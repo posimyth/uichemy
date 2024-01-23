@@ -253,7 +253,7 @@ function uich_handle_import( WP_REST_Request $request ) {
 		);
 
 		// Set current user as admin.
-		wp_set_current_user( null, PLUGIN_USERNAME );
+		wp_set_current_user( null, UICH_USERNAME );
 
 		// Start the import.
 		$import_result = \Elementor\Plugin::$instance->templates_manager->import_template( $file_data );
@@ -305,7 +305,7 @@ function uich_handle_check( WP_REST_Request $request ) {
  */
 function uiche_rest_send_cors_headers( $value ) {
 	$origin     = get_http_origin();
-	$requesturi = ! empty( $_SERVER['REQUEST_URI'] ) ? wdkit_sanitizer_bypass( $_SERVER, 'REQUEST_URI' ) : '';
+	$requesturi = ! empty( $_SERVER['REQUEST_URI'] ) ? uiche_sanitizer_bypass( $_SERVER, 'REQUEST_URI' ) : '';
 
 	if ( ! empty( $origin ) && preg_match( '/^\/wp-json\/uichemy\/v1/', wp_parse_url( $requesturi, PHP_URL_PATH ) ) === 1 ) {
 		header( 'Access-Control-Allow-Headers: UiChemy-Security-Token' );
