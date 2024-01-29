@@ -9,12 +9,12 @@
  * @subpackage Uichemy/token
  */
 
+namespace Uich\token;
+
 /** If this file is called directly, abort. */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-define( 'UICHEMY_TOKEN_OPTION', 'uichemy_token' );
 
 if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 
@@ -25,6 +25,35 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 	 * @since      1.0.0
 	 */
 	class Uich_Token_Manager {
+
+		/**
+		 * Define the core functionality of the plugin.
+		 *
+		 * @since 1.0.0
+		 */
+		public function __construct() {
+			add_filter( 'uich_manage_token', array( $this, 'uich_create_default' ), 10, 1 );
+		}
+
+		/**
+		 * Create Default setting data in db
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $type use for check page type.
+		 */
+		public function uich_create_default( $type ) {
+
+			if ( 'get_token' === $type ) {
+				return $this->get_token();
+			} elseif ( 'create_token' === $type ) {
+				return $this->create_token();
+			} elseif ( 'delete_token' === $type ) {
+				return $this->delete_token();
+			} elseif ( 'reset_token' === $type ) {
+				return $this->reset_token();
+			}
+		}
 
 		/**
 		 * Generate random token
@@ -88,8 +117,15 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function get_token() {
+			$token = get_option( UICHEMY_TOKEN_OPTION );
+
+			if ( false === $token ) {
+				self::create_token();
+			}
+
 			return get_option( UICHEMY_TOKEN_OPTION );
 		}
 	}
 
+	new Uich_Token_Manager();
 }

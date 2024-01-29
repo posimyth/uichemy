@@ -13,9 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once plugin_dir_path( __FILE__ ) . '../class-uich-token-manager.php';
-
-$current_token = Uich_Token_Manager::get_token();
+$current_token = apply_filters( 'uich_manage_token', 'get_token' );
 
 ?>
 <div class='flex flex-col items-center justify-between gap-3
