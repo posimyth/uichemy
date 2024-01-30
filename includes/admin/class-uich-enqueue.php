@@ -43,7 +43,9 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			$capability = 'manage_options';
 
 			if ( current_user_can( $capability ) ) {
-				add_menu_page( __( 'UiChemy', 'uichemy' ), __( 'UiChemy', 'uichemy' ), 'manage_options', 'uichemy-settings', array( $this, 'uich_menu_page_template' ), UICH_URL . 'assets/svg/bw-logo.svg' );
+				add_menu_page( __( 'Welcome', 'uichemy' ), __( 'Welcome', 'uichemy' ), 'manage_options', 'uichemy-welcome', array( $this, 'uich_menu_page_template' ), UICH_URL . 'assets/svg/bw-logo.svg' );
+
+				add_submenu_page( 'uichemy-welcome', __( 'Settings', 'uichemy' ), __( 'Settings', 'uichemy' ), 'manage_options', 'uichemy-settings', array( $this, 'uich_submenu_settings_page_template' ) );
 			}
 		}
 
@@ -53,6 +55,15 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 * @since   1.0.0
 		 */
 		public function uich_menu_page_template() {
+			require_once UICH_PATH . 'includes/pages/uich-welcome-page.php';
+		}
+		
+		/**
+		 * Load Uichemy uichemy-settings page content.
+		 *
+		 * @since   1.0.0
+		 */
+		public function uich_submenu_settings_page_template() {
 			require_once UICH_PATH . 'includes/pages/uich-settings-page.php';
 		}
 
@@ -65,11 +76,12 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 */
 		public function uich_admin_scripts( $page ) {
 
-			if ( 'toplevel_page_uichemy-settings' !== $page ) {
+			$slug = array( 'toplevel_page_uichemy-welcome', 'welcome_page_uichemy-settings' ); 
+			if ( !in_array( $page, $slug ) ) {
 				return;
 			}
 
-			$this->uich_enqueue_styles();
+			$this->uich_enqueue_styles( $page );
 			$this->uich_enqueue_scripts();
 		}
 
@@ -78,8 +90,8 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 *
 		 * @since   1.0.0
 		 */
-		public function uich_enqueue_styles() {
-			wp_enqueue_style( 'uichemy-style', UICH_URL . 'assets/css/out.css', array(), UICH_VERSION, 'all' );
+		public function uich_enqueue_styles( $page ) {
+			wp_enqueue_style( 'uichemy-welcome-style', UICH_URL . 'assets/css/welcome-page.css', array(), UICH_VERSION, 'all' );	
 		}
 
 		/**

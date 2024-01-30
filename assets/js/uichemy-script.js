@@ -8,7 +8,11 @@ jQuery(document).ready(function($) {
 
         const copy_btn = $(button_id)
 
-        copy_btn.click(function() {
+        copy_btn.click(function(event) {
+            event.preventDefault();
+            // Stop the event from propagating up or down the DOM tree
+            event.stopPropagation();
+            
             // CTRL + C.
             copyToClipboard($(input_id).val())
     
@@ -16,12 +20,12 @@ jQuery(document).ready(function($) {
             copy_btn.find('.done-icon').first().removeClass('hidden')
             copy_btn.find('.copy-icon').first().addClass('hidden')
 
-            // Change it back
+            // Change it back.
             setTimeout(function(){
                 copy_btn.find('.copy-icon').first().removeClass('hidden')
                 copy_btn.find('.done-icon').first().addClass('hidden')
             }, 1500)
-        })
+        });
     }
 
     attachCopyLogic('#uichemy-url-copy-btn', '#uichemy-site-url-input')
@@ -37,7 +41,9 @@ jQuery(document).ready(function($) {
                 nonce: uichemy_ajax_object.nonce,
             },
             success: function(res){
-                document.querySelector('#uichemy-token-input').value = res.data.token
+                if( res.data.token ){
+                    document.querySelector('#uichemy-token-input').value = res.data.token
+                }
             },
             error: function(jq, status, err){
                 // console.log("It errored..", jq, status, err)
@@ -45,5 +51,28 @@ jQuery(document).ready(function($) {
             complete: function() {
             },
         });
+    });
+
+    /**Accodion Welcome page */
+    $('.uich-accordion-box:first').addClass('uich-active')
+    $('.uich-accordion-box:first').children('.uich-acc-trigger').children('i').addClass('fa-minus')
+    $('.uich-accordion-box:first').children('.uich-acc-trigger').addClass('selected').next('.uich-acc-container').show()
+
+    $('.uich-acc-trigger').click(function(event) {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            $(this).children('i').removeClass('fa-plus').addClass('fa-minus');
+            $(this).next().slideUp();
+            $(this).parent().removeClass('uich-active');
+        } else {
+            $('.uich-acc-trigger').removeClass('selected');
+            $(this).addClass('selected');
+            $('.uich-acc-trigger').children('i').removeClass('fa-minus').addClass('fa-plus');
+            $(this).children('i').removeClass('fa-plus').addClass('fa-minus');
+            $('.uich-acc-trigger').next().slideUp();
+            $(this).next().slideDown();
+            $('.uich-accordion-box').removeClass('active');
+            $(this).parent().addClass('active');
+        }
     });
 });

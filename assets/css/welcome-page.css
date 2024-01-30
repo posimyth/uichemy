@@ -1,0 +1,717 @@
+:root {
+    --primary-color: #E3ED5D;
+    --secondary-color: #4B22CC;
+    --white: #ffffff;
+    --black: #000000;
+    --black-shade-one:#020202;
+    --yellow-hover: #ccd554;
+    --gray-shade-one: #999999;
+    --red: #FF1E1E;
+    --green: #00A31B;
+    --font-famliy: 'Plus Jakarta Sans', sans-serif;
+}
+
+.uich-container-main{  
+    display: grid;
+    gap: 24px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    padding-bottom: 30px;
+}
+.uich-container-main::-webkit-scrollbar{
+    display: none;
+}
+
+.uich-container{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.uich-header-btn {
+    font-family: var(--font-famliy);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: .2s ease-out;
+}
+
+.uich-yellow-btn{
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 16px 32px;
+    background-color: var(--primary-color);
+    color: var(--black-shade-one);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s ease-out;
+}
+
+.uich-icon-btn{
+    font-family: var(--font-famliy);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--black);
+    background-color: #F9F9F9;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.uich-border-btn{
+    font-family: var(--font-famliy);
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: .2s ease-out;
+}
+
+.uich-border-btn:hover{
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+.uich-icon-btn:hover{
+    color:#FF0000;
+}
+.uich-icon-btn i{
+    color: #FF0000;
+    font-size: 12px;
+}
+
+.uich-yellow-btn:hover{
+    background-color: var(--yellow-hover);
+}
+
+.uich-quick-link{
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.uich-quick-link:hover{
+    color: var(--yellow-hover);
+}
+
+h1, p{
+    font-family: var(--font-famliy);
+}
+
+.uich-heading{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.uich-paragraph{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #C7BAEF;
+}
+.uich-heading-strip{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#wpbody-content{
+    padding-bottom: 0 !important;
+}
+
+.uich-with-notification-btn {
+    position: relative;
+}
+
+.uich-with-notification-btn .uich-notify-circle {
+    font-family: var(--font-famliy);
+    font-size: 8px;
+    line-height: 10px;
+    font-weight: 500;
+    background-color: var(--red);
+    border-radius: 100px;
+    width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    color: var(--white);
+    top: -7px;
+    right: -7px;
+}
+
+.uich-transparent-btn {
+    background-color: #FFFFFF26;
+    color: var(--white);
+}
+
+.uich-filled-btn {
+    background-color: var(--white)
+}
+
+.uich-header-btn-group {
+    display: flex;
+    gap: 14px;
+}
+
+.uich-main-bg {
+    background-color: var(--secondary-color);
+    padding: 20px 40px;
+    margin-top: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.uich-logo {
+    width: 140px;
+    height: auto;
+    display: flex;
+}
+
+.uich-main-bg .uich-logo img {
+    width: 100%;
+    display: flex;
+}
+
+.uich-welcome-section{
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 40px;
+}
+
+.uich-welcome-section .uich-left-text{
+    padding: 40px 0px 40px 0px;
+}
+
+.uich-welcome-section .uich-left-text .uich-paragraph{
+    width: 86%;
+}
+.uich-welcome-section .uich-right-img{
+    padding: 40px 0px 0px 40px;
+    display: flex;
+    align-items: flex-end;
+}
+.uich-welcome-section .uich-right-img img{
+    max-width: 100%;
+}
+.uich-btn-group{
+    display: flex;
+    gap:20px;
+    align-items:center;
+    padding-top: 24px;
+}
+
+.uich-how-does-work-section{
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+.uich-how-does-work-section .uich-points-section{
+    width: 60%;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 24px;
+}
+.uich-how-does-work-section .uich-points-section .uich-heading{
+    color: var(--black);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.uich-how-does-work-section .uich-points-section ol{
+    margin-left: 18px;
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.uich-how-does-work-section .uich-points-section ol li{
+    margin-top: 24px;
+    color: var(--black-shade-one);
+}
+.uich-how-does-work-section .uich-activate-section{
+    width: 40%;
+    background-color: var(--white);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+}
+
+.uich-how-does-work-section .uich-activate-section .uich-cover{
+    display: grid;
+    place-items: center;
+}
+
+.uich-how-does-work-section .uich-activate-section .uich-icon-box{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    display: flex;
+    place-items: center;
+}
+
+.uich-how-does-work-section .uich-activate-section .uich-active-deactive button{
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height:24px;
+    font-weight: 400;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s ease-out;
+}
+
+.uich-how-does-work-section .uich-activate-section .uich-text{
+    color: var(--black-shade-one);
+}
+
+.uich-how-does-work-section .uich-activate-section.uich-api-active{
+    border: 1px solid var(--red);
+}
+.uich-how-does-work-section .uich-activate-section.uich-api-active .uich-icon-box i{
+    color: var(--red);
+    font-size: 18px;
+}
+
+.uich-how-does-work-section .uich-activate-section.uich-api-active .uich-active-deactive .uich-btn{
+    color: var(--red);
+    border: 1px solid;
+    border-color: var(--red);
+}
+.uich-how-does-work-section .uich-activate-section.uich-api-active .uich-icon-box{
+    background-color: #FFE9E9;
+}
+.uich-how-does-work-section .uich-activate-section.uich-api-active .uich-active-deactive .uich-btn:hover{
+    background-color: #FFE9E9;   
+}
+
+.uich-how-does-work-section .uich-activate-section.uich-api-deactive{
+    border: 1px solid var(--green);
+}
+.uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-icon-box i{
+    color: var(--green);
+    font-size: 18px;
+}
+
+.uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-active-deactive .uich-btn{
+    color: var(--green);
+    border-color: var(--green);
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}   
+.uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-icon-box{
+    background-color: #E6F6E8;
+}
+.uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-active-deactive .uich-btn:hover{
+    background-color: #E6F6E8;
+    
+}
+
+.uich-text{
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.uich-quick-link-cards{
+    display: flex;
+    gap: 24px;
+}
+.uich-quick-link-cards .uich-card-main{
+    background-color: var(--white);
+    width: 25%;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+}
+
+.uich-quick-link-cards .uich-card-main .uich-heading{
+    color: var(--black);
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.uich-welcome-section.uich-templates-section{
+background-color: var(--black-shade-one);
+}
+
+.uich-welcome-section.uich-templates-section .uich-paragraph{
+    color: var(--gray-shade-one) ;
+}
+.uich-welcome-section.uich-templates-section{
+    padding: 0px 0px 0px 40px;
+    overflow: hidden;
+}
+.uich-welcome-section.uich-templates-section .uich-right-img{
+    padding: 0;
+}
+.uich-welcome-section.uich-templates-section .uich-left-text .uich-paragraph{
+    width: 56%;
+}
+
+.uich-faqs-section{
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.uich-faqs-section .uich-left-section{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+}
+
+.uich-faqs-section .uich-right-section{
+    width: 50%;
+}
+
+.uich-faqs-section .uich-heading-para .uich-heading{
+    color: var(--black);
+    margin: 0;
+}
+
+.uich-faqs-section .uich-heading-para .uich-text{
+    color: var(--gray-shade-one);
+    margin:0;
+    padding-top: 24px;
+    width: 56%;
+}
+
+.uich-faqs-section .uich-heading-para .uich-text a{
+    text-decoration: none;
+    color: var(--secondary-color);
+  
+}
+
+.uich-faqs-section .uich-left-section .uich-bottom-section .uich-social-icons i{
+    font-size: 20px;
+    margin-right: 20px;
+    color: var(--secondary-color);
+}
+
+.uich-faqs-section .uich-left-section .uich-bottom-section .uich-text{
+    margin: 0;
+    color: var(--black);
+    padding-top: 24px;
+}
+
+/**New Accoedian Start*/
+
+.uich-accordion-box{
+	border: 1px solid var(--secondary-color);
+	padding: 0 15px 1px;
+	background: transparent;
+	color: #332e2e;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.uich-accordion-box.uich-active{
+	background: var(--white);
+}
+.uich-acc-trigger{
+	padding: 15px 40px 15px 0;
+	margin: 0;
+    font-family: var(--font-famliy);
+	font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+	position: relative;
+	cursor: pointer;
+    color: var(--black);
+}
+.uich-acc-trigger i{
+	position: absolute;
+	right: 6px;
+	top: 20px;
+	font-size: 18px;
+}
+.uich-acc-container{
+	display: none;
+}
+.uich-acc-container p{
+	margin-top: 0px;
+    font-family: var(--font-famliy);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: var(--gray-shade-one);
+}
+
+.uich-acc-container p a{
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+.uich-main-form{
+    width: 50%;
+    margin: 0 auto;
+}
+.uich-main-form .uich-feilds{
+    padding-bottom: 24px;
+}
+.uich-main-form .uich-feilds label{
+    display: inline-block;
+    padding-bottom: 12px;
+    font-family: var(--font-famliy);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.uich-main-form .uich-feilds input{
+    width: 100%;
+    border: 1px solid var(--gray-shade-one);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: var(--font-famliy);
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--black-shade-one);
+}
+.uich-main-form .uich-feilds input:focus{
+    border-color: var(--secondary-color);
+    box-shadow: none;
+}
+.uich-main-form .uich-border-btn{
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.uich-main-form .uich-border-btn:hover{
+    background-color: transparent;
+    color: var(--secondary-color);
+}
+.uich-main-form .uich-feilds.uich-dropdown-cover{
+    width: 71%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 auto;
+    padding-top: 24px;
+}
+.uich-main-form .uich-feilds .uich-dropdown{
+    padding-bottom: 0;
+    text-wrap: nowrap;
+}
+.uich-main-form .uich-feilds select{
+    width: 100%;
+}
+
+/**Media-query-start */
+
+@media (max-width: 1024px){
+    .uich-container-main{
+        gap:16px
+    }
+    .uich-how-does-work-section{
+        gap:16px
+    }
+    .uich-quick-link-cards .uich-card-main .uich-heading{
+        font-size: 16px;
+    }
+    .uich-welcome-section .uich-left-text{
+        width: 42%;
+    }
+    .uich-welcome-section .uich-right-img{
+    width: 58%;
+    }
+    .uich-welcome-section .uich-left-text .uich-paragraph{
+        width: 92%;
+    }
+    .uich-yellow-btn{
+        padding: 16px 18px;
+    }
+    .uich-btn-group{
+        padding-top: 20px;
+    }
+    .uich-quick-link-cards{
+        gap: 16px;
+    }
+    .uich-border-btn{
+        font-size: 14px;
+        padding: 9px;
+    }
+    .uich-how-does-work-section .uich-activate-section .uich-active-deactive button{
+        font-size: 14px;
+        padding: 7px 18px;
+    }
+    .uich-welcome-section.uich-templates-section .uich-left-text .uich-paragraph{
+        width: 78%;
+    }
+    .uich-text{
+        font-size: 14px;
+    }
+    .uich-paragraph{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px){
+
+    .uich-paragraph{
+        font-size: 12px;
+        line-height: 22px;
+    }
+    .uich-yellow-btn{
+        font-size: 12px;
+        line-height: 22px;
+        border-radius: 8px;
+        padding: 12px 16px;
+    }
+    .uich-quick-link{
+        font-size: 12px;
+        line-height: 22px;
+    }
+    .uich-quick-link-cards .uich-card-main .uich-heading{
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .uich-border-btn{
+        font-size: 12px;
+        line-height: 22px ;
+        border-radius: 6px;
+    }
+    .uich-welcome-section .uich-right-img{
+        padding: 0;
+    }
+    .uich-how-does-work-section .uich-points-section ol{
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .uich-welcome-section.uich-templates-section{
+        padding: 0;
+    }
+    .uich-faqs-section .uich-heading-para .uich-text{
+        width: 86%;
+    }
+    .uich-acc-container p{
+        font-size: 12px;
+    }
+    .uich-acc-trigger{
+        font-size: 14px;
+    }
+    .uich-main-form{
+        width: 75%;
+    }
+}
+
+@media (max-width: 576px){
+    .uich-container-main{
+        padding-right: 10px;
+    }
+
+    .uich-main-bg{
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 18px;
+        box-sizing: border-box;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .uich-welcome-section{
+        flex-direction: column;
+        padding: 20px 20px 0px 20px;
+    }
+    .uich-welcome-section .uich-left-text{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+    }
+    .uich-welcome-section.uich-templates-section .uich-left-text{
+        padding: 20px;
+    }
+    .uich-welcome-section.uich-templates-section .uich-left-text .uich-paragraph{
+        width: 100%;
+    }
+    .uich-welcome-section .uich-right-img{
+        width: 100%;
+        padding-top: 40px;
+    }
+    .uich-how-does-work-section{
+        flex-direction: column;
+    }
+    .uich-quick-link-cards{
+        flex-wrap: wrap;
+    }
+    .uich-how-does-work-section .uich-points-section{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .uich-how-does-work-section .uich-activate-section{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    .uich-quick-link-cards .uich-card-main{
+        width: 40%;
+        padding: 12px;
+    }
+    .uich-quick-link-cards .uich-card-main .uich-heading{
+        padding-bottom: 14px;
+    }
+    .uich-welcome-section.uich-templates-section .uich-right-img{
+        padding-top: 30px;
+    }
+    .uich-faqs-section{
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .uich-faqs-section .uich-left-section .uich-bottom-section .uich-text{
+        padding-top: 8px;
+    }
+    .uich-faqs-section .uich-left-section .uich-bottom-section{
+        padding-top: 20px;
+    }
+    .uich-faqs-section .uich-heading-para .uich-text{
+        width: 100%;
+        padding-top: 8px;
+    }
+    .uich-faqs-section .uich-left-section{
+        width: 100%;
+        height: auto;
+    }
+    .uich-faqs-section .uich-right-section{
+        width: 100%;
+        padding-top: 24px;
+    }
+
+    .uich-main-form{
+        width: 85%;
+    }
+    .uich-main-form .uich-feilds.uich-dropdown-cover{
+        width: 99%;
+    }
+
+}
