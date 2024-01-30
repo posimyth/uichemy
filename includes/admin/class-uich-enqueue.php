@@ -57,7 +57,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		public function uich_menu_page_template() {
 			require_once UICH_PATH . 'includes/pages/uich-welcome-page.php';
 		}
-		
+
 		/**
 		 * Load Uichemy uichemy-settings page content.
 		 *
@@ -76,8 +76,8 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 */
 		public function uich_admin_scripts( $page ) {
 
-			$slug = array( 'toplevel_page_uichemy-welcome', 'welcome_page_uichemy-settings' ); 
-			if ( !in_array( $page, $slug ) ) {
+			$slug = array( 'toplevel_page_uichemy-welcome', 'welcome_page_uichemy-settings' );
+			if ( ! in_array( $page, $slug ) ) {
 				return;
 			}
 
@@ -89,9 +89,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 * Enqueue Styles admin area.
 		 *
 		 * @since   1.0.0
+		 * 
+		 * @param string $page use for check page type.
 		 */
 		public function uich_enqueue_styles( $page ) {
-			wp_enqueue_style( 'uichemy-welcome-style', UICH_URL . 'assets/css/welcome-page.css', array(), UICH_VERSION, 'all' );	
+			wp_enqueue_style( 'uichemy-welcome-style', UICH_URL . 'assets/css/welcome-page.css', array(), UICH_VERSION, 'all' );
 		}
 
 		/**

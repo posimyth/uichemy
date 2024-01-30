@@ -64,15 +64,6 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		}
 
 		/**
-		 * Load Text Domain. Text Domain : wdkit
-		 *
-		 * @since 1.0.0
-		 */
-		public function uich_load_textdomain() {
-			load_plugin_textdomain( 'uichemy', false, UICH_BDNAME . '/languages/' );
-		}
-
-		/**
 		 * Plugin Activation.
 		 *
 		 * @since 1.0.0
@@ -101,6 +92,15 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		public function uich_plugin_loaded() {
 			$this->uich_load_textdomain();
 			$this->uich_load_dependencies();
+		}
+		
+		/**
+		 * Load Text Domain. Text Domain : wdkit
+		 *
+		 * @since 1.0.0
+		 */
+		public function uich_load_textdomain() {
+			load_plugin_textdomain( 'uichemy', false, UICH_BDNAME . '/languages/' );
 		}
 
 		/**

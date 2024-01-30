@@ -107,7 +107,7 @@ if ( ! class_exists( 'Uich_Plugin_Page' ) ) {
 
 			if ( strpos( $plugin_file, UICH_PBNAME ) !== false ) {
 				$new_links = array(
-					'video-tutorials' => '<a href="' . esc_url( '#' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Video Tutorials', 'uichemy' ) . '</a>',
+					'video-tutorials' => '<a href="' . esc_url( 'https://www.youtube.com/watch?v=vm8Ak5Oy9AU&t=2s' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Video Tutorials', 'uichemy' ) . '</a>',
 					'join-community'  => '<a href="' . esc_url( 'https://www.facebook.com/groups/uichemy' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Join Community', 'uichemy' ) . '</a>',
 					'whats-new'       => '<a href="' . esc_url( 'https://roadmap.uichemy.com/updates' ) . '" target="_blank" rel="noopener noreferrer" style="color: orange;">' . esc_html__( 'What\'s New?', 'uichemy' ) . '</a>',
 					'req-feature'     => '<a href="' . esc_url( 'https://roadmap.uichemy.com/boards/feature-requests' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Request Feature', 'uichemy' ) . '</a>',

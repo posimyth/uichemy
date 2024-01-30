@@ -32,7 +32,7 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 18px;
-    border: none;
+    border: 0;
     border-radius: 5px;
     padding: 6px 12px;
     cursor: pointer;
@@ -107,10 +107,6 @@
 
 .uich-quick-link:hover{
     color: var(--yellow-hover);
-}
-
-h1, p{
-    font-family: var(--font-famliy);
 }
 
 .uich-heading{

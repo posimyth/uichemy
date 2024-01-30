@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Udkit_Notice_Main' ) ) {
+if ( ! class_exists( 'Uich_Notice_Main' ) ) {
 
 	/**
-	 * Udkit_Notice_Main
+	 * Uich_Notice_Main
 	 *
 	 * @since 1.0.0
 	 */
-	class Udkit_Notice_Main {
+	class Uich_Notice_Main {
 
 		/**
 		 * Singleton instance variable.
@@ -69,5 +69,5 @@ if ( ! class_exists( 'Udkit_Notice_Main' ) ) {
 		}
 	}
 
-	Udkit_Notice_Main::get_instance();
+	Uich_Notice_Main::get_instance();
 }
