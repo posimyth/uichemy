@@ -16,7 +16,7 @@ $output .= '<div class="uich-container-main">';
             $output .= '</div>';
         $output .= '</div>';
         $output .= '<div class="uich-right-img">';
-            $output .= '<img src="'. esc_url(UICH_URL) .'assets/svg/fig-elementor-img.svg"/>';
+            $output .= '<img src="'. esc_url(UICH_URL) .'assets/images/fig-elementor-updated.png"/>';
         $output .= '</div>';
     $output .= '</div>';
 
@@ -77,7 +77,7 @@ $output .= '<div class="uich-container-main">';
             $output .= '</div>';
         $output .= '</div>';
         $output .= '<div class="uich-right-img">';
-            $output .= '<img src="'. esc_url(UICH_URL) .'assets/svg/templates-section-right-img.svg"/>';
+            $output .= '<img src="'. esc_url(UICH_URL) .'assets/images/templates-right-img-updated.png"/>';
         $output .= '</div>';
     $output .= '</div>';
 

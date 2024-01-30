@@ -11,6 +11,10 @@
     --font-famliy: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* .uich-container-main.uich-settings-pages{
+    background-color: var(--white);
+} */
+
 .uich-container-main{  
     display: grid;
     gap: 24px;
@@ -471,9 +475,24 @@ background-color: var(--black-shade-one);
     width: 50%;
     margin: 0 auto;
 }
+.uich-token-copy-url{
+    position: absolute;
+    background-color: #F9F9F9;
+    top: 35px;
+    right: 12px;
+    border-radius: 100%;
+    padding: 5px;
+    border: none;
+    display: flex;
+    cursor: pointer;
+}
 .uich-main-form .uich-feilds{
     padding-bottom: 24px;
 }
+.uich-main-form .uich-feilds{
+    position: relative;
+}
+
 .uich-main-form .uich-feilds label{
     display: inline-block;
     padding-bottom: 12px;
@@ -493,6 +512,7 @@ background-color: var(--black-shade-one);
     font-size: 14px;
     line-height: 21px;
     color: var(--black-shade-one);
+    box-sizing: border-box;
 }
 .uich-main-form .uich-feilds input:focus{
     border-color: var(--secondary-color);
@@ -501,11 +521,14 @@ background-color: var(--black-shade-one);
 .uich-main-form .uich-border-btn{
     background-color: var(--secondary-color);
     color: var(--white);
+    margin-bottom: 15px;
 }
 
 .uich-main-form .uich-border-btn:hover{
-    background-color: transparent;
-    color: var(--secondary-color);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #441fb8;
+
 }
 .uich-main-form .uich-feilds.uich-dropdown-cover{
     width: 71%;

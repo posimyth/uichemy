@@ -17,11 +17,10 @@ $current_token = apply_filters( 'uich_manage_token', 'get_token' );
 
 $output = '';
 
-$output .= '<div class="uich-container-main">';
+$output .= '<div class="uich-container-main uich-settings-pages">';
 	require_once UICH_PATH . 'includes/pages/design-header.php';
-$output .= '</div>';
 
-$output .= '<form class="uich-main-form">';
+	$output .= '<form class="uich-main-form">';
 
 	$output .= '<div class="uich-feilds">';
 
@@ -31,7 +30,7 @@ $output .= '<form class="uich-main-form">';
 
 		$output .= '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( UICH_URL ) . '"/>';
 
-		$output     .= '<button id="uichemy-url-copy-btn" class="bg-neutral-100 hover:bg-neutral-200 p-1 ml-2 rounded-md">';
+		$output     .= '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
 			$output .= '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';
 			$output .= '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//done-status.svg" />';
 		$output     .= '</button>';
@@ -46,7 +45,7 @@ $output .= '<form class="uich-main-form">';
 
 		$output .= '<input readonly id="uichemy-token-input" name="Security" type="text" value="' . esc_attr( $current_token ) . '"/>';
 
-		$output     .= '<button id="uichemy-token-copy-btn" class="bg-neutral-100 hover:bg-neutral-200 p-1 ml-2 rounded-md">';
+		$output     .= '<button id="uichemy-token-copy-btn" class="uich-token-copy-url">';
 			$output .= '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/copy-action.svg" />';
 			$output .= '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/done-status.svg" />';
 		$output     .= '</button>';
@@ -72,5 +71,6 @@ $output .= '<form class="uich-main-form">';
 	$output         .= '</div>';
 
 $output .= '</form>';
+$output .= '</div>';
 
 echo $output;
