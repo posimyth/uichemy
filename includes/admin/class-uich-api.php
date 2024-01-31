@@ -32,6 +32,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			add_filter( 'http_request_timeout', array( $this, 'uich_modify_http_request_default_timeout' ), 10 );
 
 			add_action( 'wp_ajax_uichemy_regenerate_token', array( $this, 'uiche_regenerate_token' ) );
+			add_action( 'wp_ajax_uichemy_select_user', array( $this, 'uichemy_select_user' ) );
 
 			add_action(
 				'rest_api_init',
@@ -84,6 +85,31 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			);
 
 			// Send the JSON response back to the client-side JavaScript.
+			wp_send_json_success( $response );
+		}
+
+		/**
+		 * Select User role
+		 *
+		 * @since   1.0.0
+		 */
+		public function uichemy_select_user() {
+
+			check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
+
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( null, 400 );
+			}
+
+			$newuser = ! empty( $_POST['new_user'] ) ? sanitize_text_field( wp_unslash( $_POST['new_user'] ) ) : '';
+
+			apply_filters( 'uich_manage_usermanager', 'set_user', $newuser );
+
+			$response = array(
+				'message'  => 'Set Successful',
+				'new_user' => apply_filters( 'uich_manage_usermanager', 'get_user' ),
+			);
+
 			wp_send_json_success( $response );
 		}
 

@@ -93,7 +93,7 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 			$this->uich_load_textdomain();
 			$this->uich_load_dependencies();
 		}
-		
+
 		/**
 		 * Load Text Domain. Text Domain : wdkit
 		 *
@@ -112,9 +112,9 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		 * @since    1.0.0
 		 */
 		public function uich_load_dependencies() {
-
 			require_once UICH_PATH . 'includes/notices/class-uich-notice-main.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-token-manager.php';
+			require_once UICH_PATH . 'includes/admin/class-uich-usermanager.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-api.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-enqueue.php';
 		}

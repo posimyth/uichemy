@@ -52,6 +52,8 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 				return $this->delete_token();
 			} elseif ( 'reset_token' === $type ) {
 				return $this->reset_token();
+			} elseif ( 'is_token_set' === $type ) {
+				return $this->is_token_set();
 			}
 		}
 
@@ -61,7 +63,7 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function gen_random_token() {
-			return str_shuffle( MD5( microtime() ) );
+			return MD5( random_bytes( 512 ) );
 		}
 
 		/**

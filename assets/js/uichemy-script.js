@@ -58,6 +58,26 @@ jQuery(document).ready(function($) {
         });
     });
 
+    // Select for User.
+    $('#uichemy-user-select').change(function(e) {
+        
+        jQuery.ajax({
+            url: uichemy_ajax_object.ajax_url,
+            method: "POST",
+            data: {
+                action: 'uichemy_select_user',
+                nonce: uichemy_ajax_object.nonce,
+                new_user: e.target.value,
+            },
+            success: function(res){
+            },
+            error: function(){
+            },
+            complete: function() {
+            },
+        });
+    });
+    
     /**Accodion Welcome page */
     $('.uich-accordion-box:first').addClass('uich-active')
     $('.uich-accordion-box:first').children('.uich-acc-trigger').children('i').addClass('fa-minus')

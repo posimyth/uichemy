@@ -47,7 +47,8 @@ if ( ! class_exists( 'Uich_Activation' ) ) {
 					'user_login' => $username,
 					'user_pass'  => $password,
 				);
-				$user_id  = wp_insert_user( $userdata );
+
+				$user_id = wp_insert_user( $userdata );
 
 				$user = new WP_User( $user_id );
 				$user->add_cap( 'edit_posts' );

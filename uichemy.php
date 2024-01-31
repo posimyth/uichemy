@@ -31,5 +31,6 @@ define( 'UICH_BDNAME', basename( dirname( __FILE__ ) ) );
 define( 'UICH_PBNAME', plugin_basename( __FILE__ ) );
 define( 'UICH_USERNAME', 'uichemy' );
 define( 'UICHEMY_TOKEN_OPTION', 'uichemy_token' );
+define( 'UICHEMY_USER_OPTION', 'uichemy_user' );
 
 require UICH_PATH . 'includes/class-uich-uichemy.php';

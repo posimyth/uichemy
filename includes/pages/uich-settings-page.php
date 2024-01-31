@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $current_token = apply_filters( 'uich_manage_token', 'get_token' );
+$capable_users = apply_filters( 'uich_manage_usermanager', 'get_userlist' );
+$selected_user = apply_filters( 'uich_manage_usermanager', 'get_user' );
 
 $output = '';
 
@@ -53,23 +55,26 @@ $output .= '<div class="uich-container-main uich-settings-pages">';
 	$output .= '</div>';
 
 	$output     .= '<button type="button" id="uichemy-regenerate-btn" class="uich-border-btn">';
-		$output .= '<span>'.esc_html__( 'Regenerate Token', 'uichemy' ).'</span>';
+		$output .= '<span>' . esc_html__( 'Regenerate Token', 'uichemy' ) . '</span>';
 		$output .= '<span><div class="uich-loader"></div></span>';
 	$output     .= '</button>';
 
-	// $output .= '<div class="uich-feilds dropdown-cover">';
+	$output .= '<div class="uich-feilds uich-dropdown-cover">';
 
-	// 	$output     .= '<label for="IMPuser" class="uich-dropdown">';
-	// 		$output .= esc_html__( 'Import as User', 'uichemy' );
-	// 	$output     .= '</label>';
+		$output     .= '<label for="IMPuser" class="uich-dropdown">';
+			$output .= esc_html__( 'Import as User', 'uichemy' );
+		$output     .= '</label>';
 
-	// 	$output     .= '<select id="IMPuser" name="IMPuser">';
-	// 		$output .= '<option value="volvo">Volvo</option>';
-	// 		$output .= '<option value="saab">Saab</option>';
-	// 		$output .= '<option value="fiat">Fiat</option>';
-	// 		$output .= '<option value="audi">Audi</option>';
-	// 	$output     .= '</select>';
-	// $output         .= '</div>';
+		$output .= '<select value="' . esc_attr( $selected_user ) . '" id="uichemy-user-select">';
+
+foreach ( $capable_users as $user ) {
+	$username = ! empty( $user->user_login ) ? $user->user_login : '';
+	$selected = ( $username === $selected_user ) ? 'selected="selected"' : '';
+	$output  .= "<option value='" . esc_attr( $username ) . "' {$selected}>" . esc_html( ucfirst ( $username ) ) . '</option>';
+}
+
+		$output .= '</select>';
+	$output     .= '</div>';
 
 $output .= '</form>';
 $output .= '</div>';
