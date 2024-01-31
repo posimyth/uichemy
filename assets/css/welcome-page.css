@@ -11,17 +11,21 @@
     --font-famliy: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* .uich-container-main.uich-settings-pages{
-    background-color: var(--white);
-} */
-
 .uich-container-main{  
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
-    padding-right: 20px;
     overflow-y: scroll;
     padding-bottom: 30px;
+    margin-left: -20px;
+    padding: 0px 20px;
 }
+
+.uich-container-main.uich-settings-pages{
+    background-color: var(--white);
+    height: 100vh;
+}
+
 .uich-container-main::-webkit-scrollbar{
     display: none;
 }
@@ -70,6 +74,9 @@
 }
 
 .uich-border-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-famliy);
     width: 100%;
     padding: 12px;
@@ -82,6 +89,11 @@
     color: var(--secondary-color);
     cursor: pointer;
     transition: .2s ease-out;
+}
+
+.uich-border-btn span:nth-child(2) {
+    display: none;
+    margin-left: 10px;
 }
 
 .uich-border-btn:hover{
@@ -174,7 +186,7 @@
 .uich-main-bg {
     background-color: var(--secondary-color);
     padding: 20px 40px;
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -478,7 +490,7 @@ background-color: var(--black-shade-one);
 .uich-token-copy-url{
     position: absolute;
     background-color: #F9F9F9;
-    top: 35px;
+    top: 37px;
     right: 12px;
     border-radius: 100%;
     padding: 5px;
@@ -513,6 +525,7 @@ background-color: var(--black-shade-one);
     line-height: 21px;
     color: var(--black-shade-one);
     box-sizing: border-box;
+    background: white;
 }
 .uich-main-form .uich-feilds input:focus{
     border-color: var(--secondary-color);
@@ -528,7 +541,6 @@ background-color: var(--black-shade-one);
     border-width: 1px;
     border-style: solid;
     border-color: #441fb8;
-
 }
 .uich-main-form .uich-feilds.uich-dropdown-cover{
     width: 71%;
@@ -734,3 +746,18 @@ background-color: var(--black-shade-one);
     }
 
 }
+
+
+.uich-loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

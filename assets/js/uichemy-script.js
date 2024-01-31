@@ -33,6 +33,8 @@ jQuery(document).ready(function($) {
 
     // Regenerate Button.
     $('#uichemy-regenerate-btn').click(function() {
+        var secondSpan = this.querySelector('span:nth-child(2)')
+
         jQuery.ajax({
             url: uichemy_ajax_object.ajax_url,
             method: "POST",
@@ -40,15 +42,18 @@ jQuery(document).ready(function($) {
                 action: 'uichemy_regenerate_token',
                 nonce: uichemy_ajax_object.nonce,
             },
+            beforeSend: function() {
+                secondSpan.style.display = 'flex';
+            },
             success: function(res){
                 if( res.data.token ){
                     document.querySelector('#uichemy-token-input').value = res.data.token
                 }
             },
             error: function(jq, status, err){
-                // console.log("It errored..", jq, status, err)
             },
             complete: function() {
+                secondSpan.style.display = 'none';
             },
         });
     });

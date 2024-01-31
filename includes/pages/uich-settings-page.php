@@ -53,22 +53,23 @@ $output .= '<div class="uich-container-main uich-settings-pages">';
 	$output .= '</div>';
 
 	$output     .= '<button type="button" id="uichemy-regenerate-btn" class="uich-border-btn">';
-		$output .= esc_html__( 'Regenerate Token', 'uichemy' );
+		$output .= '<span>'.esc_html__( 'Regenerate Token', 'uichemy' ).'</span>';
+		$output .= '<span><div class="uich-loader"></div></span>';
 	$output     .= '</button>';
 
-	$output .= '<div class="uich-feilds dropdown-cover">';
+	// $output .= '<div class="uich-feilds dropdown-cover">';
 
-		$output     .= '<label for="IMPuser" class="uich-dropdown">';
-			$output .= esc_html__( 'Import as User', 'uichemy' );
-		$output     .= '</label>';
+	// 	$output     .= '<label for="IMPuser" class="uich-dropdown">';
+	// 		$output .= esc_html__( 'Import as User', 'uichemy' );
+	// 	$output     .= '</label>';
 
-		$output     .= '<select id="IMPuser" name="IMPuser">';
-			$output .= '<option value="volvo">Volvo</option>';
-			$output .= '<option value="saab">Saab</option>';
-			$output .= '<option value="fiat">Fiat</option>';
-			$output .= '<option value="audi">Audi</option>';
-		$output     .= '</select>';
-	$output         .= '</div>';
+	// 	$output     .= '<select id="IMPuser" name="IMPuser">';
+	// 		$output .= '<option value="volvo">Volvo</option>';
+	// 		$output .= '<option value="saab">Saab</option>';
+	// 		$output .= '<option value="fiat">Fiat</option>';
+	// 		$output .= '<option value="audi">Audi</option>';
+	// 	$output     .= '</select>';
+	// $output         .= '</div>';
 
 $output .= '</form>';
 $output .= '</div>';
