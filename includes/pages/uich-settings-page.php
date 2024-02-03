@@ -30,7 +30,8 @@ $output .= '<div class="uich-container-main uich-settings-pages">';
 			$output .= esc_html__( 'Site URL', 'uichemy' );
 		$output     .= '</label>';
 
-		$output .= '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( UICH_URL ) . '"/>';
+		$site_url = home_url();
+		$output .= '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( $site_url ) . '"/>';
 
 		$output     .= '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
 			$output .= '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';
