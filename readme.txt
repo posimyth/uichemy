@@ -4,7 +4,7 @@ Donate link: https://uichemy.com/
 Tags: uichemy, figma to wordpress, figma to elementor, figma to bricks, figma to gutenberg
 Requires at least: 5.7.0
 Tested up to: 6.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -103,6 +103,11 @@ UiChemy works by integrating directly with Figma and Elementor. Once you have de
 1. Figma to WordPress Converter
 
 == Changelog ==
+
+= 1.1.0 = 3 FEBRUARY 2024
+- Update : Design Improvement
+- Fix : Minor Bug Fixes & Improvements
+
 = 1.0.0 = 28 December 2023
 - Initial Release
 

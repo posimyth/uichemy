@@ -3,7 +3,7 @@
  * Plugin Name:       UiChemy
  * Plugin URI:        https://uichemy.com
  * Description:       Convert Figma Design to 100% Editable WordPress websites in Elementor Website Builder and Gutenberg aka WordPress Block Editor.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            POSIMYTH
  * Author URI:        https://posimyth.com
  * License:           GPL-2.0+
@@ -14,7 +14,6 @@
  * Requires PHP:      7.1
  *
  * @link              https://posimyth.com
- * @since             1.0.0
  * @package           Uichemy
  */
 
@@ -23,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'UICH_VERSION', '1.0.0' );
+define( 'UICH_VERSION', '1.1.0' );
 define( 'UICH_FILE', __FILE__ );
 define( 'UICH_PATH', plugin_dir_path( __FILE__ ) );
 define( 'UICH_URL', plugins_url( '/', __FILE__ ) );
@@ -34,3 +33,4 @@ define( 'UICHEMY_TOKEN_OPTION', 'uichemy_token' );
 define( 'UICHEMY_USER_OPTION', 'uichemy_user' );
 
 require UICH_PATH . 'includes/class-uich-uichemy.php';
+

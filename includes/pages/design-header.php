@@ -13,7 +13,9 @@
 
 $output             .= '<div class="uich-container uich-main-bg" >';
 	$output         .= '<div class="uich-logo">';
-		$output     .= '<img src="' . esc_url( UICH_URL ) . 'assets/svg/uichemy-logo.svg" />';
+		$output         .= '<a href="https://uichemy.com/">';
+			$output     .= '<img src="' . esc_url( UICH_URL ) . 'assets/svg/uichemy-logo.svg" />';
+		$output         .= '</a>';	
 	$output         .= '</div>';
 	$output         .= '<div class="uich-header-btn-group">';
 		$output     .= '<div class="uich-with-notification-btn" >';

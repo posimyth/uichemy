@@ -328,6 +328,7 @@
 }
 
 .uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-active-deactive .uich-btn{
+    text-decoration: none;
     color: var(--green);
     border-color: var(--green);
     padding: 10px;
@@ -340,7 +341,6 @@
 }
 .uich-how-does-work-section .uich-activate-section.uich-api-deactive .uich-active-deactive .uich-btn:hover{
     background-color: #E6F6E8;
-    
 }
 
 .uich-text{

@@ -42,7 +42,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 						'/import',
 						array(
 							'methods'             => 'POST',
-							'callback'            => 'uich_handle_import',
+							'callback'            => array( $this, 'uich_handle_import' ),
 							'permission_callback' => '__return_true',
 						)
 					);
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 						'/check',
 						array(
 							'methods'             => array( 'GET', 'POST' ),
-							'callback'            => 'uich_handle_check',
+							'callback'            => array( $this, 'uich_handle_check' ),
 							'permission_callback' => '__return_true',
 						)
 					);
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			header( 'Access-Control-Allow-Origin: *' );
 
 			// Match Security Token.
-			if ( ! uich_are_tokens_matching( $request ) ) {
+			if ( ! $this->uich_are_tokens_matching( $request ) ) {
 				return array(
 					'success' => false,
 					'message' => esc_html__( 'Invalid Security Token', 'uichemy' ),
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 */
 		public function uich_handle_check( WP_REST_Request $request ) {
 
-			if ( uich_are_tokens_matching( $request ) ) {
+			if ( $this->uich_are_tokens_matching( $request ) ) {
 				return array(
 					'success' => true,
 					'message' => esc_html__( 'All Good.', 'uichemy' ),
