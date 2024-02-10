@@ -81,7 +81,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 				return;
 			}
 
-			$this->uich_enqueue_styles( $page );
+			$this->uich_enqueue_styles();
 			$this->uich_enqueue_scripts();
 		}
 
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 *
 		 * @param string $page use for check page type.
 		 */
-		public function uich_enqueue_styles( $page ) {
+		public function uich_enqueue_styles() {
 			wp_enqueue_style( 'uichemy-welcome-style', UICH_URL . 'assets/css/welcome-page.css', array(), UICH_VERSION, 'all' );
 		}
 

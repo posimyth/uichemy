@@ -105,11 +105,11 @@ UiChemy works by integrating directly with Figma and Elementor. Once you have de
 == Changelog ==
 
 = 1.1.0 = 3 FEBRUARY 2024
-- Update : Design Improvement
-- Fix : Minor Bug Fixes & Improvements
+Update : Design Improvement
+Fix : Minor Bug Fixes & Improvements
 
 = 1.0.0 = 28 December 2023
-- Initial Release
+Initial Release
 
 == Upgrade Notice ==
 

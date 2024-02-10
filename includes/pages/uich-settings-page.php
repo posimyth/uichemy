@@ -17,67 +17,63 @@ $current_token = apply_filters( 'uich_manage_token', 'get_token' );
 $capable_users = apply_filters( 'uich_manage_usermanager', 'get_userlist' );
 $selected_user = apply_filters( 'uich_manage_usermanager', 'get_user' );
 
-$output = '';
-
-$output .= '<div class="uich-container-main uich-settings-pages">';
+echo '<div class="uich-container-main uich-settings-pages">';
 	require_once UICH_PATH . 'includes/pages/design-header.php';
 
-	$output .= '<form class="uich-main-form">';
+	echo '<form class="uich-main-form">';
 
-	$output .= '<div class="uich-feilds">';
+	echo '<div class="uich-feilds">';
 
-		$output     .= '<label for="SiteURL">';
-			$output .= esc_html__( 'Site URL', 'uichemy' );
-		$output     .= '</label>';
+		echo '<label for="SiteURL">';
+			echo esc_html__( 'Site URL', 'uichemy' );
+		echo '</label>';
 
 		$site_url = home_url();
-		$output .= '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( $site_url ) . '"/>';
+		echo '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( $site_url ) . '"/>';
 
-		$output     .= '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
-			$output .= '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';
-			$output .= '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//done-status.svg" />';
-		$output     .= '</button>';
+		echo '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
+			echo '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';
+			echo '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//done-status.svg" />';
+		echo '</button>';
 
-	$output .= '</div>';
+	echo '</div>';
 
-	$output .= '<div class="uich-feilds">';
+	echo '<div class="uich-feilds">';
 
-		$output     .= '<label for="Security">';
-			$output .= esc_html__( 'Security Token', 'uichemy' );
-		$output     .= '</label>';
+		echo '<label for="Security">';
+			echo esc_html__( 'Security Token', 'uichemy' );
+		echo '</label>';
 
-		$output .= '<input readonly id="uichemy-token-input" name="Security" type="text" value="' . esc_attr( $current_token ) . '"/>';
+		echo '<input readonly id="uichemy-token-input" name="Security" type="text" value="' . esc_attr( $current_token ) . '"/>';
 
-		$output     .= '<button id="uichemy-token-copy-btn" class="uich-token-copy-url">';
-			$output .= '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/copy-action.svg" />';
-			$output .= '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/done-status.svg" />';
-		$output     .= '</button>';
+		echo '<button id="uichemy-token-copy-btn" class="uich-token-copy-url">';
+			echo '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/copy-action.svg" />';
+			echo '<img class="hidden done-icon" src="' . esc_url( UICH_URL ) . 'assets/svg/done-status.svg" />';
+		echo '</button>';
 
-	$output .= '</div>';
+	echo '</div>';
 
-	$output     .= '<button type="button" id="uichemy-regenerate-btn" class="uich-border-btn">';
-		$output .= '<span>' . esc_html__( 'Regenerate Token', 'uichemy' ) . '</span>';
-		$output .= '<span><div class="uich-loader"></div></span>';
-	$output     .= '</button>';
+	echo '<button type="button" id="uichemy-regenerate-btn" class="uich-border-btn">';
+		echo '<span>' . esc_html__( 'Regenerate Token', 'uichemy' ) . '</span>';
+		echo '<span><div class="uich-loader"></div></span>';
+	echo '</button>';
 
-	$output .= '<div class="uich-feilds uich-dropdown-cover">';
+	echo '<div class="uich-feilds uich-dropdown-cover">';
 
-		$output     .= '<label for="IMPuser" class="uich-dropdown">';
-			$output .= esc_html__( 'Import as User', 'uichemy' );
-		$output     .= '</label>';
+		echo '<label for="IMPuser" class="uich-dropdown">';
+			echo esc_html__( 'Import as User', 'uichemy' );
+		echo '</label>';
 
-		$output .= '<select value="' . esc_attr( $selected_user ) . '" id="uichemy-user-select">';
+		echo '<select value="' . esc_attr( $selected_user ) . '" id="uichemy-user-select">';
 
 foreach ( $capable_users as $user ) {
 	$username = ! empty( $user->user_login ) ? $user->user_login : '';
 	$selected = ( $username === $selected_user ) ? 'selected="selected"' : '';
-	$output  .= "<option value='" . esc_attr( $username ) . "' {$selected}>" . esc_html( ucfirst ( $username ) ) . '</option>';
+	echo "<option value='" . esc_attr( $username ) . "' " . selected( $username, $selected_user, false ) . '>' . esc_html( ucfirst( $username ) ) . '</option>';
 }
 
-		$output .= '</select>';
-	$output     .= '</div>';
+		echo '</select>';
+	echo '</div>';
 
-$output .= '</form>';
-$output .= '</div>';
-
-echo $output;
+echo '</form>';
+echo '</div>';

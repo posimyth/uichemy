@@ -2,7 +2,7 @@
 /**
  * The file that defines the core plugin class
  *
- * It is Header File. 
+ * It is Header File.
  *
  * @link       https://posimyth.com/
  * @since      1.0.0
@@ -11,21 +11,24 @@
  * @subpackage Wdesignkit/pages/header
  */
 
-$output             .= '<div class="uich-container uich-main-bg" >';
-	$output         .= '<div class="uich-logo">';
-		$output         .= '<a href="https://uichemy.com/">';
-			$output     .= '<img src="' . esc_url( UICH_URL ) . 'assets/svg/uichemy-logo.svg" />';
-		$output         .= '</a>';	
-	$output         .= '</div>';
-	$output         .= '<div class="uich-header-btn-group">';
-		$output     .= '<div class="uich-with-notification-btn" >';
-			$output .= '<button type="button" class="uich-header-btn uich-transparent-btn">What’s New?</button>';
-			$output .= '<span class="uich-notify-circle">1</span>';
-		$output     .= '</div>';
-		$output     .= '<button type="button" class="uich-header-btn filled-btn">';
-			$output .= esc_html__( 'Version ', 'uichemy' ) . esc_html( UICH_VERSION );
-		$output     .= '</button>';
-	$output         .= '</div>';
-$output             .= '</div>';
+/** If this file is called directly, abort. */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-return $output;
+echo '<div class="uich-container uich-main-bg" >';
+	echo '<div class="uich-logo">';
+		echo '<a href="https://uichemy.com/">';
+			echo '<img src="' . esc_url( UICH_URL ) . 'assets/svg/uichemy-logo.svg" />';
+		echo '</a>';
+	echo '</div>';
+	echo '<div class="uich-header-btn-group">';
+		echo '<div class="uich-with-notification-btn" >';
+			echo '<button type="button" class="uich-header-btn uich-transparent-btn">What’s New?</button>';
+			echo '<span class="uich-notify-circle">1</span>';
+		echo '</div>';
+		echo '<button type="button" class="uich-header-btn filled-btn">';
+			echo esc_html__( 'Version ', 'uichemy' ) . esc_html( UICH_VERSION );
+		echo '</button>';
+	echo '</div>';
+echo '</div>';
