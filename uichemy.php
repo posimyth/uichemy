@@ -28,7 +28,6 @@ define( 'UICH_PATH', plugin_dir_path( __FILE__ ) );
 define( 'UICH_URL', plugins_url( '/', __FILE__ ) );
 define( 'UICH_BDNAME', basename( __DIR__ ) );
 define( 'UICH_PBNAME', plugin_basename( __FILE__ ) );
-define( 'UICH_USERNAME', 'uichemy' );
 define( 'UICHEMY_TOKEN_OPTION', 'uichemy_token' );
 define( 'UICHEMY_USER_OPTION', 'uichemy_user' );
 

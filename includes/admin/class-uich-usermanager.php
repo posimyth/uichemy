@@ -95,6 +95,10 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function get_selected_user() {
+			if( false === get_option( UICHEMY_USER_OPTION  ) ) {
+				self::init_selected_user();
+			}
+
 			return get_option( UICHEMY_USER_OPTION );
 		}
 

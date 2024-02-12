@@ -143,12 +143,14 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				// Using the elementor tmp_file creator.
 				$temp_filename = \Elementor\Plugin::$instance->uploads_manager->create_temp_file( $json, $file_name );
 				$file_data     = array(
-					'name'     => $file_name,
-					'tmp_name' => $temp_filename,
+					'fileName' => $file_name,
+            		'fileData' => base64_encode($json),
 				);
 
+				$selected_user = apply_filters( 'uich_manage_usermanager', 'get_user' );
+
 				// Set current user as admin.
-				wp_set_current_user( null, UICH_USERNAME );
+				wp_set_current_user( null, $selected_user );
 
 				// Start the import.
 				$import_result = \Elementor\Plugin::$instance->templates_manager->import_template( $file_data );

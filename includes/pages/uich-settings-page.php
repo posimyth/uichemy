@@ -13,6 +13,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// In case of Single or Multisite setup.
+function get_site_url(){
+    $url = site_url();
+
+    if( is_multisite() ){
+        $network = get_network();
+		
+        if( $network !== null ){
+            $url = site_url( $network->path );
+        }
+    }
+
+    return trailingslashit($url);
+}
+
 $current_token = apply_filters( 'uich_manage_token', 'get_token' );
 $capable_users = apply_filters( 'uich_manage_usermanager', 'get_userlist' );
 $selected_user = apply_filters( 'uich_manage_usermanager', 'get_user' );
@@ -28,8 +43,7 @@ echo '<div class="uich-container-main uich-settings-pages">';
 			echo esc_html__( 'Site URL', 'uichemy' );
 		echo '</label>';
 
-		$site_url = home_url();
-		echo '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( $site_url ) . '"/>';
+		echo '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( get_site_url() ) . '"/>';
 
 		echo '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
 			echo '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';

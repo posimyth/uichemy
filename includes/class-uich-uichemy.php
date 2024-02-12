@@ -69,9 +69,7 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		 * @since 1.0.0
 		 * @return void
 		 */
-		public static function uich_activation() {
-			require_once UICH_PATH . 'includes/admin/class-uich-activation.php';
-		}
+		public static function uich_activation() { }
 
 		/**
 		 * Plugin deactivation.
