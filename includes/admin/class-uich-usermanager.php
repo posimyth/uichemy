@@ -50,6 +50,8 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 				return self::get_selected_user();
 			} elseif ( 'set_user' === $type ) {
 				return self::set_user( $data );
+			} elseif ( 'delete_user' === $type ) {
+				return self::delete_user_option();
 			}
 		}
 

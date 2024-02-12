@@ -24,7 +24,7 @@ echo '<div class="uich-container uich-main-bg" >';
 	echo '</div>';
 	echo '<div class="uich-header-btn-group">';
 		echo '<div class="uich-with-notification-btn" >';
-			echo '<button type="button" class="uich-header-btn uich-transparent-btn">What’s New?</button>';
+			echo '<a target="_blank" rel="noopener noreferrer" href="https://roadmap.uichemy.com/updates" class="uich-header-btn uich-transparent-btn">What’s New?</a>';
 			echo '<span class="uich-notify-circle">1</span>';
 		echo '</div>';
 		echo '<button type="button" class="uich-header-btn filled-btn">';

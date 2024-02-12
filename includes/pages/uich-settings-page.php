@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // In case of Single or Multisite setup.
-function get_site_url(){
+function uich_get_site_url(){
     $url = site_url();
 
     if( is_multisite() ){
@@ -43,7 +43,7 @@ echo '<div class="uich-container-main uich-settings-pages">';
 			echo esc_html__( 'Site URL', 'uichemy' );
 		echo '</label>';
 
-		echo '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( get_site_url() ) . '"/>';
+		echo '<input readonly id="uichemy-site-url-input" name="SiteURL" type="url" value="' . esc_url( uich_get_site_url() ) . '"/>';
 
 		echo '<button id="uichemy-url-copy-btn" class="uich-token-copy-url">';
 			echo '<img class="copy-icon" src="' . esc_url( UICH_URL ) . 'assets/svg//copy-action.svg" />';
@@ -80,11 +80,11 @@ echo '<div class="uich-container-main uich-settings-pages">';
 
 		echo '<select value="' . esc_attr( $selected_user ) . '" id="uichemy-user-select">';
 
-foreach ( $capable_users as $user ) {
-	$username = ! empty( $user->user_login ) ? $user->user_login : '';
-	$selected = ( $username === $selected_user ) ? 'selected="selected"' : '';
-	echo "<option value='" . esc_attr( $username ) . "' " . selected( $username, $selected_user, false ) . '>' . esc_html( ucfirst( $username ) ) . '</option>';
-}
+			foreach ( $capable_users as $user ) {
+				$username = ! empty( $user->user_login ) ? $user->user_login : '';
+				$selected = ( $username === $selected_user ) ? 'selected="selected"' : '';
+				echo "<option value='" . esc_attr( $username ) . "' " . selected( $username, $selected_user, false ) . '>' . esc_html( ucfirst( $username ) ) . '</option>';
+			}
 
 		echo '</select>';
 	echo '</div>';

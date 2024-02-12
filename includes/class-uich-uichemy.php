@@ -79,6 +79,7 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		 */
 		public static function uich_deactivation() {
 			apply_filters( 'uich_manage_token', 'delete_token' );
+			apply_filters( 'uich_manage_usermanager', 'delete_user' );
 		}
 
 		/**

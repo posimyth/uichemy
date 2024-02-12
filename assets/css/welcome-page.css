@@ -53,6 +53,7 @@
     line-height: 24px;
     font-weight: 500;
     padding: 16px 32px;
+    text-decoration: none;
     background-color: var(--primary-color);
     color: var(--black-shade-one);
     border: none;
@@ -78,7 +79,7 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-famliy);
-    width: 100%;
+    text-decoration: none;
     padding: 12px;
     font-size: 16px;
     line-height: 24px;
@@ -89,6 +90,10 @@
     color: var(--secondary-color);
     cursor: pointer;
     transition: .2s ease-out;
+}
+
+#uichemy-regenerate-btn {
+    width: 100%;
 }
 
 .uich-border-btn span:nth-child(2) {
@@ -110,6 +115,7 @@
 
 .uich-yellow-btn:hover{
     background-color: var(--yellow-hover);
+    color: #000000;
 }
 
 .uich-quick-link{
@@ -172,6 +178,13 @@
 .uich-transparent-btn {
     background-color: #FFFFFF26;
     color: var(--white);
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+.uich-transparent-btn:hover {
+    color: white;
 }
 
 .uich-filled-btn {

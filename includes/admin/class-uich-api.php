@@ -122,16 +122,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 */
 		public function uich_handle_import( WP_REST_Request $request ) {
 
-			// In case of shutdown.
-			header( 'Access-Control-Allow-Origin: *' );
-
 			// Match Security Token.
-			if ( ! $this->uich_are_tokens_matching( $request ) ) {
-				return array(
-					'success' => false,
-					'message' => esc_html__( 'Invalid Security Token', 'uichemy' ),
-				);
-			}
+			$this->uich_check_token( $request );
 
 			$json = $request->get_body();
 
@@ -180,16 +172,11 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 */
 		public function uich_handle_check( WP_REST_Request $request ) {
 
-			if ( $this->uich_are_tokens_matching( $request ) ) {
-				return array(
-					'success' => true,
-					'message' => esc_html__( 'All Good.', 'uichemy' ),
-				);
-			}
+			$this->uich_check_token( $request );
 
 			return array(
-				'success' => false,
-				'message' => esc_html__( 'Invalid Security Token', 'uichemy' ),
+				'success' => true,
+				'message' => esc_html__( 'All Good.', 'uichemy' ),
 			);
 		}
 
@@ -205,6 +192,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$requesturi = ! empty( $_SERVER['REQUEST_URI'] ) ? esc_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) : '';
 
 			if ( ! empty( $origin ) && preg_match( '/\/wp-json\/uichemy\/v1/', wp_parse_url( $requesturi, PHP_URL_PATH ) ) === 1 ) {
+				// Allow security token header.
 				header( 'Access-Control-Allow-Headers: UiChemy-Security-Token' );
 			}
 
@@ -218,16 +206,24 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 *
 		 * @param WP_REST_Request $request WP_REST_Request object.
 		 */
-		public function uich_are_tokens_matching( WP_REST_Request $request ) {
+		public function uich_check_token( WP_REST_Request $request ) {
+
+			// In case of shutdown.
+			header( 'Access-Control-Allow-Origin: *' );
 
 			$token         = $request->get_header( 'UiChemy-Security-Token' );
 			$current_token = apply_filters( 'uich_manage_token', 'get_token' );
 
 			if ( is_null( $token ) || empty( $current_token ) || $current_token !== $token ) {
-				return false;
-			}
+				wp_send_json(
+					array(
+						'success' => false,
+						'message' => esc_html__( 'Invalid Security Token', 'uichemy' ),
+					)
+				);
 
-			return true;
+				wp_die();
+			}
 		}
 
 		/**
