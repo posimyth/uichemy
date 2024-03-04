@@ -63,7 +63,9 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function gen_random_token() {
-			return MD5( random_bytes( 512 ) );
+			$hash = strtoupper( MD5( random_bytes( 512 ) ) );
+			$split_hash = str_split($hash, 4);
+			return join("-", $split_hash);
 		}
 
 		/**

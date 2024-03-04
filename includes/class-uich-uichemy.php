@@ -115,6 +115,7 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 			require_once UICH_PATH . 'includes/admin/class-uich-token-manager.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-usermanager.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-api.php';
+			require_once UICH_PATH . 'includes/user-experience/class-uich-user-experience-main.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-enqueue.php';
 		}
 	}
