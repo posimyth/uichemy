@@ -444,7 +444,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 		/**
 		 * Install Elementor
-		 *
+		 * 
+		 * @since 1.0.0
 		 * */
 		public function uich_install_elementor() {
 			include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -488,28 +489,30 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 				$success = null === $elementor_active;
 
-				return $this->uich_response( 'Success Install Elementor', 'Success Install Elementor', $success, '' );
+				return $this->uich_response( 'Successfully Activated!', 'Elementor Installed and Activated Successfully.', $success, '' );
 			}
 		}
 
 		/**
 		 * Flexbox Container
 		 *
+		 * @since 1.0.0
 		 * */
 		public function uich_flexbox_container() {
 			
 			if ( 'active' !== get_option( $this->flexbox_container_db ) ) {
 				update_option( $this->flexbox_container_db, 'active' );
 
-				return $this->uich_response( 'Flexbox Container Activated', 'Flexbox Container Activated', true, '' );
+				return $this->uich_response( 'Successfully Enabled!', 'Flexbox Container activated Successfully.', true, '' );
 			}else {
-				return $this->uich_response( 'Flexbox Container Alredy Activated', 'Flexbox Container Alredy Activated', true, '' );
+				return $this->uich_response( 'Something Went Wrong', 'Flexbox Container Alredy Activated', true, '' );
 			}
 		}
 
 		/**
 		 * Flexbox Container
-		 *
+		 * 
+		 * @since 1.0.0
 		 * */
 		public function uich_elementor_file_uploads() {
 			$fileupload = get_option( $this->file_uploads_db );
@@ -517,9 +520,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			if ( empty( $fileupload ) && $fileupload !== 1 ) {
 				update_option( $this->file_uploads_db, 1 );
 
-				return $this->uich_response( 'File Uploads Activated', 'File Uploads Activated', true, '' );
+				return $this->uich_response( 'Successfully Enabled!', 'Unfiltered File Uploads activated Successfully.', true, '' );
 			}else {
-				return $this->uich_response( 'File Uploads Alredy Activated', 'File Uploads Alredy Activated', true, '' );
+				return $this->uich_response( 'Something Went Wrong', 'File Uploads Alredy Activated', true, '' );
 			}
 		}
 

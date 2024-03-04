@@ -130,12 +130,12 @@ if ( ! class_exists( 'Uich_Toast_Popup' ) ) {
 
 					var timer1, timer2;
 
-					function Toast_message( type='', title='', description='' ) {
+					function Toast_message( type='', title='Success', description='' ) {
 						var toast = document.querySelector(".uich_toast"),
 							progress = document.querySelector(".uich_progress");
 						
 							if( type ){
-								toast.querySelector('.uich_text-1').innerHTML = 'Success';
+								toast.querySelector('.uich_text-1').innerHTML = title;
 
 								toast.querySelector('.uich-success-svg').style.display = 'flex';
 								toast.querySelector('.uich-error-svg').style.display = 'none';
