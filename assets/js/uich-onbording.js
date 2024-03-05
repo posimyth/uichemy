@@ -7,16 +7,18 @@ jQuery(document).ready(function($) {
             var getstyle = document.querySelector('.uich-btn-finish');
             var btn_ddd = document.querySelector('.uichemy-btn');
 
+            var checkbox = document.querySelector('.uich-latest-builder input:checked');
+
             if( btn_main.classList.contains('uich-btn-step-1') ){
                 document.querySelector('.uich-popup-container.uich-step-1').style.display = 'none';
                 document.querySelector('.uich-popup-container.uich-step-2').style.display = 'flex';
                 document.querySelector('.uichemy-page-count').innerHTML = '<span class="uich-pagination-first">02</span>/06';
-            
+                
                 btn_ddd.classList.remove('uich-btn-step-1');
                 btn_ddd.classList.add('uich-btn-step-2');
 
                 e.target.innerHTML = 'Next';
-
+                
                 return;
             }
 
@@ -202,55 +204,68 @@ jQuery(document).ready(function($) {
     }
 
     /************************************************* Page 5 Active Button ***********************************************/
-    var success_svg = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.3734 2.79289C12.764 3.18342 12.764 3.81658 12.3734 4.20711L5.95678 10.6238C5.56626 11.0143 4.93309 11.0143 4.54257 10.6238L1.6259 7.70711C1.23538 7.31658 1.23538 6.68342 1.6259 6.29289C2.01643 5.90237 2.64959 5.90237 3.04011 6.29289L5.24967 8.50245L10.9592 2.79289C11.3498 2.40237 11.9829 2.40237 12.3734 2.79289Z" fill="#33C598"/></svg>';
-    var error_svg = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_168_67022)"><path d="M7.00033 12.8337C10.222 12.8337 12.8337 10.222 12.8337 7.00033C12.8337 3.77866 10.222 1.16699 7.00033 1.16699C3.77866 1.16699 1.16699 3.77866 1.16699 7.00033C1.16699 10.222 3.77866 12.8337 7.00033 12.8337Z" stroke="#FF3D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 4.66699V7.00033" stroke="#FF3D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 9.33301H7.00583" stroke="#FF3D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_168_67022"><rect width="14" height="14" fill="white"/></clipPath></defs></svg>';
+    var success_svg = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+    var error_svg = '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"></path></svg>';
 
     /**Elementor Page Builder*/
     var elementorButton = document.querySelectorAll('.uich-onbording-elementor');
     if( elementorButton.length > 0 ){
         function installelementorOnbording() {
-            var $this = this;
+            var $this = this,
+                get_tooltip = $this.closest('.uich-box').querySelector('.uich-tooltip');
 
-            this.insertAdjacentHTML("beforeend", `<span class="uich-round-loader" style="margin-left: 5px;"></span>`);
+                $this.innerHTML = `<span class="uich-round-loader"></span>`;
 
-            jQuery.ajax({
-                url: uichemy_ajax_object.ajax_url,
-                method: "POST",
-                data: {
-                    action: 'uich_uichemy',
-                    nonce: uichemy_ajax_object.nonce,
-                    type: 'install_elementor',
-                },
-                beforeSend: function() {
-                },
-                success: function(res){
-                    if( res ){
-                        if ( $this.classList.contains('uich-danger') ) {
-                            $this.classList.remove('uich-danger');
+                jQuery.ajax({
+                    url: uichemy_ajax_object.ajax_url,
+                    method: "POST",
+                    data: {
+                        action: 'uich_uichemy',
+                        nonce: uichemy_ajax_object.nonce,
+                        type: 'install_elementor',
+                    },
+                    beforeSend: function() {
+                    },
+                    success: function(res){
+                        console.log( res );
+                        if ( res && res.success ) {
+                            $this.innerHTML = `No Action Needed`;
+
+                            if ( $this.classList.contains('uich-success') ) {
+                                $this.classList.remove('uich-success');
+                            }
+
+                            if ( $this.classList.contains('uich-onbording-fc') ) {
+                                $this.classList.remove('uich-onbording-fc');
+                            }
+
+                            if ( get_tooltip.classList.contains('uich-error') ) {
+                                get_tooltip.classList.remove('uich-error');
+                            }
+
+                            if ( !get_tooltip.classList.contains('uich-ob-success') ) {
+                                get_tooltip.classList.add('uich-ob-success');
+                            }
+
+                            $this.classList.add('uich-ob-active');
+
+                            get_tooltip.querySelector('span:nth-child(1)').innerHTML = success_svg;
+                            get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+
+                            // Remove click event after success
+                            get_flexboxcontainer[0].removeEventListener('click', bording_flexboxcontainer);
+                        }else{
+                            $this.innerHTML = `Install & Activate`;
+
+                            get_tooltip.querySelector('span:nth-child(1)').innerHTML = error_svg;
+                            get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
                         }
-
-                        $this.classList.add('uich-success');
-                        $this.querySelector('span:nth-child(1)').innerHTML = success_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Activate';
-
-                        elementorButton[0].removeEventListener('click', installelementorOnbording);
-                    }else{
-                        if ( $this.classList.contains('uich-success') ) {
-                            $this.classList.remove('uich-success');
-                        }
-
-                        $this.classList.add('uich-danger');
-                        $this.querySelector('span:nth-child(1)').innerHTML = error_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Installed';
-                    }
-
-                    $this.querySelector('.uich-round-loader').remove();
-                },
-                error: function(jq, status, err){
-                },
-                complete: function() {
-                },
-            });
+                    },
+                    error: function(jq, status, err){
+                    },
+                    complete: function() {
+                    },
+                });
         }
 
         elementorButton[0].addEventListener('click', installelementorOnbording);
@@ -259,9 +274,10 @@ jQuery(document).ready(function($) {
     var get_flexboxcontainer = document.querySelectorAll('.uich-onbording-fc');
     if( get_flexboxcontainer.length > 0 ){
         function bording_flexboxcontainer() {
-            var $this = this;
-            
-            this.insertAdjacentHTML("beforeend", `<span class="uich-round-loader" style="margin-left: 5px;"></span>`);
+            var $this = this,
+                get_tooltip = $this.closest('.uich-box').querySelector('.uich-tooltip');
+
+                $this.innerHTML = `<span class="uich-round-loader"></span>`;
 
             jQuery.ajax({
                 url: uichemy_ajax_object.ajax_url,
@@ -274,28 +290,39 @@ jQuery(document).ready(function($) {
                 beforeSend: function () {
                 },
                 success: function (res) {
-                    if (res) {
-                        if ( $this.classList.contains('uich-danger') ) {
-                            $this.classList.remove('uich-danger');
+                    
+                    if (res.success) {
+                        $this.innerHTML = `No Action Needed`;
+
+                        if ( $this.classList.contains('uich-success') ) {
+                            $this.classList.remove('uich-success');
+                        }
+                        
+                        if ( $this.classList.contains('uich-onbording-fc') ) {
+                            $this.classList.remove('uich-onbording-fc');
                         }
 
-                        $this.classList.add('uich-success');
-                        $this.querySelector('span:nth-child(1)').innerHTML = success_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+                        if ( get_tooltip.classList.contains('uich-error') ) {
+                            get_tooltip.classList.remove('uich-error');
+                        }
+
+                        if ( !get_tooltip.classList.contains('uich-ob-success') ) {
+                            get_tooltip.classList.add('uich-ob-success');
+                        }
+
+                        $this.classList.add('uich-ob-active');
+
+                        get_tooltip.querySelector('span:nth-child(1)').innerHTML = success_svg;
+                        get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
 
                         // Remove click event after success
                         get_flexboxcontainer[0].removeEventListener('click', bording_flexboxcontainer);
                     }else{
-                        if ( $this.classList.contains('uich-success') ) {
-                            $this.classList.remove('uich-success');
-                        }
+                        $this.innerHTML = `Install & Activate`;
 
-                        $this.classList.add('uich-danger');
-                        $this.querySelector('span:nth-child(1)').innerHTML = error_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Installed';
+                        get_tooltip.querySelector('span:nth-child(1)').innerHTML = error_svg;
+                        get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Inactive';
                     }
-
-                    $this.querySelector('.uich-round-loader').remove();
                 },
                 error: function (jq, status, err) {
                     // Handle error if needed
@@ -312,9 +339,10 @@ jQuery(document).ready(function($) {
     var fileuploads = document.querySelectorAll('.uich-onbording-fu');
     if( fileuploads.length > 0 ){
         function fileuploadsHandler() {
-            var $this = this;
+            var $this = this,
+                get_tooltip = $this.closest('.uich-box').querySelector('.uich-tooltip');
 
-            this.insertAdjacentHTML("beforeend", `<span class="uich-round-loader" style="margin-left: 5px;"></span>`);
+                $this.innerHTML = `<span class="uich-round-loader"></span>`;
 
             jQuery.ajax({
                 url: uichemy_ajax_object.ajax_url,
@@ -327,28 +355,38 @@ jQuery(document).ready(function($) {
                 beforeSend: function () {
                 },
                 success: function (res) {
-                    if (res) {
-                        if ( $this.classList.contains('uich-danger') ) {
-                            $this.classList.remove('uich-danger');
-                        }
+                    if (res.success) {
+                        $this.innerHTML = `No Action Needed`;
 
-                        $this.classList.add('uich-success');
-                        $this.querySelector('span:nth-child(1)').innerHTML = success_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Activate';
-
-                        // Remove click event after success
-                        fileuploads[0].removeEventListener('click', fileuploadsHandler);
-                    }else{
                         if ( $this.classList.contains('uich-success') ) {
                             $this.classList.remove('uich-success');
                         }
+                        
+                        if ( $this.classList.contains('uich-onbording-fc') ) {
+                            $this.classList.remove('uich-onbording-fc');
+                        }
 
-                        $this.classList.add('uich-danger');
-                        $this.querySelector('span:nth-child(1)').innerHTML = error_svg;
-                        $this.querySelector('span:nth-child(2)').innerHTML = 'Installed';
+                        if ( get_tooltip.classList.contains('uich-error') ) {
+                            get_tooltip.classList.remove('uich-error');
+                        }
+
+                        if ( !get_tooltip.classList.contains('uich-ob-success') ) {
+                            get_tooltip.classList.add('uich-ob-success');
+                        }
+
+                        $this.classList.add('uich-ob-active');
+
+                        get_tooltip.querySelector('span:nth-child(1)').innerHTML = success_svg;
+                        get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+
+                        // Remove click event after success
+                        get_flexboxcontainer[0].removeEventListener('click', bording_flexboxcontainer);
+                    }else{
+                        $this.innerHTML = `Install & Activate`;
+
+                        get_tooltip.querySelector('span:nth-child(1)').innerHTML = error_svg;
+                        get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Inactive';
                     }
-
-                    $this.querySelector('.uich-round-loader').remove();
                 },
                 error: function (jq, status, err) {
                     // Handle error if needed

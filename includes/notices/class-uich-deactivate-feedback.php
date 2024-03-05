@@ -206,7 +206,7 @@ if ( ! class_exists( 'Uich_Deactivate_Feedback' ) ) {
 		 */
 		public function uich_onboarding_assets( $page ) {
 			if ( 'plugins.php' === $page ) {
-				wp_enqueue_style( 'uich-onbording-style', UICH_URL . 'assets/css/uich-onbording.css', array(), UICH_VERSION, 'all' );
+				wp_enqueue_style( 'uich-deactive-style', UICH_URL . 'assets/css/uich-deactive.css', array(), UICH_VERSION, 'all' );
 			}
 		}
 

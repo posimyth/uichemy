@@ -16,9 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$admin_page_url = admin_url('admin.php?page=uichemy-welcome');
+
 echo '<div class="uich-container uich-main-bg" >';
 	echo '<div class="uich-logo">';
-		echo '<a href="https://uichemy.com/">';
+		echo '<a href="' . esc_url($admin_page_url) . '">';
 			echo '<img src="' . esc_url( UICH_URL ) . 'assets/svg/uichemy-logo.svg" />';
 		echo '</a>';
 	echo '</div>';

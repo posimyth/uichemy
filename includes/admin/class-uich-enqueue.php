@@ -43,7 +43,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			$capability = 'manage_options';
 
 			if ( current_user_can( $capability ) ) {
-				add_menu_page( __( 'Uichemy', 'uichemy' ), __( 'Uichemy', 'uichemy' ), 'manage_options', 'uichemy-welcome', array( $this, 'uich_menu_page_template' ), UICH_URL . 'assets/svg/bw-logo.svg' );
+				add_menu_page( __( 'UiChemy', 'uichemy' ), __( 'UiChemy', 'uichemy' ), 'manage_options', 'uichemy-welcome', array( $this, 'uich_menu_page_template' ), UICH_URL . 'assets/svg/bw-logo.svg' );
 
 				add_submenu_page( 'uichemy-welcome', __( 'Settings', 'uichemy' ), __( 'Settings', 'uichemy' ), 'manage_options', 'uichemy-settings', array( $this, 'uich_submenu_settings_page_template' ) );
 			}

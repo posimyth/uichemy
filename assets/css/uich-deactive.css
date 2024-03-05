@@ -1,0 +1,228 @@
+.uich-modal {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backdrop-filter: blur(4px);
+    display: none;
+    box-sizing: border-box;
+    overflow: scroll;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s, backdrop-filter .3s
+}
+
+.uich-modal.modal-active {
+    display: block;
+    opacity: 1;
+    visibility: visible
+}
+
+.uich-modal-wrap {
+    width: 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    max-width: 554px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform .3s ease-in-out;
+    transform-origin: center
+}
+
+.uich-reason-txt-deails {
+    display: block;
+    width: 100%;
+    margin-top: 20px
+}
+
+#uich-deactive-modal {
+    background: rgb(0 0 0/33%);
+    overflow: hidden
+}
+
+#uich-deactive-modal .uich-modal-header {
+    padding: 17px 30px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1)
+}
+
+#uich-deactive-modal .uich-modal-header .uich-feed-head-title {
+    margin-left: 10px;
+    padding: 0;
+    flex: 1;
+    line-height: 1;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #3c434a
+}
+
+#uich-deactive-modal .uich-feed-caption {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.4
+}
+
+#uich-deactive-modal .uich-modal-body,
+.uich-help-link {
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column
+}
+
+.uich-feedback-dialog-form {
+    padding-top: 25px
+}
+
+#uich-deactive-modal .uich-modal-body h3 {
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
+    font-size: 15px
+}
+
+#uich-deactive-modal .uich-modal-body ul {
+    margin: 25px 0 10px
+}
+
+#uich-deactive-modal .uich-modal-body ul li {
+    display: flex;
+    margin-bottom: 10px;
+    color: #807d7d
+}
+
+#uich-deactive-modal .uich-modal-body ul li:last-child {
+    margin-bottom: 0
+}
+
+#uich-deactive-modal .uich-modal-body ul li label {
+    align-items: center;
+    width: 100%
+}
+
+#uich-deactive-modal .uich-modal-body ul li label input {
+    padding: 0 !important;
+    margin: 0;
+    display: inline-block
+}
+
+#uich-deactive-modal .uich-modal-body ul li label textarea {
+    margin-top: 8px;
+    width: 350px
+}
+
+#uich-deactive-modal .uich-modal-body ul li label .uich-reason-txt-text {
+    margin-left: 8px;
+    display: inline-block
+}
+
+#uich-deactive-modal .uich-modal-footer {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+
+#uich-deactive-modal .uich-modal-footer .uich-modal-deactive,
+#uich-deactive-modal .uich-modal-footer .uich-modal-submit {
+    display: flex;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 15px;
+    outline: 0;
+    border: 0;
+    border-radius: 3px;
+    transition: all .3s;
+    text-decoration: none
+}
+
+#uich-deactive-modal .uich-modal-footer .uich-modal-submit {
+    background-color: #040483;
+    color: #fff
+}
+
+#uich-deactive-modal .uich-modal-footer .uich-modal-submit:hover {
+    background-color: #030369;
+}
+
+#uich-deactive-modal .uich-modal-footer .uich-modal-deactive {
+    color: #515962
+}
+
+.uich-modal-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 10px
+}
+
+.uich-relist {
+    display: flex;
+}
+
+.uich-relist .uich-radion-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.uich-reason-txt-text {
+    display: inline-block
+}
+
+#uich-deactive-modal input[type=radio]:focus,
+.uich-modal-deactive:focus,
+.uich-modal-submit:focus {
+    border-color: #6f14f1 !important;
+    box-shadow: none !important
+}
+
+#uich-deactive-modal input[type=radio]:checked::before {
+    background: #6f14f1
+}
+
+.uich-help-link span {
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 500
+}
+
+.uich-help-link span>a {
+    color: #c22076;
+    text-decoration: none;
+    line-height: 1.8
+}
+
+.uich-help-link span>a:focus {
+    box-shadow: unset;
+    outline: unset;
+}
+
+@keyframes tp-rotation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(359deg)
+    }
+}
+
+#uich-deactive-modal .uich-modal-submit.uich-loading:before {
+    display: inline-block;
+    content: "\f463";
+    font: 18px dashicons;
+    animation: tp-rotation 2s infinite linear
+}

@@ -48,7 +48,6 @@
   border: 0;
   border-radius: 5px;
   padding: 6px 12px;
-  cursor: pointer;
   transition: 0.2s ease-out;
 }
 
@@ -100,33 +99,47 @@
   font-family: var(--font-famliy);
   text-decoration: none;
   padding: 12px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   font-weight: 400;
-  border: 1px solid var(--secondary-color);
+  padding: 5px 10px;
   border-radius: 5px;
-  background-color: transparent;
+  border: 1px solid #E6E6E6;
+  background-color: #E6E6E6;
+}
+
+.uich-border-btn.uich-activation-btn{
+  background-color: #EDE9FA;
+  border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
   cursor: pointer;
   transition: 0.2s ease-out;
 }
 
-.uich-border-btn.uich-activation-btn{
-  padding: 5px 10px;
-  background-color: #EDE9FA;
+.uich-card-btn{
+  border: 1px solid var(--secondary-color);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  padding: 12px;
+  background-color: transparent;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: var(--secondary-color);
+}
 
+.uich-card-btn:hover{
+  background-color: var(--secondary-color);
+  color: var(--white);
 }
 
 .uich-border-btn.uich-activation-btn:hover{
   background-color: #EDE9FA;
   color: var(--secondary-color);
-}
-.uich-mid-color{
-  color: var(--secondary-color);
-}
-
-#uichemy-regenerate-btn {
-  width: 100%;
 }
 
 .uich-border-btn span:nth-child(2) {
@@ -134,9 +147,19 @@
   margin-left: 10px;
 }
 
-.uich-border-btn:hover {
-  background-color: var(--secondary-color);
-  color: var(--white);
+.uich-mid-color{
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.uich-mid-color:focus{
+  box-shadow: unset;
+  outline: unset;
+}
+
+#uichemy-regenerate-btn {
+  width: 100%;
+  cursor: pointer;
 }
 
 .uich-icon-btn:hover {
@@ -146,6 +169,11 @@
 .uich-icon-btn i {
   color: #ff0000;
   font-size: 12px;
+} 
+
+.uich-yellow-btn:focus{
+  box-shadow: none;
+  outline: none;
 }
 
 .uich-yellow-btn:hover {
@@ -484,29 +512,6 @@ visibility: visible;
 
 }
 
-
-/* 
-.uich-recommended-settings .uich-hint-text {
-  padding: 5px 10px;
-  font-family: var(--font-famliy);
-  font-size: 14px;
-  line-height: 12px;
-  font-weight: 400;
-  border-radius: 5px;
-  margin-left: 7px;
-} */
-/* 
-.uich-recommended-settings .uich-hint-text.uich-installed {
-  background-color: #e6f6e880;
-  color: var(--green);
-} */
-
-/* .uich-recommended-settings .uich-hint-text.uich-uninstalled {
-  background-color: #ffe9e9;
-  color: var(--red);
-  cursor: pointer;
-} */
-
 .uich-activate-section {
   background-color: var(--white);
   border-radius: 10px;
@@ -619,12 +624,20 @@ visibility: visible;
 }
 
 .uich-main-welcome-back{
+  display: flex;
   font-family: var(--font-famliy);
   font-size: 14px;
   line-height: 21px;
   font-weight: 400;
   color: var(--secondary-color);
   text-decoration: none;
+  gap: 5px;
+}
+
+
+.uich-main-welcome-back:focus{
+  box-shadow: unset;
+  outline: unset;
 }
 
 .uich-main-welcome-back:hover{
@@ -869,6 +882,7 @@ visibility: visible;
   line-height: 18px;
   font-weight: 500;
   color: var(--black);
+  pointer-events: none;
 }
 
 .uich-main-form .uich-feilds input {
@@ -1218,44 +1232,6 @@ visibility: visible;
 }
 
 
-
-
-
-/**Install Plugin Loader*/
-.uich-install-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0px 5px;
-  position: relative;
-  margin: 0 auto;
-}
-
-.uich-install-loader:before {
-  content: "";
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #e3ed5d;
-  animation: loaderAnimation 1.2s infinite ease-in-out;
-}
-
-@keyframes loaderAnimation {
-  0% {
-      transform: scale(0);
-  }
-
-  50% {
-      background-color: #e3ed5d;
-      transform: scale(1);
-  }
-
-  100% {
-      transform: scale(0);
-  }
-}
-
 /************************************************* Toast Message ***********************************************/
 .uich_toast {
   position: fixed;
@@ -1373,5 +1349,9 @@ visibility: visible;
 
 
 #footer-thankyou{
+  display: none;
+}
+
+#footer-upgrade{
   display: none;
 }

@@ -490,6 +490,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				$success = null === $elementor_active;
 
 				return $this->uich_response( 'Successfully Activated!', 'Elementor Installed and Activated Successfully.', $success, '' );
+			}else{
+				return $this->uich_response( 'Something Went Wrong', 'Not Activate Plugin', false, $elementor_active );
 			}
 		}
 

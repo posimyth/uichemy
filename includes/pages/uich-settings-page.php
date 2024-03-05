@@ -32,14 +32,19 @@ $current_token = apply_filters( 'uich_manage_token', 'get_token' );
 $capable_users = apply_filters( 'uich_manage_usermanager', 'get_userlist' );
 $selected_user = apply_filters( 'uich_manage_usermanager', 'get_user' );
 
+$admin_page_url = admin_url('admin.php?page=uichemy-welcome');
+
 echo '<div class="uich-container-main uich-settings-pages">';
 	
 	require_once UICH_PATH . 'includes/pages/design-header.php';
 	
 	echo '<div class="uich-main-welcome-back-btn-cover">';
 	
-	echo '<svg width="16" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.8337 10.5H4.16699" stroke="#4B22CC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.0003 16.3334L4.16699 10.5001L10.0003 4.66675" stroke="#4B22CC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-		echo '<a href= "#" class="uich-main-welcome-back">'.esc_html__( 'Back to Dashboard', 'uichemy' ).'</a>';
+		echo '<a href= "' . esc_url($admin_page_url) . '" class="uich-main-welcome-back">';
+			echo '<svg width="16" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.8337 10.5H4.16699" stroke="#4B22CC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.0003 16.3334L4.16699 10.5001L10.0003 4.66675" stroke="#4B22CC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+			
+			echo esc_html__( 'Back', 'uichemy' );
+		echo '</a>';
 	echo '</div>';
 
 	echo '<div class="uich-security-img-cover">';
@@ -101,4 +106,7 @@ echo '<div class="uich-container-main uich-settings-pages">';
 	echo '</div>';
 
 echo '</form>';
+
+require_once UICH_PATH . 'includes/pages/uich-footer.php';
+
 echo '</div>';
