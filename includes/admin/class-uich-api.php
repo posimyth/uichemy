@@ -188,6 +188,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				// Set current user as admin.
 				wp_set_current_user( null, $selected_user );
 
+				// Disable Error Displaying
+				ini_set( 'display_errors', 0 );
+				
 				// Start the import.
 				$import_result = \Elementor\Plugin::$instance->templates_manager->import_template( $file_data );
 
@@ -298,7 +301,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			wp_set_current_user( null, $selected_user );
 
 			// Create Nonce
-			$nonce = wp_create_nonce("bricks-nonce");
+			$nonce = wp_create_nonce("bricks-nonce-admin");
 
 			return array(
 		        'success' => true,

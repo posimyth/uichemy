@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 15:05+0530\n"
+"POT-Creation-Date: 2024-03-15 11:14+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,23 +21,23 @@ msgstr ""
 msgid "Reset Successful"
 msgstr ""
 
-#: includes/admin/class-uich-api.php:202
+#: includes/admin/class-uich-api.php:205
 msgid "No JSON data found."
 msgstr ""
 
-#: includes/admin/class-uich-api.php:223
+#: includes/admin/class-uich-api.php:226
 msgid "All Good."
 msgstr ""
 
-#: includes/admin/class-uich-api.php:265
+#: includes/admin/class-uich-api.php:268
 msgid "Invalid Security Token"
 msgstr ""
 
-#: includes/admin/class-uich-api.php:392
+#: includes/admin/class-uich-api.php:395
 msgid "Insufficient permissions."
 msgstr ""
 
-#: includes/admin/class-uich-api.php:397
+#: includes/admin/class-uich-api.php:400
 msgid "Something went wrong."
 msgstr ""
 
