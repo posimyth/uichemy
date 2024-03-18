@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
             var getstyle = document.querySelector('.uich-btn-finish');
             var btn_ddd = document.querySelector('.uichemy-btn');
 
-            var checkbox = document.querySelector('.uich-latest-builder input:checked');
+            set_builder_setting();
 
             if( btn_main.classList.contains('uich-btn-step-1') ){
                 document.querySelector('.uich-popup-container.uich-step-1').style.display = 'none';
@@ -115,6 +115,8 @@ jQuery(document).ready(function($) {
             var btn_main = e.target.closest('.uichemy-btn');
             var btn_ddd = document.querySelector('.uichemy-btn');
 
+            set_builder_setting();
+
             document.querySelector('.uich-btn-finish').innerHTML = 'Next';
 
             if( btn_main.classList.contains('uich-btn-step-2') ){
@@ -179,6 +181,8 @@ jQuery(document).ready(function($) {
     if( skip_btn.length > 0 ){
         skip_btn[0].addEventListener("click", (e) => {
             var btn_ddd = document.querySelector('.uichemy-btn');
+
+            set_builder_setting();
 
             document.querySelector('.uich-popup-container.uich-step-1').style.display = 'none';
             document.querySelector('.uich-popup-container.uich-step-2').style.display = 'none';
@@ -400,4 +404,36 @@ jQuery(document).ready(function($) {
         // Attach the click event using the named function
         fileuploads[0].addEventListener('click', fileuploadsHandler);
     }
+
+    function set_builder_setting(){
+        var checkbox = document.querySelector('.uich-latest-builder input:checked');
+            
+        if( checkbox.value ){
+            if ( 'elementor' === checkbox.value ){
+                let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
+                    get_builder.forEach(function(self) {
+                        if( self.classList.contains('uich-page-elementor') ){
+                            self.style.display = "flex";
+                        }else{
+                            self.style.display = "none";
+                        }
+                    });
+            }else if ( 'bricks' === checkbox.value ) {
+                let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
+                    get_builder.forEach(function(self) {
+                        if( self.classList.contains('uich-page-bricks') ){
+                            self.style.display = "flex";
+                        }else{
+                            self.style.display = "none";
+                        }
+                    });
+            }else{
+                let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
+                    get_builder.forEach(function(self) {
+                        self.style.display = "none";
+                    });
+            }
+        }
+    }
+
 });

@@ -362,87 +362,148 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 
 			echo '<div class="uichemy-info">';
 
-				echo '<div class="uich-box">';
+				echo '<div class="uich-box uich-page-elementor">';
 				
-				if ( ! empty( $elementor_install_success ) ) {
-					echo '<div class="uich-tooltip uich-ob-success">';
-						echo '<span>';
-							echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
-					echo '</div>';
-				}else{
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-				}
-				
-					echo '<h3>' . esc_html__( 'Elementor Page Builder', 'uichemy' ) . '</h3>';
+					if ( ! empty( $elementor_install_success ) ) {
+						echo '<div class="uich-tooltip uich-ob-success">';
+							echo '<span>';
+								echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}else{
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}
+					
+						echo '<h3>' . esc_html__( 'Elementor Page Builder', 'uichemy' ) . '</h3>';
 
-			if ( ! empty( $elementor_install_success ) ) {
-				echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
-			} else {
-				echo '<div class="uich-info-btn uich-success uich-onbording-elementor">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-			}
+					if ( ! empty( $elementor_install_success ) ) {
+						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
+					} else {
+						echo '<div class="uich-info-btn uich-success uich-onbording-elementor">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+					}
 
 				echo '</div>';
 
-			echo '<div class="uich-box">';
+				echo '<div class="uich-box uich-page-elementor">';
 
-				if ( ! empty( $flexbox_setting_val ) && 'active' === $flexbox_setting_val ) {
-					echo '<div class="uich-tooltip uich-ob-success">';
-						echo '<span>';
-							echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
-					echo '</div>';
-				}else{
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-				}
+					if ( ! empty( $flexbox_setting_val ) && 'active' === $flexbox_setting_val ) {
+						echo '<div class="uich-tooltip uich-ob-success">';
+							echo '<span>';
+								echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}else{
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}
 
 					echo '<h3>' . esc_html__( 'Flexbox (Container)', 'uichemy' ) . '</h3>';
 
-				if ( ! empty( $flexbox_setting_val ) && 'active' === $flexbox_setting_val ) {
-					echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
-				} else {
-					echo '<div class="uich-info-btn uich-success uich-onbording-fc">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-				}
+					if ( ! empty( $flexbox_setting_val ) && 'active' === $flexbox_setting_val ) {
+						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
+					} else {
+						echo '<div class="uich-info-btn uich-success uich-onbording-fc">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+					}
 
 				echo '</div>';
 
-				echo '<div class="uich-box">';
+				echo '<div class="uich-box uich-page-elementor">';
 				
-				if ( ! empty( $file_uploads_val ) ) {
-					echo '<div class="uich-tooltip uich-ob-success">';
-						echo '<span>';
-							echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
-					echo '</div>';
-				}else{
+					if ( ! empty( $file_uploads_val ) ) {
+						echo '<div class="uich-tooltip uich-ob-success">';
+							echo '<span>';
+								echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}else{
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}
+
+						echo '<h3>' . esc_html__( 'Enabled Unfiltered Uploads for SVG', 'uichemy' ) . '</h3>';
+
+					if ( ! empty( $file_uploads_val ) ) {
+						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
+					} else {
+						echo '<div class="uich-info-btn uich-success uich-onbording-fu">'. esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+					}
+
+				echo '</div>';
+
+				/** Bricks settings */
+				echo '<div class="uich-box uich-page-bricks">';
+
 					echo '<div class="uich-tooltip uich-error">';
 						echo '<span>';
 							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
 						echo '</span>';
 						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
 					echo '</div>';
-				}
 
-					echo '<h3>' . esc_html__( 'Enabled Unfiltered Uploads for SVG', 'uichemy' ) . '</h3>';
+					echo '<h3>' . esc_html__( 'Administrator', 'uichemy' ) . '</h3>';
 
-				if ( ! empty( $file_uploads_val ) ) {
-					echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
-				} else {
-					echo '<div class="uich-info-btn uich-success uich-onbording-fu">'. esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-				}
+					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+
+				echo '</div>';
+
+				echo '<div class="uich-box uich-page-bricks">';
+
+					echo '<div class="uich-tooltip uich-error">';
+						echo '<span>';
+							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+						echo '</span>';
+						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+					echo '</div>';
+
+					echo '<h3>' . esc_html__( 'Editor', 'uichemy' ) . '</h3>';
+
+					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+
+				echo '</div>';
+
+				echo '<div class="uich-box uich-page-bricks">';
+
+					echo '<div class="uich-tooltip uich-error">';
+						echo '<span>';
+							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+						echo '</span>';
+						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+					echo '</div>';
+
+					echo '<h3>' . esc_html__( 'Author', 'uichemy' ) . '</h3>';
+
+					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+
+				echo '</div>';
+
+				echo '<div class="uich-box uich-page-bricks">';
+
+					echo '<div class="uich-tooltip uich-error">';
+						echo '<span>';
+							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+						echo '</span>';
+						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+					echo '</div>';
+
+					echo '<h3>' . esc_html__( 'Contributor', 'uichemy' ) . '</h3>';
+
+					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
 
 				echo '</div>';
 

@@ -42,7 +42,8 @@
     gap: 20px;
 }
 
-.uich-onbording-hide{
+.uich-onbording-hide,
+.uich-box.uich-hide{
     display: none;
 }
 
