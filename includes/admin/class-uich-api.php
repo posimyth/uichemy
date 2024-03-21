@@ -32,16 +32,24 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		/**
 		 * Member Variable
 		 *
-		 * @var staring $flexbox_container_db
+		 * @var staring $file_uploads_db
 		 */
 		public $file_uploads_db = 'elementor_unfiltered_files_upload';
 
 		/**
 		 * Member Variable
 		 *
-		 * @var staring $flexbox_container_db
+		 * @var staring $elementor_pluginpath
 		 */
 		public $elementor_pluginpath = 'elementor/elementor.php';
+
+		/**
+		 * Onbording Popup Close
+		 *
+		 * @since 1.2.2
+		 * @var uich_onbording_end of the class.
+		 */
+		public $uich_onbording_end = 'uich_onbording_end';
 
 		/**
 		 * Initialize the class and set its properties.
@@ -54,9 +62,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			add_action( 'wp_ajax_uichemy_regenerate_token', array( $this, 'uiche_regenerate_token' ) );
 			add_action( 'wp_ajax_uichemy_select_user', array( $this, 'uichemy_select_user' ) );
+			add_action( 'wp_ajax_uich_uichemy', array( $this, 'uich_api_call' ) );
 
 			add_filter( 'uich_recommended_settings', array( $this, 'uich_recommended_settings' ), 10, 1 );
-			add_action( 'wp_ajax_uich_uichemy', array( $this, 'uich_api_call' ) );
 
 			add_action(
 				'rest_api_init',
@@ -385,38 +393,6 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		}
 		
 		/**
-		 * Get uichemy Api Call Ajax.
-		 */
-		public function uich_api_call() {
-
-			check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
-
-			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
-			}
-
-			$type = isset( $_POST['type'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['type'] ) ) ) : false;
-			if ( ! $type ) {
-				$this->uich_error_msg( __( 'Something went wrong.', 'uichemy' ) );
-			}
-
-			switch ( $type ) {
-				case 'install_elementor':
-					$data = $this->uich_install_elementor();
-				break;
-				case 'flexbox_container':
-					$data = $this->uich_flexbox_container();
-				break;
-				case 'elementor_file_uploads':
-					$data = $this->uich_elementor_file_uploads();
-				break;
-			}
-
-			wp_send_json( $data );
-			wp_die();
-		}
-
-		/**
 		 * Error JSON message
 		 *
 		 * @param array  $data give array.
@@ -443,6 +419,82 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				'success' => $success,
 				'data' => $data, 
 			);
+		}
+
+		/**
+		 * Create Default setting data in db
+		 *
+		 * @since 1.2.2
+		 *
+		 * @param string $type use for check page type.
+		 */
+		public function uich_recommended_settings( $type ) {
+
+			if ( 'elementor_install' === $type ) {
+				if ( is_plugin_active( $this->elementor_pluginpath ) ) {
+					return $this->uich_response( 'Elementor Activated', 'Elementor Activated', true, '' );
+				}else{
+					return $this->uich_response( 'Elementor Not Activated', 'Elementor Not Activated', false, '' );
+				}
+			}else if ( 'flexbox_container' === $type ) {
+				$get_default = get_option( $this->flexbox_container_db );
+
+				return $this->uich_response( '', '', true, $get_default );
+			}else if( 'enable_unfiltered_file_uploads' === $type ){
+				$get_default = get_option( $this->file_uploads_db );
+
+				return $this->uich_response( '', '', true, $get_default );
+			}else if( 'bricks_svg_uploads' === $type ) {
+				$uroles = get_editable_roles();
+				$capability = 'bricks_upload_svg';
+				$briRole = array();
+				foreach ($uroles as $role_key => $role_data) {
+					if (isset($role_data['capabilities'][$capability]) && $role_data['capabilities'][$capability] === true) {
+						$briRole[$role_key] = $role_data;
+					}
+				}
+
+				return $this->uich_response( '', '', true, $briRole );
+			}
+		}
+
+		/**
+		 * Get uichemy Api Call Ajax.
+		 *
+		 * @since 1.0.10
+		 */
+		public function uich_api_call() {
+
+			check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
+
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json( $this->uich_response( 'User Roll Issue', 'is_user_logged_in', true, '' ) );
+				wp_die();
+			}
+
+			$type = isset( $_POST['type'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['type'] ) ) ) : false;
+			if ( empty( $type ) ) {
+				wp_send_json( $this->uich_response( 'Something went wrong.', 'Type Not Found', true, '' ) );
+				wp_die();
+			}
+
+			switch ( $type ) {
+				case 'install_elementor':
+					$data = $this->uich_install_elementor();
+				break;
+				case 'flexbox_container':
+					$data = $this->uich_flexbox_container();
+				break;
+				case 'elementor_file_uploads':
+					$data = $this->uich_elementor_file_uploads();
+				break;
+				case 'bricks_file_uploads':
+					$data = $this->uich_bricks_file_uploads();
+				break;
+			}
+
+			wp_send_json( $data );
+			wp_die();
 		}
 
 		/**
@@ -494,14 +546,21 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 				return $this->uich_response( 'Successfully Activated!', 'Elementor Installed and Activated Successfully.', $success, '' );
 			}else{
-				return $this->uich_response( 'Something Went Wrong', 'Not Activate Plugin', false, $elementor_active );
+				activate_plugin( $this->elementor_pluginpath );
+
+				if ( is_plugin_active( $this->elementor_pluginpath ) ) {
+					return $this->uich_response( 'Successfully Activated!', 'Elementor Installed and Activated Successfully.', true, '' );
+				} else {
+					return $this->uich_response( 'Something Went Wrong', 'Not Activate Plugin', false, '' );
+				}
+
 			}
 		}
 
 		/**
 		 * Flexbox Container
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * */
 		public function uich_flexbox_container() {
 			
@@ -517,7 +576,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		/**
 		 * Flexbox Container
 		 * 
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * */
 		public function uich_elementor_file_uploads() {
 			$fileupload = get_option( $this->file_uploads_db );
@@ -532,29 +591,18 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		}
 
 		/**
-		 * Create Default setting data in db
+		 * Bricks File Uploads
 		 *
-		 * @since 1.0.0
-		 *
-		 * @param string $type use for check page type.
+		 * @since 1.2.2
 		 */
-		public function uich_recommended_settings( $type ) {
+		public function uich_bricks_file_uploads(){
 
-			if ( 'elementor_install' === $type ) {
-				if ( is_plugin_active( $this->elementor_pluginpath ) ) {
-					return $this->uich_response( 'Elementor Activated', 'Elementor Activated', true, '' );
-				}else{
-					return $this->uich_response( 'Elementor Not Activated', 'Elementor Not Activated', false, '' );
-				}
-			}else if ( 'flexbox_container' === $type ) {
-				$get_default = get_option( $this->flexbox_container_db );
-
-				return $this->uich_response( '', '', true, $get_default );
-			}else if( 'enable_unfiltered_file_uploads' === $type ){
-				$get_default = get_option( $this->file_uploads_db );
-
-				return $this->uich_response( '', '', true, $get_default );
+			$roles = wp_roles()->get_names();
+			foreach ( $roles as $role_key => $label ) {
+				wp_roles()->add_cap( $role_key, 'bricks_upload_svg' );
 			}
+
+			return $this->uich_response( 'Successfully Enabled!', 'Unfiltered File Uploads activated Successfully.', true, '' );
 		}
 
 	}

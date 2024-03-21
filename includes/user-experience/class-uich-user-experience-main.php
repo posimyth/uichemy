@@ -73,10 +73,10 @@ if ( ! class_exists( 'Uich_User_Experience_Main' ) ) {
 		
 			include UICH_PATH . 'includes/user-experience/class-uich-toast-popup.php';
 
-			// $uich_onbording_end = get_option( 'uich_onbording_end' );
-			// if ( empty( $uich_onbording_end ) ) {
-				// include UICH_PATH . 'includes/user-experience/class-uich-onbording.php';
-			// }
+			$uich_onbording_end = get_option( 'uich_onbording_end' );
+			if ( empty( $uich_onbording_end ) ) {
+				include UICH_PATH . 'includes/user-experience/class-uich-onbording.php';
+			}
 
 		}
 	}

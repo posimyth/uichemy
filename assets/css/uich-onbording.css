@@ -44,7 +44,7 @@
 
 .uich-onbording-hide,
 .uich-box.uich-hide{
-    display: none;
+    display: none !important;
 }
 
 .uich-main .uich-fix-popup {
@@ -113,6 +113,7 @@
     color: var(--gray-shade-one);
     padding: 0;
     margin: 0;
+    position: relative;
 }
     
 .uich-main .uichemy-list-item li a {
@@ -125,9 +126,21 @@
     list-style-type: var(--gray-shade-one);
     padding-bottom: 2px;
 }
-
-.uich-main .uichemy-list-item li a:hover {
-    border-bottom: 1px solid #4B22CC;
+.uich-main .uichemy-list-item li a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    transition: transform 0.25s ease-out;
+    left: 0;
+    transform-origin: bottom right;
+    transform: scaleX(0);
+    background-color: #4B22CC;
+}
+.uich-main .uichemy-list-item li a:hover::after{
+   transform: scaleX(1);
+   transform-origin: bottom left;
 }
 
 .uich-main .uichemy-list-item li a:focus {
@@ -163,16 +176,19 @@
 
 .uichemy-btn.uich-btn-step-6 .uich-btn-skip{
     visibility: hidden;
+    display: none;
 }
 
 .uich-main .uichemy-btn .uichemy-page-count{
     display: flex; 
     font-family: var(--font-famliy);
+    color: #999999;
 }
 
 .uich-main .uichemy-btn .uich-pagination-first{
     display: flex; 
     font-weight: bold;
+    color: #212121;
 }
 
 .uich-main .uichemy-btn-group {
@@ -204,7 +220,9 @@
     background-color: #6643d4 !important;
     color: var(--white) !important;
 }
-
+.uich-btn-skip{
+    color: #999999;
+}
 
 
 /* Requirements */
@@ -439,7 +457,7 @@
     color: var(--white);
     background-color: var(--secondary-color);
     position: absolute;
-    left: 48%;
+    right: -3%;
     top: -41%;
     opacity: 1;
 }
@@ -551,8 +569,6 @@
     .uich-main {
         left: 0;
         padding: 0;
-        width: 350px;
-
     }
 
     .uich-main .uich-fix-popup {
@@ -560,7 +576,7 @@
         width: auto;
         overflow: auto;
         min-height: 400px;
-
+        margin: 0 15px;
     }
 
     .uich-main .uichemy-content h1 {
@@ -588,7 +604,7 @@
     }
 
     #first-item {
-        list-style-type: initial;
+        list-style-type: none;
     }
 
     .uich-main .uichemy-info {
@@ -600,15 +616,17 @@
     .uich-main .uichemy-info .uich-box {
         width: 100%;
         height: auto;
-        gap: 30px;
+        gap: 25px;
         padding: 25px 15px;
+        justify-content: center;
+        align-items: center;
     }
 
     .uich-main .uichemy-btn {
         width: auto;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         gap: 25px;
         align-items: center;
         padding-top: 0px;
@@ -657,8 +675,10 @@
         padding: 5px;
         font-size: 9px;
         left: 48%;
-        top: 30%;
+        top: 70%;
         opacity: 1;
+        right: unset;
+        line-height: 10px;
     }
 
     #Bricks {
@@ -668,5 +688,27 @@
         top: 68%;
         opacity: 1;
     }
+    .uich-step-5 {
+        max-height: 530px;
+        overflow: hidden scroll;
+    }
+    .uich-step-5 .uichemy-info .uich-page-bricks.uich-box{
+        width: 100% !important;
+    }
 
+}
+
+.uich-onbording-bricks[disabled] {
+    cursor: not-allowed;
+}
+
+.uich-step-5 .uichemy-info .uich-page-bricks.uich-box{
+    width: 33.33%;
+    justify-content: center;
+    align-items: center;
+}
+
+.uich-step-5 > .uichemy-info{
+    justify-content: center;
+    padding: 20px;
 }

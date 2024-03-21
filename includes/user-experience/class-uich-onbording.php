@@ -3,7 +3,7 @@
  * It is Main File to load all Notice, Upgrade Menu and all
  *
  * @link       https://posimyth.com/
- * @since      1.0.0
+ * @since      1.2.2
  *
  * @package    Uichemy
  * @subpackage Uichemy/includes
@@ -21,14 +21,14 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 	/**
 	 * This class used for only load All Notice Files
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.2
 	 */
 	class Uich_Onbording {
 
 		/**
 		 * Instance
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * @access private
 		 * @static
 		 * @var instance of the class.
@@ -38,15 +38,15 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording APi
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * @var onbording_api of the class.
 		 */
 		public $onbording_api = 'https://api.posimyth.com/wp-json/uich/v2/uich_store_user_data';
 
 		/**
-		 * Onbording APi
+		 * Onbording Popup Close
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * @var uich_onbording_end of the class.
 		 */
 		public $uich_onbording_end = 'uich_onbording_end';
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		 * This public static method ensures that only one instance of the class is loaded or can be loaded.
 		 * It follows the Singleton design pattern to create or return the existing instance of the class.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 * @access public
 		 */
 		public static function instance() {
@@ -73,18 +73,18 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		 *
 		 * Perform some compatibility checks to make sure basic requirements are meet.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function __construct() {
 			add_action( 'wp_ajax_uich_boarding_store', array( $this, 'uich_boarding_store' ) );
-
+ 
 			$this->uich_deactivate_feedback();
 		}
 
 		/**
 		 * Check if the Current Screen is Related to Plugin Management.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 *
 		 * @return bool True if the current screen is for managing plugins, otherwise false.
 		 */
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		 *
 		 * Fired by the `current_screen` action hook.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_deactivate_feedback() {
 			add_action(
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Perform some compatibility checks to make sure basic requirements are meet.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_onboarding_assets() {
 			$nonce = wp_create_nonce( 'uich_onboarding_nonce' );
@@ -140,7 +140,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Perform some compatibility checks to make sure basic requirements are meet.
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_onboarding_content_func() {
 
@@ -189,9 +189,10 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 1
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step1() {
+
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/welcome.png' ) . '" alt="welcome" draggable="false"/>';
 
 			echo '<div class="uichemy-content">';
@@ -213,19 +214,21 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 					echo '</div>';
 
 					echo '<div class="uich-latest-builder">';
-						echo '<span class="uich-comingsoon">';
-							echo '<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 21C16.299 21 21 16.299 21 10.5C21 4.70101 16.299 0 10.5 0C4.70101 0 0 4.70101 0 10.5C0 16.299 4.70101 21 10.5 21ZM6.2107 11.3716C6.09155 8.50625 6.70433 7.01558 8.30435 6.31994C9.98948 5.57461 12.3044 6.18743 12.9853 7.57872C13.2746 8.15843 13.3087 8.37374 13.1555 8.63875C12.8321 9.23502 12.4916 9.03626 12.1172 8.07561C11.6746 6.86652 9.7682 6.41932 8.54265 7.21434C7.53838 7.86029 7.28306 8.60562 7.28306 10.9741C7.28306 12.7629 7.33412 13.1273 7.64051 13.6242C8.15116 14.4855 8.96819 14.9492 9.95544 14.9492C11.5725 14.9492 12.3044 14.1708 12.3044 12.4151C12.3044 11.9182 12.2533 11.4876 12.2023 11.4213C11.998 11.2226 11.0959 11.7029 10.6193 12.2495C10.2788 12.647 10.0235 12.8126 9.85331 12.7464C9.44479 12.5807 9.5299 12.1998 10.1086 11.5538C10.6363 10.9741 10.9767 10.8416 12.8661 10.4772C13.53 10.3447 14.0406 10.1129 14.4151 9.79816C15.0789 9.23502 15.5385 9.16876 15.5385 9.63253C15.5385 10.03 14.4491 10.9244 13.8193 11.0569C13.3768 11.1563 13.3597 11.206 13.2917 12.5145C13.2406 13.3261 13.1044 14.088 12.9342 14.4027C12.5257 15.1645 11.6235 15.6449 10.364 15.7277C8.59372 15.8768 7.38519 15.2805 6.65326 13.8892C6.3639 13.3592 6.27879 12.8292 6.2107 11.3716Z" fill="#287CB2"/></svg>';
-							echo '<h4>' . esc_html__( 'Gutenberg', 'uichemy' ) . '</h4>';
-						echo '</span>';
-						echo '<span id="Gutenberg">' . esc_html__( 'Coming Soon', 'uichemy' ) . '</span>';
-					echo '</div>';
-
-					echo '<div class="uich-latest-builder">';
 						echo '<input type="radio" id="uich-bricks" name="uich-radio" value="bricks" />';
 						echo '<label for="uich-bricks">';
 							echo '<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.2348 10.5276C20.2348 4.93987 15.7051 0.410156 10.1174 0.410156C4.52971 0.410156 0 4.93987 0 10.5276C0 16.1152 4.52971 20.6449 10.1174 20.6449C15.7051 20.6449 20.2348 16.1152 20.2348 10.5276Z" fill="#FFD53E"/><path d="M8.2497 9.05296C8.47771 8.71502 8.79029 8.44048 9.18727 8.22935C9.59273 8.01817 10.0531 7.91258 10.5683 7.91258C11.1681 7.91258 11.7087 8.06041 12.1902 8.35608C12.6801 8.6517 13.0644 9.07404 13.3432 9.62311C13.6304 10.1637 13.774 10.793 13.774 11.511C13.774 12.229 13.6304 12.8667 13.3432 13.4242C13.0644 13.9733 12.6801 14.3998 12.1902 14.7039C11.7087 15.008 11.1681 15.1601 10.5683 15.1601C10.0446 15.1601 9.58433 15.0587 9.18727 14.856C8.79877 14.6448 8.48619 14.3745 8.2497 14.0451V15.046H6.47583V5.66992H8.2497V9.05296ZM11.9621 11.511C11.9621 11.0887 11.8734 10.7254 11.696 10.4213C11.5271 10.1088 11.2991 9.87228 11.0118 9.71179C10.7331 9.5513 10.429 9.47102 10.0996 9.47102C9.77858 9.47102 9.47448 9.5555 9.18727 9.72447C8.90853 9.88496 8.68044 10.1215 8.50307 10.434C8.33418 10.7465 8.2497 11.1139 8.2497 11.5363C8.2497 11.9586 8.33418 12.3261 8.50307 12.6386C8.68044 12.9512 8.90853 13.1919 9.18727 13.3609C9.47448 13.5214 9.77858 13.6016 10.0996 13.6016C10.429 13.6016 10.7331 13.5172 11.0118 13.3482C11.2991 13.1792 11.5271 12.9385 11.696 12.6259C11.8734 12.3135 11.9621 11.9417 11.9621 11.511Z" fill="black"/></svg>';
 							echo '<h4>' . esc_html__( 'Bricks', 'uichemy' ) . '</h4>';
 						echo '</label>';
+					echo '</div>';
+
+					echo '<div class="uich-latest-builder">';
+						echo '<label>';
+						echo '<span class="uich-comingsoon">';
+							echo '<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 21C16.299 21 21 16.299 21 10.5C21 4.70101 16.299 0 10.5 0C4.70101 0 0 4.70101 0 10.5C0 16.299 4.70101 21 10.5 21ZM6.2107 11.3716C6.09155 8.50625 6.70433 7.01558 8.30435 6.31994C9.98948 5.57461 12.3044 6.18743 12.9853 7.57872C13.2746 8.15843 13.3087 8.37374 13.1555 8.63875C12.8321 9.23502 12.4916 9.03626 12.1172 8.07561C11.6746 6.86652 9.7682 6.41932 8.54265 7.21434C7.53838 7.86029 7.28306 8.60562 7.28306 10.9741C7.28306 12.7629 7.33412 13.1273 7.64051 13.6242C8.15116 14.4855 8.96819 14.9492 9.95544 14.9492C11.5725 14.9492 12.3044 14.1708 12.3044 12.4151C12.3044 11.9182 12.2533 11.4876 12.2023 11.4213C11.998 11.2226 11.0959 11.7029 10.6193 12.2495C10.2788 12.647 10.0235 12.8126 9.85331 12.7464C9.44479 12.5807 9.5299 12.1998 10.1086 11.5538C10.6363 10.9741 10.9767 10.8416 12.8661 10.4772C13.53 10.3447 14.0406 10.1129 14.4151 9.79816C15.0789 9.23502 15.5385 9.16876 15.5385 9.63253C15.5385 10.03 14.4491 10.9244 13.8193 11.0569C13.3768 11.1563 13.3597 11.206 13.2917 12.5145C13.2406 13.3261 13.1044 14.088 12.9342 14.4027C12.5257 15.1645 11.6235 15.6449 10.364 15.7277C8.59372 15.8768 7.38519 15.2805 6.65326 13.8892C6.3639 13.3592 6.27879 12.8292 6.2107 11.3716Z" fill="#287CB2"/></svg>';
+							echo '<h4>' . esc_html__( 'Gutenberg', 'uichemy' ) . '</h4>';
+						echo '</span>';
+						echo '</label>';
+						echo '<span id="Gutenberg">' . esc_html__( 'Coming Soon', 'uichemy' ) . '</span>';
 					echo '</div>';
 
 				echo '</div>';
@@ -235,7 +238,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 2
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step2() {
 
@@ -270,7 +273,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 3
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step3() {
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/plugin-install.png' ) . '" alt="install plugin" draggable="false"/>';
@@ -298,7 +301,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 4
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step4() {
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/figma-connect.png' ) . '" alt="Figma plugin" draggable="false"/>';
@@ -341,7 +344,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 4
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step5() {
 			$flexbox_setting     = apply_filters( 'uich_recommended_settings', 'flexbox_container' );
@@ -353,8 +356,12 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 			$file_uploads     = apply_filters( 'uich_recommended_settings', 'enable_unfiltered_file_uploads' );
 			$file_uploads_val = ! empty( $file_uploads['data'] ) ? $file_uploads['data'] : '';
 
-			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/Basic-requirements.png' ) . '" alt="Preview-img" draggable="false" />';
+			$svg_uploads = apply_filters( 'uich_recommended_settings', 'bricks_svg_uploads' );
+			$briRole = ! empty( $svg_uploads['data'] ) ? $svg_uploads['data'] : '';
 
+			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/bricks-svg.png' ) . '" class="uich-cover-bricks" alt="Preview-img" draggable="false" style="display:none" />';
+			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/basic-requirements.png' ) . '" class="uich-cover-elementor" alt="Preview-img" draggable="false" style="display:none" />';
+			
 			echo '<div class="uichemy-content">';
 				echo '<h1>' . esc_html__( 'Basic Requirements', 'uichemy' ) . '</h1>';
 				echo '<p>' . esc_html__( 'Please ensure the following things are set for best design conversion.', 'uichemy' ) . '</p>';
@@ -413,7 +420,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 					if ( ! empty( $flexbox_setting_val ) && 'active' === $flexbox_setting_val ) {
 						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
 					} else {
-						echo '<div class="uich-info-btn uich-success uich-onbording-fc">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+						echo '<div class="uich-info-btn uich-success uich-onbording-fc">' . esc_html__( 'Activate', 'uichemy' ) . '</div>';
 					}
 
 				echo '</div>';
@@ -441,69 +448,33 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 					if ( ! empty( $file_uploads_val ) ) {
 						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
 					} else {
-						echo '<div class="uich-info-btn uich-success uich-onbording-fu">'. esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+						echo '<div class="uich-info-btn uich-success uich-onbording-fu">'. esc_html__( 'Activate', 'uichemy' ) . '</div>';
 					}
 
 				echo '</div>';
 
 				/** Bricks settings */
 				echo '<div class="uich-box uich-page-bricks">';
-
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-
-					echo '<h3>' . esc_html__( 'Administrator', 'uichemy' ) . '</h3>';
-
-					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-
-				echo '</div>';
-
-				echo '<div class="uich-box uich-page-bricks">';
-
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-
-					echo '<h3>' . esc_html__( 'Editor', 'uichemy' ) . '</h3>';
-
-					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-
-				echo '</div>';
-
-				echo '<div class="uich-box uich-page-bricks">';
-
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-
-					echo '<h3>' . esc_html__( 'Author', 'uichemy' ) . '</h3>';
-
-					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
-
-				echo '</div>';
-
-				echo '<div class="uich-box uich-page-bricks">';
-
-					echo '<div class="uich-tooltip uich-error">';
-						echo '<span>';
-							echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
-						echo '</span>';
-						echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
-					echo '</div>';
-
-					echo '<h3>' . esc_html__( 'Contributor', 'uichemy' ) . '</h3>';
-
-					echo '<div class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+					if( isset($briRole) && empty($briRole) ){
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+						echo '<h3>' . esc_html__( 'SVG Uploads', 'uichemy' ) . '</h3>';
+						echo '<button class="uich-info-btn uich-success uich-onbording-bricks">' . esc_html__( 'Activate', 'uichemy' ) . '</button>';
+					}else{
+						echo '<div class="uich-tooltip uich-ob-success">';
+							echo '<span>';
+								echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Activate', 'uichemy' ) . '</span>';
+						echo '</div>';
+						echo '<h3>' . esc_html__( 'SVG Uploads', 'uichemy' ) . '</h3>';
+						echo '<button class="uich-info-btn uich-success uich-onbording-bricks uich-ob-active" disabled="disabled">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</button>';
+					}
+					
 
 				echo '</div>';
 
@@ -513,7 +484,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * Onbording Step 4
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_step6() {
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/live-preview.png' ) . '" alt="Preview-img"  draggable="false"/>';
@@ -544,7 +515,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 		/**
 		 * On Boarding Data
 		 *
-		 * @since 1.0.0
+		 * @since 1.2.2
 		 */
 		public function uich_boarding_store() {
 
@@ -642,8 +613,8 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 
 					$result = array(
 						'success'     => ! empty( $get_res['success'] ) ? $get_res['success'] : false,
-						'messages'    => ! empty( $get_res['messages'] ) ? $get_res['messages'] : 'success',
-						'description' => ! empty( $get_res['description'] ) ? $get_res['description'] : 'Description',
+						'messages'    => ! empty( $get_res['messages'] ) ? $get_res['messages'] : 'Successfully Completed!',
+						'description' => ! empty( $get_res['description'] ) ? $get_res['description'] : 'Welcome to UiChemy! Your Onboarding finished successfully.',
 					);
 
 					wp_send_json( $result );
@@ -661,6 +632,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 
 			wp_die();
 		}
+
 	}
 
 	Uich_Onbording::instance();
