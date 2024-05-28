@@ -2,9 +2,9 @@
 Contributors: posimyththemes, dhaval4, sagarpatel124
 Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 1.2.2
+Stable tag: 2.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -141,25 +141,23 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 2.0.0 = 21 May 2024
+- Added : Elementor Import Functionalities for new & Existing Posts.
+- Fix : Minor Bug Fixes & Improvements
 
 = 1.2.2 = 21 March 2024
-
-Added : Uichemy Settings : On Boarding Process
-Fix : Minor Bug Fixes & Improvements
+- Added : Uichemy Settings : On Boarding Process
+- Fix : Minor Bug Fixes & Improvements
 
 = 1.2.1 = 15 March 2024
-
-Fix : Minor Bug Fixes & Improvements
+- Fix : Minor Bug Fixes & Improvements
 
 = 1.2.0 = 5 March 2024
-
-Fix : Minor Bug Fixes & Improvements
+- Fix : Minor Bug Fixes & Improvements
 
 = 1.1.0 = 3 FEBRUARY 2024
-
-Update : Design Improvement
-Fix : Minor Bug Fixes & Improvements
+- Update : Design Improvement
+- Fix : Minor Bug Fixes & Improvements
 
 = 1.0.0 = 28 December 2023
-
-Initial Release
+- Initial Release

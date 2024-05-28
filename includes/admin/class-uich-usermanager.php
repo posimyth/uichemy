@@ -65,7 +65,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 			$capable_users = array();
 
 			foreach ( $all_users as $user ) {
-				if ( $user->has_cap( 'edit_posts' ) ) {
+				if ( $user->has_cap( 'edit_pages' ) ) {
 					$capable_users[] = $user;
 				}
 			}
