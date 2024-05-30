@@ -300,7 +300,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 							array_push($response['posts'][$post_type], array(
 								'id' => get_the_ID(),
-								'title' => get_the_title(),
+								'title' => html_entity_decode(get_the_title()),
 							));
 
 						}
@@ -367,7 +367,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 						array_push($response['posts'][$post_type], array(
 							'id' => get_the_ID(),
-							'title' => get_the_title(),
+							'title' => html_entity_decode(get_the_title()),
 						));
 					}
 
@@ -427,7 +427,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 							array_push($response['posts'][$post_type], array(
 								'id' => get_the_ID(),
-								'title' => get_the_title(),
+								'title' => html_entity_decode(get_the_title()),
 							));
 
 						}
