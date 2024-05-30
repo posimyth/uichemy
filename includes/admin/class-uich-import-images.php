@@ -23,161 +23,228 @@ if ( ! class_exists( 'Uichemy_Import_Images' ) ) {
 	class Uichemy_Import_Images {
 
 		/**
-		 * Replaced images IDs.
+		 * Member Variable
 		 *
-		 * The old attachment ID and the new attachment ID generated after the import.
-		 *
-		 * @since 1.0.0
-		 * @access private
-		 *
-		 * @var array
+		 * @var instance
 		 */
-		private static $new_image_ids = array();
+		private static $instance;
 
 		/**
-		 * Get attachment url image hash sha1.
-		 *
-		 * Retrieve the sha1 hash of the image URL.
-		 *
-		 * @since 1.0.0
-		 * @access private
-		 *
-		 * @param string $attachment_url The attachment URL.
+		 *  Initiator
 		 */
-		private static function get_attachment_url_hash_image( $attachment_url ) {
-			return sha1( $attachment_url );
+		public static function get_instance() {
+			if ( ! isset( self::$instance ) ) {
+				self::$instance = new self;
+			}
+			return self::$instance;
 		}
 
-		/**
-		 * Media Import image.
-		 *
-		 * Import a single image from a remote server, upload the image WordPress
-		 * uploads folder, create a new attachment in the database and updates the
-		 * attachment metadata.
-		 *
-		 * @since 1.0.0
-		 * @access public
-		 *
-		 * @param array $attachment The attachment.
-		 */
-		public static function wdkit_Import_media( $attachment ) {
-			$stored_image = self::get_store_image_saved( $attachment );
-
-			if ( $stored_image ) {
-				return $stored_image;
-			}
-
-			// Extract the file name and extension from the url.
-			$file_name = basename( $attachment['url'] );
-
-			$file_content = wp_remote_retrieve_body( wp_safe_remote_get( $attachment['url'] ) );
-
-			if ( empty( $file_content ) ) {
-				return false;
-			}
-
-			$upload_data = wp_upload_bits( $file_name, null, $file_content );
-
-			$post_image = array(
-				'post_title' => $file_name,
-				'guid'       => $upload_data['url'],
+		public static function gutenberg_import_media_copy_content( $data_import ){
+			
+			return self::array_recursively_data(
+				$data_import,
+				function( $block_data ) {
+					
+					$elements = self::block_data_instance( $block_data );
+					
+					return $elements;
+				}
 			);
-
-			$info = wp_check_filetype( $upload_data['file'] );
-			if ( ! empty( $info ) ) {
-				$post_image['post_mime_type'] = $info['type'];
-			} else {
-				return $attachment;
-			}
-
-			$post_id = wp_insert_attachment( $post_image, $upload_data['file'] );
-
-			// On REST requests.
-			if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
-				require_once ABSPATH . '/wp-admin/includes/image.php';
-			}
-
-			if ( ! function_exists( 'wp_read_video_metadata' ) ) {
-				require_once ABSPATH . '/wp-admin/includes/media.php';
-			}
-
-			wp_update_attachment_metadata( $post_id, wp_generate_attachment_metadata( $post_id, $upload_data['file'] ) );
-			update_post_meta( $post_id, 'tpgb_source_image_key', self::get_attachment_url_hash_image( $attachment['url'] ) );
-
-			$new_attachment_img = array(
-				'id'  => $post_id,
-				'url' => $upload_data['url'],
-			);
-
-			if ( isset( $attachment['id'] ) ) {
-				self::$new_image_ids[ $attachment['id'] ] = $new_attachment_img;
-			}
-
-			return $new_attachment_img;
 		}
 
-		/**
-		 * Get store saved image.
-		 *
-		 * Retrieve new image ID, if the image has a new ID after the import.
-		 *
-		 * @since 1.0.0
-		 * @access private
-		 *
-		 * @param array $attachment The attachment.
-		 */
-		private static function get_store_image_saved( $attachment ) {
-			global $wpdb;
-
-			if ( isset( $attachment['id'] ) && isset( self::$new_image_ids[ $attachment['id'] ] ) ) {
-				return self::$new_image_ids[ $attachment['id'] ];
+		public static function block_data_instance( array $block_data, array $args = [], $block_args = null ){
+			
+			if ( $block_data['blockName'] && $block_data['attrs'] ) {
+			
+				foreach($block_data['attrs'] as $block_key => $block_val) {
+					
+					if( isset( $block_val['url'] ) && isset( $block_val['id'] ) && !empty( $block_val['url'] ) ){
+						$new_media = Tpgb_Import_Images::media_import( $block_val );
+						$block_data['attrs'][$block_key] = $new_media;
+						if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+							$block_data['innerHTML'] = str_replace($block_val['url'], $new_media['url'], $block_data['innerHTML']);
+						}
+						if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+							$block_data['innerContent'] = str_replace($block_val['url'], $new_media['url'], $block_data['innerContent']);
+						}
+					}else if(isset( $block_val['url'] ) && !empty( $block_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $block_val['url'])) {
+						$new_media = Tpgb_Import_Images::media_import( $block_val );
+						$block_data['attrs'][$block_key] = $new_media;
+						if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+							$block_data['innerHTML'] = str_replace($block_val['url'], $new_media['url'], $block_data['innerHTML']);
+						}
+						if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+							$block_data['innerContent'] = str_replace($block_val['url'], $new_media['url'], $block_data['innerContent']);
+						}
+					}else if(is_array($block_val) && !empty($block_val)){
+						if( !array_key_exists("md",$block_val) && !array_key_exists("openTypography",$block_val) && !array_key_exists("openBorder",$block_val) && !array_key_exists("openShadow",$block_val) && !array_key_exists("openFilter",$block_val)  ){
+							foreach($block_val as $key => $val) {
+								if(is_array($val) && !empty($val)){
+									
+									if( isset( $val['url'] ) && ( isset( $val['Id'] ) || isset( $val['id'] ) ) && !empty( $val['url'] ) ){
+										$new_media = Tpgb_Import_Images::media_import( $val );
+										$block_data['attrs'][$block_key][$key] = $new_media;
+										if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+											$block_data['innerHTML'] = str_replace($val['url'], $new_media['url'], $block_data['innerHTML']);
+										}
+										if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+											$block_data['innerContent'] = str_replace($val['url'], $new_media['url'], $block_data['innerContent']);
+										}
+									}else if( isset( $val['url'] ) && !empty( $val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $val['url']) ) {
+										$new_media = Tpgb_Import_Images::media_import( $val );
+										$block_data['attrs'][$block_key][$key] = $new_media;
+										if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+											$block_data['innerHTML'] = str_replace($val['url'], $new_media['url'], $block_data['innerHTML']);
+										}
+										if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+											$block_data['innerContent'] = str_replace($val['url'], $new_media['url'], $block_data['innerContent']);
+										}
+									}else{
+										foreach($val as $sub_key => $sub_val) {
+											if( isset( $sub_val['url'] ) && ( isset( $sub_val['Id'] ) || isset( $sub_val['id'] ) ) && !empty( $sub_val['url'] ) ){
+												$new_media = Tpgb_Import_Images::media_import( $sub_val );
+												$block_data['attrs'][$block_key][$key][$sub_key] = $new_media;
+												if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+													$block_data['innerHTML'] = str_replace($sub_val['url'], $new_media['url'], $block_data['innerHTML']);
+												}
+												if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+													$block_data['innerContent'] = str_replace($sub_val['url'], $new_media['url'], $block_data['innerContent']);
+												}
+											}else if( isset( $sub_val['url'] ) && !empty( $sub_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $sub_val['url'])) {
+												$new_media = Tpgb_Import_Images::media_import( $sub_val );
+												$block_data['attrs'][$block_key][$key][$sub_key] = $new_media;
+												if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+													$block_data['innerHTML'] = str_replace($sub_val['url'], $new_media['url'], $block_data['innerHTML']);
+												}
+												if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+													$block_data['innerContent'] = str_replace($sub_val['url'], $new_media['url'], $block_data['innerContent']);
+												}
+											}else if(is_array($sub_val) && !empty($sub_val)){
+												foreach($sub_val as $sub_key1 => $sub_val1) {
+													if( isset( $sub_val1['url'] ) && ( isset( $sub_val1['Id'] ) || isset( $sub_val1['id'] ) ) && !empty( $sub_val1['url'] ) ){
+														$new_media = Tpgb_Import_Images::media_import( $sub_val1 );
+														$block_data['attrs'][$block_key][$key][$sub_key][$sub_key1] = $new_media;
+														if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+															$block_data['innerHTML'] = str_replace($sub_val1['url'], $new_media['url'], $block_data['innerHTML']);
+														}
+														if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+															$block_data['innerContent'] = str_replace($sub_val1['url'], $new_media['url'], $block_data['innerContent']);
+														}
+													}else if( isset( $sub_val1['url'] ) && !empty( $sub_val1['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $sub_val1['url'])) {
+														$new_media = Tpgb_Import_Images::media_import( $sub_val1 );
+														$block_data['attrs'][$block_key][$key][$sub_key][$sub_key1] = $new_media;
+														if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
+															$block_data['innerHTML'] = str_replace($sub_val1['url'], $new_media['url'], $block_data['innerHTML']);
+														}
+														if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
+															$block_data['innerContent'] = str_replace($sub_val1['url'], $new_media['url'], $block_data['innerContent']);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
+			
+			return $block_data;
+		}
 
-			$post_id = $wpdb->get_var(
-				$wpdb->prepare( 'SELECT `post_id` FROM `' . $wpdb->postmeta . '` WHERE `meta_key` = \'tpgb_source_image_key\' AND `meta_value` = %s;', self::get_attachment_url_hash_image( $attachment['url'] ) )
-			);
-
-			if ( ! empty( $post_id ) ) {
-				$new_attachment_img = array(
-					'id'  => $post_id,
-					'url' => wp_get_attachment_url( $post_id ),
-				);
-
-				if ( isset( $attachment['id'] ) ) {
-					self::$new_image_ids[ $attachment['id'] ] = $new_attachment_img;
+		public static function array_recursively_data( $data, $callback, $args = [] ) {
+			if ( isset( $data['blockName'] ) ) {
+				if ( ! empty( $data['innerBlocks'] ) ) {
+					$data['innerBlocks'] = self::array_recursively_data( $data['innerBlocks'], $callback, $args );
 				}
 
-				return $new_attachment_img;
+				return call_user_func( $callback, $data, $args );
 			}
 
-			return false;
-		}
+			foreach ( $data as $block_key => $block_value ) {
+				$block_data = self::array_recursively_data( $data[ $block_key ], $callback, $args );
 
-		function check_svg_filetype_and_ext($data, $file, $filename, $mimes) {
-			$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			if ($ext === 'svg') {
-				$data['ext'] = 'svg';
-				$data['type'] = 'image/svg+xml';
+				if ( null === $block_data ) {
+					continue;
+				}
+
+				$data[ $block_key ] = $block_data;
 			}
 
 			return $data;
 		}
 
 		/**
-		 * Import images Constructor.
-		 *
-		 * @since 1.0.0
-		 * @access public
+		 * Elementor Widgets elements data
 		 */
-		public function __construct() {
-			if ( ! function_exists( 'WP_Filesystem' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/file.php';
+		public static function widgets_elements_id_change( $media_import ) {
+			if ( did_action( 'elementor/loaded' ) ) {
+				return \Elementor\Plugin::instance()->db->iterate_data(
+					$media_import,
+					function ( $element ) {
+						$element['id'] = \Elementor\Utils::generate_random_string();
+						return $element;
+					}
+				);
+			} else {
+				return $media_import;
+			}
+		}
+
+		/**
+		 * Widgets Media import copy content.
+		 *
+		 */
+		public static function widgets_import_media_copy_content( $media_import ) {
+			if ( did_action( 'elementor/loaded' ) ) {
+
+				return \Elementor\Plugin::instance()->db->iterate_data(
+					$media_import,
+					function ( $element_data ) {
+						$elements = \Elementor\Plugin::instance()->elements_manager->create_element_instance( $element_data );
+
+						if ( ! $elements ) {
+							return null;
+						}
+
+						return self::widgets_element_import_start( $elements );
+					}
+				);
+			} else {
+				return $media_import;
+			}
+		}
+
+		/**
+		 * Start element copy content for media import.
+		 *
+		 */
+		public static function widgets_element_import_start( \Elementor\Controls_Stack $element ) {
+			$get_element_instance = $element->get_data();
+			$tp_mi_on_fun         = 'on_import';
+
+			if ( method_exists( $element, $tp_mi_on_fun ) ) {
+				$get_element_instance = $element->{$tp_mi_on_fun}( $get_element_instance );
 			}
 
-			add_filter('wp_check_filetype_and_ext', array( $this, 'check_svg_filetype_and_ext', 10, 4));
+			foreach ( $element->get_controls() as $get_control ) {
+				$control_type = \Elementor\Plugin::instance()->controls_manager->get_control( $get_control['type'] );
+				$control_name = $get_control['name'];
 
-			WP_Filesystem();
+				if ( ! $control_type ) {
+					return $get_element_instance;
+				}
+
+				if ( method_exists( $control_type, $tp_mi_on_fun ) ) {
+					$get_element_instance['settings'][ $control_name ] = $control_type->{$tp_mi_on_fun}( $element->get_settings( $control_name ), $get_control );
+				}
+			}
+
+			return $get_element_instance;
 		}
+
 	}
 
 }

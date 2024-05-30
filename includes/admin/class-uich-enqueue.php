@@ -32,6 +32,18 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'uich_admin_menu' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'uich_admin_scripts' ), 10, 1 );
+
+			// Gutenberg editor load
+			// add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
+		}
+
+		public function editor_assets() {
+			global $pagenow;
+			$scripts_dep = array( 'react', 'react-dom', 'wp-block-editor', 'wp-element', 'wp-blocks', 'wp-i18n','wp-plugins', 'wp-components','wp-api-fetch');
+			if ( 'widgets.php' !== $pagenow && 'customize.php' !== $pagenow ) {
+				$scripts_dep = array_merge($scripts_dep, array('wp-editor', 'wp-edit-post'));
+				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+			}
 		}
 
 		/**
