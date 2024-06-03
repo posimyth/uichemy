@@ -1051,6 +1051,11 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				if (!empty($post) ) {
 					$get_temp_type = get_post_meta($exist_post_id, '_bricks_template_type', true);
 
+					// Content key
+					$get_temp_type = $get_temp_type === 'header' || $get_temp_type === 'footer'
+						? $get_temp_type
+						: 'content';
+
 					if(!empty($get_temp_type)){
 						$exits_content = get_post_meta($exist_post_id, '_bricks_page_'.esc_attr($get_temp_type).'_2', true);
 					}
