@@ -883,14 +883,19 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 						'message' => $update_post->get_error_message(),
 					);
 				} else {
+					// Remove Dynamic Cache
+					// tpgb_library()->remove_dir_files(TPGB_ASSET_PATH);
+					// tpgb_library()->remove_dir_dynamic_style_files(TPGB_ASSET_PATH);
+
 					return array(
 						'success' => true,
 						'result'  => array(
 							'title'     => get_the_title( $exist_post_id ),
 							'edit_link' => get_edit_post_link( $exist_post_id, 'internal' ),
-							'view'      => $post_type === 'wp_block'
-								? get_edit_post_link( $exist_post_id, 'internal' )
-								: get_permalink( $exist_post_id ),
+							'view'      => get_edit_post_link( $exist_post_id, 'internal' ), // Temp Fix for Caching Issue
+							// 'view'      => $post_type === 'wp_block'
+							// 	? get_edit_post_link( $exist_post_id, 'internal' )
+							// 	: get_permalink( $exist_post_id ),
 						),
 					);
 				}
