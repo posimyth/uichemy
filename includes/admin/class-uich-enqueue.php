@@ -34,7 +34,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'uich_admin_scripts' ), 10, 1 );
 
 			// Gutenberg editor load
-			// add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
+			add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
 		}
 
 		public function editor_assets() {
