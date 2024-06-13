@@ -180,6 +180,10 @@ if ( ! class_exists( 'Uichemy_Import_Images' ) ) {
 				return call_user_func( $callback, $data, $args );
 			}
 
+			if(gettype($data) !== "array" && gettype($data) !== "object") {
+				return $data;
+			}
+
 			foreach ( $data as $block_key => $block_value ) {
 				$block_data = self::array_recursively_data( $data[ $block_key ], $callback, $args );
 
