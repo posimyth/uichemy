@@ -1126,7 +1126,15 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$origin     = get_http_origin();
 			$requesturi = ! empty( $_SERVER['REQUEST_URI'] ) ? esc_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) : '';
 
-			if ( ! empty( $origin ) && preg_match( '/\/wp-json\/uichemy\/v/', wp_parse_url( $requesturi, PHP_URL_PATH ) ) === 1 ) {
+			// In case of non-pretty REST URLs
+			$rest_route_str = (isset($_GET['rest_route']) && !empty($_GET['rest_route'])) ? $_GET['rest_route'] : '';
+
+			if ( ! empty( $origin )
+				&& ((preg_match( '/\/wp-json\/uichemy\/v/', wp_parse_url( $requesturi, PHP_URL_PATH ) ) === 1)
+				|| (preg_match( '/^\/uichemy\/v/', $rest_route_str ) === 1))
+			) {
+				// WP REST Takes care of Access-Control-Allow-Origin
+
 				// Allow security token header.
 				header( 'Access-Control-Allow-Headers: UiChemy-Security-Token' );
 			}
