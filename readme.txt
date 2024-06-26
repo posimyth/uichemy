@@ -12,7 +12,7 @@ Convert Figma Designs Templates into 100% Editable WordPress Websites with Eleme
 
 == Description ==
 
-Convert Figma Designs into Live WordPress Websites in seconds. You can edit your website using the popular Elementor Page Builder, Bricks Builder & Default Gutenberg Block Editor (Coming Soon).
+Convert Figma Designs into Live WordPress Websites in seconds. You can edit your website using the popular Elementor Page Builder, Bricks Builder & Default Gutenberg Block Editor.
 
 Well, that's it, that's the product. Install can bring your website to reality!
 
@@ -22,7 +22,7 @@ Well, that's it, that's the product. Install can bring your website to reality!
 ## Figma Plugins
 * [Figma to Elementor Plugin](https://www.figma.com/community/plugin/1265873702834050352)
 * [Figma to Bricks Plugin](https://www.figma.com/community/plugin/1344313361212431142/)
-* Figma to Gutenberg Plugin _(Coming Soon)_
+* [Figma to Gutenberg Plugin](https://www.figma.com/community/plugin/1379733208974981538/uichemy-convert-figma-to-gutenberg-block-editor-wordpress) 
 
 ### [Read our Onboarding Guidelines to Get Best Output with UiChemy](https://www.figma.com/community/plugin/1265873702834050352/uichemy-convert-figma-to-wordpress-elementor-and-gutenberg)
 
@@ -93,7 +93,7 @@ Yes, we've released our Bricks Builder integration - [Figma Plugin for Bricks Bu
 
 **Do you plan to add Figma to WordPress (Gutenberg Block Editor)?**
 
-Yes, we've already started working on a Gutenberg version. This allows you to convert Figma designs to the default WordPress Block editor, aka Gutenberg Editor.
+Yes, we have released a version compatible with the Gutenberg Block Editor. This allows you to convert Figma designs to the default WordPress Block editor, aka Gutenberg Editor. Additionally, For Tagging - our plugin supports blocks from [The Plus Blocks for Gutenberg](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links).
 
 **Do I need to pay to use UiChemy?**
 
