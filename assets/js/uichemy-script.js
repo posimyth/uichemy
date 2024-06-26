@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
 
         const copy_btn = $(button_id)
 
-        copy_btn.click(function(event) {
+        copy_btn.on('click', function(event) {
             event.preventDefault();
             // Stop the event from propagating up or down the DOM tree
             event.stopPropagation();
@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
     attachCopyLogic('#uichemy-token-copy-btn', '#uichemy-token-input')
 
     // Regenerate Button.
-    $('#uichemy-regenerate-btn').click(function() {
+    $('#uichemy-regenerate-btn').on('click', function() {
         var secondSpan = this.querySelector('span:nth-child(2)')
 
         jQuery.ajax({
@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
     });
 
     // Select for User.
-    $('#uichemy-user-select').change(function(e) {
+    $('#uichemy-user-select').on('change', function(e) {
         
         jQuery.ajax({
             url: uichemy_ajax_object.ajax_url,
@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
     $('.uich-accordion-box:first').children('.uich-acc-trigger').children('i').addClass('fa-minus')
     $('.uich-accordion-box:first').children('.uich-acc-trigger').addClass('selected').next('.uich-acc-container').show()
 
-    $('.uich-acc-trigger').click(function(event) {
+    $('.uich-acc-trigger').on('click', function(event) {
         var minus = '<svg class="uich-minus-icon" width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19" stroke="#020202" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
             plus = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19" stroke="#020202" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12H19" stroke="#020202" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         
@@ -111,7 +111,6 @@ jQuery(document).ready(function($) {
                 get_accordionarea.forEach(function(self) {
                     var GetSvg = self.querySelector('.uich-acc-trigger');
 
-                        console.log( GetSvg );
                     if( self.classList.contains('uich-active') ){
                         $(GetSvg).find('span').find('svg').remove();
                         $(GetSvg).find('span').append(minus);
