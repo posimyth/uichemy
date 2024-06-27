@@ -4,7 +4,7 @@ Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -141,6 +141,9 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 2.3.1 = 26 June 2024
+- Fix : Minor Bug Fixes & Improvements
+
 = 2.3.0 = 26 June 2024
 - Improved : Added support for rest_route to Reduce URL Unreachable errors.
 
