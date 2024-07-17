@@ -44,6 +44,13 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		public $elementor_pluginpath = 'elementor/elementor.php';
 
 		/**
+		 * TPGB Plugin Path
+		 *
+		 * @var string $tpgb_plugin_path
+		 */
+		public $tpgb_plugin_path = 'the-plus-addons-for-block-editor/the-plus-addons-for-block-editor.php';
+
+		/**
 		 * Onbording Popup Close
 		 *
 		 * @since 1.2.2
@@ -1343,6 +1350,12 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				}
 
 				return $this->uich_response( '', '', true, $briRole );
+			}else if ( 'tpgb_install' === $type ) {
+				if ( is_plugin_active( $this->tpgb_plugin_path ) ) {
+					return $this->uich_response( 'The Plus Blocks for Block Editor Activated', 'The Plus Blocks for Block Edito Activated', true, '' );
+				}else{
+					return $this->uich_response( 'The Plus Blocks for Block Editor Not Activated', 'The Plus Blocks for Block Edito Not Activated', false, '' );
+				}
 			}
 		}
 
@@ -1378,6 +1391,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				break;
 				case 'bricks_file_uploads':
 					$data = $this->uich_bricks_file_uploads();
+				break;
+				case 'install_tpgb':
+					$data = $this->uich_install_tpgb();
 				break;
 			}
 
@@ -1559,6 +1575,67 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			return $content;
 		}
+
+		/**
+		 * Install The Plus Block For Editor
+		 *
+		 * @since 2.3.2
+		 * */
+		public function uich_install_tpgb(){
+			include_once ABSPATH . 'wp-admin/includes/file.php';
+			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+
+			$response = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/',
+				[
+					'body' => [
+						'action' => 'plugin_information',
+						'request' => serialize((object) [
+							'slug' => 'the-plus-addons-for-block-editor',
+							'fields' => [
+								'version' => false,
+							],
+						]),
+					],
+				]
+			);
+
+			$tpgb_plugin = unserialize(wp_remote_retrieve_body($response));
+			if ( is_wp_error($tpgb_plugin) ) {
+				return $this->uich_response( 'Something Went Wrong', 'get body', false, $tpgb_plugin );
+			}
+
+			$upgrad = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
+
+			/**Install Plugin*/
+			$tpgb_plugin = $upgrad->install($tpgb_plugin->download_link);
+			if ( is_wp_error($tpgb_plugin) ) {
+				return $this->uich_response( 'Something Went Wrong', 'Install Plugin', false, $tpgb_plugin );
+			}
+
+			/**Activate Plugin*/
+			if ( true === $tpgb_plugin ) {
+				$tpgb_active = activate_plugin( $upgrad->plugin_info(), '', false, true );
+
+				if ( is_wp_error($tpgb_active) ) {
+					return $this->uich_response( 'Something Went Wrong', 'Activate Plugin', false, $tpgb_active );
+				}
+
+				$success = null === $tpgb_active;
+
+				return $this->uich_response( 'Successfully Activated!', 'The Plus Blocks for Block Editor Installed and Activated Successfully.', $success, '' );
+			}else{
+				activate_plugin( $this->tpgb_plugin_path );
+
+				if ( is_plugin_active( $this->tpgb_plugin_path ) ) {
+					return $this->uich_response( 'Successfully Activated!', 'The Plus Blocks for Block Editor Installed and Activated Successfully.', true, '' );
+				} else {
+					return $this->uich_response( 'Something Went Wrong', 'Not Activate Plugin', false, '' );
+				}
+
+			}
+		}
+
 	}
 
 	new Uich_Api();

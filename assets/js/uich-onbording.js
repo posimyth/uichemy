@@ -236,6 +236,7 @@ jQuery(document).ready(function($) {
                 let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
 
                     document.querySelector('.uich-cover-bricks').style.display = "none";
+                    document.querySelector('.uich-cover-gutenberg').style.display = "none";
                     document.querySelector('.uich-cover-elementor').style.display = "flex";
 
                     get_builder.forEach(function(self) {
@@ -249,10 +250,25 @@ jQuery(document).ready(function($) {
                 let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
 
                     document.querySelector('.uich-cover-elementor').style.display = "none";
+                    document.querySelector('.uich-cover-gutenberg').style.display = "none";
                     document.querySelector('.uich-cover-bricks').style.display = "flex";
 
                     get_builder.forEach(function(self) {
                         if( self.classList.contains('uich-page-bricks') ){
+                            self.style.display = "flex";
+                        }else{
+                            self.style.display = "none";
+                        }
+                    });
+            }else if ( 'gutenberg' === checkbox.value ){
+                let get_builder = document.querySelectorAll('.uichemy-info .uich-box');
+
+                    document.querySelector('.uich-cover-bricks').style.display = "none";
+                    document.querySelector('.uich-cover-elementor').style.display = "none";
+                    document.querySelector('.uich-cover-gutenberg').style.display = "flex";
+
+                    get_builder.forEach(function(self) {
+                        if( self.classList.contains('uich-page-gutenberg') ){
                             self.style.display = "flex";
                         }else{
                             self.style.display = "none";
@@ -337,6 +353,73 @@ jQuery(document).ready(function($) {
         }
 
         elementorButton[0].addEventListener('click', installelementorOnbording);
+    }
+
+    /**
+     * The Plus Blocks for Block Editor Install
+     * 
+     * @since 1.2.2
+     * */
+    var tpgbButton = document.querySelectorAll('.uich-onbording-gutenberg');
+    if( tpgbButton.length > 0 ){
+        function installtpgbOnbording() {
+            var $this = this,
+                get_tooltip = $this.closest('.uich-box').querySelector('.uich-tooltip');
+
+                $this.innerHTML = `<span class="uich-round-loader"></span>`;
+
+                jQuery.ajax({
+                    url: uichemy_ajax_object.ajax_url,
+                    method: "POST",
+                    data: {
+                        action: 'uich_uichemy',
+                        nonce: uichemy_ajax_object.nonce,
+                        type: 'install_tpgb',
+                    },
+                    beforeSend: function() {
+                    },
+                    success: function(res){
+                        if ( res && res.success ) {
+                            $this.innerHTML = `No Action Needed`;
+
+                            if ( $this.classList.contains('uich-success') ) {
+                                $this.classList.remove('uich-success');
+                            }
+
+                            if ( $this.classList.contains('uich-onbording-fc') ) {
+                                $this.classList.remove('uich-onbording-fc');
+                            }
+
+                            if ( get_tooltip.classList.contains('uich-error') ) {
+                                get_tooltip.classList.remove('uich-error');
+                            }
+
+                            if ( !get_tooltip.classList.contains('uich-ob-success') ) {
+                                get_tooltip.classList.add('uich-ob-success');
+                            }
+
+                            $this.classList.add('uich-ob-active');
+
+                            get_tooltip.querySelector('span:nth-child(1)').innerHTML = success_svg;
+                            get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+
+                            // Remove click event after success
+                            elementorButton[0].removeEventListener('click', installtpgbOnbording);
+                        }else{
+                            $this.innerHTML = `Install & Activate`;
+
+                            get_tooltip.querySelector('span:nth-child(1)').innerHTML = error_svg;
+                            get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+                        }
+                    },
+                    error: function(jq, status, err){
+                    },
+                    complete: function() {
+                    },
+                });
+        }
+
+        tpgbButton[0].addEventListener('click', installtpgbOnbording);
     }
 
     /**

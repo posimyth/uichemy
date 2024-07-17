@@ -254,6 +254,56 @@ jQuery(document).ready(function($) {
         flexboxcontainer[0].addEventListener('click', flexboxcontainerHandler);
     }
 
+    var tpgbButton = document.querySelectorAll('.uich-install-gutenberg');
+    if( tpgbButton.length > 0 ){
+        function installtpgbOnbording() {
+            var $this = this,
+                get_tooltip = $this.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
+
+
+                jQuery.ajax({
+                    url: uichemy_ajax_object.ajax_url,
+                    method: "POST",
+                    data: {
+                        action: 'uich_uichemy',
+                        nonce: uichemy_ajax_object.nonce,
+                        type: 'install_tpgb',
+                    },
+                    beforeSend: function() {
+                        $this.innerHTML = '<span class="uich-round-loader"></span>';
+                    },
+                    success: function(res){
+                        if( res ){
+                            $this.innerHTML = 'No Action Needed';
+                            get_tooltip.innerHTML = success;
+    
+                            if( $this.classList.contains('uich-install-gutenberg') ){
+                                $this.classList.remove('uich-install-gutenberg');
+                            }
+    
+                            if ( $this.classList.contains('uich-activation-btn') ) {
+                                $this.classList.remove('uich-activation-btn');
+                            }
+    
+                            tpgbButton[0].removeEventListener('click', installelementorHandler);
+    
+                            Toast_message( res.success, res.message, res.description );
+                        }else{
+                            get_tooltip.innerHTML = error;
+    
+                            Toast_message( res.success, res.message, res.description );
+                        }
+                    },
+                    error: function(jq, status, err){
+                    },
+                    complete: function() {
+                    },
+                });
+        }
+
+        tpgbButton[0].addEventListener('click', installtpgbOnbording);
+    }
+
     var fileuploads = document.querySelectorAll('.uich-active-fileuploads');
     if( fileuploads.length > 0 ){
         function fileuploadsHandler() {
@@ -299,6 +349,63 @@ jQuery(document).ready(function($) {
 
         // Attach the click event using the named function
         fileuploads[0].addEventListener('click', fileuploadsHandler);
+    }
+
+    const tabLinks = document.querySelectorAll(".uich-tablink");
+    const tabContents = document.querySelectorAll(".uich-tabcontent");
+    tabLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            const tabId = this.getAttribute("data-tab");
+            tabContents.forEach(content => {
+                if (content.id === tabId) {
+                    content.style.display = "block";
+                } else {
+                    content.style.display = "none";
+                }
+            });
+            tabLinks.forEach(tablink => {
+                tablink.classList.remove("active");
+            });
+            this.classList.add("active");
+        });
+    });
+
+    var briuserBtn = document.querySelector('.uich-wel-bricks');
+    if( briuserBtn ){
+        briuserBtn.addEventListener("click", (e) => {
+            var get_tooltip = e.target.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
+                e.target.innerHTML = `<span class="uich-round-loader"></span>`;
+            jQuery.ajax({
+                url: uichemy_ajax_object.ajax_url,
+                method: "POST",
+                data: {
+                    action: 'uich_uichemy',
+                    nonce: uichemy_ajax_object.nonce,
+                    type: 'bricks_file_uploads',
+                },
+                beforeSend: function() {
+                },
+                success: function( data ){
+                    if( data.success ){
+                        e.target.innerHTML = 'No Action Needed';
+                        e.target.setAttribute('disabled', 'disabled');
+                        e.target.classList.remove('uich-activation-btn');
+                        if ( get_tooltip.classList.contains('uich-error') ) {
+                            get_tooltip.classList.remove('uich-error');
+                        }
+                        if ( !get_tooltip.classList.contains('uich-ob-success') ) {
+                            get_tooltip.classList.add('uich-ob-success');
+                        }
+                        get_tooltip.querySelector('span:nth-child(1)').innerHTML = '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 0C7.76142 0 10 2.23858 10 5C10 7.76142 7.76142 10 5 10C2.23858 10 0 7.76142 0 5C0 2.23858 2.23858 0 5 0ZM7.52014 3.68435C7.71473 3.48841 7.71362 3.17183 7.51768 2.97725C7.32174 2.78267 7.00516 2.78377 6.81058 2.97971L4.1862 5.62245L3.18681 4.61608C2.99223 4.42014 2.67565 4.41904 2.47971 4.61362C2.28377 4.8082 2.28267 5.12478 2.47725 5.32072L3.83142 6.68435C3.92529 6.77887 4.05299 6.83203 4.1862 6.83203C4.31941 6.83203 4.44712 6.77887 4.54099 6.68435L7.52014 3.68435Z" fill="#00A31B"/></svg>';
+                        get_tooltip.querySelector('span:nth-child(2)').innerHTML = 'Activate';
+                    }
+                },
+                error: function(jq, status, err){
+                },
+                complete: function() {
+                },
+            });
+        })
     }
 
 });

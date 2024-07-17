@@ -197,7 +197,7 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 
 			echo '<div class="uichemy-content">';
 				echo '<h1>' . esc_html__( 'Welcome', 'uichemy' ) . '</h1>';
-				echo '<p>' . esc_html__( 'Uichemy is the perfect tool to bring your Figma design live on WordPress. Lets start!', 'uichemy' ) . '</p>';
+				echo '<p>' . esc_html__( 'UiChemy is the perfect tool to bring your Figma design live on WordPress. Lets start!', 'uichemy' ) . '</p>';
 			echo '</div>';
 
 			echo '<div class="uich-select-page-builder">';
@@ -222,13 +222,11 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 					echo '</div>';
 
 					echo '<div class="uich-latest-builder">';
-						echo '<label>';
-						echo '<span class="uich-comingsoon">';
+						echo '<input type="radio" id="uich-gutenberg" name="uich-radio" value="gutenberg" />';
+						echo '<label for="uich-gutenberg">';
 							echo '<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 21C16.299 21 21 16.299 21 10.5C21 4.70101 16.299 0 10.5 0C4.70101 0 0 4.70101 0 10.5C0 16.299 4.70101 21 10.5 21ZM6.2107 11.3716C6.09155 8.50625 6.70433 7.01558 8.30435 6.31994C9.98948 5.57461 12.3044 6.18743 12.9853 7.57872C13.2746 8.15843 13.3087 8.37374 13.1555 8.63875C12.8321 9.23502 12.4916 9.03626 12.1172 8.07561C11.6746 6.86652 9.7682 6.41932 8.54265 7.21434C7.53838 7.86029 7.28306 8.60562 7.28306 10.9741C7.28306 12.7629 7.33412 13.1273 7.64051 13.6242C8.15116 14.4855 8.96819 14.9492 9.95544 14.9492C11.5725 14.9492 12.3044 14.1708 12.3044 12.4151C12.3044 11.9182 12.2533 11.4876 12.2023 11.4213C11.998 11.2226 11.0959 11.7029 10.6193 12.2495C10.2788 12.647 10.0235 12.8126 9.85331 12.7464C9.44479 12.5807 9.5299 12.1998 10.1086 11.5538C10.6363 10.9741 10.9767 10.8416 12.8661 10.4772C13.53 10.3447 14.0406 10.1129 14.4151 9.79816C15.0789 9.23502 15.5385 9.16876 15.5385 9.63253C15.5385 10.03 14.4491 10.9244 13.8193 11.0569C13.3768 11.1563 13.3597 11.206 13.2917 12.5145C13.2406 13.3261 13.1044 14.088 12.9342 14.4027C12.5257 15.1645 11.6235 15.6449 10.364 15.7277C8.59372 15.8768 7.38519 15.2805 6.65326 13.8892C6.3639 13.3592 6.27879 12.8292 6.2107 11.3716Z" fill="#287CB2"/></svg>';
 							echo '<h4>' . esc_html__( 'Gutenberg', 'uichemy' ) . '</h4>';
-						echo '</span>';
 						echo '</label>';
-						echo '<span id="Gutenberg">' . esc_html__( 'Coming Soon', 'uichemy' ) . '</span>';
 					echo '</div>';
 
 				echo '</div>';
@@ -359,8 +357,12 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 			$svg_uploads = apply_filters( 'uich_recommended_settings', 'bricks_svg_uploads' );
 			$briRole = ! empty( $svg_uploads['data'] ) ? $svg_uploads['data'] : '';
 
+			$tpgb_install = apply_filters( 'uich_recommended_settings', 'tpgb_install' );
+			$tpgb_install_success = ! empty( $tpgb_install['success'] ) ? (bool) $tpgb_install['success'] : false;
+
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/bricks-svg.png' ) . '" class="uich-cover-bricks" alt="Preview-img" draggable="false" style="display:none" />';
 			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/basic-requirements.png' ) . '" class="uich-cover-elementor" alt="Preview-img" draggable="false" style="display:none" />';
+			echo '<img src="' . esc_url( UICH_URL . 'assets/images/onbording/tpgb-img.png' ) . '" class="uich-cover-gutenberg" alt="Preview-img" draggable="false" style="display:none" />';
 			
 			echo '<div class="uichemy-content">';
 				echo '<h1>' . esc_html__( 'Basic Requirements', 'uichemy' ) . '</h1>';
@@ -455,6 +457,47 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 
 				/** Bricks settings */
 				echo '<div class="uich-box uich-page-bricks">';
+					$themes = wp_get_themes();
+					$theme_names = array_keys($themes);
+					if( !in_array('bricks', $theme_names) ){
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+						echo '<h3>' . esc_html__( 'Bricks Page Builder', 'uichemy' ) . '</h3>';
+						echo '<a target="_blank" rel="noopener noreferrer"  href="'.esc_url('https://bricksbuilder.io/pricing/').'" class="uich-info-btn uich-success" type="button">' . esc_html__( 'Download', 'uichemy' ) . '</a>';
+					}else{
+						$current_theme = wp_get_theme();
+						$current_theme_name = $current_theme->get( 'Name' );
+						
+							if ( $current_theme->get( 'Name' ) == 'Bricks' ) {
+								echo '<div class="uich-tooltip uich-ob-success">';
+									echo '<span>';
+										echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+									echo '</span>';
+									echo '<span id="uich-tooltip-txt">' . esc_html__( 'Activate', 'uichemy' ) . '</span>';
+								echo '</div>';
+							}else{
+								echo '<div class="uich-tooltip uich-error">';
+									echo '<span>';
+										echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+									echo '</span>';
+									echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+								echo '</div>';
+							}
+
+						echo '<h3>' . esc_html__( 'Bricks Page Builder', 'uichemy' ) . '</h3>';
+						
+						if ( $current_theme->get( 'Name' ) == 'Bricks' ) {
+							echo '<button class="uich-info-btn uich-success uich-ob-active" type="button">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</button>';
+						}else{
+							echo '<a target="_blank" rel="noopener noreferrer"  href="'.esc_url( admin_url( 'themes.php' ) ).'" class="uich-border-btn uich-activation-btn uich-activate-bricks" type="button">' . esc_html__( 'Activate', 'uichemy' ) . '</a>';
+						}
+					}
+				echo '</div>';
+				echo '<div class="uich-box uich-page-bricks">';
 					if( isset($briRole) && empty($briRole) ){
 						echo '<div class="uich-tooltip uich-error">';
 							echo '<span>';
@@ -474,8 +517,33 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 						echo '<h3>' . esc_html__( 'SVG Uploads', 'uichemy' ) . '</h3>';
 						echo '<button class="uich-info-btn uich-success uich-onbording-bricks uich-ob-active" disabled="disabled">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</button>';
 					}
+				echo '</div>';
+				
+				/** Gutenberg settings */
+				echo '<div class="uich-box uich-page-gutenberg">';
+					if ( ! empty( $tpgb_install_success ) ) {
+						echo '<div class="uich-tooltip uich-ob-success">';
+							echo '<span>';
+								echo '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.33366 2.5L3.75033 7.08333L1.66699 5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Active', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}else{
+						echo '<div class="uich-tooltip uich-error">';
+							echo '<span>';
+								echo '<svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00016 1.33301C2.97512 1.33301 1.3335 2.97463 1.3335 4.99967C1.3335 7.02472 2.97512 8.66634 5.00016 8.66634C7.02521 8.66634 8.66683 7.02472 8.66683 4.99967C8.66683 2.97463 7.02521 1.33301 5.00016 1.33301ZM0.333496 4.99967C0.333496 2.42235 2.42283 0.333008 5.00016 0.333008C7.57749 0.333008 9.66683 2.42235 9.66683 4.99967C9.66683 7.577 7.57749 9.66634 5.00016 9.66634C2.42283 9.66634 0.333496 7.577 0.333496 4.99967ZM5 2.83301C5.27614 2.83301 5.5 3.05687 5.5 3.33301V4.99967C5.5 5.27582 5.27614 5.49967 5 5.49967C4.72386 5.49967 4.5 5.27582 4.5 4.99967V3.33301C4.5 3.05687 4.72386 2.83301 5 2.83301ZM5 6.16699C4.72386 6.16699 4.5 6.39085 4.5 6.66699C4.5 6.94313 4.72386 7.16699 5 7.16699H5.00417C5.28031 7.16699 5.50417 6.94313 5.50417 6.66699C5.50417 6.39085 5.28031 6.16699 5.00417 6.16699H5Z" fill="white"/></svg>';
+							echo '</span>';
+							echo '<span id="uich-tooltip-txt">' . esc_html__( 'Inactive', 'uichemy' ) . '</span>';
+						echo '</div>';
+					}
 					
+						echo '<h3>' . esc_html__( 'The Plus Blocks For Block Editor', 'uichemy' ) . '</h3>';
 
+					if ( ! empty( $tpgb_install_success ) ) {
+						echo '<div class="uich-info-btn uich-ob-active">' . esc_html__( 'No Action Needed', 'uichemy' ) . '</div>';
+					} else {
+						echo '<div class="uich-info-btn uich-success uich-onbording-gutenberg">' . esc_html__( 'Install & Activate', 'uichemy' ) . '</div>';
+					}
 				echo '</div>';
 
 			echo '</div>';
