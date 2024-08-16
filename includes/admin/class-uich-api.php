@@ -15,6 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! class_exists( 'Uich_Globals' ) ) {
+	require_once UICH_PATH . 'includes/admin/globals/class-uich-globals.php';
+}
+
 if ( ! class_exists( 'Uich_Api' ) ) {
 
 	/**
@@ -109,6 +113,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 					register_rest_route(
 						'uichemy/v2',
+						'/elementor/get_config',
+						array(
+							'methods'             => 'GET',
+							'callback'            => array( $this, 'uich_get_elementor_config' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+
+					register_rest_route(
+						'uichemy/v2',
 						'/gutenberg/import',
 						array(
 							'methods'             => 'POST',
@@ -176,7 +190,54 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 							'permission_callback' => '__return_true',
 						)
 					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/elementor/globals',
+						array(
+							'methods'             => array( 'GET' ),
+							'callback'            => array( $this, 'uich_handle_elementor_globals_list' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/elementor/globals/sync',
+						array(
+							'methods'             => array( 'POST' ),
+							'callback'            => array( $this, 'uich_handle_elementor_globals_sync' ),
+							'permission_callback' => '__return_true',
+						)
+					);
 				}
+			);
+		}
+
+		/**
+		 * Globals
+		 */
+		public function uich_handle_elementor_globals_list( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			return  Uich_Globals::get_globals();
+		}
+
+		/**
+		 * Sync Globals
+		 */
+		public function uich_handle_elementor_globals_sync( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			$sync_data = json_decode( $request->get_body() );
+
+			$update_sync_data = Uich_Globals::sync_globals( $sync_data );
+
+			return array(
+				'success' => true,
+				'data' => $update_sync_data,
 			);
 		}
 
@@ -315,6 +376,29 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 					wp_reset_postdata();
 				}
 			}
+
+			return $response;
+		}
+
+		public function uich_get_elementor_config( WP_REST_Request $request){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			$response = array(
+				'success' => true,
+				'version' => UICH_VERSION,
+			);
+
+			// fetch all post Types
+			$all_post_types = get_post_types( [
+				'public' => true,
+				'can_export' => true,
+				'_builtin' => false,
+			] );
+
+			$response['is_elementor_pro_installed'] = class_exists( 'ElementorPro\Plugin' );
+			$response['is_elementor_installed'] = class_exists( 'Elementor\Plugin' );
+			$response['nxt_builder'] = array_key_exists('nxt_builder', $all_post_types);
 
 			return $response;
 		}
