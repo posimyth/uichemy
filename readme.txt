@@ -4,7 +4,7 @@ Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -141,6 +141,10 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 2.5.0 = 17 Aug 2024
+- Added : Elementor Globals Support for UiChemy Plugin.
+- Fix : Minor Bug Fixes.
+
 = 2.4.0 = 17 July 2024
 - Improvement : Added recommended settings for Bricks & Gutenberg.
 - Improvement : Updated Onboarding popup for Bricks & Gutenberg.
