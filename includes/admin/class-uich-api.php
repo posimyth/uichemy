@@ -143,6 +143,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 					register_rest_route(
 						'uichemy/v2',
+						'/gutenberg/get_config',
+						array(
+							'methods'             => 'GET',
+							'callback'            => array( $this, 'uich_get_gutenberg_config' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+
+					register_rest_route(
+						'uichemy/v2',
 						'/bricks/import',
 						array(
 							'methods'             => 'POST',
@@ -157,6 +167,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 						array(
 							'methods'             => 'GET',
 							'callback'            => array( $this, 'uich_get_bricks_posts' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+
+					register_rest_route(
+						'uichemy/v2',
+						'/bricks/get_config',
+						array(
+							'methods'             => 'GET',
+							'callback'            => array( $this, 'uich_get_bricks_config' ),
 							'permission_callback' => '__return_true',
 						)
 					);
@@ -469,6 +489,33 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			return $response;
 		}
 
+		public function uich_get_gutenberg_config( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			// Create a response
+			$response = array(
+				'success' => true,
+				'version' => UICH_VERSION,
+			);
+
+			// fetch all post Types
+			$all_post_types = get_post_types( [
+				'public' => true,
+				'can_export' => true,
+				'_builtin' => false,
+			] );
+
+			// Establishing installed things
+			$is_nexter_installed = array_key_exists('nxt_builder', $all_post_types);
+
+			// To Check if required plugins have been installed
+			$response['is_tpag_installed'] = defined('TPGB_VERSION');
+			$response['is_nexter_installed'] = $is_nexter_installed;
+
+			return $response;
+		}
+
 
 		public function uich_get_bricks_posts( WP_REST_Request $request ){
 			// Match Security Token.
@@ -526,6 +573,25 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 					wp_reset_postdata();
 				}
 			}
+
+			return $response;
+		}
+
+		public function uich_get_bricks_config( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			// Create a response
+			$response = array(
+				'success' => true,
+				'version' => UICH_VERSION,
+			);
+
+			// Establishing installed things
+			$is_bricks_installed = ( class_exists( '\Bricks\Theme' ) && class_exists(( '\Bricks\Templates' )) );
+
+			// To Check if required plugins have been installed
+			$response['is_bricks_installed'] = $is_bricks_installed;
 
 			return $response;
 		}
