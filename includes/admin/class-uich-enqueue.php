@@ -41,8 +41,9 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			global $pagenow;
 			$scripts_dep = array( 'react', 'react-dom', 'wp-block-editor', 'wp-element', 'wp-blocks', 'wp-i18n','wp-plugins', 'wp-components','wp-api-fetch');
 			if ( 'widgets.php' !== $pagenow && 'customize.php' !== $pagenow ) {
+				wp_enqueue_style( 'uichemy-cp-style', UICH_URL . 'assets/css/uich-cp.css', array(), UICH_VERSION, 'all' );
 				$scripts_dep = array_merge($scripts_dep, array('wp-editor', 'wp-edit-post'));
-				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/build/uich-copy-button.js', $scripts_dep, '1.0.0', false);
 			}
 		}
 

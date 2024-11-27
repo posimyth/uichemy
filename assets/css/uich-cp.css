@@ -1,0 +1,110 @@
+
+/*paste clipboard*/
+.uich-paste-clipboard-wrap {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.editor-document-tools__left ~ .uich-paste-clipboard-wrap {
+    margin-left: 8px;
+}
+#uich-paste-clipboard {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    cursor: pointer;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0;
+    border-radius: 4px;
+    background: 0 0;
+    font-size: 22px;
+    background-color: #4B22CC;
+    color: white;
+    gap: 4px;
+    align-items: center;
+    font-size: 14px;
+    padding: 4px 6px;
+    transition: background-color 200ms ease-in-out;
+}
+#uich-paste-clipboard:hover svg {
+    fill: var(--wp-admin-theme-color);
+}
+#uich-paste-clipboard:hover {
+    background-color: #2e0d98;
+}
+#uich-paste-clipboard:active {
+    transform: scale(96%);
+}
+
+#uich-paste-clipboard svg {
+    fill: #1e1e1e;
+}
+
+.uich-clip-pop-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.uich-head-clip-pop {
+    margin-top: 0;
+    min-width: 350px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(26, 26, 26, 0.6);
+}
+.uich-clip-os-wrap, .uich-os-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 11px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    width: 100%;
+}
+.uich-os-tag {
+    gap: 15px;
+}
+.uich-os-tag:first-child{
+    width: 90%;
+}
+.uich-os-tag label {
+    font-size: 14px;
+    font-weight: 300;
+    color: #707070;
+}
+.uich-os-tag .os-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.uich-clip-separator {
+    font-weight: 100;
+    font-size: 26px;
+}
+input#uich-paste-area-input {
+    background: transparent;
+    color: transparent;
+    border-color: transparent;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+input#uich-paste-area-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+  /*paste clipboard*/
