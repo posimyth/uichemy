@@ -32,6 +32,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'uich_admin_menu' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'uich_admin_scripts' ), 10, 1 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_bricks_scripts' ));
 
 			// Gutenberg editor load
 			add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
@@ -124,6 +125,31 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 					'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
 				)
 			);
+		}
+
+		public function enqueue_bricks_scripts() {
+			wp_register_script(
+				'uich-bricks-button-js',
+				UICH_URL . 'assets/js/uich-bricks-button.js',
+				array('jquery'),
+				UICH_VERSION,
+				true,
+			);
+
+
+			if ( !empty( $_GET['bricks'] ) && $_GET['bricks'] === 'run') {
+				wp_enqueue_script('uich-bricks-button-js');
+
+				wp_localize_script(
+					'uich-bricks-button-js',
+					'uichemy_ajax_object',
+					array(
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
+						'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
+					)
+				);
+			}
+
 		}
 	}
 
