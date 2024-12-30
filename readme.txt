@@ -4,7 +4,7 @@ Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 2.6
+Stable tag: 2.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -141,8 +141,8 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
-= 2.6 = 27 Dec 2024
-- Updated UiChemy paste button Design for Guetnberg editor.
+= 2.6.0 = 27 Dec 2024
+- Updated UiChemy paste button Design for Gutenberg editor.
 - Added UiChemy paste button for Bricks builder.
 - Added Custom CSS for Elementor Editor.
 
