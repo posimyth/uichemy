@@ -144,6 +144,7 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 = 2.6 = 27 Dec 2024
 - Updated UiChemy paste button Design for Guetnberg editor.
 - Added UiChemy paste button for Bricks builder.
+- Added Custom CSS for Elementor Editor.
 
 = 2.5.1 = 17 Aug 2024
 - Improved Live Import Connection speed for Bricks & Gutenberg Plugins.
