@@ -45,6 +45,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 'system_colors',
                 'custom_typography',
                 'system_typography',
+                'container_width'
             ];
 
             foreach($required_keys as $key){
@@ -88,6 +89,28 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             Uich_Globals::elementor_refresh_css_and_clear_cache( $kit->get_id() );
         }
 
+        public static function get_elementor_container_width(){
+            if(!class_exists( '\Elementor\Plugin' )) return false;
+
+            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit_for_frontend();
+
+            $container_width_kit = $kit->get_settings_for_display('container_width');
+
+            $default_container_width = [
+                'unit' => 'px',
+                'size' => 1440,
+                'sizes' => []
+            ];
+
+            if(isset(Uich_Globals::get_all_kit_settings()['container_width'])){
+                return Uich_Globals::get_all_kit_settings()['container_width'];
+            }else if(isset($container_width_kit)){
+                return $container_width_kit;
+            }else{
+                return $default_container_width;
+            }
+
+        }
 
         // Lists
         public static function get_typography() {
@@ -162,6 +185,20 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             return $result;
         }
 
+        public static function set_container_width($new_container_widths){
+
+            // Get the current container width
+
+            $document_settings = Uich_Globals::get_all_kit_settings();
+
+            $container_width = &$document_settings['container_width'];
+
+            $container_width = $new_container_widths;
+
+            Uich_Globals::save_all_kit_settings($document_settings);
+
+            return $document_settings;
+        }
 
         // Modifiers
         public static function set_or_create_color( $id, $title, $val ) {
@@ -357,13 +394,13 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $post_css->enqueue();
         }
 
-
         // End Points
         public static function get_globals() {
             return array(
                 'success' => true,
                 'typography' => Uich_Globals::get_typography(),
 				'colors' => Uich_Globals::get_colors(),
+                'container_width' => Uich_Globals::get_elementor_container_width()
             );
         }
 
@@ -371,6 +408,12 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             $sync_color = $sync_data->colors;
             $sync_typography = $sync_data->typography;
+            $sync_container_width = $sync_data->container_width;
+
+            // apply container width
+            if(isset($sync_container_width)){
+                Uich_Globals::set_container_width($sync_container_width);
+            }
 
             // apply color changes
             foreach( $sync_color as $color ){
