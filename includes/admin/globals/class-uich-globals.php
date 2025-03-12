@@ -88,6 +88,30 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             Uich_Globals::elementor_refresh_css_and_clear_cache( $kit->get_id() );
         }
 
+        public static function get_elementor_container_width(){
+            if(!class_exists( '\Elementor\Plugin' )) return false;
+
+            $all_settings = Uich_Globals::get_all_kit_settings();
+            $container_width_from_all_settings = array_key_exists('container_width', $all_settings) ? $all_settings['container_width'] : null;
+
+            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit_for_frontend();
+            $container_width_kit = $kit->get_settings_for_display('container_width');
+
+            $default_container_width = [
+                'unit' => 'px',
+                'size' => 1440,
+                'sizes' => []
+            ];
+
+            if(isset($container_width_from_all_settings)) {
+                return $container_width_from_all_settings;
+            } else if(isset($container_width_kit)) {
+                return $container_width_kit;
+            } else {
+                return $default_container_width;
+            }
+
+        }
 
         // Lists
         public static function get_typography() {
@@ -162,6 +186,24 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             return $result;
         }
 
+        public static function set_container_width($new_container_width){
+
+            // Get the current container width
+            $document_settings = Uich_Globals::get_all_kit_settings();
+
+            // Convert object -> array
+            if(is_object($new_container_width)){
+                $new_container_width = (array) $new_container_width;
+            }
+
+            // Set boxed width
+            $document_settings['container_width'] = $new_container_width;
+
+            // Save the settings
+            Uich_Globals::save_all_kit_settings($document_settings);
+
+            return $document_settings;
+        }
 
         // Modifiers
         public static function set_or_create_color( $id, $title, $val ) {
@@ -364,6 +406,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 'success' => true,
                 'typography' => Uich_Globals::get_typography(),
 				'colors' => Uich_Globals::get_colors(),
+                'container_width' => Uich_Globals::get_elementor_container_width(),
             );
         }
 
@@ -371,6 +414,12 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             $sync_color = $sync_data->colors;
             $sync_typography = $sync_data->typography;
+            $sync_container_width = $sync_data->container_width;
+
+            // set container width
+            if(isset($sync_container_width)){
+                Uich_Globals::set_container_width($sync_container_width);
+            }
 
             // apply color changes
             foreach( $sync_color as $color ){
