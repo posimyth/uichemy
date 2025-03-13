@@ -99,7 +99,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             $default_container_width = [
                 'unit' => 'px',
-                'size' => 1440,
+                'size' => 1140,
                 'sizes' => []
             ];
 
