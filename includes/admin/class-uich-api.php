@@ -1293,7 +1293,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				// WP REST Takes care of Access-Control-Allow-Origin
 
 				// Allow security token header.
-				header( 'Access-Control-Allow-Headers: UiChemy-Security-Token' );
+				header( 'Access-Control-Allow-Headers: UiChemy-Security-Token, Content-Type' );
 			}
 
 			return $value;

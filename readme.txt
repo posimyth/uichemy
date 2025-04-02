@@ -4,7 +4,7 @@ Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -64,11 +64,9 @@ This is not Figma to HTML Code Convertor, it converts Figma designs to Elementor
 
 <strong>[🥇 The Plus Addons for Elementor](https://theplusaddons.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)</strong> -  120+ Powerful Elementor Widgets for Elementor Page Builder. 
 
-<strong>[The Plus Blocks for Gutenberg](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
+<strong>[🥇 NexterWP Theme, Blocks & Extensions](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter Theme for WordPress with 22+ WordPress Extension & 90+ Gutenberg Blocks. 
 
-<strong>[NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)</strong> - Best Starter Theme for Elementor. Which Replaces 22+ WordPress Plugin - [Best Elementor Hello Theme Alternative.](https://theplusaddons.com/blog/best-hello-elementor-theme-alternatives/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)
-
-<strong>[WdesignKit](https://wdesignkit.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)</strong> — 1000+ Elementor Template, Elementor Widget Builder, Widget Convertor to Block, Bricks, Cloud Template & Widget Storage & more.
+<strong>[🥇WdesignKit](https://wdesignkit.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - 1000+ Elementor Template, Elementor Widget Builder, Widget Convertor to Block, Bricks, Cloud Template & Widget Storage & more.
 
 
 == Installation ==
@@ -141,6 +139,11 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 2.7.0 = 2 Apr 2025
+- Added api updates for Elementor container boxed width.
+- Updated README.
+- More bug fixes & improvements.
+
 = 2.6.0 = 27 Dec 2024
 - Updated UiChemy paste button Design for Gutenberg editor.
 - Added UiChemy paste button for Bricks builder.
