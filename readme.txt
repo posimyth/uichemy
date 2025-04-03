@@ -2,9 +2,9 @@
 Contributors: posimyththemes, dhaval4, sagarpatel124
 Tags: figma, figma to wordpress, templates, elementor templates, figma design
 Requires at least: 5.7.0
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,6 +139,9 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 2.7.1 = 3 Apr 2025
+- Updated the compatible wordpress version to 6.7.
+
 = 2.7.0 = 2 Apr 2025
 - Added api updates for Elementor container boxed width.
 - Updated README.
