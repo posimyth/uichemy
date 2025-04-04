@@ -1,14 +1,14 @@
-=== UiChemy - Figma to WordPress (Gutenberg, Elementor, Bricks) ===
+=== UiChemy - Figma to WordPress (Elementor, Gutenberg, Bricks) ===
 Contributors: posimyththemes, dhaval4, sagarpatel124
-Tags: figma, figma to wordpress, templates, elementor templates, figma design
+Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to bricks, figma to code
 Requires at least: 5.7.0
-Tested up to: 6.7
+Tested up to: 6.7.2
 Requires PHP: 5.6
-Stable tag: 2.7.1
+Stable tag: 3.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Convert Figma Designs Templates into 100% Editable WordPress Websites with Elementor, Gutenberg & Bricks Page Builder.
+Convert Figma Designs Templates into 100% Editable WordPress Websites. It's having figma to Elementor, Figma to Gutenberg & Figma to Bricks Page Builder options.
 
 == Description ==
 
@@ -139,8 +139,8 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
-= 2.7.1 = 3 Apr 2025
-- Updated the compatible wordpress version to 6.7.
+= 3.0.0 = 4 Apr 2025
+- Updated the compatible wordpress version to 6.7.2
 
 = 2.7.0 = 2 Apr 2025
 - Added api updates for Elementor container boxed width.
