@@ -664,39 +664,13 @@ if ( ! class_exists( 'Uich_Onbording' ) ) {
 				add_option( $this->uich_onbording_end, true );
 			}
 
-			if ( is_wp_error( $response ) ) {
-				$result = array(
-					'success'     => false,
-					'messages'    => 'Oops',
-					'description' => 'Description',
-				);
+			$result = array(
+				'success'     => true,
+				'message'    => 'Welcome to UiChemy!',
+				'description' => 'Your Onboarding finished successfully.',
+			);
 
-				wp_send_json( $result );
-			} else {
-				$status_one = wp_remote_retrieve_response_code( $response );
-
-				if ( 200 === $status_one ) {
-					$get_data_one = wp_remote_retrieve_body( $response );
-					$get_res      = json_decode( json_decode( $get_data_one, true ), true );
-
-					$result = array(
-						'success'     => ! empty( $get_res['success'] ) ? $get_res['success'] : false,
-						'messages'    => ! empty( $get_res['messages'] ) ? $get_res['messages'] : 'Successfully Completed!',
-						'description' => ! empty( $get_res['description'] ) ? $get_res['description'] : 'Welcome to UiChemy! Your Onboarding finished successfully.',
-					);
-
-					wp_send_json( $result );
-				} else {
-
-					$result = array(
-						'success'     => false,
-						'messages'    => 'Oops',
-						'description' => 'description',
-					);
-
-					wp_send_json( $result );
-				}
-			}
+			wp_send_json( $result );
 
 			wp_die();
 		}
