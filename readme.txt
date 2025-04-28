@@ -140,7 +140,6 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 
 == Changelog ==
 = 3.0.1 = 28 Apr 2025
-- Renamed "Security Token" to "Conenction Key".
 - Fixed a bug with onboarding toast message.
 
 = 3.0.0 = 4 Apr 2025

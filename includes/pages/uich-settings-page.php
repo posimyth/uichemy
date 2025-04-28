@@ -71,7 +71,7 @@ echo '<div class="uich-container-main uich-settings-pages">';
 	echo '<div class="uich-feilds">';
 
 		echo '<label for="Security">';
-			echo esc_html__( 'Connection Key', 'uichemy' );
+			echo esc_html__( 'Security Token', 'uichemy' );
 		echo '</label>';
 
 		echo '<input readonly id="uichemy-token-input" name="Security" type="text" value="' . esc_attr( $current_token ) . '"/>';
