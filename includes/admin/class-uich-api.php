@@ -230,6 +230,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 							'permission_callback' => '__return_true',
 						)
 					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/bricks/globals',
+						array(
+							'methods'             => array( 'GET' ),
+							'callback'            => array( $this, 'uich_handle_bricks_globals_list' ),
+							'permission_callback' => '__return_true',
+						)
+					);
 				}
 			);
 		}
@@ -258,6 +268,15 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			return array(
 				'success' => true,
 				'data' => $update_sync_data,
+			);
+		}
+
+		public function uich_handle_bricks_globals_list( ){
+			return array(
+				'width' => Uich_Bricks_Globals::get_global_container_width(),
+				'colors' => Uich_Bricks_Globals::get_global_colors(),
+				'typography' => Uich_Bricks_Globals::get_global_typography_classes(),
+				'padding' => Uich_Bricks_Globals::get_global_padding_classes(),
 			);
 		}
 

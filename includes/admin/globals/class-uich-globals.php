@@ -456,4 +456,111 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
         }
 
     }
+
+    class Uich_Bricks_Globals {
+
+	    const TYPO_CLASS_CATEGORY_ID = 'UICHEMY_TYPO';
+	    const PADDING_CLASS_CATEGORY_ID = 'UICHEMY_PADDING';
+
+        public static function get_global_colors() {
+            $bricks_color_palette = get_option( 'bricks_color_palette', array() );
+
+
+            foreach($bricks_color_palette as $palette) {
+                if(isset($palette['name']) && $palette['name'] === 'uichemy_palette') {
+                    return $palette; // Return as an array to match the original structure
+                }
+            }
+        
+            // If 'uichmey_color' is not found, create a new palette
+            $new_palette = array(
+                'id' => 'UICHEMY_PALETTE', // Generate a unique ID
+                'name' => 'uichemy_palette',
+                'colors' => array(),
+            );
+        
+            // Add the new palette to the existing palette array
+            $bricks_color_palette[] = $new_palette;
+        
+            // Update the option in the database
+            update_option('bricks_color_palette', $bricks_color_palette);
+        
+            // Return only the new 'uichmey_color' palette as an array
+            return $new_palette;
+        }
+
+        public static function get_global_container_width(): array {
+            $theme_styles = get_option('bricks_theme_styles', []);
+            $result = [];
+
+            foreach($theme_styles as $style) {
+                $result[] = [
+                    'name' => $style['label'] ?? '',
+                    'container_width' => $style['settings']['container']['width'] ?? '1100px'
+                ];
+            }
+
+            return $result;
+        }
+
+        public static function get_global_typography_classes() {
+            $bricks_classes = get_option('bricks_global_classes', array());
+            $bricks_class_categories = (array) get_option('bricks_global_classes_categories', array());
+            $acss_category_id = array_search(self::TYPO_CLASS_CATEGORY_ID, array_column($bricks_class_categories, 'id'));
+            $result = [];
+
+            // Check if typography category exists
+            if($acss_category_id === false) {
+                // Category doesn't exist, create it
+                $bricks_class_categories[] = [
+                    'id' => self::TYPO_CLASS_CATEGORY_ID,
+                    'name' => 'UichemyTypo.css',
+                ];
+                update_option('bricks_global_classes_categories', $bricks_class_categories);
+            } else {
+                // Category exists, collect typography classes for TYPO_CLASS_CATEGORY_ID
+                foreach($bricks_classes as $item) {
+                    if(isset($item['category']) && $item['category'] === self::TYPO_CLASS_CATEGORY_ID && isset($item['settings']['_typography'])) {
+                        $result[] = [
+                            'id' => $item['id'] ?? '',
+                            'name' => $item['name'] ?? '',
+                            'typography' => $item['settings']['_typography'] ?? []
+                        ];
+                    }
+                }
+            }
+
+            return $result;
+        }
+
+        public static function get_global_padding_classes() {
+            $bricks_classes = get_option('bricks_global_classes', array());
+            $bricks_class_categories = (array) get_option('bricks_global_classes_categories', array());
+            $acss_category_id = array_search(self::PADDING_CLASS_CATEGORY_ID, array_column($bricks_class_categories, 'id'));
+            $result = [];
+        
+            // Check if typography category exists
+            if($acss_category_id === false) {
+                // Category doesn't exist, create it
+                $bricks_class_categories[] = [
+                    'id' => self::PADDING_CLASS_CATEGORY_ID,
+                    'name' => 'UichemyPadding.css',
+                ];
+                update_option('bricks_global_classes_categories', $bricks_class_categories);
+            } else {
+                // Category exists, collect typography classes for TYPO_CLASS_CATEGORY_ID
+                foreach($bricks_classes as $item) {
+                    if(isset($item['category']) && $item['category'] === self::PADDING_CLASS_CATEGORY_ID && isset($item['settings']['_padding'])) {
+                        $result[] = [
+                            'id' => $item['id'] ?? '',
+                            'name' => $item['name'] ?? '',
+                            'padding' => $item['settings']['_padding'] ?? []
+                        ];
+                    }
+                }
+            }
+        
+            return $result;
+        }
+    }
 }
