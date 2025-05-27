@@ -271,7 +271,10 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			);
 		}
 
-		public function uich_handle_bricks_globals_list( ){
+		public function uich_handle_bricks_globals_list( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
 			return array(
 				'width' => Uich_Bricks_Globals::get_global_container_width(),
 				'colors' => Uich_Bricks_Globals::get_global_colors(),

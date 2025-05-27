@@ -520,11 +520,16 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             } else {
                 // Category exists, collect typography classes for TYPO_CLASS_CATEGORY_ID
                 foreach($bricks_classes as $item) {
-                    if(isset($item['category']) && $item['category'] === self::TYPO_CLASS_CATEGORY_ID && isset($item['settings']['_typography'])) {
+                    if(isset($item['category']) && $item['category'] === self::TYPO_CLASS_CATEGORY_ID && isset($item['settings'])) {
                         $result[] = [
                             'id' => $item['id'] ?? '',
                             'name' => $item['name'] ?? '',
-                            'typography' => $item['settings']['_typography'] ?? []
+                            'typography' => array(
+                                'desktop' => $item['settings']['_typography'] ?? [],
+                                'tablet' => $item['settings']['_typography:tablet_portrait'] ?? [],
+                                'mobile_landscape' => $item['settings']['_typography:mobile_landscape'] ?? [],
+                                'mobile' => $item['settings']['_typography:mobile_portrait'] ?? [],
+                            ),
                         ];
                     }
                 }
@@ -550,11 +555,16 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             } else {
                 // Category exists, collect typography classes for TYPO_CLASS_CATEGORY_ID
                 foreach($bricks_classes as $item) {
-                    if(isset($item['category']) && $item['category'] === self::PADDING_CLASS_CATEGORY_ID && isset($item['settings']['_padding'])) {
+                    if(isset($item['category']) && $item['category'] === self::PADDING_CLASS_CATEGORY_ID && isset($item['settings'])) {
                         $result[] = [
                             'id' => $item['id'] ?? '',
                             'name' => $item['name'] ?? '',
-                            'padding' => $item['settings']['_padding'] ?? []
+                            'padding' =>array(
+                                'desktop' => $item['settings']['_padding'] ?? [],
+                                'tablet' => $item['settings']['_padding:tablet_portrait'] ?? [],
+                                'mobile_landscape' => $item['settings']['_padding:mobile_landscape'] ?? [],
+                                'mobile' => $item['settings']['_padding:mobile_portrait'] ?? [],
+                            ),
                         ];
                     }
                 }
