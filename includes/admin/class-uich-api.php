@@ -276,6 +276,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$this->uich_check_token( $request );
 
 			return array(
+				'success' => true,
 				'width' => Uich_Bricks_Globals::get_global_container_width(),
 				'colors' => Uich_Bricks_Globals::get_global_colors(),
 				'typography' => Uich_Bricks_Globals::get_global_typography_classes(),
