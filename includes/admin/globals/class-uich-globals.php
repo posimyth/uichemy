@@ -467,24 +467,24 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
 
             foreach($bricks_color_palette as $palette) {
-                if(isset($palette['name']) && $palette['name'] === 'uichemy_palette') {
+                if(isset($palette['name']) && $palette['name'] === 'uichemy palette') {
                     return $palette; // Return as an array to match the original structure
                 }
             }
-        
+
             // If 'uichmey_color' is not found, create a new palette
             $new_palette = array(
                 'id' => 'UICHEMY_PALETTE', // Generate a unique ID
-                'name' => 'uichemy_palette',
+                'name' => 'uichemy palette',
                 'colors' => array(),
             );
-        
+
             // Add the new palette to the existing palette array
             $bricks_color_palette[] = $new_palette;
-        
+
             // Update the option in the database
             update_option('bricks_color_palette', $bricks_color_palette);
-        
+
             // Return only the new 'uichmey_color' palette as an array
             return $new_palette;
         }
@@ -514,7 +514,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 // Category doesn't exist, create it
                 $bricks_class_categories[] = [
                     'id' => self::TYPO_CLASS_CATEGORY_ID,
-                    'name' => 'UichemyTypo.css',
+                    'name' => 'Uichemy Typography',
                 ];
                 update_option('bricks_global_classes_categories', $bricks_class_categories);
             } else {
@@ -538,13 +538,13 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $bricks_class_categories = (array) get_option('bricks_global_classes_categories', array());
             $acss_category_id = array_search(self::PADDING_CLASS_CATEGORY_ID, array_column($bricks_class_categories, 'id'));
             $result = [];
-        
+
             // Check if typography category exists
             if($acss_category_id === false) {
                 // Category doesn't exist, create it
                 $bricks_class_categories[] = [
                     'id' => self::PADDING_CLASS_CATEGORY_ID,
-                    'name' => 'UichemyPadding.css',
+                    'name' => 'Uichemy Padding',
                 ];
                 update_option('bricks_global_classes_categories', $bricks_class_categories);
             } else {
