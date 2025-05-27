@@ -525,10 +525,10 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                             'id' => $item['id'] ?? '',
                             'name' => $item['name'] ?? '',
                             'typography' => array(
-                                'desktop' => $item['settings']['_typography'] ?? [],
-                                'tablet' => $item['settings']['_typography:tablet_portrait'] ?? [],
-                                'mobile_landscape' => $item['settings']['_typography:mobile_landscape'] ?? [],
-                                'mobile' => $item['settings']['_typography:mobile_portrait'] ?? [],
+                                'desktop' => $item['settings']['_typography'] ?? null,
+                                'tablet' => $item['settings']['_typography:tablet_portrait'] ?? null,
+                                'mobile_landscape' => $item['settings']['_typography:mobile_landscape'] ?? null,
+                                'mobile' => $item['settings']['_typography:mobile_portrait'] ?? null,
                             ),
                         ];
                     }
@@ -560,10 +560,10 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                             'id' => $item['id'] ?? '',
                             'name' => $item['name'] ?? '',
                             'padding' =>array(
-                                'desktop' => $item['settings']['_padding'] ?? [],
-                                'tablet' => $item['settings']['_padding:tablet_portrait'] ?? [],
-                                'mobile_landscape' => $item['settings']['_padding:mobile_landscape'] ?? [],
-                                'mobile' => $item['settings']['_padding:mobile_portrait'] ?? [],
+                                'desktop' => $item['settings']['_padding'] ?? null,
+                                'tablet' => $item['settings']['_padding:tablet_portrait'] ?? null,
+                                'mobile_landscape' => $item['settings']['_padding:mobile_landscape'] ?? null,
+                                'mobile' => $item['settings']['_padding:mobile_portrait'] ?? null,
                             ),
                         ];
                     }
