@@ -418,7 +418,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			$response['is_elementor_pro_installed'] = class_exists( 'ElementorPro\Plugin' );
 			$response['is_elementor_installed'] = class_exists( 'Elementor\Plugin' );
-			$response['nxt_builder'] = array_key_exists('nxt_builder', $all_post_types);
+			$response['isNexterInstalled'] = array_key_exists('nxt_builder', $all_post_types);
 
 			return $response;
 		}
