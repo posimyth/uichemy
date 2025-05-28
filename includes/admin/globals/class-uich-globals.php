@@ -490,7 +490,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
         }
 
         public static function get_global_container_width(): array {
-            $theme_styles = get_option('bricks_theme_styles', []);
+            $theme_styles = get_option('bricks_theme_styles', array());
             $result = [];
 
             foreach($theme_styles as $style) {
@@ -500,7 +500,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 ];
             }
 
-            return $result;
+            return $result[0];
         }
 
         public static function get_global_typography_classes() {
@@ -571,6 +571,102 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             }
         
             return $result;
+        }
+
+        public static function set_container_width($new_container_width, $name){
+
+            // Get the current container width
+            $theme_styles = get_option('bricks_theme_styles', []);
+
+            $theme_styles[$name]['settings']['container']['width'] = $new_container_width;
+            update_option('bricks_theme_styles', $theme_styles);
+            
+            return $theme_styles;
+
+        }
+
+        public static function sync_color_palette($sync_colors){
+            $bricks_color_palette = get_option( 'bricks_color_palette', array() );
+
+            if (!empty($bricks_color_palette) && is_array($bricks_color_palette)) {
+                foreach ($sync_colors as $sync_color) {
+                    // Ensure $sync_color is an object and has required properties
+                    if (!is_object($sync_color) || !isset($sync_color->action, $sync_color->id)) {
+                        continue; // Skip if not a valid object or missing required properties
+                    }
+            
+                    foreach ($bricks_color_palette as $palette_key => &$palette) {
+                        // Check if palette has the required structure
+                        if (!is_array($palette) || !isset($palette['name'], $palette['colors']) || $palette['name'] !== 'uichemy palette' || !is_array($palette['colors'])) {
+                            continue; // Skip if palette is invalid
+                        }
+            
+                        if ($sync_color->action === 'DEL') {
+                            // Delete action: Remove color with matching ID
+                            $palette['colors'] = array_filter($palette['colors'], function ($color) use ($sync_color) {
+                                return !isset($color['id']) || $color['id'] !== $sync_color->id;
+                            });
+                            $palette['colors'] = array_values($palette['colors']);
+                        }
+                        if ($sync_color->action === 'SET' || $sync_color->action === 'ADD') {
+                            // Set action: Add or update color
+                            if (!isset($sync_color->hex)) {
+                                error_log('SET action skipped: Missing color value for ID ' . $sync_color->id);
+                                continue; // Skip if color value is missing
+                            }
+            
+                            $found = false;
+                            foreach ($palette['colors'] as $color_key => &$color) {
+                                if (isset($color['id']) && $color['id'] === $sync_color->id) {
+                                    // Update existing color
+                                    $color['hex'] = $sync_color->hex;
+                                    $color['name'] = $sync_color->name;
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                            unset($color); // Clean up reference
+            
+                            if (!$found) {
+                                // Add new color
+                                $palette['colors'][] = [
+                                    'id' => $sync_color->id,
+                                    'hex' => $sync_color->hex,
+                                    'name' => $sync_color->name
+                                    // Add other fields if provided, e.g., 'name' => $sync_color->name ?? ''
+                                ];
+                            }
+                        }
+                    }
+                    unset($palette); // Clean up the reference to avoid issues
+                }
+            
+                // Update the option and handle potential failure
+                if (!update_option('bricks_color_palette', $bricks_color_palette)) {
+                    error_log('Failed to update bricks_color_palette option.');
+                }
+            }
+        }
+
+        public static function sync_bricks_globals( $sync_data ) {
+
+            $sync_width = $sync_data->width;
+            $sync_name = $sync_data->name;
+            $sync_colors = $sync_data->colors;
+            // $sync_typography = $sync_data->typography;
+            // $sync_padding = $sync_data->padding;
+
+            // set container width
+            if(isset($sync_width)){
+                Uich_Bricks_Globals::set_container_width($sync_width, $sync_name);
+            }
+
+            // handle color
+            if(!empty($sync_colors) && is_array($sync_colors)){
+                Uich_Bricks_Globals::sync_color_palette($sync_colors);
+            }
+
+            return get_option('bricks_theme_styles', []);
         }
     }
 }

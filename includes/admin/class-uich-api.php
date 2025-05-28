@@ -240,6 +240,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 							'permission_callback' => '__return_true',
 						)
 					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/bricks/globals/sync',
+						array(
+							'methods'             => array( 'POST' ),
+							'callback'            => array( $this, 'uich_handle_bricks_globals_sync' ),
+							'permission_callback' => '__return_true',
+						)
+					);
 				}
 			);
 		}
@@ -281,6 +291,20 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				'colors' => Uich_Bricks_Globals::get_global_colors(),
 				'typography' => Uich_Bricks_Globals::get_global_typography_classes(),
 				'padding' => Uich_Bricks_Globals::get_global_padding_classes(),
+			);
+		}
+
+		public function uich_handle_bricks_globals_sync( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			$sync_data = json_decode( $request->get_body() );
+
+			$update_sync_data = Uich_Bricks_Globals::sync_bricks_globals( $sync_data );
+
+			return array(
+				'success' => true,
+				'data' => $update_sync_data,
 			);
 		}
 
