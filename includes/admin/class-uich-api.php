@@ -288,9 +288,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			return array(
 				'success' => true,
 				'width' => Uich_Bricks_Globals::get_global_container_width(),
-				'colors' => Uich_Bricks_Globals::get_global_colors(),
-				'typography' => Uich_Bricks_Globals::get_global_typography_classes(),
-				'padding' => Uich_Bricks_Globals::get_global_padding_classes(),
+				'colors' => Uich_Bricks_Globals::get_uich_color_palette(),
+				'typography' => Uich_Bricks_Globals::get_uich_typography_classes(),
+				'padding' => Uich_Bricks_Globals::get_uich_padding_classes(),
 			);
 		}
 
@@ -300,7 +300,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			$sync_data = json_decode( $request->get_body() );
 
-			$update_sync_data = Uich_Bricks_Globals::sync_bricks_globals( $sync_data );
+			$update_sync_data = Uich_Bricks_Globals::sync_uich_globals($sync_data);
 
 			return array(
 				'success' => true,
