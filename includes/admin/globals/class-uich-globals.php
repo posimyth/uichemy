@@ -549,8 +549,8 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             // Search for the Uichemy palette (case-insensitive for robustness)
             foreach($color_palettes as $palette){
-                if(isset( $palette['name']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICHEMY_PALETTE_NAME ) === 0){
-                    return $palette;
+                if(isset( $palette['name']) && isset($palette['colors']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICHEMY_PALETTE_NAME ) === 0){
+                    return $palette['colors'];
                 }
             }
 
@@ -564,7 +564,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $color_palettes[] = $uichemy_palette;
             update_option('bricks_color_palette', $color_palettes);
 
-            return $uichemy_palette;
+            return $uichemy_palette['colors'];
         }
 
         // Get the global container width.
