@@ -287,10 +287,12 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			return array(
 				'success' => true,
-				'width' => Uich_Bricks_Globals::get_global_container_width(),
-				'colors' => Uich_Bricks_Globals::get_uich_color_palette(),
-				'typography' => Uich_Bricks_Globals::get_uich_typography_classes(),
-				'padding' => Uich_Bricks_Globals::get_uich_padding_classes(),
+				'data' => array(
+					'width' => Uich_Bricks_Globals::get_global_container_width(),
+					'colors' => Uich_Bricks_Globals::get_uich_color_palette(),
+					'typography' => Uich_Bricks_Globals::get_uich_typography_classes(),
+					'padding' => Uich_Bricks_Globals::get_uich_padding_classes(),
+				)
 			);
 		}
 

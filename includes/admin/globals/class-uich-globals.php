@@ -882,9 +882,9 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             return array(
                 'width' => Uich_Bricks_Globals::initContainerWidth()->width,
-                'color_palettes' => Uich_Bricks_Globals::get_uich_color_palette(),
-                'typography_classes' => Uich_Bricks_Globals::get_uich_typography_classes(),
-                'padding_classes' => Uich_Bricks_Globals::get_uich_padding_classes()
+                'colors' => Uich_Bricks_Globals::get_uich_color_palette(),
+                'typography' => Uich_Bricks_Globals::get_uich_typography_classes(),
+                'padding' => Uich_Bricks_Globals::get_uich_padding_classes()
             );
         }
     }
