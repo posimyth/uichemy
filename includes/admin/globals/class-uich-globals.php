@@ -753,14 +753,15 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
                     // Sanitize name and typography settings
                     $name = sanitize_text_field($update->name ?? '');
-                    $desktop = is_array($update->typography->desktop) ? $update->typography->desktop : null;
-                    $tablet = isset($update->typography->tablet) ? $update->typography->tablet : null;
-                    $mobile = isset($update->typography->mobile) ? $update->typography->mobile : null;
-                    $mobile_landscape = isset($update->typography->mobile_landscape) ? $update->typography->mobile_landscape : null;
+                    $desktop = $update->typography->desktop ?? null;
+                    $tablet = $update->typography->tablet ?? null;
+                    $mobile = $update->typography->mobile ?? null;
+                    $mobile_landscape = $update->typography->mobile_landscape ?? null;
 
                     $found = false;
                     foreach($global_classes as &$class){
                         if(isset($class['id'], $class['category']) && $class['id'] === $id && $class['category'] === $uichemy_category_id){
+                            
                             // Update existing class
                             $class['settings'] = array_merge($class['settings'] ?? [], [
                                 '_typography'                   => $desktop,
@@ -819,10 +820,10 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
                     // Sanitize name and padding settings
                     $name = sanitize_text_field($update->name ?? '');
-                    $desktop = isset($update->padding->desktop) ? $update->padding->desktop : null;
-                    $tablet = isset($update->padding->tablet) ? $update->padding->tablet : null;
-                    $mobile = isset($update->padding->mobile) ? $update->padding->mobile : null;
-                    $mobile_landscape = isset($update->padding->mobile_landscape) ? $update->padding->mobile_landscape : null;
+                    $desktop = $update->padding->desktop ?? null;
+                    $tablet = $update->padding->tablet ?? null;
+                    $mobile = $update->padding->mobile ?? null;
+                    $mobile_landscape = $update->padding->mobile_landscape ?? null;
 
                     $found = false;
                     foreach($global_classes as &$class){
@@ -862,11 +863,6 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
         // Sync all Uichemy globals (width, colors, typography, padding).
         public static function sync_uich_globals($global_data){
-
-            $width = null;
-            $color_palettes = null;
-            $typography_classes = null;
-            $padding_classes = null;
 
             if(isset($global_data->width)){
                 Uich_Bricks_Globals::set_uich_container_width($global_data->width);
