@@ -484,21 +484,22 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
         // Initialize and retrieve the Uichemy container width.
         public static function initContainerWidth(){
             $theme_styles_array = Uich_Bricks_Globals::getOptionAsArray('bricks_theme_styles');
-
+            
             // Check for existing Uichemy Theme
             foreach($theme_styles_array as $key => $style){
-                if(isset($style['label']) && $style['label'] === Uich_Bricks_Globals::UICHEMY_THEME_NAME){
+                if($key === Uich_Bricks_Globals::UICHEMY_THEME_NAME){
                     $width = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
 
                     // Reindex: Remove the current theme and append it to the end
                     $uichemy_theme_style = $style;
                     unset($theme_styles_array[$key]);
-                    $theme_styles_array['Uichemy Theme'] = $uichemy_theme_style;
+                    $theme_styles_array[$key] = $uichemy_theme_style;
+
                     update_option('bricks_theme_styles', $theme_styles_array);
 
                     return (object)[
                         'width' => $width,
-                        'theme' => 'Uichemy Theme',
+                        'themeID' => $key,
                     ];
                 }
             }
@@ -512,7 +513,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
                     return (object)[
                         'width' => $width,
-                        'theme' => $style['label'] ?? '',
+                        'themeID' => $key ?? '',
                     ];
                 }
             }
@@ -539,7 +540,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             return (object)[
                 'width' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH,
-                'theme' => Uich_Bricks_Globals::UICHEMY_THEME_NAME,
+                'themeID' => Uich_Bricks_Globals::UICHEMY_THEME_NAME,
             ];
         }
 
@@ -644,7 +645,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
         // Set the Uichemy container width.
         public static function set_uich_container_width( $container_width ){
             $container_width = sanitize_text_field( $container_width );
-            $theme_name = Uich_Bricks_Globals::initContainerWidth()->theme;
+            $theme_id = Uich_Bricks_Globals::initContainerWidth()->themeID;
             $theme_styles_array = Uich_Bricks_Globals::getOptionAsArray('bricks_theme_styles');
 
             // For initialize and retrieve the Uichemy container width.
@@ -654,7 +655,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 return false;
             }
 
-            $theme_styles_array[$theme_name]['settings']['container']['width'] = $container_width;
+            $theme_styles_array[$theme_id]['settings']['container']['width'] = $container_width;
             return update_option('bricks_theme_styles', $theme_styles_array);
         }
 
