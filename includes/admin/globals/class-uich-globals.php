@@ -759,6 +759,12 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                     $mobile = $update->typography->mobile ?? null;
                     $mobile_landscape = $update->typography->mobile_landscape ?? null;
 
+                    // Convert objects to arrays if they exist
+                    $desktop = is_object($desktop) ? get_object_vars($desktop) : $desktop;
+                    $tablet = is_object($tablet) ? get_object_vars($tablet) : $tablet;
+                    $mobile = is_object($mobile) ? get_object_vars($mobile) : $mobile;
+                    $mobile_landscape = is_object($mobile_landscape) ? get_object_vars($mobile_landscape) : $mobile_landscape;
+
                     $found = false;
                     foreach($global_classes as &$class){
                         if(isset($class['id'], $class['category']) && $class['id'] === $id && $class['category'] === $uichemy_category_id){
@@ -825,6 +831,12 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                     $tablet = $update->padding->tablet ?? null;
                     $mobile = $update->padding->mobile ?? null;
                     $mobile_landscape = $update->padding->mobile_landscape ?? null;
+
+                    // Convert objects to arrays if they exist
+                    $desktop = is_object($desktop) ? get_object_vars($desktop) : $desktop;
+                    $tablet = is_object($tablet) ? get_object_vars($tablet) : $tablet;
+                    $mobile = is_object($mobile) ? get_object_vars($mobile) : $mobile;
+                    $mobile_landscape = is_object($mobile_landscape) ? get_object_vars($mobile_landscape) : $mobile_landscape;
 
                     $found = false;
                     foreach($global_classes as &$class){
