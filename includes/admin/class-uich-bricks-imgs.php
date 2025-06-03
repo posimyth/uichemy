@@ -17,6 +17,10 @@ class Uich_Bricks_Import_Images {
 
         $decode_data['content'] = $post_content;
 
+        $site_url = get_site_url();
+
+        $decode_data['sourceUrl'] = $site_url;
+
         wp_send_json_success( $decode_data);
     }
 
