@@ -665,6 +665,20 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $uichemy_palette = Uich_Bricks_Globals::get_uich_color_palette();
             $palette_key = null;
 
+            function extractHexCode($hex) {
+                // Remove any whitespace
+                $hex = trim($hex);
+                
+                // Check if hex code is 9 characters (# + 8 digits for RGBA)
+                if(strlen($hex) === 9){
+                    // Return only first 7 characters (# + 6 digits)
+                    return sanitize_hex_color(substr($hex, 0, 7));
+                }
+                
+                // Return original hex if not RGBA
+                return sanitize_hex_color($hex);
+            }
+
             foreach($color_palettes as $key => $palette){
                 if(isset($palette['name']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICHEMY_PALETTE_NAME) === 0){
 
@@ -694,18 +708,23 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                         fn($color) => ! isset($color['id']) || $color['id'] !== $id
                     ) );
                 } else if($action === 'SET' || $action === 'ADD'){
-                    if(!isset($update->hex) || !preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $update->hex)){
+
+                    if(!isset($update->hex)){
                         continue;
                     }
 
-                    $hex = sanitize_hex_color($update->hex);
+                    $hex = extractHexCode($update->hex);
                     $name = isset($update->name) ? sanitize_text_field($update->name) : '';
+                    $rgb = isset($update->rgb) ? $update->rgb : '';
 
                     $found = false;
                     foreach($color_palettes[$palette_key]['colors'] as &$color){
                         if(isset($color['id']) && $color['id'] === $id){
                             $color['hex'] = $hex;
                             $color['name'] = $name;
+                            if(!empty($rgb)){
+                                $color['rgb'] = $rgb;
+                            }
                             $found = true;
                             break;
                         }
@@ -713,11 +732,15 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                     unset($color);
 
                     if(!$found){
-                        $color_palettes[$palette_key]['colors'][] = [
+                        $color = [
                             'id'   => $id,
                             'hex'  => $hex,
                             'name' => $name,
                         ];
+                        if(!empty($rgb)){
+                            $color['rgb'] = $rgb;
+                        }
+                        $color_palettes[$palette_key]['colors'][] = $color;
                     }
                 }
             }
