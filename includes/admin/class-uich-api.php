@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Uich_Globals' ) ) {
 	require_once UICH_PATH . 'includes/admin/globals/class-uich-globals.php';
+	require_once UICH_PATH . 'includes/admin/globals/class-uich-bricks-globals.php';
 }
 
 if ( ! class_exists( 'Uich_Api' ) ) {
