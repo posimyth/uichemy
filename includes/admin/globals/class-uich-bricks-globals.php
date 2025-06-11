@@ -56,7 +56,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
         }
 
         // Initialize and retrieve the Uichemy container width.
-        public static function init_container_width(){
+        public static function get_or_create_container_width(){
             $theme_styles_array = Uich_Bricks_Globals::get_option_as_array('bricks_theme_styles');
 
             // Check for existing Uichemy Theme
@@ -124,7 +124,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
         }
 
         // Retrieve or create the Uichemy color palette.
-        public static function get_and_set_uich_color_palette(){
+        public static function get_or_create_uich_color_palette(){
             $color_palettes = self::get_option_as_array('bricks_color_palette');
 
             // Search for the Uichemy palette (case-insensitive for robustness)
@@ -145,11 +145,6 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             update_option('bricks_color_palette', $color_palettes);
 
             return $uichemy_palette['colors'];
-        }
-
-        // Get the global container width.
-        public static function get_global_container_width(){
-            return Uich_Bricks_Globals::init_container_width()->width;
         }
 
         // Retrieve Uichemy typography classes.
@@ -238,11 +233,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
         // Set the Uichemy container width.
         public static function set_uich_container_width( $container_width ){
             $container_width = sanitize_text_field( $container_width );
-            $theme_id = Uich_Bricks_Globals::init_container_width()->themeID;
+            $theme_id = Uich_Bricks_Globals::get_or_create_container_width()->themeID;
             $theme_styles_array = Uich_Bricks_Globals::get_option_as_array('bricks_theme_styles');
-
-            // For initialize and retrieve the Uichemy container width.
-            Uich_Bricks_Globals::get_global_container_width();
 
             if(empty($theme_styles_array)){
                 return false;
@@ -254,8 +246,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
         // Sync the Uichemy color palette with updates.
         public static function sync_uich_color_palette( $color_updates ){
+            $uichemy_palette = Uich_Bricks_Globals::get_or_create_uich_color_palette();
             $color_palettes = Uich_Bricks_Globals::get_option_as_array('bricks_color_palette');
-            $uichemy_palette = Uich_Bricks_Globals::get_and_set_uich_color_palette();
             $palette_key = null;
 
             function extractHexCode($hex) {
@@ -354,7 +346,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                 if(!isset($update['action'], $update['value']['id'])){
                     continue;
                 }
-                
+
                 $action = sanitize_text_field($update['action']);
                 $id = sanitize_text_field($update['value']['id']);
 
@@ -405,7 +397,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             $convertIntoArray = Uich_Bricks_Globals::object_to_array($padding_updates);
 
             foreach($convertIntoArray as $update){
-                 if(!isset($update['action'], $update['value']['id'])){
+                if(!isset($update['action'], $update['value']['id'])){
                     continue;
                 }
 
@@ -418,7 +410,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                         fn($class) => !isset($class['id'], $class['category']) || $class['id'] !== $id || $class['category'] !== $uichemy_category_id
                     ));
                 } else if($action === 'SET' || $action === 'ADD'){
-                   if(!isset($update['value']['value'])){
+                    if(!isset($update['value']['value'])){
                         continue;
                     }
 
@@ -454,8 +446,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
         // Get current active globals
         public static function get_uich_bricks_globals(){
             return array(
-                'width' => Uich_Bricks_Globals::init_container_width()->width,
-                'colors' => Uich_Bricks_Globals::get_and_set_uich_color_palette(),
+                'width' => Uich_Bricks_Globals::get_or_create_container_width()->width,
+                'colors' => Uich_Bricks_Globals::get_or_create_uich_color_palette(),
                 'typography' => Uich_Bricks_Globals::get_uich_typography_classes(),
                 'padding' => Uich_Bricks_Globals::get_uich_padding_classes()
             );
@@ -467,15 +459,15 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             if(isset($global_data->width)){
                 Uich_Bricks_Globals::set_uich_container_width($global_data->width);
             }
-    
+
             if(!empty($global_data->colors) && is_array($global_data->colors)){
                 Uich_Bricks_Globals::sync_uich_color_palette($global_data->colors);
             }
-    
+
             if(!empty($global_data->typography) && is_array($global_data->typography)){
                 Uich_Bricks_Globals::sync_uich_typography_classes($global_data->typography);
             }
-    
+
             if(!empty($global_data->padding) && is_array($global_data->padding)){
                 Uich_Bricks_Globals::sync_uich_padding_classes($global_data->padding);
             }
