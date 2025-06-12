@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Uich_Globals' ) ) {
 	require_once UICH_PATH . 'includes/admin/globals/class-uich-globals.php';
+	require_once UICH_PATH . 'includes/admin/globals/class-uich-bricks-globals.php';
 }
 
 if ( ! class_exists( 'Uich_Api' ) ) {
@@ -230,6 +231,26 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 							'permission_callback' => '__return_true',
 						)
 					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/bricks/globals',
+						array(
+							'methods'             => array( 'GET' ),
+							'callback'            => array( $this, 'uich_handle_bricks_globals_list' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+
+					register_rest_route(
+						'uichemy/v1',
+						'/bricks/globals/sync',
+						array(
+							'methods'             => array( 'POST' ),
+							'callback'            => array( $this, 'uich_handle_bricks_globals_sync' ),
+							'permission_callback' => '__return_true',
+						)
+					);
 				}
 			);
 		}
@@ -254,6 +275,30 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$sync_data = json_decode( $request->get_body() );
 
 			$update_sync_data = Uich_Globals::sync_globals( $sync_data );
+
+			return array(
+				'success' => true,
+				'data' => $update_sync_data,
+			);
+		}
+
+		public function uich_handle_bricks_globals_list( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			return array(
+				'success' => true,
+				'data' => Uich_Bricks_Globals::get_uich_bricks_globals(),
+			);
+		}
+
+		public function uich_handle_bricks_globals_sync( WP_REST_Request $request ){
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			$sync_data = json_decode( $request->get_body() );
+
+			$update_sync_data = Uich_Bricks_Globals::sync_uich_globals($sync_data);
 
 			return array(
 				'success' => true,
@@ -1142,6 +1187,10 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				$post_content = isset($json) && !empty($json) && isset($json['content']) ? $json['content'] : [];
 				$post_content = $this->import_bricks_media($post_content);
 
+				// for page settings
+				$page_settings = isset($json) && !empty($json) && isset($json['pageSettings']) ? $json['pageSettings'] : [];
+				$page_settings = $this->import_bricks_media($page_settings); // Optional: Process media in pageSettings if needed
+
 				$post_attributes = array(
 					'post_title'  => $post_title,
 					'post_content' => '',
@@ -1166,6 +1215,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 					update_post_meta($inserted_id, '_bricks_editor_mode', 'bricks');
 					update_post_meta($inserted_id, '_bricks_template_type', esc_attr($el_type));
+					update_post_meta($inserted_id, '_bricks_page_settings', $page_settings);
 
 					return array(
 						'success' => true,
@@ -1209,6 +1259,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 				// Initialize a variable to store the post content
 				$exits_content = [];
+				$exits_page_settings = [];
 				$get_temp_type = 'content';
 				if (!empty($post) ) {
 					$get_temp_type = get_post_meta($exist_post_id, '_bricks_template_type', true);
@@ -1220,22 +1271,28 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 					if(!empty($get_temp_type)){
 						$exits_content = get_post_meta($exist_post_id, '_bricks_page_'.esc_attr($get_temp_type).'_2', true);
+						$exits_page_settings = get_post_meta($exist_post_id, '_bricks_page_settings', true);
 					}
 				}
 
 				$json_array = json_decode($json, true);
 				$update_content = !empty($json_array) && isset($json_array['content']) ? $json_array['content'] : [];
+				$update_page_settings = !empty($json_array) && isset($json_array['pageSettings']) ? $json_array['pageSettings'] : [];
+				$update_page_settings = $this->import_bricks_media($update_page_settings);
 				$update_content = $this->import_bricks_media($update_content);
 
 				if(!empty($importByReplacing) && $importByReplacing=='false'){
 					$merged_content = array_merge($exits_content, $update_content);
+					$merged_page_settings = array_merge($exits_page_settings, $update_page_settings);
 				}else if(!empty($importByReplacing) && $importByReplacing=='true'){
 					$merged_content = $update_content;
+					$merged_page_settings = $update_page_settings;
 				}
 
 				if(!empty($get_temp_type)){
 
 					update_post_meta($exist_post_id, '_bricks_page_'.esc_attr($get_temp_type).'_2', $merged_content);
+					update_post_meta($exist_post_id, '_bricks_page_settings', $merged_page_settings);
 					return array(
 						'success' => true,
 						'result'  => array(
