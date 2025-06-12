@@ -1,15 +1,13 @@
 <?php
 
-add_action('wp_ajax_bricks_import_media', array('Uich_Bricks_Import_Images', 'import_media'));        
+add_action('wp_ajax_bricks_import_media', array('Uich_Bricks_Import_Images', 'import_media'));
 
 class Uich_Bricks_Import_Images {
 
     public static function import_media() {
         check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
 
-        $input_data = isset($_POST['inputData']) ? $_POST['inputData'] : '';
-
-        $decode_data = json_decode(stripslashes($input_data), true);
+        $decode_data = isset($_POST['inputData']) ? json_decode(stripslashes($_POST['inputData']), true) : [];
 
         $post_content = isset($decode_data) && !empty($decode_data) && isset($decode_data['content']) ? $decode_data['content'] : [];
 

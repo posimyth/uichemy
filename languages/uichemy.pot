@@ -1,127 +1,189 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Copyright (C) 2025 POSIMYTH
+# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 11:14+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: UiChemy 3.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/uichemy\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-06-09T10:58:01+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: uichemy\n"
 
-#: includes/admin/class-uich-api.php:127
-msgid "Reset Successful"
-msgstr ""
-
-#: includes/admin/class-uich-api.php:205
-msgid "No JSON data found."
-msgstr ""
-
-#: includes/admin/class-uich-api.php:226
-msgid "All Good."
-msgstr ""
-
-#: includes/admin/class-uich-api.php:268
-msgid "Invalid Security Token"
-msgstr ""
-
-#: includes/admin/class-uich-api.php:395
-msgid "Insufficient permissions."
-msgstr ""
-
-#: includes/admin/class-uich-api.php:400
-msgid "Something went wrong."
-msgstr ""
-
-#: includes/admin/class-uich-enqueue.php:46
+#. Plugin Name of the plugin
+#: uichemy.php
+#: includes/admin/class-uich-enqueue.php:413
 msgid "UiChemy"
 msgstr ""
 
-#: includes/admin/class-uich-enqueue.php:48
-#: includes/notices/class-uich-plugin-page.php:86
-#: includes/user-experience/class-uich-onbording.php:324
-msgid "Settings"
+#. Plugin URI of the plugin
+#: uichemy.php
+msgid "https://uichemy.com"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:113
-msgid "Quick Feedback"
+#. Description of the plugin
+#: uichemy.php
+msgid "Convert Figma Design to 100% Editable WordPress websites in Elementor Website Builder and Gutenberg aka WordPress Block Editor."
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:119
-msgid ""
-"If you have a moment, please let us know why you're deactivating Uichemy :"
+#. Author of the plugin
+#: uichemy.php
+msgid "POSIMYTH"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:131
-msgid "This is a temporary deactivation."
+#. Author URI of the plugin
+#: uichemy.php
+msgid "https://posimyth.com"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:134
-msgid "Facing technical issues/bugs with the plugin."
+#: includes/admin/class-uich-api.php:292
+msgid "Reset Successful"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:137
-msgid "Performance Issues."
+#: includes/admin/class-uich-api.php:645
+#: includes/admin/class-uich-api.php:725
+#: includes/admin/class-uich-api.php:1122
+msgid "No JSON data found."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:666
+msgid "Required Elementor Plugin Please Install and Active."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:812
+#: includes/admin/class-uich-api.php:990
+#: includes/admin/class-uich-api.php:1188
+msgid "Post ID not provided for Updating."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:821
+#: includes/admin/class-uich-api.php:999
+#: includes/admin/class-uich-api.php:1197
+msgid "Post does not exist with given ID & Type."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:866
+msgid "This post doesn't have Elementor data."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:926
+msgid "No data Provided for Importing."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:1251
+msgid "Could not update the data."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:1271
+msgid "All Good."
+msgstr ""
+
+#: includes/admin/class-uich-api.php:1321
+msgid "Invalid Security Token"
+msgstr ""
+
+#: includes/admin/class-uich-elementor.php:97
+msgid "UiChemy : Custom CSS"
+msgstr ""
+
+#: includes/admin/class-uich-elementor.php:104
+msgid "CSS Code"
+msgstr ""
+
+#: includes/admin/class-uich-enqueue.php:252
+msgid "Insufficient permissions."
+msgstr ""
+
+#: includes/admin/class-uich-enqueue.php:262
+msgid "Bricks theme has been activated."
+msgstr ""
+
+#: includes/admin/class-uich-enqueue.php:264
+msgid "Bricks theme is not installed."
+msgstr ""
+
+#: includes/admin/class-uich-enqueue.php:306
+msgid "Failed to retrieve plugin information."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:107
+msgid "Deactivation Reason"
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:116
+msgid "Just Debugging."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:120
+msgid "Plugin Issue."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:124
+msgid "Slow Performance."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:128
+msgid "Switched to Alternative."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:132
+msgid "No Longer Needed."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:136
+msgid "Compatibility Issue."
 msgstr ""
 
 #: includes/notices/class-uich-deactivate-feedback.php:140
-msgid "Found an alternative plugin."
+msgid "Missing Feature."
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:143
-msgid "No more planning to use."
+#: includes/notices/class-uich-deactivate-feedback.php:144
+msgid "Other Reasons."
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:146
-msgid "Dont want to use any wordpress plugin."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:149
-msgid "Its missing the feature i require."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:152
-msgid "Other"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:167
+#: includes/notices/class-uich-deactivate-feedback.php:160
 msgid "Please share the reason"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:173
-msgid "Submit & Deactivate"
+#: includes/notices/class-uich-deactivate-feedback.php:162
+msgid "If you require any help, please"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:176
+#: includes/notices/class-uich-deactivate-feedback.php:163
+msgid "Create A Ticket."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:163
+msgid "We reply within 24 working hours."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:164
+msgid " we reply within 24 working hours.Looking for instant solutions? - "
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:164
+msgid "Read our Documentation"
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:170
+msgid "I agree to be contacted via email for support with this plugin."
+msgstr ""
+
+#: includes/notices/class-uich-deactivate-feedback.php:179
 msgid "Skip & Deactivate"
 msgstr ""
 
 #: includes/notices/class-uich-deactivate-feedback.php:182
-msgid "If you require any help , "
+msgid "Submit & Deactivate"
 msgstr ""
 
-#: includes/notices/class-uich-deactivate-feedback.php:185
-msgid "please add a ticket "
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:186
-msgid "We reply within 24 working hours."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:188
-msgid "Read"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:192
-msgid "Documentation."
+#: includes/notices/class-uich-plugin-page.php:86
+msgid "Settings"
 msgstr ""
 
 #: includes/notices/class-uich-plugin-page.php:87
@@ -137,6 +199,7 @@ msgid "Join Community"
 msgstr ""
 
 #: includes/notices/class-uich-plugin-page.php:112
+#: dashboard/build/index.js:1
 msgid "What's New?"
 msgstr ""
 
@@ -145,6 +208,7 @@ msgid "Request Feature"
 msgstr ""
 
 #: includes/pages/design-header.php:33
+#: dashboard/build/index.js:1
 msgid "Version "
 msgstr ""
 
@@ -172,354 +236,270 @@ msgstr ""
 msgid "How can I get support or assistance with UiChemy?"
 msgstr ""
 
-#: includes/pages/uich-settings-page.php:46
-msgid "Back"
+#: dashboard/build/index.js:1
+msgid "Select Page Builder"
 msgstr ""
 
-#: includes/pages/uich-settings-page.php:59
-msgid "Site URL"
+#: dashboard/build/index.js:1
+msgid "Install Figma Plugin"
 msgstr ""
 
-#: includes/pages/uich-settings-page.php:74
-msgid "Security Token"
+#: dashboard/build/index.js:1
+msgid "Required Theme"
 msgstr ""
 
-#: includes/pages/uich-settings-page.php:87
-msgid "Regenerate Token"
+#: dashboard/build/index.js:1
+msgid "Complete"
 msgstr ""
 
-#: includes/pages/uich-settings-page.php:94
-msgid "Import as User"
+#: dashboard/build/index.js:1
+msgid "Required Plugins"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:35
-msgid "Welcome, "
+#: dashboard/build/index.js:1
+msgid "Nexter Blocks"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:36
-msgid ""
-"Convert your Figma Designs to 100% Editable Elementor Templates in Seconds."
+#: dashboard/build/index.js:1
+msgid "Important"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:39
-msgid "Elementor Figma Plugin"
+#: dashboard/build/index.js:1
+msgid "Activated"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:40
-msgid "Bricks Figma Plugin"
+#: dashboard/build/index.js:1
+msgid "Activate"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:56
-msgid "How does it work?"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:56
-msgid "Watch Video"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:61
-msgid "Step 1"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:62
-#: includes/user-experience/class-uich-onbording.php:278
-msgid "Install UiChemy Figma Plugin"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:69
-msgid "Step 2"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:77
-msgid "Step 3"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:78
-msgid "Import in Elementor"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:94
-#: includes/user-experience/class-uich-onbording.php:383
-msgid "Elementor Page Builder"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:99
-#: includes/pages/uich-welcome-page.php:125
-#: includes/pages/uich-welcome-page.php:151
-#: includes/user-experience/class-uich-onbording.php:372
-#: includes/user-experience/class-uich-onbording.php:400
-#: includes/user-experience/class-uich-onbording.php:428
-msgid "Active"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:104
-#: includes/pages/uich-welcome-page.php:130
-#: includes/pages/uich-welcome-page.php:156
-#: includes/user-experience/class-uich-onbording.php:379
-#: includes/user-experience/class-uich-onbording.php:407
-#: includes/user-experience/class-uich-onbording.php:435
-msgid "Inactive"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:111
-#: includes/pages/uich-welcome-page.php:137
-#: includes/pages/uich-welcome-page.php:163
-#: includes/user-experience/class-uich-onbording.php:386
-#: includes/user-experience/class-uich-onbording.php:414
-#: includes/user-experience/class-uich-onbording.php:442
-msgid "No Action Needed"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:113
-#: includes/pages/uich-welcome-page.php:139
-#: includes/pages/uich-welcome-page.php:165
-#: includes/user-experience/class-uich-onbording.php:388
-#: includes/user-experience/class-uich-onbording.php:416
-#: includes/user-experience/class-uich-onbording.php:444
+#: dashboard/build/index.js:1
 msgid "Install & Activate"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:120
-msgid "Flexbox Container"
+#: dashboard/build/index.js:1
+msgid "Spectra"
 msgstr ""
 
-#: includes/pages/uich-welcome-page.php:146
-msgid "Enable Unfiltered File Uploads"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:188
-msgid "Documentation"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:189
-msgid "Read Now"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:193
-msgid "Design Guidelines"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:194
-msgid "Learn More"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:198
-msgid "Join Our Community?"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:199
-msgid "Join Now"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:203
-msgid "YouTube Tutorials"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:204
-msgid "Watch Now"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:213
-msgid "UiChemy Templates"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:214
-msgid ""
-"We are offering a Lifetime Deal for a limited time only. Afterward, we will "
-"switch to only offering Yearly Plans. Take advantage of our offer to lock in "
-"your Lifetime Deal forever for unlimited conversions."
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:215
-msgid "Template Library"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:223
-msgid "Case Study"
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:224
-msgid ""
-"We are offering a Lifetime Deal for a limited time only. Afterward, we will "
-"switch to only offering Yearly Plans."
-msgstr ""
-
-#: includes/pages/uich-welcome-page.php:225
-msgid "Browse Case Studies"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:198
-msgid "Welcome"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:199
-msgid ""
-"Uichemy is the perfect tool to bring your Figma design live on WordPress. "
-"Lets start!"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:203
-msgid "Select your Page Builder"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:211
-msgid "Elementor"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:218
-msgid "Gutenberg"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:220
+#: dashboard/build/index.js:1
 msgid "Coming Soon"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:227
+#: dashboard/build/index.js:1
+msgid "Kadence Blocks"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Elementor"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Gutenberg"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Bricks Builder"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Continue"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Install UiChemy Figma Plugin"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Get UiChemy Key"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Install UiChemy Figma to"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Convertor"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Install & Run"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "The Figma Plugin"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Connect your UiChemy"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Key & Click Connect"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Back"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Confirm & Proceed"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Elementor Pro"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Optional"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Installation Required"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "The Plus Addons for Elementor"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Setup Up Done Successfully."
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Your Figma to WordPress Convertor is Ready to Import Design"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Contribute to improving our plugin by sharing non-sensitive details."
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "I just installed UiChemy - Figma to WordPress Convertor Plugin. This connects my WordPress sites with Figma and easily import converted designs from Figma. Excited to use it."
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Post on"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Start Importing Design"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Get Started with UiChemy - Figma to"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "WordPress Convertor"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Skip"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Get Started"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Welcome,"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Convert your Figma Designs to 100% Editable Elementor Templates in Seconds."
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Site URL"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Security Token"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Regenerate Token"
+msgstr ""
+
+#: dashboard/build/index.js:1
+msgid "Import as User"
+msgstr ""
+
+#: dashboard/build/index.js:1
 msgid "Bricks"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:245
-msgid "Register to UiChemy"
+#: dashboard/build/index.js:1
+msgid "Install Required Plugins"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:246
-msgid "Create your account to get your UiChemy license key."
+#: dashboard/build/index.js:1
+msgid "Figma to Elementor | UiChemy"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:254
-#: includes/user-experience/class-uich-onbording.php:284
-#: includes/user-experience/class-uich-onbording.php:315
-msgid "1"
+#: dashboard/build/index.js:1
+msgid "Install in Figma"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:255
-msgid "Select your "
+#: dashboard/build/index.js:1
+msgid "Elementor Page Builder"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:255
-msgid "Plan"
+#: dashboard/build/index.js:1
+msgid "Recommended Settings"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:259
-#: includes/user-experience/class-uich-onbording.php:288
-#: includes/user-experience/class-uich-onbording.php:320
-msgid "2"
+#: dashboard/build/index.js:1
+msgid "Flexbox Container"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:260
-msgid "Register at POSIMYTH Store"
+#: dashboard/build/index.js:1
+msgid "Activate Now"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:264
-#: includes/user-experience/class-uich-onbording.php:292
-#: includes/user-experience/class-uich-onbording.php:329
-msgid "3"
+#: dashboard/build/index.js:1
+msgid "Enable Unfiltered File Uploads"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:265
-msgid "Get the License Key"
+#: dashboard/build/index.js:1
+msgid "Optional Plugins"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:279
-msgid "Install the UiChemy Figma Plugin on your design board."
+#: dashboard/build/index.js:1
+msgid "The Plus Addons for Elementor (Free)"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:285
-msgid "Install"
+#: dashboard/build/index.js:1
+msgid "Figma to Gutenberg | UiChemy"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:285
-msgid "UiChemy Figma Plugin"
+#: dashboard/build/index.js:1
+msgid "Figma to Bricks | UiChemy"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:285
-msgid "on"
+#: dashboard/build/index.js:1
+msgid "Bricks Page Builder"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:285
-msgid "Figma.com"
+#: dashboard/build/index.js:1
+msgid "SVG Uploads"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:289
-msgid "Install & Run UiChemy"
+#: dashboard/build/index.js:1
+msgid "How Does It Work?"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:289
-msgid "Figma Plugin"
+#: dashboard/build/index.js:1
+msgid "Watch Video"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:293
-msgid "Paste the Key"
+#: dashboard/build/index.js:1
+msgid "Frequently Asked Questions"
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:293
-msgid "and Activate"
+#: dashboard/build/index.js:1
+msgid "For any further help, reach us at Helpdesk or connect via Live Chat on website."
 msgstr ""
 
-#: includes/user-experience/class-uich-onbording.php:307
-msgid "Connect Figma Plugin with WordPress"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:316
-msgid "Select the Design for Export"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:321
-msgid "Click on Live Preview"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:330
-msgid "Copy Site URL & Security Token from UiChemy WordPress Plugin"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:334
-msgid "4"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:335
-msgid "Paste Site URL & Token from UiChemy WordPress Plugin"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:359
-msgid "Basic Requirements"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:360
-msgid "Please ensure the following things are set for best design conversion."
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:411
-msgid "Flexbox (Container)"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:439
-msgid "Enabled Unfiltered Uploads for SVG"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:461
-msgid "Congratulation!"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:461
-msgid "UiChemy is Ready for Magic."
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:462
-msgid "Still in Doubt?"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:468
-msgid "Read Step-By-Step Docs"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:471
-msgid "Watch Video Tutorials"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:474
-msgid "Read Documention"
-msgstr ""
-
-#: includes/user-experience/class-uich-onbording.php:477
-msgid "Figma Community Guidelines"
+#: dashboard/build/index.js:1
+msgid "Our Products"
 msgstr ""

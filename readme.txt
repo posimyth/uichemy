@@ -2,8 +2,8 @@
 Contributors: posimyththemes, dhaval4, sagarpatel124
 Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to bricks, figma to code
 Requires at least: 5.7.0
-Tested up to: 6.7.2
-Requires PHP: 5.6
+Tested up to: 6.8
+Requires PHP: 7.1
 Stable tag: 3.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0

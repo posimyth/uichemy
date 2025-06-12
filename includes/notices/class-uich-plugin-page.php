@@ -83,7 +83,7 @@ if ( ! class_exists( 'Uich_Plugin_Page' ) ) {
 		 */
 		public function uich_settings_pro_link( $links ) {
 
-			$settings  = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=uichemy-settings' ), __( 'Settings', 'uichemy' ) );
+			$settings  = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=uichemy-welcome' ), __( 'Settings', 'uichemy' ) );
 			$need_help = sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', esc_url( 'https://uichemy.com/' ), __( 'Need Help?', 'uichemy' ) );
 
 			$links   = (array) $links;
