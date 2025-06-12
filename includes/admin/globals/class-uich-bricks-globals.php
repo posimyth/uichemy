@@ -316,15 +316,15 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                     }
 
                     if(!$found){
-                        $color = [
+                        $new_color = [
                             'id'   => $id,
                             'hex'  => $hex,
                             'name' => $name,
                         ];
                         if(!empty($rgb)){
-                            $color['rgb'] = $rgb;
+                            $new_color['rgb'] = $rgb;
                         }
-                        $color_palettes[$palette_key]['colors'][] = $color;
+                        $color_palettes[$palette_key]['colors'][] = $new_color;
                     }
                 }
             }
