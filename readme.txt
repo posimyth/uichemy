@@ -140,6 +140,7 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 
 == Changelog ==
 = 3.1.0 = 12 June 2025
+- Updated the plugin welcome UI.
 - Added support for bricks global style classes.
 - Fixed an issue with media import in copy paste mode with bricks.
 - Fixed an issue with bricks live import & page settings with bricks.
