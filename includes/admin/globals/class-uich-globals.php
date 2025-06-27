@@ -40,6 +40,13 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 $document_settings = [];
             }
 
+            $default_settings = [
+                'custom_colors' => $kit->get_settings_for_display( 'custom_colors' ),
+                'system_colors' => $kit->get_settings_for_display( 'system_colors' ),
+                'custom_typography' => $kit->get_settings_for_display( 'custom_typography' ),
+                'system_typography' => $kit->get_settings_for_display( 'system_typography' ),
+            ];
+
             $required_keys = [
                 'custom_colors',
                 'system_colors',
@@ -50,7 +57,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             foreach($required_keys as $key){
                 if ( isset( $document_settings[ $key ] ) ) continue;
 
-                $document_settings[ $key ] = [];
+                $document_settings[ $key ] = !empty($default_settings[$key]) ? $default_settings[$key] : [];
             }
 
             return $document_settings;
