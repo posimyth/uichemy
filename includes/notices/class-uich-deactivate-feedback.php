@@ -158,10 +158,12 @@ if ( ! class_exists( 'Uich_Deactivate_Feedback' ) ) {
 							</div>
 
 							<textarea name="uich-reason-txt-deails" placeholder="<?php echo esc_html__( 'Please share the reason', 'uichemy' ); ?>" class="uich-reason-txt-deails" rows="3"></textarea>
-                            <div class="uich-help-link">                                 
-                                <span><?php echo esc_html__( "If you require any help, please" , 'uichemy'); ?></span>                                 
-                                <span> <a href="<?php echo esc_url( 'https://wordpress.org/support/plugin/uichemy' ); ?>" target="_blank" rel="noopener noreferrer"> <?php echo esc_html__( 'Create A Ticket.', 'uichemy') ?> </a> <?php echo esc_html__ ( 'We reply within 24 working hours.', 'uichemy' ); ?></span>                                 
-                                <span> <?php echo esc_html__( ' we reply within 24 working hours.Looking for instant solutions? - ', 'uichemy') ?>  <a href="<?php echo esc_url( 'https://uichemy.com/docs/?utm_source=wpbackend&utm_medium=admin&utm_campaign=links' ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Read our Documentation', 'uichemy') ?></a>. </span>                              
+                            <div class="uich-help-link">
+                                <span>
+                                    <?php echo esc_html__( "If you need any help, please" , 'uichemy'); ?>
+                                    <a href="<?php echo esc_url( 'https://wordpress.org/support/plugin/uichemy' ); ?>" target="_blank" rel="noopener noreferrer"> <?php echo esc_html__( 'Create A Ticket', 'uichemy') ?> </a>
+                                    <?php echo esc_html__( ' or ', 'uichemy') ?>  <a href="<?php echo esc_url( 'https://uichemy.com/docs/?utm_source=wpbackend&utm_medium=admin&utm_campaign=links' ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Read our Documentation', 'uichemy') ?></a>.
+                                </span>
                             </div>
 
                             <div class="uich-contact-item">

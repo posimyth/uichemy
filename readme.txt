@@ -4,7 +4,7 @@ Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to brick
 Requires at least: 5.7.0
 Tested up to: 6.8
 Requires PHP: 7.1
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,6 +139,10 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+
+= 3.1.3 = 01 Aug 2025
+- Made Some UI improvements.
+
 = 3.1.2 = 30 June 2025
 - Fixed a bug with elementor's global settings & latest elementor version.
 - More bug fixes & improvements.
