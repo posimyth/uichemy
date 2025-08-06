@@ -7,6 +7,10 @@ class Uich_Bricks_Import_Images {
     public static function import_media() {
         check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
 
+        if( ! is_user_logged_in() || ! current_user_can('edit_pages')) {
+            wp_send_json_error([ 'content' => __( 'Insufficient permissions.', 'uichemy' ) ], 401);
+        }
+
         $decode_data = isset($_POST['inputData']) ? json_decode(stripslashes($_POST['inputData']), true) : [];
 
         $post_content = isset($decode_data) && !empty($decode_data) && isset($decode_data['content']) ? $decode_data['content'] : [];

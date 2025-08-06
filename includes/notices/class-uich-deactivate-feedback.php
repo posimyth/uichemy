@@ -366,7 +366,7 @@ if ( ! class_exists( 'Uich_Deactivate_Feedback' ) ) {
 		public function uich_deactive_plugin() {
 			$nonce = ! empty( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 
-			if ( ! isset( $nonce ) || empty( $nonce ) || ! wp_verify_nonce( $nonce, 'uich-deactivate-feedback' ) ) {
+			if ( ! isset( $nonce ) || empty( $nonce ) || ! wp_verify_nonce( $nonce, 'uich-deactivate-feedback') || ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
 				die( 'Security checked!' );
 			}
 
@@ -425,6 +425,10 @@ if ( ! class_exists( 'Uich_Deactivate_Feedback' ) ) {
 		public function uich_skip_deactivate() {
 
 			check_ajax_referer( 'uich-deactivate-feedback', 'nonce' );
+
+            if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				die( 'Insufficient permissions !' );
+			}
 
 			$response = wp_remote_post(
 				$this->btn_skip,

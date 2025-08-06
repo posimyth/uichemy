@@ -329,6 +329,10 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
         public function activate_elementor_pro_plugin() {
             
             check_ajax_referer('uich-dash-ajax-nonce', 'security');
+
+            if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+                wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
+            }
         
             $plugin_paths = [
                 'elementor-pro/elementor-pro.php',
@@ -501,6 +505,10 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
         public function uich_boarding_store() {
             check_ajax_referer( 'uich-dash-ajax-nonce', 'nonce' );
 
+            if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+                wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
+            }
+
             $uionData = ( isset($_POST['boardingData']) && !empty($_POST['boardingData']) ) ? wp_unslash(json_decode(stripslashes($_POST['boardingData']), true)) : [];
 
             if( !empty($uionData) && isset($uionData['uich_onboarding']) && $uionData['uich_onboarding'] == true ) {
@@ -608,6 +616,10 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
          */
         public function uich_update_notice_count() {
             check_ajax_referer('uich-dash-ajax-nonce', 'security');
+
+            if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+                wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
+            }
 
             $get_option = get_option('uich_menu_notice_count');
             $updated = false;
