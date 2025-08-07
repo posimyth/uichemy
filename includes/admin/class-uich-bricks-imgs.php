@@ -7,7 +7,7 @@ class Uich_Bricks_Import_Images {
     public static function import_media() {
         check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
 
-        if( ! is_user_logged_in() || ! current_user_can('edit_pages')) {
+        if( ! is_user_logged_in() || ! current_user_can('edit_pages') || ! current_user_can('upload_files') ) {
             wp_send_json_error([ 'content' => __( 'Insufficient permissions.', 'uichemy' ) ], 401);
         }
 
