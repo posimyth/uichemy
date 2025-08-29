@@ -95,14 +95,27 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             Uich_Globals::elementor_refresh_css_and_clear_cache( $kit->get_id() );
         }
 
-        public static function get_elementor_container_width(){
+        public static function get_elementor_container_breakpoints_width(){
             if(!class_exists( '\Elementor\Plugin' )) return false;
 
             $all_settings = Uich_Globals::get_all_kit_settings();
             $container_width_from_all_settings = array_key_exists('container_width', $all_settings) ? $all_settings['container_width'] : null;
+            $container_width_tablet_from_all_settings = array_key_exists('container_width_tablet', $all_settings) ? $all_settings['container_width_tablet'] : null;
+            $container_width_mobile_from_all_settings = array_key_exists('container_width_mobile', $all_settings) ? $all_settings['container_width_mobile'] : null;
+            $container_width_tablet_extra_from_all_settings = array_key_exists('container_width_tablet_extra', $all_settings) ? $all_settings['container_width_tablet_extra'] : null;
+            $container_width_mobile_extra_from_all_settings = array_key_exists('container_width_mobile_extra', $all_settings) ? $all_settings['container_width_mobile_extra'] : null;
+            $container_width_widescreen_from_all_settings = array_key_exists('container_width_widescreen', $all_settings) ? $all_settings['container_width_widescreen'] : null;
+            $container_width_laptop_from_all_settings = array_key_exists('container_width_laptop', $all_settings) ? $all_settings['container_width_laptop'] : null;
+
 
             $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit_for_frontend();
             $container_width_kit = $kit->get_settings_for_display('container_width');
+            $container_width_tablet_kit  = $kit->get_settings_for_display('container_width_tablet');
+            $container_width_mobile_kit  = $kit->get_settings_for_display('container_width_mobile');
+            $container_width_tablet_extra_kit  = $kit->get_settings_for_display('container_width_tablet_extra');
+            $container_width_mobile_extra_kit  = $kit->get_settings_for_display('container_width_mobile_extra');
+            $container_width_widescreen_kit  = $kit->get_settings_for_display('container_width_widescreen');
+            $container_width_laptop_kit  = $kit->get_settings_for_display('container_width_laptop');
 
             $default_container_width = [
                 'unit' => 'px',
@@ -110,13 +123,50 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 'sizes' => []
             ];
 
-            if(isset($container_width_from_all_settings)) {
-                return $container_width_from_all_settings;
-            } else if(isset($container_width_kit)) {
-                return $container_width_kit;
-            } else {
-                return $default_container_width;
-            }
+            $container_width_normalize = function($value) {
+                if (empty($value) || !is_array($value)) {
+                    return null;
+                }
+                if (!isset($value['unit']) || $value['unit'] === null) {
+                    return null;
+                }
+                if (!isset($value['size']) || $value['size'] === '') {
+                    return null;
+                }
+                return $value;
+            };
+
+            $container_width_array = [];
+
+            // desktop
+            $desktop = $container_width_from_all_settings ?? $container_width_kit ?? $default_container_width;
+            $container_width_array['desktop'] = $desktop;
+
+            // tablet
+            $tablet = $container_width_tablet_from_all_settings ?? $container_width_tablet_kit ?? null;
+            $container_width_array['tablet'] = $container_width_normalize($tablet);
+
+            // tablet extra
+            $tablet_extra = $container_width_tablet_extra_from_all_settings ?? $container_width_tablet_extra_kit ?? null;
+            $container_width_array['tablet_extra'] = $container_width_normalize($tablet_extra);
+
+            // mobile
+            $mobile = $container_width_mobile_from_all_settings ?? $container_width_mobile_kit ?? null;
+            $container_width_array['mobile'] = $container_width_normalize($mobile);
+
+            // mobile extra
+            $mobile_extra = $container_width_mobile_extra_from_all_settings ?? $container_width_mobile_extra_kit ?? null;
+            $container_width_array['mobile_extra'] = $container_width_normalize($mobile_extra);
+
+            // widescreen
+            $widescreen = $container_width_widescreen_from_all_settings ?? $container_width_widescreen_kit ?? null;
+            $container_width_array['widescreen'] = $container_width_normalize($widescreen);
+
+            // laptop
+            $laptop = $container_width_laptop_from_all_settings ?? $container_width_laptop_kit ?? null;
+            $container_width_array['laptop'] = $container_width_normalize($laptop);
+
+            return $container_width_array;
 
         }
 
@@ -193,7 +243,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             return $result;
         }
 
-        public static function set_container_width($new_container_width){
+        public static function set_container_breakpoints_width($new_container_width){
 
             // Get the current container width
             $document_settings = Uich_Globals::get_all_kit_settings();
@@ -203,8 +253,31 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 $new_container_width = (array) $new_container_width;
             }
 
-            // Set boxed width
-            $document_settings['container_width'] = $new_container_width;
+            foreach ($new_container_width as $device => $val) {
+                $key = "container_width_{$device}";
+
+                if ($device === "desktop") {
+                    $document_settings['container_width'] = [
+                        'unit' => !empty($val->size) ? $val->unit : "px",
+                        'size' => !empty($val->size) ? $val->size : 1140,
+                        'sizes' => $val->sizes ?? []
+                    ];
+                } else {
+                    if(!isset($val) || !isset($val->size) || $val-> size === ""){
+                        $document_settings[$key] = [
+                            'unit' => null,
+                            'size' => "",
+                            'sizes' => null
+                        ];
+                    }else {
+                        $document_settings[$key] = [
+                            'unit' => $val->unit,
+                            'size' => $val->size,
+                            'sizes' => $val->sizes
+                        ];
+                    }
+                }
+            }
 
             // Save the settings
             Uich_Globals::save_all_kit_settings($document_settings);
@@ -413,7 +486,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 'success' => true,
                 'typography' => Uich_Globals::get_typography(),
 				'colors' => Uich_Globals::get_colors(),
-                'container_width' => Uich_Globals::get_elementor_container_width(),
+                'container_width' => Uich_Globals::get_elementor_container_breakpoints_width(),
             );
         }
 
@@ -425,7 +498,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
 
             // set container width
             if(isset($sync_container_width)){
-                Uich_Globals::set_container_width($sync_container_width);
+                Uich_Globals::set_container_breakpoints_width($sync_container_width);
             }
 
             // apply color changes
