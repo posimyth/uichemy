@@ -1,4 +1,4 @@
-=== UiChemy - Figma to WordPress (Elementor, Gutenberg, Bricks) ===
+=== UiChemy — Figma Converter for Elementor, Gutenberg and Bricks ===
 Contributors: posimyththemes, dhaval4, sagarpatel124
 Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to bricks, figma to code
 Requires at least: 5.7.0
