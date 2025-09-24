@@ -31,11 +31,11 @@ jQuery(document).ready(function ($) {
         var firstSpan = this.querySelector("span:nth-child(1)");
 
         jQuery.ajax({
-            url: uichemy_ajax_object.ajax_url,
+            url: uich_ajax_object_data.ajax_url,
             method: "POST",
             data: {
-                action: "uichemy_regenerate_token",
-                nonce: uichemy_ajax_object.nonce,
+                action: "uich_regenerate_token",
+                nonce: uich_ajax_object_data.nonce,
             },
             beforeSend: function () {
                 secondSpan.style.display = "flex";
@@ -71,11 +71,11 @@ jQuery(document).ready(function ($) {
     // Select for User.
     $(document).on("change", "#uichemy-user-select", function (e) {
         jQuery.ajax({
-            url: uichemy_ajax_object.ajax_url,
+            url: uich_ajax_object_data.ajax_url,
             method: "POST",
             data: {
-                action: "uichemy_select_user",
-                nonce: uichemy_ajax_object.nonce,
+                action: "uich_select_user",
+                nonce: uich_ajax_object_data.nonce,
                 new_user: e.target.value,
             },
             success: function (res) { console.log("new_user",res); },

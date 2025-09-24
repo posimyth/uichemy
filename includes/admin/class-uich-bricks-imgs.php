@@ -1,6 +1,6 @@
 <?php
 
-add_action('wp_ajax_bricks_import_media', array('Uich_Bricks_Import_Images', 'import_media'));
+add_action('wp_ajax_uich_bricks_import_media', array('Uich_Bricks_Import_Images', 'import_media'));
 
 class Uich_Bricks_Import_Images {
 
@@ -11,7 +11,7 @@ class Uich_Bricks_Import_Images {
             wp_send_json_error([ 'content' => __( 'Insufficient permissions.', 'uichemy' ) ], 401);
         }
 
-        $decode_data = isset($_POST['inputData']) ? json_decode(stripslashes($_POST['inputData']), true) : [];
+        $decode_data = isset($_POST['inputData']) ? json_decode(wp_unslash($_POST['inputData']), true) : [];
 
         $post_content = isset($decode_data) && !empty($decode_data) && isset($decode_data['content']) ? $decode_data['content'] : [];
 

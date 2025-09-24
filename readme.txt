@@ -1,10 +1,10 @@
 === UiChemy — Figma Converter for Elementor, Gutenberg and Bricks ===
 Contributors: posimyththemes, dhaval4, sagarpatel124
 Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to bricks, figma to code
-Requires at least: 5.7.0
+Requires at least: 6.6
 Tested up to: 6.8
-Requires PHP: 7.1
-Stable tag: 4.1.0
+Requires PHP: 7.4
+Stable tag: 4.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,6 +139,11 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 4.1.2 = 20 Sep 2025
+- Fixed : Bug Fixed and Improvement
+
+= 4.1.1 = 13 Sep 2025
+- Fixed : Bug Fixed and Improvement
 
 = 4.1.0 = 29 Aug 2025
 - Added support for breakpoints for boxed width of Elementor Containers.

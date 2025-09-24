@@ -22,11 +22,11 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 	 */
     class Uich_Bricks_Globals {
 
-	    const TYPO_CLASS_CATEGORY_ID = 'UICHEMY_TYPO';
-	    const PADDING_CLASS_CATEGORY_ID = 'UICHEMY_PADDING';
+	    const TYPO_CLASS_CATEGORY_ID = 'UICH_TYPO';
+	    const PADDING_CLASS_CATEGORY_ID = 'UICH_PADDING';
         const DEFAULT_CONTAINER_WIDTH = '1100px';
-        const UICHEMY_THEME_ID = 'uichemy_theme';
-        const UICHEMY_PALETTE_NAME = 'Uichemy Palette';
+        const UICH_THEME_ID = 'uichemy_theme';
+        const UICH_PALETTE_NAME = 'Uichemy Palette';
 
         // Helper method to safely retrieve and ensure an option is an array.
         private static function get_option_as_array($optionName){
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
             // Check for existing Uichemy Theme
             foreach($theme_styles_array as $key => $style){
-                if($key === Uich_Bricks_Globals::UICHEMY_THEME_ID){
+                if($key === Uich_Bricks_Globals::UICH_THEME_ID){
                     $width = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
 
                     // Reindex: Remove the current theme and append it to the end
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             }
 
             // Create new Uichemy Theme if none found
-            $themeStyles[Uich_Bricks_Globals::UICHEMY_THEME_ID] = [
+            $themeStyles[Uich_Bricks_Globals::UICH_THEME_ID] = [
                 'label' => 'UICHEMY THEME',
                 'settings' => [
                     '_custom' => true,
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
             return (object)[
                 'width' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH,
-                'themeID' => Uich_Bricks_Globals::UICHEMY_THEME_ID,
+                'themeID' => Uich_Bricks_Globals::UICH_THEME_ID,
             ];
         }
 
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
             // Search for the Uichemy palette (case-insensitive for robustness)
             foreach($color_palettes as $palette){
-                if(isset( $palette['name']) && isset($palette['colors']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICHEMY_PALETTE_NAME ) === 0){
+                if(isset( $palette['name']) && isset($palette['colors']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICH_PALETTE_NAME ) === 0){
                     return $palette['colors'];
                 }
             }
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             // Create new Uichemy palette
             $uichemy_palette = [
                 'id'     => 'uichemy_palette_' . uniqid(), // Unique ID to avoid conflicts
-                'name'   => Uich_Bricks_Globals::UICHEMY_PALETTE_NAME,
+                'name'   => Uich_Bricks_Globals::UICH_PALETTE_NAME,
                 'colors' => [],
             ];
 
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             }
 
             foreach($color_palettes as $key => $palette){
-                if(isset($palette['name']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICHEMY_PALETTE_NAME) === 0){
+                if(isset($palette['name']) && strcasecmp($palette['name'], Uich_Bricks_Globals::UICH_PALETTE_NAME) === 0){
 
                     $palette_key = $key;
                     break;

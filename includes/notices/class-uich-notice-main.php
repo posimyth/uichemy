@@ -65,7 +65,6 @@ if ( ! class_exists( 'Uich_Notice_Main' ) ) {
 		 */
 		public function wdkit_notice_fileload() {
 			require_once UICH_PATH . 'includes/notices/class-uich-plugin-page.php';
-			require_once UICH_PATH . 'includes/notices/class-uich-deactivate-feedback.php';
 		}
 	}
 

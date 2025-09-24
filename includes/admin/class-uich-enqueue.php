@@ -62,7 +62,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 }
             });
 
-            add_action( 'wp_ajax_activate_elementor_pro_plugin', array( $this, 'activate_elementor_pro_plugin' ) );
+            add_action( 'wp_ajax_uich_activate_elementor_pro_plugin', array( $this, 'uich_activate_elementor_pro_plugin' ) );
 
             add_action('wp_ajax_uich_update_notice_count', array($this, 'uich_update_notice_count'));
 		}
@@ -250,8 +250,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
             }
 
-            $plu_slug = ( isset( $_POST['slug'] ) && !empty( $_POST['slug'] ) ) ? $_POST['slug'] : '';
-
+            $plu_slug = '';
+            if ( isset( $_POST['slug'] ) && ! empty( $_POST['slug'] ) ) {
+                $plu_slug = sanitize_title( wp_unslash( $_POST['slug'] ) ); // safe slug
+            }
+            
             if ( $plu_slug === 'bricks' || $plu_slug === 'nexter' ) {
                 $all_themes = wp_get_themes();
 
@@ -326,7 +329,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
          *
          * @since 3.2.3
          */
-        public function activate_elementor_pro_plugin() {
+        public function uich_activate_elementor_pro_plugin() {
             
             check_ajax_referer('uich-dash-ajax-nonce', 'security');
 
@@ -339,7 +342,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 'elementor-pro/plugin.php'
             ];
         
-            $option = isset($_POST['pluginName']) ? sanitize_text_field($_POST['pluginName']) : '';
+            $option = isset($_POST['pluginName']) ? sanitize_text_field(wp_unslash($_POST['pluginName'])) : '';
         
             $plugin_file = '';
             foreach ($plugin_paths as $path) {
@@ -442,7 +445,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			wp_enqueue_script( 'uichemy-script', UICH_URL . 'assets/js/uichemy-script.js', array( 'jquery' ), UICH_VERSION, true );
 			wp_localize_script(
 				'uichemy-script',
-				'uichemy_ajax_object',
+				'uich_ajax_object_data_data',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
@@ -459,7 +462,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			wp_enqueue_script( 'uich-regenerate-token', UICH_URL . 'assets/js/uich-regenerate-token.js', array( 'jquery' ), UICH_VERSION, true );
 			wp_localize_script(
 				'uich-regenerate-token',
-				'uichemy_ajax_object',
+				'uich_ajax_object_data',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
@@ -487,7 +490,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
 				wp_localize_script(
 					'uich-bricks-button-js',
-					'uichemy_ajax_object',
+					'uich_ajax_object_data',
 					array(
 						'ajax_url' => admin_url( 'admin-ajax.php' ),
 						'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
@@ -509,7 +512,21 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
             }
 
-            $uionData = ( isset($_POST['boardingData']) && !empty($_POST['boardingData']) ) ? wp_unslash(json_decode(stripslashes($_POST['boardingData']), true)) : [];
+            $uionData = [];
+
+            // Step 1: Check if POST exists
+            if ( isset( $_POST['boardingData'] ) && ! empty( $_POST['boardingData'] ) ) {
+                // Step 2: Unslash first
+                $raw_json = wp_unslash( $_POST['boardingData'] );
+
+                // Step 3: Decode JSON safely
+                $decoded = json_decode( $raw_json, true );
+
+                // Step 4: Ensure it's an array
+                if ( is_array( $decoded ) ) {
+                    $uionData = $decoded;
+                }
+            }
 
             if( !empty($uionData) && isset($uionData['uich_onboarding']) && $uionData['uich_onboarding'] == true ) {
                 

@@ -13,14 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Uichemy_Import_Images' ) ) {
+if ( ! class_exists( 'Uich_Import_Images' ) ) {
 
 	/**
 	 * Template Import Images Here
 	 *
 	 * @since 1.0.0
 	 */
-	class Uichemy_Import_Images {
+	class Uich_Import_Images {
 
 		/**
 		 * Member Variable

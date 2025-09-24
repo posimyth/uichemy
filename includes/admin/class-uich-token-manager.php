@@ -74,7 +74,7 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function create_token() {
-			return add_option( UICHEMY_TOKEN_OPTION, self::gen_random_token() );
+			return add_option( UICH_TOKEN_OPTION, self::gen_random_token() );
 		}
 
 		/**
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function is_token_set() {
-			return get_option( UICHEMY_TOKEN_OPTION ) !== false;
+			return get_option( UICH_TOKEN_OPTION ) !== false;
 		}
 
 		/**
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function delete_token() {
-			return delete_option( UICHEMY_TOKEN_OPTION );
+			return delete_option( UICH_TOKEN_OPTION );
 		}
 
 		/**
@@ -112,7 +112,7 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @param string $value use dor databash update.
 		 */
 		public static function set_token( $value = '' ) {
-			return update_option( UICHEMY_TOKEN_OPTION, $value );
+			return update_option( UICH_TOKEN_OPTION, $value );
 		}
 
 		/**
@@ -121,13 +121,13 @@ if ( ! class_exists( 'Uich_Token_Manager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function get_token() {
-			$token = get_option( UICHEMY_TOKEN_OPTION );
+			$token = get_option( UICH_TOKEN_OPTION );
 
 			if ( false === $token ) {
 				self::create_token();
 			}
 
-			return get_option( UICHEMY_TOKEN_OPTION );
+			return get_option( UICH_TOKEN_OPTION );
 		}
 	}
 

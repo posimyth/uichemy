@@ -63,11 +63,11 @@ jQuery(document).ready(function($) {
         var secondSpan = this.querySelector('span:nth-child(2)')
 
         jQuery.ajax({
-            url: uichemy_ajax_object.ajax_url,
+            url: uich_ajax_object_data.ajax_url,
             method: "POST",
             data: {
-                action: 'uichemy_regenerate_token',
-                nonce: uichemy_ajax_object.nonce,
+                action: 'uich_regenerate_token',
+                nonce: uich_ajax_object_data.nonce,
             },
             beforeSend: function() {
                 secondSpan.style.display = 'flex';
@@ -89,11 +89,11 @@ jQuery(document).ready(function($) {
     $('#uichemy-user-select').on('change', function(e) {
         
         jQuery.ajax({
-            url: uichemy_ajax_object.ajax_url,
+            url: uich_ajax_object_data.ajax_url,
             method: "POST",
             data: {
-                action: 'uichemy_select_user',
-                nonce: uichemy_ajax_object.nonce,
+                action: 'uich_select_user',
+                nonce: uich_ajax_object_data.nonce,
                 new_user: e.target.value,
             },
             success: function(res){
@@ -164,11 +164,11 @@ jQuery(document).ready(function($) {
                 get_tooltip = $this.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
 
             jQuery.ajax({
-                url: uichemy_ajax_object.ajax_url,
+                url: uich_ajax_object_data.ajax_url,
                 method: "POST",
                 data: {
                     action: 'uich_uichemy',
-                    nonce: uichemy_ajax_object.nonce,
+                    nonce: uich_ajax_object_data.nonce,
                     type: 'install_elementor',
                 },
                 beforeSend: function() {
@@ -213,11 +213,11 @@ jQuery(document).ready(function($) {
                 get_tooltip = $this.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
 
             jQuery.ajax({
-                url: uichemy_ajax_object.ajax_url,
+                url: uich_ajax_object_data.ajax_url,
                 method: "POST",
                 data: {
                     action: 'uich_uichemy',
-                    nonce: uichemy_ajax_object.nonce,
+                    nonce: uich_ajax_object_data.nonce,
                     type: 'flexbox_container',
                 },
                 beforeSend: function () {
@@ -262,11 +262,11 @@ jQuery(document).ready(function($) {
 
 
                 jQuery.ajax({
-                    url: uichemy_ajax_object.ajax_url,
+                    url: uich_ajax_object_data.ajax_url,
                     method: "POST",
                     data: {
                         action: 'uich_uichemy',
-                        nonce: uichemy_ajax_object.nonce,
+                        nonce: uich_ajax_object_data.nonce,
                         type: 'install_tpgb',
                     },
                     beforeSend: function() {
@@ -311,11 +311,11 @@ jQuery(document).ready(function($) {
                 get_tooltip = $this.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
 
             jQuery.ajax({
-                url: uichemy_ajax_object.ajax_url,
+                url: uich_ajax_object_data.ajax_url,
                 method: "POST",
                 data: {
                     action: 'uich_uichemy',
-                    nonce: uichemy_ajax_object.nonce,
+                    nonce: uich_ajax_object_data.nonce,
                     type: 'elementor_file_uploads',
                 },
                 beforeSend: function () {
@@ -376,11 +376,11 @@ jQuery(document).ready(function($) {
             var get_tooltip = e.target.closest('.uich-listing-strip').querySelector('.uich-sm-icon');
                 e.target.innerHTML = `<span class="uich-round-loader"></span>`;
             jQuery.ajax({
-                url: uichemy_ajax_object.ajax_url,
+                url: uich_ajax_object_data.ajax_url,
                 method: "POST",
                 data: {
                     action: 'uich_uichemy',
-                    nonce: uichemy_ajax_object.nonce,
+                    nonce: uich_ajax_object_data.nonce,
                     type: 'bricks_file_uploads',
                 },
                 beforeSend: function() {

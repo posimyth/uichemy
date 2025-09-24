@@ -6,7 +6,7 @@ const { Modal } = wp.components;
 
 	const loadingbtn = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 24 24"><style>.spinner_ajPY{transform-origin:center;animation:spinner_AtaB .75s infinite linear}@keyframes spinner_AtaB{100%{transform:rotate(360deg)}}</style><path fill="#FFFFFF" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path fill="#FFFFFF" d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z" class="spinner_ajPY"/></svg> Uploading...';
     
-    function uichemy_cross_cp() {
+    function uich_cross_cp() {
         if (!document.querySelector("#uich-paste-area-input")) {
             const modalContainer = document.querySelector("#uich-paste-clipboard");
             ReactDOM.render(renderModal(), modalContainer);
@@ -15,7 +15,7 @@ const { Modal } = wp.components;
             inputArea.focus();
             inputArea.addEventListener("paste", (async function(event) {
                 event.preventDefault();
-                closeModal()
+                uich_closeModal()
                 const pastedData = event.clipboardData.getData("text");
 
                 if(pastedData){
@@ -60,14 +60,14 @@ const { Modal } = wp.components;
                 const a = '<button id="uich-paste-clipboard" title="Paste">' + copybuton + "</button>";
                 t.innerHTML = a, e.appendChild(t);
                 let o = document.querySelector("#uich-paste-clipboard");
-                o && o.addEventListener("click", uichemy_cross_cp)
+                o && o.addEventListener("click", uich_cross_cp)
             }
         }), 1)
     }));
    
     const renderModal = () => {
 		return (
-			<Modal className={"uich-clipboard-paste-data"} onRequestClose={closeModal}>
+			<Modal className={"uich-clipboard-paste-data"} onRequestClose={uich_closeModal}>
 				<div className="uich-clip-pop-content">
                     <svg width="84" height="85" viewBox="0 0 84 85" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_4829_3031)">
@@ -101,7 +101,7 @@ const { Modal } = wp.components;
 		);
 	};
 
-    function closeModal() {
+    function uich_closeModal() {
 		const modalContainer = document.querySelector("#uich-paste-clipboard");
 		if(modalContainer){
 			ReactDOM.unmountComponentAtNode(modalContainer);

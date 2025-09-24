@@ -105,8 +105,8 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 		/**
 		 * Load the required dependencies for this plugin.
 		 *
-		 * - Uichemy_Admin. Defines all hooks for the admin area.
-		 * - Uichemy_Public. Defines all hooks for the public side of the site.
+		 * -  Defines all hooks for the admin area.
+		 * -  Defines all hooks for the public side of the site.
 		 *
 		 * @since    1.0.0
 		 */

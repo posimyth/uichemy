@@ -73,8 +73,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			add_filter( 'upload_mimes', array( $this, 'add_svg_to_upload_mimes' ) );
 			add_filter( 'http_request_timeout', array( $this, 'uich_modify_http_request_default_timeout' ), 10 );
 
-			add_action( 'wp_ajax_uichemy_regenerate_token', array( $this, 'uiche_regenerate_token' ) );
-			add_action( 'wp_ajax_uichemy_select_user', array( $this, 'uichemy_select_user' ) );
+			add_action( 'wp_ajax_uich_regenerate_token', array( $this, 'uiche_regenerate_token' ) );
+			add_action( 'wp_ajax_uich_select_user', array( $this, 'uich_select_user' ) );
 			add_action( 'wp_ajax_uich_uichemy', array( $this, 'uich_api_call' ) );
 
 			add_filter( 'uich_recommended_settings', array( $this, 'uich_recommended_settings' ), 10, 1 );
@@ -347,7 +347,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 *
 		 * @since   1.0.0
 		 */
-		public function uichemy_select_user() {
+		public function uich_select_user() {
 
 			check_ajax_referer( 'uichemy-ajax-nonce', 'nonce' );
 
@@ -713,10 +713,10 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			}
 
 			// Get Parameters
-			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field($_GET['newImport']) : "true";
-			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field($_GET['postType']) : 'elementor';
-			$elementor_post_sub_type = (isset( $_GET['elementorPostSubType'] ) && !empty( $_GET['elementorPostSubType'] )) ? sanitize_text_field( $_GET['elementorPostSubType'] ) : '';
-			$nexter_post_sub_type = (isset( $_GET['nexterPostSubType'] ) && !empty( $_GET['nexterPostSubType'] )) ? sanitize_text_field( $_GET['nexterPostSubType'] ) : '';
+			$new_import = ( isset( $_GET['newImport'] ) && ! empty( $_GET['newImport'] ) ) ? sanitize_text_field( wp_unslash( $_GET['newImport'] ) ) : 'true';
+			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field(wp_unslash($_GET['postType'])) : 'elementor';
+			$elementor_post_sub_type = (isset( $_GET['elementorPostSubType'] ) && !empty( $_GET['elementorPostSubType'] )) ? sanitize_text_field( wp_unslash($_GET['elementorPostSubType']) ) : '';
+			$nexter_post_sub_type = (isset( $_GET['nexterPostSubType'] ) && !empty( $_GET['nexterPostSubType'] )) ? sanitize_text_field( wp_unslash($_GET['nexterPostSubType']) ) : '';
 
 			// postType: 'page' | 'nexter' | 'elementor'
 			$post_type_map = array(
@@ -848,8 +848,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				);
 
 			}else if($new_import === "false"){
-				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field($_GET['importToPost']) : '';
-				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field($_GET['importByReplacing']) : 'false';
+				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field(wp_unslash($_GET['importToPost'])) : '';
+				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field(wp_unslash($_GET['importByReplacing'])) : 'false';
 
 				if(empty($exist_post_id)){
 					return array(
@@ -928,10 +928,10 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$this->uich_check_token( $request );
 
 			// Get Parameters
-			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field($_GET['newImport']) : "true";
-			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field($_GET['postType']) : 'page';
-			$nexter_post_sub_type = (isset( $_GET['nexterPostSubType'] ) && !empty( $_GET['nexterPostSubType'] )) ? sanitize_text_field( $_GET['nexterPostSubType'] ) : '';
-			$post_title = (isset( $_GET['postTitle'] ) && !empty( $_GET['postTitle'] )) ? sanitize_text_field($_GET['postTitle']) : "New Post - UiChemy";
+			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field(wp_unslash($_GET['newImport'])) : "true";
+			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field(wp_unslash($_GET['postType'])) : 'page';
+			$nexter_post_sub_type = (isset( $_GET['nexterPostSubType'] ) && !empty( $_GET['nexterPostSubType'] )) ? sanitize_text_field( wp_unslash($_GET['nexterPostSubType']) ) : '';
+			$post_title = (isset( $_GET['postTitle'] ) && !empty( $_GET['postTitle'] )) ? sanitize_text_field(wp_unslash($_GET['postTitle'])) : "New Post - UiChemy";
 
 			
 			// postType: 'page' | 'nexter' | 'gutenberg_pattern'
@@ -1026,8 +1026,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			}else if( $new_import === "false"){
 				// In case of Existing Import
-				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field($_GET['importToPost']) : '';
-				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field($_GET['importByReplacing']) : 'false';
+				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field(wp_unslash($_GET['importToPost'])) : '';
+				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field(wp_unslash($_GET['importByReplacing'])) : 'false';
 
 				if(empty($exist_post_id)){
 					return array(
@@ -1126,9 +1126,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			}
 
 			// Get Parameters
-			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field($_GET['newImport']) : "true";
-			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field($_GET['postType']) : 'page';
-			$bricks_post_sub_type = (isset( $_GET['bricksPostSubType'] ) && !empty( $_GET['bricksPostSubType'] )) ? sanitize_text_field( $_GET['bricksPostSubType'] ) : '';
+			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field(wp_unslash($_GET['newImport'])) : "true";
+			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field(wp_unslash($_GET['postType'])) : 'page';
+			$bricks_post_sub_type = (isset( $_GET['bricksPostSubType'] ) && !empty( $_GET['bricksPostSubType'] )) ? sanitize_text_field( wp_unslash($_GET['bricksPostSubType']) ) : '';
 
 			// postType: 'page' | 'bricks'
 			$post_type_map = array(
@@ -1229,8 +1229,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			}else if( $new_import === "false"){
 				// In case of Existing Import
-				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field($_GET['importToPost']) : '';
-				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field($_GET['importByReplacing']) : 'false';
+				$exist_post_id = (isset($_GET['importToPost']) && !empty($_GET['importToPost'])) ? (int) sanitize_text_field(wp_unslash($_GET['importToPost'])) : '';
+				$importByReplacing = (isset($_GET['importByReplacing']) && !empty($_GET['importByReplacing'])) ? sanitize_text_field(wp_unslash($_GET['importByReplacing'])) : 'false';
 
 				if(empty($exist_post_id)){
 					return array(
@@ -1338,10 +1338,14 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 */
 		public function uiche_rest_send_cors_headers( $value ) {
 			$origin     = get_http_origin();
-			$requesturi = ! empty( $_SERVER['REQUEST_URI'] ) ? esc_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) : '';
+			$requesturi = (isset( $_SERVER['REQUEST_URI'] ) && ! empty( $_SERVER['REQUEST_URI'] )) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
 			// In case of non-pretty REST URLs
-			$rest_route_str = (isset($_GET['rest_route']) && !empty($_GET['rest_route'])) ? $_GET['rest_route'] : '';
+			$rest_route_str = '';
+			if ( isset( $_GET['rest_route'] ) && ! empty( $_GET['rest_route'] ) ) {
+				// Sanitize GET param
+				$rest_route_str = sanitize_text_field( wp_unslash( $_GET['rest_route'] ) );
+			}
 
 			if ( ! empty( $origin )
 				&& ((preg_match( '/\/wp-json\/uichemy\/v/', wp_parse_url( $requesturi, PHP_URL_PATH ) ) === 1)
@@ -1458,42 +1462,69 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				WP_Filesystem();
 			}
 
-			// Get the template Elements
-			$template = json_decode( $wp_filesystem->get_contents( $_FILES['files']['tmp_name'][0] ), true );
-			$elements = $template['content'];
+			/**
+			 * Safe template import with sanitization
+			 */
+			if ( isset( $_FILES['files']['tmp_name'][0] ) && isset($_FILES['files']['name'][0]) ) {
+				// Sanitize uploaded file info
+				$file_tmp  = sanitize_text_field( wp_unslash( $_FILES['files']['tmp_name'][0] ) );
+				$file_name = sanitize_file_name( wp_unslash( $_FILES['files']['name'][0] ) );
 
-			\Bricks\Templates::$template_images = [];
+				// Verify JSON file type
+				$filetype = wp_check_filetype_and_ext( $file_tmp, $file_name );
+				if ( $filetype['ext'] === 'json' && $filetype['type'] === 'application/json' ) {
 
-			foreach ( $elements as $index => $element ) {
-				if ( !empty( $element['settings'] ) ) {
-					\Bricks\Theme::instance()->templates->import_images( $element['settings'], true );
+					// Read contents
+					$contents = $wp_filesystem->get_contents( $file_tmp );
+
+					if ( $contents ) {
+						$template = json_decode( $contents, true );
+
+						if ( is_array( $template ) && isset( $template['content'] ) && is_array( $template['content'] ) ) {
+
+							$elements = $template['content'];
+
+							\Bricks\Templates::$template_images = [];
+
+							foreach ( $elements as $index => $element ) {
+								if ( ! empty( $element['settings'] ) && is_array( $element['settings'] ) ) {
+									\Bricks\Theme::instance()->templates->import_images(
+										$element['settings'],
+										true
+									);
+								}
+							}
+
+							// STEP: Replace remote image data with imported/existing image data.
+							if ( count( \Bricks\Templates::$template_images ) ) {
+								$elements_encoded = wp_json_encode( $elements );
+
+								foreach ( \Bricks\Templates::$template_images as $template_image ) {
+									$elements_encoded = str_replace(
+										wp_json_encode( $template_image['old'] ),
+										wp_json_encode( $template_image['new'] ),
+										$elements_encoded
+									);
+								}
+
+								$elements = json_decode( $elements_encoded, true );
+
+								$template['content'] = $elements;
+
+								// Replace Uploaded File Contents for Importing (safe JSON encoding)
+								$wp_filesystem->put_contents( $file_tmp, wp_json_encode( $template ) );
+							}
+
+							// Import & Return the value
+							\Bricks\Theme::instance()->templates->import_template();
+						}
+					}
 				}
 			}
 
-			// STEP: Replace remote image data with imported/existing image data.
-			if ( count( \Bricks\Templates::$template_images ) ) {
-				$elements_encoded = wp_json_encode( $elements );
 
-				foreach ( \Bricks\Templates::$template_images as $template_image ) {
-					$elements_encoded = str_replace(
-						wp_json_encode( $template_image['old'] ),
-						wp_json_encode( $template_image['new'] ),
-						$elements_encoded
-					);
-				}
-
-				$elements = json_decode( $elements_encoded, true );
-
-				$template['content'] = $elements;
-
-				// Replace Uploaded File Contents for Importing.
-				$wp_filesystem->put_contents($_FILES['files']['tmp_name'][0], json_encode( $template ));
-			}
-
-			// Import & Return the value
-			\Bricks\Theme::instance()->templates->import_template();
 		}
-		
+
 		/**
 		 * Error JSON message
 		 *
@@ -1717,13 +1748,13 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		}
 
 		public function ele_media_import( $content = array() ) {
-			if ( ! class_exists( 'Uichemy_Import_Images' ) ) {
+			if ( ! class_exists( 'Uich_Import_Images' ) ) {
 				require_once UICH_PATH . 'includes/admin/class-uich-import-images.php';
 			}
 			if ( ! empty( $content ) ) {
 				$media_import = array( $content );
-				$media_import = Uichemy_Import_Images::widgets_elements_id_change( $media_import );
-				$media_import = Uichemy_Import_Images::widgets_import_media_copy_content( $media_import );
+				$media_import = Uich_Import_Images::widgets_elements_id_change( $media_import );
+				$media_import = Uich_Import_Images::widgets_import_media_copy_content( $media_import );
 				$content      = $media_import[0];
 			}
 			return $content;
@@ -1731,7 +1762,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 
 		public function import_gutenberg_media($content = ''){
-			if ( ! class_exists( 'Uichemy_Import_Images' ) ) {
+			if ( ! class_exists( 'Uich_Import_Images' ) ) {
 				require_once UICH_PATH . 'includes/admin/class-uich-import-images.php';
 			}
 			if(defined('TPGB_VERSION') && defined('TPGB_PATH')){
@@ -1740,7 +1771,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				
 				$content = parse_blocks( $content );
 				
-				$new_content = Uichemy_Import_Images::gutenberg_import_media_copy_content( $content );
+				$new_content = Uich_Import_Images::gutenberg_import_media_copy_content( $content );
 				
 				$content = '';
 				foreach ($new_content as $block) {

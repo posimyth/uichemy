@@ -88,7 +88,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 
 			$selected_username = $capable_users[0]->user_login;
 
-			return add_option( UICHEMY_USER_OPTION, $selected_username );
+			return add_option( UICH_USER_OPTION, $selected_username );
 		}
 
 		/**
@@ -97,11 +97,11 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function get_selected_user() {
-			if( false === get_option( UICHEMY_USER_OPTION  ) ) {
+			if( false === get_option( UICH_USER_OPTION  ) ) {
 				self::init_selected_user();
 			}
 
-			return get_option( UICHEMY_USER_OPTION );
+			return get_option( UICH_USER_OPTION );
 		}
 
 		/**
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function is_user_set() {
-			return get_option( UICHEMY_USER_OPTION ) !== false;
+			return get_option( UICH_USER_OPTION ) !== false;
 		}
 
 		/**
@@ -121,10 +121,10 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 		 */
 		public static function set_user( $username = '' ) {
 			if ( apply_filters( 'uich_manage_token', 'is_token_set' ) ) {
-				return update_option( UICHEMY_USER_OPTION, $username );
+				return update_option( UICH_USER_OPTION, $username );
 			}
 
-			return add_option( UICHEMY_USER_OPTION, $username );
+			return add_option( UICH_USER_OPTION, $username );
 		}
 
 		/**
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function delete_user_option() {
-			return delete_option( UICHEMY_USER_OPTION );
+			return delete_option( UICH_USER_OPTION );
 		}
 	}
 
