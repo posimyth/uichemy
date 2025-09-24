@@ -59,6 +59,9 @@ You can further edit them directly from your preferred page builder.
 
 This is not Figma to HTML Code Convertor, it converts Figma designs to Elementor Editable website using its widgets set. No HTML Code is added. You can edit these templates using supported Elementor Widgets, Brick Elements or Gutenberg Blocks.
 
+<strong>[WordPress Plugin Source Code](https://github.com/posimyth/UiChemy-Plugin-Developer)</strong> - To embrace the open-source community, we’ve also made the plugin’s design source code available here.
+
+
 
 ###🔍 OUR PRODUCTS
 
