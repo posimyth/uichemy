@@ -62,7 +62,10 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             // Check for existing Uichemy Theme
             foreach($theme_styles_array as $key => $style){
                 if($key === Uich_Bricks_Globals::UICH_THEME_ID){
-                    $width = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
+                    $desktop = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
+                    $tablet_portrait = isset($style['settings']['container']['width:tablet_portrait']) ? sanitize_text_field($style['settings']['container']['width:tablet_portrait']) : null;
+                    $mobile_landscape = isset($style['settings']['container']['width:mobile_landscape']) ? sanitize_text_field($style['settings']['container']['width:mobile_landscape']) : null;
+                    $mobile_portrait = isset($style['settings']['container']['width:mobile_portrait']) ? sanitize_text_field($style['settings']['container']['width:mobile_portrait']) : null;
 
                     // Reindex: Remove the current theme and append it to the end
                     $uichemy_theme_style = $style;
@@ -71,8 +74,21 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
                     update_option('bricks_theme_styles', $theme_styles_array);
 
+                    $width_data = ['desktop' => $desktop];
+
+                    if($tablet_portrait !== null){
+                        $width_data['tablet_portrait'] = $tablet_portrait;
+                    }
+                    if($mobile_landscape !== null){
+                        $width_data['mobile_landscape'] = $mobile_landscape;
+                    }
+                    if($mobile_portrait !== null){
+                        $width_data['mobile_portrait'] = $mobile_portrait;
+                    }
+            
+
                     return (object)[
-                        'width' => $width,
+                        'width' => (object)$width_data,
                         'themeID' => $key,
                     ];
                 }
@@ -87,10 +103,25 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                     && isset($style['settings']['conditions']['conditions'][0]['main'])
                     && $style['settings']['conditions']['conditions'][0]['main'] === 'any'
                 ){
-                    $width = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
+                    $desktop = sanitize_text_field($style['settings']['container']['width'] ?? Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH);
+                    $tablet_portrait = isset($style['settings']['container']['width:tablet_portrait']) ? sanitize_text_field($style['settings']['container']['width:tablet_portrait']) : null;
+                    $mobile_landscape = isset($style['settings']['container']['width:mobile_landscape']) ? sanitize_text_field($style['settings']['container']['width:mobile_landscape']) : null;
+                    $mobile_portrait = isset($style['settings']['container']['width:mobile_portrait']) ? sanitize_text_field($style['settings']['container']['width:mobile_portrait']) : null;
+
+                    $width_data = ['desktop' => $desktop];
+
+                    if($tablet_portrait !== null){
+                        $width_data['tablet_portrait'] = $tablet_portrait;
+                    }
+                    if($mobile_landscape !== null){
+                        $width_data['mobile_landscape'] = $mobile_landscape;
+                    }
+                    if($mobile_portrait !== null){
+                        $width_data['mobile_portrait'] = $mobile_portrait;
+                    }
 
                     return (object)[
-                        'width' => $width,
+                        'width' => (object)$width_data,
                         'themeID' => $key ?? '',
                     ];
                 }
@@ -118,7 +149,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             update_option('bricks_theme_styles', $themeStyles);
 
             return (object)[
-                'width' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH,
+                'width' => ['desktop' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH],
                 'themeID' => Uich_Bricks_Globals::UICH_THEME_ID,
             ];
         }
@@ -232,7 +263,6 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
         // Set the Uichemy container width.
         public static function set_uich_container_width( $container_width ){
-            $container_width = sanitize_text_field( $container_width );
             $theme_id = Uich_Bricks_Globals::get_or_create_container_width()->themeID;
             $theme_styles_array = Uich_Bricks_Globals::get_option_as_array('bricks_theme_styles');
 
@@ -240,7 +270,30 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                 return false;
             }
 
-            $theme_styles_array[$theme_id]['settings']['container']['width'] = $container_width;
+            // Set desktop width (required)
+            $theme_styles_array[$theme_id]['settings']['container']['width'] = sanitize_text_field($container_width->desktop);
+
+            // Handle tablet_portrait
+            if(isset($container_width->tablet_portrait) && !empty($container_width->tablet_portrait)){
+                $theme_styles_array[$theme_id]['settings']['container']['width:tablet_portrait'] = sanitize_text_field($container_width->tablet_portrait);
+            } else {
+                unset($theme_styles_array[$theme_id]['settings']['container']['width:tablet_portrait']);
+            }
+
+            // Handle mobile_landscape
+            if(isset($container_width->mobile_landscape) && !empty($container_width->mobile_landscape)){
+                $theme_styles_array[$theme_id]['settings']['container']['width:mobile_landscape'] = sanitize_text_field($container_width->mobile_landscape);
+            } else {
+                unset($theme_styles_array[$theme_id]['settings']['container']['width:mobile_landscape']);
+            }
+
+            // Handle mobile_portrait
+            if(isset($container_width->mobile_portrait) && !empty($container_width->mobile_portrait)){
+                $theme_styles_array[$theme_id]['settings']['container']['width:mobile_portrait'] = sanitize_text_field($container_width->mobile_portrait);
+            } else {
+                unset($theme_styles_array[$theme_id]['settings']['container']['width:mobile_portrait']);
+            }
+
             return update_option('bricks_theme_styles', $theme_styles_array);
         }
 
