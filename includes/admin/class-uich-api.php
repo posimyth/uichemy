@@ -1617,6 +1617,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				wp_die();
 			}
 
+            $key = isset( $_POST['key'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['key'] ) ) ) : false;
+           
 			switch ( $type ) {
 				case 'install_elementor':
 					$data = $this->uich_install_elementor();
@@ -1632,6 +1634,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				break;
 				case 'install_tpgb':
 					$data = $this->uich_install_tpgb();
+                break;
+                case 'add_custom_option':
+                    $data = $this->uich_add_option($key);
 				break;
 			}
 
@@ -1873,7 +1878,23 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			}
 		}
-
+        
+        public function uich_add_option( $key ) {
+            $current_value = get_option( $key );
+        
+            if ( ! empty( $current_value ) ) {
+                update_option( $key, false );
+                return $this->uich_response(  'Successfully Disabled!', 'Custom CSS Field Deactivated Successfully.', true, '');
+            }  else {
+                if ( get_option( $key ) === false ) {
+                    add_option( $key, true );
+                } else {
+                    update_option( $key, true );
+                }
+        
+                return $this->uich_response( 'Successfully Enabled!', 'Custom CSS Field Activated Successfully.', true, '' );
+            }
+        }
 	}
 
 	new Uich_Api();
