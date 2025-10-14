@@ -156,6 +156,15 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
             $bricks_uploads_svg     = apply_filters( 'uich_recommended_settings', 'bricks_svg_uploads' );
             $bricks_uploads_val_svg = ! empty( $bricks_uploads_svg['data'] ) ? $bricks_uploads_svg['data'] : '';
 
+            $kadence_install = apply_filters( 'uich_recommended_settings', 'kadence_install' );
+            $kad_success = ! empty( $kadence_install['success'] ) ? (bool) $kadence_install['success'] : false;
+
+            $generateblocks_install = apply_filters( 'uich_recommended_settings', 'generateblocks_install' );
+            $generateblocks_success = ! empty( $generateblocks_install['success'] ) ? (bool) $generateblocks_install['success'] : false;
+
+            $spectra_install = apply_filters( 'uich_recommended_settings', 'spectra_install' );
+            $spectra_success = ! empty( $spectra_install['success'] ) ? (bool) $spectra_install['success'] : false;
+
             $bricks_permissions =[];
             if(!empty($bricks_uploads_val_svg)){
                  foreach ( $bricks_uploads_val_svg as $role => $details ) {
@@ -225,8 +234,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                         'userEmail' => get_option('admin_email'),
                         'siteUrl' => get_option('siteurl'),
                     ],
-                    'elementor' =>$elementor_install_success,
-                    'nexterBlock'=>$tpgb_install_success,
+                    'elementor' => $elementor_install_success,
+                    'nexterBlock'=> $tpgb_install_success,
+                    'kadence'=> $kad_success,
+                    'generateblocks'=>$generateblocks_success,
+                    'spectra'=>$spectra_success,
                     // 'gutenberg' => $gutenberg,
                     'plusAddons'=>$plusAddons,
                     'elementorPro'=>$elementorPro,
@@ -719,11 +731,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 	
 					$uitem_parts = get_block_templates( array( 'slugs__in' => $uichslugs ), 'wp_template_part' );
 	
-// 					foreach ( $uitem_parts as $template ) {
-// 						if ( ! empty( $template->content ) && ! empty( $template->slug ) && in_array( $template->slug, $slugs ) ) {
-// 							$cnt .= $template->content;
-// 						}
-// 					}
+					foreach ( $uitem_parts as $template ) {
+						if ( ! empty( $template->content ) && ! empty( $template->slug ) && in_array( $template->slug, $slugs ) ) {
+							$cnt .= $template->content;
+						}
+					}
 	
 					$cnt .= $_wp_current_template_content;
 				} else {

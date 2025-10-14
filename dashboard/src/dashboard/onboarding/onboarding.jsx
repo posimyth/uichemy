@@ -188,95 +188,75 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
     const gutenberginstall = () => {
         var active = uich_ajax_object.dashData;
 
+        var plugin_data = [
+            {
+                key: 'nexterBlock',
+                title: 'Nexter Blocks',
+                icon: ( <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" fill="none" viewBox="0 0 4 20"><path fill="#fff" d="m3.6 17.227-.01 2.222H.4v-3.088h2.308c.02 0 .035.008.052.01.099.011.196.036.288.072.03.01.06.023.088.036.007.005.015.008.022.012a.72.72 0 0 1 .349.331l.01.018a.603.603 0 0 1 .052.158c.02.075.03.151.031.229ZM3.59.82v12.998c0 .203-.092.378-.283.529-.197.152-.441.231-.69.223H.4V.4h2.662a.598.598 0 0 1 .37.12.36.36 0 0 1 .158.3Z" /></svg> ),
+                slug: 'the-plus-addons-for-block-editor',
+                required: true,
+            },
+            {
+                key: 'spectra',
+                title: 'Spectra',
+                icon: <img src={plugin_url + 'assets/images/spectra.png'} alt="nexter" />,
+                slug: 'ultimate-addons-for-gutenberg',
+                beta: true,
+            },
+            {
+                key: 'kadence',
+                title: 'Kadence Blocks – Gutenberg Blocks for Page Builder Features',
+                icon: <img src={plugin_url + 'assets/images/kadence.png'} alt="nexter" />,
+                slug: 'kadence-blocks',
+                beta: true,
+            },
+            {
+                key: 'generateblocks',
+                title: 'GenerateBlocks',
+                icon: <img src={plugin_url + 'assets/images/generateblocks.png'} alt="nexter" />,
+                slug: 'generateblocks',
+                beta: true,
+            },
+        ]
+
         return (
-            <>
-
-                {/* Gutenberg is not available in the new version of WordPress */}
-                {/* <div className={`uich_plugin_item ${active.gutenberg === true ? 'uich_activated' : ''}`}>
+            plugin_data.map((plugin) => (
+                <div key={plugin.key} className={`uich_plugin_item ${active[plugin.key] === true ? 'uich_activated' : ''}`}>
                     <div className='uich_plugin_info'>
-                        <div className='uich_setting_icon wp'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" fill="none" viewBox="0 0 13 12"><path fill="#fff" d="M3.394.396C1.476 1.252.741 3.086.884 6.613c.082 1.794.184 2.446.53 3.099.878 1.712 2.327 2.446 4.45 2.263 1.51-.102 2.59-.694 3.08-1.631.205-.388.368-1.325.429-2.324.082-1.61.102-1.672.633-1.794.755-.163 2.06-1.264 2.06-1.753 0-.571-.55-.49-1.346.204-.45.387-1.061.672-1.857.835-2.265.449-2.673.612-3.306 1.325-.694.795-.796 1.264-.306 1.468.204.082.51-.122.918-.611.572-.673 1.653-1.264 1.898-1.02.061.082.122.612.122 1.223 0 2.161-.877 3.12-2.816 3.12-1.183 0-2.163-.571-2.775-1.631-.367-.612-.428-1.06-.428-3.262 0-2.915.306-3.832 1.51-4.627 1.469-.979 3.754-.429 4.285 1.06.449 1.182.857 1.427 1.245.693.183-.327.143-.592-.204-1.305C8.189.233 5.414-.522 3.394.395Z" /></svg>
+                        <div className={`uich_setting_icon ${plugin.key}`}>
+                            {plugin.icon}
                         </div>
-                        <span className='uich_plugin_icon_text'>{__('Gutenberg', 'uichemy')}</span>
-                        <span className='uich_alert_button'>{__('Important', 'uichemy')}</span>
+                        <span className='uich_plugin_icon_text'>{ ( plugin.key === 'kadence' ) ? __('Kadence', 'uichemy') : __(plugin.title, 'uichemy')}</span>
+            
+                        {plugin.required ? (
+                            <span className='uich_alert_button'>{__('Required', 'uichemy')}</span>
+                        ) : (
+                            <span className='uich_alert_button uich_alert_button_soon'>{__('Beta', 'uichemy')}</span>
+                        )}
                     </div>
 
-                    {active.gutenberg === true ?
-                        <div className='uich_activated_label'>
-                            <span className='uich_check_green_icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
-                            </span>
-                            <span>{__('Enable', 'uichemy')}</span>
-                        </div> :
-                        <button className='uich_secondary_button'>{__('Disable', 'uichemy')}</button>
-                    }
-                </div> */}
-
-                <div className={`uich_plugin_item ${active.nexterBlock === true ? 'uich_activated' : ''}`}>
-                    <div className='uich_plugin_info'>
-                        <div className='uich_setting_icon nexter_block'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" fill="none" viewBox="0 0 4 20"><path fill="#fff" d="m3.6 17.227-.01 2.222H.4v-3.088h2.308c.02 0 .035.008.052.01.099.011.196.036.288.072.03.01.06.023.088.036.007.005.015.008.022.012a.72.72 0 0 1 .349.331l.01.018a.603.603 0 0 1 .052.158c.02.075.03.151.031.229ZM3.59.82v12.998c0 .203-.092.378-.283.529-.197.152-.441.231-.69.223H.4V.4h2.662a.598.598 0 0 1 .37.12.36.36 0 0 1 .158.3Z" /></svg>
-                        </div>
-                        <span className='uich_plugin_icon_text'>{__('Nexter Blocks', 'uichemy')}</span>
-                        {/* <span className='uich_alert_button uich_alert_button_green'>{__('Optional', 'uichemy')}</span> */}
-                        <span className='uich_alert_button'>{__('Required', 'uichemy')}</span>
-
-                    </div>
-                    {active.findPlugin.includes('Nexter Blocks') ? (
-                        active.nexterBlock === true ?
+                    {active.findPlugin.includes(plugin.title) ? (
+                        active[plugin.key] === true ? (
                             <div className='uich_activated_label'>
                                 <span className='uich_check_green_icon'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12">
+                                        <path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" />
+                                    </svg>
                                 </span>
                                 <span>{__('Activated', 'uichemy')}</span>
-                            </div> :
-                            <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'nexterBlock')}>{__('Activate', 'uichemy')}</button>) : (
-                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled)}>{__('Install & Activate', 'uichemy')}</button>)
-                    }
+                            </div>
+                        ) : (
+                            <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, plugin.slug)}>
+                                {__('Activate', 'uichemy')}
+                            </button>
+                        )
+                    ) : (
+                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, plugin.slug)}>
+                            {__('Install & Activate', 'uichemy')}
+                        </button>
+                    )}
                 </div>
-
-                <div className={`uich_plugin_item ${active.spectra === true ? 'uich_activated' : ''}`}>
-                    <div className='uich_plugin_info'>
-                        <div className='uich_setting_icon spectra'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 40 40"><path fill="#5733FF" fill-rule="evenodd" d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20Zm-6.03-26.565c-3.129 1.845-2.379 6.78 1.175 7.728l5.934 1.583c.494.132.584.81.141 1.072l-5.736 3.37-.606 5.955 11.152-6.578c3.129-1.845 2.378-6.78-1.175-7.728l-5.934-1.583c-.494-.132-.584-.81-.141-1.072l5.736-3.37.606-5.955-11.152 6.578Z" clip-rule="evenodd" /></svg>
-                        </div>
-                        <span className='uich_plugin_icon_text'>{__('Spectra', 'uichemy')}</span>
-                        <span className='uich_alert_button uich_alert_button_soon'>{__('Coming Soon', 'uichemy')}</span>
-
-                    </div>
-
-                    {active.Spectra === true ?
-                        <div className='uich_activated_label'>
-                            <span className='uich_check_green_icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
-                            </span>
-                            <span>{__('Activated', 'uichemy')}</span>
-                        </div> :
-                        <button className='uich_secondary_button uich_coming_soon'>{__('Install & Activate', 'uichemy')}</button>
-                    }
-                </div>
-
-                <div className={`uich_plugin_item ${active.kadence === true ? 'uich_activated' : ''}`}>
-                    <div className='uich_plugin_info'>
-                        <div className='uich_setting_icon'>
-                            <img src={plugin_url + 'assets/images/kadence.png'} alt="nexter" />
-                        </div>
-                        <span className='uich_plugin_icon_text'>{__('Kadence Blocks', 'uichemy')}</span>
-                        <span className='uich_alert_button uich_alert_button_soon'>{__('Coming Soon', 'uichemy')}</span>
-                    </div>
-
-                    {active.kadence === true ?
-                        <div className='uich_activated_label'>
-                            <span className='uich_check_green_icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
-                            </span>
-                            <span>{__('Activated', 'uichemy')}</span>
-                        </div> :
-                        <button className='uich_secondary_button uich_coming_soon'>{__('Install & Activate', 'uichemy')}</button>
-                    }
-                </div>
-
-            </>
+            ))
         )
     }
 
@@ -325,7 +305,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
                                 </div> :
                                 <button className='uich_secondary_button' onClick={(e) => elementorProInstall(e, setIsEnabled, 'elementorPro')}>{__('Activate', 'uichemy')}</button>) : (
                             <a className='uich_secondary_button' href='https://elementor.com/?utm_source=wpbackend&utm_medium=dashboard&utm_campaign=uichemy' target="_blank" rel="noopener noreferrer">
-                                <span>{__('Installation Required', 'uichemy')}</span>
+                                <span>{__('Install', 'uichemy')}</span>
                                 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#4B22CC" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10 2h4m0 0v4m0-4L6.667 9.333M12 8.667v4A1.334 1.334 0 0 1 10.667 14H3.333A1.334 1.334 0 0 1 2 12.667V5.333A1.333 1.333 0 0 1 3.333 4h4" /></svg></span>
                             </a>)
                         }
@@ -380,7 +360,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
                                 <button className='uich_secondary_button' onClick={(e) => bricksActive(e, setIsEnabled)}>{__('Activate', 'uichemy')}</button>)
                             :
                             <a className='uich_secondary_button' href="https://bricksbuilder.io/pricing/?utm_source=wpbackend&utm_medium=dashboard&utm_campaign=uichemy" target="_blank" rel="noopener noreferrer">
-                                <span>{__('Installation Required', 'uichemy')}</span>
+                                <span>{__('Install', 'uichemy')}</span>
                                 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#4B22CC" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10 2h4m0 0v4m0-4L6.667 9.333M12 8.667v4A1.334 1.334 0 0 1 10.667 14H3.333A1.334 1.334 0 0 1 2 12.667V5.333A1.333 1.333 0 0 1 3.333 4h4" /></svg></span>
                             </a>
                         }

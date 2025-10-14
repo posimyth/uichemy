@@ -222,7 +222,7 @@ const Dashboard = () => {
                     </div>
                     <div className='uich_welcome_content'>
                         <h2>{__('Welcome,', 'uichemy')} {userName} !</h2>
-                        <p>{__('Convert your Figma Designs to 100% Editable Elementor Templates in Seconds.', 'uichemy')}</p>
+                        <p>{__('Convert your Figma designs into 100% editable templates for Elementor, Gutenberg, and Bricks in seconds.', 'uichemy')}</p>
                     </div>
                 </div>
             </div>
@@ -284,9 +284,9 @@ const Dashboard = () => {
                 link: 'https://uichemy.com/docs/',
             },
             {
-                label: 'Design Guidelines',
-                buttonText: 'Learn Design Guidelines',
-                link: 'https://uichemy.com/help/design-guidelines/',
+                label: 'Educational Design Guidelines',
+                buttonText: 'Learn How to Optimize',
+                link: 'https://www.figma.com/community/file/1329383275066935195',
             },
             {
                 label: 'Community',
@@ -386,7 +386,7 @@ const Dashboard = () => {
 
         return (
             <div className='uich_select_page_builder'>
-                <div className='uich_section uich_first_box_height uich_select_page_gap' style={ activeTab === 'Elementor' ? { height: '820px' } : { height: '640px' }}>
+                <div className='uich_section uich_first_box_height uich_select_page_gap' style={ activeTab === 'Elementor' ? { height: '820px' } : { height: '730px' }}>
                     <h3>{__('Select Page Builder', 'uichemy')}</h3>
                     <div className='uich_tabs'>
                         <div className={`uich_tab ${activeTab === 'Elementor' ? 'uich_active' : ''}`} onClick={() => handleTabClick('Elementor')}>{__('Elementor', 'uichemy')}
@@ -470,6 +470,10 @@ const Dashboard = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14"><path fill="#fff" d="M7 .002c3.857 0 7 3.143 7 7 0 3.864-3.143 7-7 7-3.864 0-7-3.136-7-7 0-3.857 3.136-7 7-7ZM5.397 12.994a5.51 5.51 0 0 0 1.603.23c.665 0 1.295-.11 1.897-.314L7.091 8.024c-.56 1.652-1.127 3.304-1.694 4.97ZM1.281 4.488C.938 5.265.777 6.091.777 7.001c0 2.471 1.408 4.655 3.494 5.663C3.27 9.941 2.275 7.211 1.28 4.488Zm11.207-.462c.217 1.666-.133 2.528-.3 2.976-.687 1.806-1.367 3.632-2.045 5.445 1.868-1.078 3.08-3.142 3.08-5.445 0-1.078-.245-2.073-.735-2.976ZM7 .78a6.21 6.21 0 0 0-5.229 2.815c.147.007.28.007.406.007.64 0 1.648-.077 1.659-.078.35-.014.392.736.042.778-.009 0-.438.042-.82.055l2.388 6.406L6.713 6.68 5.83 4.294l-.644-.057c-.35-.014-.308-.874.042-.853a26.1 26.1 0 0 0 1.631.084c.658 0 1.666-.084 1.666-.084.35-.02.392.818.042.853 0 0-.196.105-.574.12l2.121 5.859s.98-2.457.98-3.5c0-.77-.14-1.296-.385-1.723-.315-.518-.63-.952-.63-1.47 0-.832.68-1.182 1.155-1.105A6.222 6.222 0 0 0 7 .779Z" /></svg>
                                     </div>
                                     <span className='uich_plugin_icon_text'>{__('Enable Unfiltered File Uploads', 'uichemy')}</span>
+                                    {(active.eleFileLoad === "1" && active.elementor === true) ? '' :
+                                        <span className='uich_alert_full_stop'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#FF1E1E" d="M5.625.002A5.627 5.627 0 0 0 0 5.627a5.627 5.627 0 0 0 5.625 5.625 5.627 5.627 0 0 0 5.625-5.625A5.627 5.627 0 0 0 5.625.002Zm0 9a.752.752 0 0 1-.75-.75c0-.413.337-.75.75-.75.412 0 .75.337.75.75 0 .412-.338.75-.75.75Zm.859-5.816-.252 3.007a.609.609 0 0 1-1.215 0l-.25-3.007a.861.861 0 1 1 1.72-.072c0 .023 0 .05-.003.072Z" /></svg>
+                                        </span>}
                                 </div>
                                 {(active.eleFileLoad === "1" && active.elementor === true) ?
                                     <div className='uich_activated_label'>
@@ -487,6 +491,11 @@ const Dashboard = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14"><path fill="#fff" d="M7 .002c3.857 0 7 3.143 7 7 0 3.864-3.143 7-7 7-3.864 0-7-3.136-7-7 0-3.857 3.136-7 7-7ZM5.397 12.994a5.51 5.51 0 0 0 1.603.23c.665 0 1.295-.11 1.897-.314L7.091 8.024c-.56 1.652-1.127 3.304-1.694 4.97ZM1.281 4.488C.938 5.265.777 6.091.777 7.001c0 2.471 1.408 4.655 3.494 5.663C3.27 9.941 2.275 7.211 1.28 4.488Zm11.207-.462c.217 1.666-.133 2.528-.3 2.976-.687 1.806-1.367 3.632-2.045 5.445 1.868-1.078 3.08-3.142 3.08-5.445 0-1.078-.245-2.073-.735-2.976ZM7 .78a6.21 6.21 0 0 0-5.229 2.815c.147.007.28.007.406.007.64 0 1.648-.077 1.659-.078.35-.014.392.736.042.778-.009 0-.438.042-.82.055l2.388 6.406L6.713 6.68 5.83 4.294l-.644-.057c-.35-.014-.308-.874.042-.853a26.1 26.1 0 0 0 1.631.084c.658 0 1.666-.084 1.666-.084.35-.02.392.818.042.853 0 0-.196.105-.574.12l2.121 5.859s.98-2.457.98-3.5c0-.77-.14-1.296-.385-1.723-.315-.518-.63-.952-.63-1.47 0-.832.68-1.182 1.155-1.105A6.222 6.222 0 0 0 7 .779Z" /></svg>
                                     </div>
                                     <span className='uich_plugin_icon_text'>{__('Custom CSS Field', 'uichemy')}</span>
+                                    { active.elementorCustomCss !== "1" ? '' :
+                                        <span className='uich_alert_full_stop'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#FF1E1E" d="M5.625.002A5.627 5.627 0 0 0 0 5.627a5.627 5.627 0 0 0 5.625 5.625 5.627 5.627 0 0 0 5.625-5.625A5.627 5.627 0 0 0 5.625.002Zm0 9a.752.752 0 0 1-.75-.75c0-.413.337-.75.75-.75.412 0 .75.337.75.75 0 .412-.338.75-.75.75Zm.859-5.816-.252 3.007a.609.609 0 0 1-1.215 0l-.25-3.007a.861.861 0 1 1 1.72-.072c0 .023 0 .05-.003.072Z" /></svg>
+                                        </span>
+                                    }
                                 </div>
                                 
                                 <button className='uich_secondary_button' onClick={(e) => addcusOption(e, setIsEnabled , 'uich_elementor_custom_css')}>{active.elementorCustomCss === "1" ? __('Activate', 'uichemy') : __('Deactivate', 'uichemy')}</button>
@@ -532,7 +541,7 @@ const Dashboard = () => {
                                         </div> :
                                         <button className='uich_secondary_button' onClick={(e) => elementorProInstall(e, setIsEnabled, 'elementorPro')}>{__('Activate', 'uichemy')}</button>) : (
                                     <a className='uich_secondary_button' href='https://elementor.com/' target="_blank" rel="noopener noreferrer">
-                                        <span>{__('Installation Required', 'uichemy')}</span>
+                                        <span>{__('Install', 'uichemy')}</span>
                                         <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#4B22CC" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10 2h4m0 0v4m0-4L6.667 9.333M12 8.667v4A1.334 1.334 0 0 1 10.667 14H3.333A1.334 1.334 0 0 1 2 12.667V5.333A1.333 1.333 0 0 1 3.333 4h4" /></svg></span>
                                     </a>)
                                 }
@@ -559,26 +568,6 @@ const Dashboard = () => {
                                 </a>
                             </div>
 
-                            {/* Gutenberg is not available in the new version of WordPress */}
-                            {/* <div className={`uich_plugin_item ${active.gutenberg === true ? 'uich_activated' : ''}`}>
-                                <div className='uich_plugin_info'>
-                                    <div className='uich_setting_icon wp'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" fill="none" viewBox="0 0 13 12"><path fill="#fff" d="M3.394.396C1.476 1.252.741 3.086.884 6.613c.082 1.794.184 2.446.53 3.099.878 1.712 2.327 2.446 4.45 2.263 1.51-.102 2.59-.694 3.08-1.631.205-.388.368-1.325.429-2.324.082-1.61.102-1.672.633-1.794.755-.163 2.06-1.264 2.06-1.753 0-.571-.55-.49-1.346.204-.45.387-1.061.672-1.857.835-2.265.449-2.673.612-3.306 1.325-.694.795-.796 1.264-.306 1.468.204.082.51-.122.918-.611.572-.673 1.653-1.264 1.898-1.02.061.082.122.612.122 1.223 0 2.161-.877 3.12-2.816 3.12-1.183 0-2.163-.571-2.775-1.631-.367-.612-.428-1.06-.428-3.262 0-2.915.306-3.832 1.51-4.627 1.469-.979 3.754-.429 4.285 1.06.449 1.182.857 1.427 1.245.693.183-.327.143-.592-.204-1.305C8.189.233 5.414-.522 3.394.395Z" /></svg>
-                                    </div>
-                                    <span className='uich_plugin_icon_text'>{__('Gutenberg', 'uichemy')}</span>
-                                </div>
-
-                                {active.gutenberg === true ?
-                                    <div className='uich_activated_label'>
-                                        <span className='uich_check_green_icon'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
-                                        </span>
-                                        <span>{__('Enable', 'uichemy')}</span>
-                                    </div> :
-                                    <button className='uich_secondary_button'>{__('Disable', 'uichemy')}</button>
-                                }
-                            </div> */}
-
                             <div className={`uich_plugin_item ${active.nexterBlock === true ? 'uich_activated' : ''}`}>
                                 <div className='uich_plugin_info'>
                                     <div className='uich_setting_icon wp'>
@@ -594,8 +583,8 @@ const Dashboard = () => {
                                             </span>
                                             <span>{__('Activated', 'uichemy')}</span>
                                         </div> :
-                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'nexterBlock')}>{__('Activate', 'uichemy')}</button>) : (
-                                    <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled)}>{__('Install & Activate', 'uichemy')}</button>
+                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'the-plus-addons-for-block-editor')}>{__('Activate', 'uichemy')}</button>) : (
+                                    <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'the-plus-addons-for-block-editor')}>{__('Install & Activate', 'uichemy')}</button>
                                 )
                                 }
                             </div>
@@ -607,6 +596,11 @@ const Dashboard = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14"><path fill="#fff" d="M7 .002c3.857 0 7 3.143 7 7 0 3.864-3.143 7-7 7-3.864 0-7-3.136-7-7 0-3.857 3.136-7 7-7ZM5.397 12.994a5.51 5.51 0 0 0 1.603.23c.665 0 1.295-.11 1.897-.314L7.091 8.024c-.56 1.652-1.127 3.304-1.694 4.97ZM1.281 4.488C.938 5.265.777 6.091.777 7.001c0 2.471 1.408 4.655 3.494 5.663C3.27 9.941 2.275 7.211 1.28 4.488Zm11.207-.462c.217 1.666-.133 2.528-.3 2.976-.687 1.806-1.367 3.632-2.045 5.445 1.868-1.078 3.08-3.142 3.08-5.445 0-1.078-.245-2.073-.735-2.976ZM7 .78a6.21 6.21 0 0 0-5.229 2.815c.147.007.28.007.406.007.64 0 1.648-.077 1.659-.078.35-.014.392.736.042.778-.009 0-.438.042-.82.055l2.388 6.406L6.713 6.68 5.83 4.294l-.644-.057c-.35-.014-.308-.874.042-.853a26.1 26.1 0 0 0 1.631.084c.658 0 1.666-.084 1.666-.084.35-.02.392.818.042.853 0 0-.196.105-.574.12l2.121 5.859s.98-2.457.98-3.5c0-.77-.14-1.296-.385-1.723-.315-.518-.63-.952-.63-1.47 0-.832.68-1.182 1.155-1.105A6.222 6.222 0 0 0 7 .779Z" /></svg>
                                     </div>
                                     <span className='uich_plugin_icon_text'>{__('Custom CSS Field', 'uichemy')}</span>
+                                    { active.gutenbergCustomCss !== "1" ? '' :
+                                        <span className='uich_alert_full_stop'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#FF1E1E" d="M5.625.002A5.627 5.627 0 0 0 0 5.627a5.627 5.627 0 0 0 5.625 5.625 5.627 5.627 0 0 0 5.625-5.625A5.627 5.627 0 0 0 5.625.002Zm0 9a.752.752 0 0 1-.75-.75c0-.413.337-.75.75-.75.412 0 .75.337.75.75 0 .412-.338.75-.75.75Zm.859-5.816-.252 3.007a.609.609 0 0 1-1.215 0l-.25-3.007a.861.861 0 1 1 1.72-.072c0 .023 0 .05-.003.072Z" /></svg>
+                                        </span>
+                                    }
                                 </div>
                                 
                                 <button className='uich_secondary_button' onClick={(e) => addcusOption(e, setIsEnabled, 'uictmcss_enabled')}>{active.gutenbergCustomCss === "1" ? __('Activate', 'uichemy') : __('Deactivate', 'uichemy')}</button>
@@ -616,49 +610,75 @@ const Dashboard = () => {
                             <h3>{__('Optional Plugins', 'uichemy')}</h3>
                             <div className={`uich_plugin_item ${active.spectra === true ? 'uich_activated' : ''}`}>
                                 <div className='uich_plugin_info'>
-                                    <div className='uich_setting_icon uich_coming_soon'>
+                                    <div className='uich_setting_icon'>
                                         <img src={plugin_url + 'assets/images/spectra.png'} alt="nexter" />
                                     </div>
-                                    <span className='uich_plugin_icon_text uich_coming_soon'>{__('Spectra', 'uichemy')}</span>
+                                    <span className='uich_plugin_icon_text'>{__('Spectra', 'uichemy')}</span>
                                     <span className='uich_alert_red_icon'>
-                                        <p>{__('Coming Soon', 'uichemy')}</p>
+                                        <p>{__('Beta', 'uichemy')}</p>
                                     </span>
                                 </div>
-
-                                {active.Spectra === true ?
-                                    <div className='uich_activated_label'>
-                                        <span className='uich_check_green_icon'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
-                                        </span>
-                                        <span>{__('Activated', 'uichemy')}</span>
-                                    </div> :
-                                    <button className='uich_secondary_button uich_coming_soon'>{__('Install & Activate', 'uichemy')}</button>
+                                {active.findPlugin.includes('Spectra') ? 
+                                    active.spectra === true ?
+                                        <div className='uich_activated_label'>
+                                            <span className='uich_check_green_icon'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
+                                            </span>
+                                            <span>{__('Activated', 'uichemy')}</span>
+                                        </div> : ( <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'ultimate-addons-for-gutenberg')}>{__('Activate', 'uichemy')}</button> ) : (
+                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'ultimate-addons-for-gutenberg')}>{__('Install & Activate', 'uichemy')}</button> )
+                                    
                                 }
                             </div>
-
+                            
+                            
                             <div className={`uich_plugin_item ${active.kadence === true ? 'uich_activated' : ''}`}>
                                 <div className='uich_plugin_info'>
-                                    <div className='uich_setting_icon uich_coming_soon'>
+                                    <div className='uich_setting_icon'>
                                         <img src={plugin_url + 'assets/images/kadence.png'} alt="nexter" />
                                     </div>
-                                    <span className='uich_plugin_icon_text uich_coming_soon'>{__('Kadence Blocks', 'uichemy')}</span>
+                                    <span className='uich_plugin_icon_text'>{__('Kadence', 'uichemy')}</span>
                                     <span className='uich_alert_red_icon'>
-                                        <p>{__('Coming Soon', 'uichemy')}</p>
+                                        <p>{__('Beta', 'uichemy')}</p>
                                     </span>
                                 </div>
-
-                                {active.kadence === true ?
+                                {active.findPlugin.includes('Kadence Blocks – Gutenberg Blocks for Page Builder Features') ? 
+                                    active.kadence === true ?
+                                        <div className='uich_activated_label'>
+                                            <span className='uich_check_green_icon'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
+                                            </span>
+                                            <span>{__('Activated', 'uichemy')}</span>
+                                        </div> :
+                                        ( <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'kadence-blocks')}>{__('Activate', 'uichemy')}</button> ) : (
+                                            <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'kadence-blocks')}>{__('Install & Activate', 'uichemy')}</button> )
+                                        
+                                    }
+                            </div>
+                            
+                            <div className={`uich_plugin_item ${active.generateblocks === true ? 'uich_activated' : ''}`}>
+                                <div className='uich_plugin_info'>
+                                    <div className='uich_setting_icon'>
+                                        <img src={plugin_url + 'assets/images/generateblocks.png'} alt="nexter" />
+                                    </div>
+                                    <span className='uich_plugin_icon_text'>{__('GenerateBlocks', 'uichemy')}</span>
+                                    <span className='uich_alert_red_icon'>
+                                        <p>{__('Beta', 'uichemy')}</p>
+                                    </span>
+                                </div>
+                                {active.findPlugin.includes('GenerateBlocks') ? 
+                                active.generateblocks === true ?
                                     <div className='uich_activated_label'>
                                         <span className='uich_check_green_icon'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path stroke="#00A31B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1.545 7.638s1.228 0 2.864 2.864c0 0 4.548-7.5 8.591-9" /></svg>
                                         </span>
                                         <span>{__('Activated', 'uichemy')}</span>
                                     </div> :
-                                    <button className='uich_secondary_button uich_coming_soon'>{__('Install & Activate', 'uichemy')}</button>
+                                    ( <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'ultimate-addons-for-gutenberg')}>{__('Activate', 'uichemy')}</button> ) : (
+                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'ultimate-addons-for-gutenberg')}>{__('Install & Activate', 'uichemy')}</button> )
                                 }
                             </div>
-
-
+                                
                         </>
                     )}
 
@@ -706,7 +726,7 @@ const Dashboard = () => {
                                         <button className='uich_secondary_button' onClick={(e) => bricksActive(e, setIsEnabled)}>{__('Activate', 'uichemy')}</button>)
                                     :
                                     <a className='uich_secondary_button' href="https://bricksbuilder.io/pricing/" target="_blank" rel="noopener noreferrer">
-                                        <span>{__('Installation Required', 'uichemy')}</span>
+                                        <span>{__('Install', 'uichemy')}</span>
                                         <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#4B22CC" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10 2h4m0 0v4m0-4L6.667 9.333M12 8.667v4A1.334 1.334 0 0 1 10.667 14H3.333A1.334 1.334 0 0 1 2 12.667V5.333A1.333 1.333 0 0 1 3.333 4h4" /></svg></span>
                                     </a>
                                 }
@@ -718,6 +738,10 @@ const Dashboard = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14"><path fill="#fff" d="M7 .002c3.857 0 7 3.143 7 7 0 3.864-3.143 7-7 7-3.864 0-7-3.136-7-7 0-3.857 3.136-7 7-7ZM5.397 12.994a5.51 5.51 0 0 0 1.603.23c.665 0 1.295-.11 1.897-.314L7.091 8.024c-.56 1.652-1.127 3.304-1.694 4.97ZM1.281 4.488C.938 5.265.777 6.091.777 7.001c0 2.471 1.408 4.655 3.494 5.663C3.27 9.941 2.275 7.211 1.28 4.488Zm11.207-.462c.217 1.666-.133 2.528-.3 2.976-.687 1.806-1.367 3.632-2.045 5.445 1.868-1.078 3.08-3.142 3.08-5.445 0-1.078-.245-2.073-.735-2.976ZM7 .78a6.21 6.21 0 0 0-5.229 2.815c.147.007.28.007.406.007.64 0 1.648-.077 1.659-.078.35-.014.392.736.042.778-.009 0-.438.042-.82.055l2.388 6.406L6.713 6.68 5.83 4.294l-.644-.057c-.35-.014-.308-.874.042-.853a26.1 26.1 0 0 0 1.631.084c.658 0 1.666-.084 1.666-.084.35-.02.392.818.042.853 0 0-.196.105-.574.12l2.121 5.859s.98-2.457.98-3.5c0-.77-.14-1.296-.385-1.723-.315-.518-.63-.952-.63-1.47 0-.832.68-1.182 1.155-1.105A6.222 6.222 0 0 0 7 .779Z" /></svg>
                                     </div>
                                     <span className='uich_plugin_icon_text'>{__('SVG Uploads', 'uichemy')}</span>
+                                    {(active.bricksSvgLoad === true && active.bricksFileLoad === "Bricks") ? '' :
+                                        <span className='uich_alert_full_stop'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#FF1E1E" d="M5.625.002A5.627 5.627 0 0 0 0 5.627a5.627 5.627 0 0 0 5.625 5.625 5.627 5.627 0 0 0 5.625-5.625A5.627 5.627 0 0 0 5.625.002Zm0 9a.752.752 0 0 1-.75-.75c0-.413.337-.75.75-.75.412 0 .75.337.75.75 0 .412-.338.75-.75.75Zm.859-5.816-.252 3.007a.609.609 0 0 1-1.215 0l-.25-3.007a.861.861 0 1 1 1.72-.072c0 .023 0 .05-.003.072Z" /></svg>
+                                        </span>}
                                 </div>
                                 {(active.bricksSvgLoad === true && active.bricksFileLoad === "Bricks") ?
                                     <div className='uich_activated_label'>
@@ -899,7 +923,7 @@ const Dashboard = () => {
         };
 
         return (
-            <div className='uich_section uich_first_box_height uich_field_group_gap' style={ activeTab === 'Elementor' ? { height: '820px' } : { height: '640px' }}>
+            <div className='uich_section uich_first_box_height uich_field_group_gap' style={ activeTab === 'Elementor' ? { height: '820px' } : { height: '730px' }}>
                 <div className='uich_field_group uich_field_group_image_wrapper'>
                     <img className='uich_field_group_image' src={plugin_url + 'assets/images/security.png'} alt="Logo" />
                 </div>

@@ -215,7 +215,7 @@ $wp-color: #2271b1;
         border: 1px solid #5D38D1;
         border-radius: 5px;
         background-color: #5D38D1;
-
+        position: relative;
         a {
             color: var(--white);
             text-decoration: none;
@@ -237,8 +237,8 @@ $wp-color: #2271b1;
 
         .uich_whats_new_icon {
             position: absolute;
-            top: 45px;
-            right: 142px;
+            right: -5px;
+            top: -5px;
         }
     }
 
