@@ -1,0 +1,16 @@
+{
+    "name": "nexter-blocks-dashboard",
+    "description": "Convert Figma Design to 100% Editable WordPress websites in Elementor Website Builder and Gutenberg aka WordPress Block Editor.",
+    "autoload": {
+        "psr-4": {
+            "Uichemy\\Enterprise\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "devangvachheta137",
+            "email": "devang.posimyth@gmail.com"
+        }
+    ],
+    "require": {}
+}

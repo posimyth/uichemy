@@ -1594,6 +1594,24 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				}else{
 					return $this->uich_response( 'The Plus Blocks for Block Editor Not Activated', 'The Plus Blocks for Block Edito Not Activated', false, '' );
 				}
+			}else if( 'kadence_install' === $type ) {
+				if ( is_plugin_active( 'kadence-blocks/kadence-blocks.php' ) ) {
+					return $this->uich_response( 'Kadence Blocks Activated', 'Kadence Blocks Activated', true, '' );
+				}else{
+					return $this->uich_response( 'Kadence Blocks Not Activated', 'Kadence Blocks Not Activated', false, '' );
+				}
+			}else if( 'generateblocks_install' === $type ) {
+				if ( is_plugin_active( 'generateblocks/plugin.php' ) ) {
+					return $this->uich_response( 'GenerateBlocks Activated', 'GenerateBlocks Activated', true, '' );
+				}else{
+					return $this->uich_response( 'GenerateBlocks Not Activated', 'GenerateBlocks Not Activated', false, '' );
+				}
+			}else if( 'spectra_install' === $type ) {
+				if ( is_plugin_active( 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php' ) ) {
+					return $this->uich_response( 'Spectra Activated', 'Spectra Activated', true, '' );
+				}else{
+					return $this->uich_response( 'Spectra Not Activated', 'Spectra Not Activated', false, '' );
+				}
 			}
 		}
 
@@ -1617,6 +1635,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				wp_die();
 			}
 
+            $key = isset( $_POST['key'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['key'] ) ) ) : false;
+           
 			switch ( $type ) {
 				case 'install_elementor':
 					$data = $this->uich_install_elementor();
@@ -1632,6 +1652,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				break;
 				case 'install_tpgb':
 					$data = $this->uich_install_tpgb();
+                break;
+                case 'add_custom_option':
+                    $data = $this->uich_add_option($key);
 				break;
 			}
 
@@ -1824,12 +1847,14 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 
+            $pluginName = isset( $_POST['pluginName'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['pluginName'] ) ) ) : false;
+
 			$response = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/',
 				[
 					'body' => [
 						'action' => 'plugin_information',
 						'request' => serialize((object) [
-							'slug' => 'the-plus-addons-for-block-editor',
+							'slug' => $pluginName,
 							'fields' => [
 								'version' => false,
 							],
@@ -1863,9 +1888,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 				return $this->uich_response( 'Successfully Activated!', 'The Plus Blocks for Block Editor Installed and Activated Successfully.', $success, '' );
 			}else{
-				activate_plugin( $this->tpgb_plugin_path );
+				activate_plugin( $pluginName.'/'.$pluginName.'.php' );
 
-				if ( is_plugin_active( $this->tpgb_plugin_path ) ) {
+				if ( is_plugin_active( $pluginName.'/'.$pluginName.'.php' ) ) {
 					return $this->uich_response( 'Successfully Activated!', 'The Plus Blocks for Block Editor Installed and Activated Successfully.', true, '' );
 				} else {
 					return $this->uich_response( 'Something Went Wrong', 'Not Activate Plugin', false, '' );
@@ -1873,7 +1898,23 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			}
 		}
-
+        
+        public function uich_add_option( $key ) {
+            $current_value = get_option( $key );
+        
+            if ( ! empty( $current_value ) ) {
+                update_option( $key, false );
+                return $this->uich_response(  'Successfully Disabled!', 'Custom CSS Field Deactivated Successfully.', true, '');
+            }  else {
+                if ( get_option( $key ) === false ) {
+                    add_option( $key, true );
+                } else {
+                    update_option( $key, true );
+                }
+        
+                return $this->uich_response( 'Successfully Enabled!', 'Custom CSS Field Activated Successfully.', true, '' );
+            }
+        }
 	}
 
 	new Uich_Api();
