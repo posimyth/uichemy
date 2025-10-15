@@ -34,6 +34,11 @@
         `;
 
         modalContent.innerHTML = `
+            <button class="uich-modal-close" type="button" style="position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; padding: 5px; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; z-index: 10;" title="Close">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             <div class="uich-clip-pop-content" style="text-align: center;">
                 <svg width="84" height="85" viewBox="0 0 84 85" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 20px;">
                     <g clipPath="url(#clip0_4829_3031)">
@@ -72,6 +77,25 @@
         `;
 
         modalOverlay.appendChild(modalContent);
+        
+        // Add close button functionality with proper event handling
+        setTimeout(function() {
+            const closeBtn = modalContent.querySelector('.uich-modal-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeModal();
+                });
+                closeBtn.addEventListener('mouseenter', function() {
+                    this.style.opacity = '0.7';
+                });
+                closeBtn.addEventListener('mouseleave', function() {
+                    this.style.opacity = '1';
+                });
+            }
+        }, 0);
+        
         return modalOverlay;
     }
 
@@ -178,7 +202,7 @@
                     button.title = "Paste";
                     button.innerHTML = copyButton;
                     button.style.cssText = `
-                        background: #1e1e1e;
+                        background: #4B22CC;
                         border: none;
                         border-radius: 4px;
                         padding: 8px 12px;
@@ -190,11 +214,11 @@
                     `;
                     
                     button.addEventListener('mouseenter', function() {
-                        button.style.background = '#333';
+                        button.style.background = '#2e0d98';
                     });
                     
                     button.addEventListener('mouseleave', function() {
-                        button.style.background = '#1e1e1e';
+                        button.style.background = '#4B22CC';
                     });
                     
                     button.addEventListener("click", openModal);
