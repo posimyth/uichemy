@@ -743,7 +743,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 					$uitem_parts = get_block_templates( array( 'slugs__in' => $uichslugs ), 'wp_template_part' );
 	
 					foreach ( $uitem_parts as $template ) {
-						if ( ! empty( $template->content ) && ! empty( $template->slug ) && in_array( $template->slug, $slugs ) ) {
+						if ( ! empty( $template->content ) && ! empty( $template->slug ) && in_array( $template->slug, $uichslugs ) ) {
 							$cnt .= $template->content;
 						}
 					}
