@@ -27,7 +27,7 @@
             background: white;
             border-radius: 8px;
             padding: 30px;
-            max-width: 500px;
+            max-width: 400px;
             width: 90%;
             position: relative;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -50,7 +50,7 @@
                     </defs>
                 </svg>
                 <div class="uich-clip-os-wrap" style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; font-size: 14px;">
-                    <div class="uich-os-tag" style="display: flex; align-items: center; gap: 8px;">
+                    <div class="uich-os-tag" style="display: flex; align-items: center; gap: 22px; width: max-content;">
                         <label style="font-weight: 600;">For Mac:</label>
                         <span class="os-icon" style="display: flex; align-items: center; gap: 5px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" fill="#1C1C1C" rx="5"/><path fill="#fff" d="M20.8 17.6h-1.6v-3.2h1.6c1.765 0 3.2-1.436 3.2-3.2C24 9.436 22.565 8 20.8 8a3.203 3.203 0 0 0-3.2 3.2v1.6h-3.2v-1.6c0-1.764-1.435-3.2-3.2-3.2A3.203 3.203 0 0 0 8 11.2c0 1.764 1.435 3.2 3.2 3.2h1.6v3.2h-1.6A3.203 3.203 0 0 0 8 20.8c0 1.764 1.435 3.2 3.2 3.2 1.765 0 3.2-1.436 3.2-3.2v-1.6h3.2v1.6c0 1.764 1.435 3.2 3.2 3.2 1.765 0 3.2-1.436 3.2-3.2 0-1.765-1.435-3.2-3.2-3.2Zm-1.6-6.4c0-.882.718-1.6 1.6-1.6.882 0 1.6.718 1.6 1.6 0 .882-.718 1.6-1.6 1.6h-1.6v-1.6Zm-6.4 9.6c0 .882-.718 1.6-1.6 1.6-.882 0-1.6-.718-1.6-1.6 0-.882.718-1.6 1.6-1.6h1.6v1.6Zm0-8h-1.6c-.882 0-1.6-.718-1.6-1.6 0-.882.718-1.6 1.6-1.6.882 0 1.6.718 1.6 1.6v1.6Zm4.8 4.8h-3.2v-3.2h3.2v3.2Zm3.2 4.8c-.882 0-1.6-.718-1.6-1.6v-1.6h1.6c.882 0 1.6.718 1.6 1.6 0 .882-.718 1.6-1.6 1.6Z"/></svg>
@@ -58,7 +58,7 @@
                         </span>
                     </div>
                     <div class="uich-clip-separator" style="color: #ccc;">|</div>
-                    <div class="uich-os-tag" style="display: flex; align-items: center; gap: 8px;">
+                    <div class="uich-os-tag" style="display: flex; align-items: center; gap: 8px; width: max-content;">
                         <label style="font-weight: 600;">For Windows:</label>
                         <span class="os-icon" style="display: flex; align-items: center; gap: 5px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" fill="#1C1C1C" rx="5"/><path fill="#fff" d="M8 10.5v5h7V9.625L8 10.5ZM16 9.5v6h8v-7l-8 1ZM16 16.5v6l8 1v-7h-8ZM8 16.5v5l7 .875V16.5H8Z"/></svg>
