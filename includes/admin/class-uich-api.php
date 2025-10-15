@@ -557,6 +557,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			// To Check if required plugins have been installed
 			$response['is_tpag_installed'] = defined('TPGB_VERSION');
 			$response['is_nexter_installed'] = $is_nexter_installed;
+			$response['is_spectra_installed'] = defined('UAGB_PLUGIN_NAME');
+			$response['is_kadence_installed'] = defined('KADENCE_BLOCKS_VERSION');
+			$response['is_generate_block_installed'] = defined('GENERATEBLOCKS_VERSION');
 
 			return $response;
 		}
@@ -927,6 +930,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			// Match Security Token.
 			$this->uich_check_token( $request );
 
+			// Sub builder type
+			$builder = sanitize_text_field( $request->get_param( 'subBuilderType' ) ?? '' );
+
 			// Get Parameters
 			$new_import = (isset( $_GET['newImport'] ) && !empty( $_GET['newImport'] )) ? sanitize_text_field(wp_unslash($_GET['newImport'])) : "true";
 			$post_type = (isset( $_GET['postType'] ) && !empty( $_GET['postType'] )) ? sanitize_text_field(wp_unslash($_GET['postType'])) : 'page';
@@ -984,6 +990,10 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				ini_set( 'display_errors', 0 );
 
 				$data = $this->import_gutenberg_media($data);
+
+				// Replace \n with \\n for custom css
+				$data = preg_replace('/\\\\n/', "\\\\\\\\n", $data);
+
 				$post_attributes = array(
 					'post_title'  => $post_title,
 					'post_content' => $data,
@@ -1017,7 +1027,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 						'result'  => array(
 							'title'     => get_the_title( $inserted_id ),
 							'edit_link' => get_edit_post_link( $inserted_id, 'internal' ),
-							'view'      => $post_type === 'wp_block'
+							'view'      =>  $post_type === 'wp_block' || $builder === 'GenBlocks'
 								? get_edit_post_link( $inserted_id, 'internal' )
 								: get_permalink( $inserted_id ),
 						),
@@ -1063,6 +1073,9 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 				// Content to Update
 				$data = $this->import_gutenberg_media($data);
+
+				// Replace \n with \\n for custom css
+				$data = preg_replace('/\\\\n/', "\\\\\\\\n", $data);
 
 				if(!empty($importByReplacing) && $importByReplacing=='false'){
 					$merged_content = $exits_content . $data;
@@ -1788,6 +1801,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			if ( ! class_exists( 'Uich_Import_Images' ) ) {
 				require_once UICH_PATH . 'includes/admin/class-uich-import-images.php';
 			}
+
 			if(defined('TPGB_VERSION') && defined('TPGB_PATH')){
 
 				require_once TPGB_PATH . 'classes/global-options/tp-import-media.php';
@@ -1801,6 +1815,15 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 					$content .= serialize_block($block);
 				}
 
+			} else {
+				$content = parse_blocks( $content );
+				
+				$new_content = Uich_Import_Images::gutenberg_import_media_copy_content( $content );
+				
+				$content = '';
+				foreach ($new_content as $block) {
+					$content .= serialize_block($block);
+				}
 			}
 
 			return $content;

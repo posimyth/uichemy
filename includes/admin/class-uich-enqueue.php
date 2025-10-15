@@ -80,7 +80,18 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			if ( 'widgets.php' !== $pagenow && 'customize.php' !== $pagenow ) {
 				wp_enqueue_style( 'uichemy-cp-style', UICH_URL . 'assets/css/uich-cp.css', array(), UICH_VERSION, 'all' );
 				$scripts_dep = array_merge($scripts_dep, array('wp-editor', 'wp-edit-post'));
-				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/build/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+
+                // Editor's Image Uploads script
+				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+                wp_localize_script(
+					'uich-editor-js',
+					'uichemy_ajax_object',
+					array(
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
+						'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
+					)
+				);
+
 
                 // Gutenberg Custom CSS Field
                 $uicssOpt = get_option( 'uictmcss_enabled' );

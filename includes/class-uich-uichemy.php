@@ -118,6 +118,7 @@ if ( ! class_exists( 'Uich_Uichemy' ) ) {
 			require_once UICH_PATH . 'includes/admin/class-uich-enqueue.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-bricks-imgs.php';
 			require_once UICH_PATH . 'includes/admin/class-uich-elementor.php';
+			require_once UICH_PATH . 'includes/admin/class-uich-copy-images.php';
 		}
 	}
 
