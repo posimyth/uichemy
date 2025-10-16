@@ -89,8 +89,6 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
                 }
             }
 
-            // error_log(print_r("Updated autosaves: " . count($autosaves), true));
-
             // Clear Cache & reset CSS
             Uich_Globals::elementor_refresh_css_and_clear_cache( $kit->get_id() );
         }

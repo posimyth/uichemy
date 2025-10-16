@@ -2,21 +2,21 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: UiChemy - Figma to WordPress (Elementor, Gutenberg, Bricks) 3.1.1\n"
+"Project-Id-Version: UiChemy — Figma Converter for Elementor, Gutenberg and Bricks 4.1.3-Beta-3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/uichemy\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-17T09:12:43+00:00\n"
+"POT-Creation-Date: 2025-10-14T07:35:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: uichemy\n"
 
 #. Plugin Name of the plugin
 #: uichemy.php
-msgid "UiChemy - Figma to WordPress (Elementor, Gutenberg, Bricks)"
+msgid "UiChemy — Figma Converter for Elementor, Gutenberg and Bricks"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -81,8 +81,16 @@ msgstr ""
 msgid "All Good."
 msgstr ""
 
-#: includes/admin/class-uich-api.php:1378
+#: includes/admin/class-uich-api.php:1382
 msgid "Invalid Security Token"
+msgstr ""
+
+#: includes/admin/class-uich-bricks-imgs.php:11
+#: includes/admin/class-uich-enqueue.php:289
+#: includes/admin/class-uich-enqueue.php:376
+#: includes/admin/class-uich-enqueue.php:551
+#: includes/admin/class-uich-enqueue.php:677
+msgid "Insufficient permissions."
 msgstr ""
 
 #: includes/admin/class-uich-elementor.php:97
@@ -93,96 +101,20 @@ msgstr ""
 msgid "CSS Code"
 msgstr ""
 
-#: includes/admin/class-uich-enqueue.php:250
-msgid "Insufficient permissions."
-msgstr ""
-
-#: includes/admin/class-uich-enqueue.php:260
+#: includes/admin/class-uich-enqueue.php:302
 msgid "Bricks theme has been activated."
 msgstr ""
 
-#: includes/admin/class-uich-enqueue.php:262
+#: includes/admin/class-uich-enqueue.php:304
 msgid "Bricks theme is not installed."
 msgstr ""
 
-#: includes/admin/class-uich-enqueue.php:302
+#: includes/admin/class-uich-enqueue.php:344
 msgid "Failed to retrieve plugin information."
 msgstr ""
 
-#: includes/admin/class-uich-enqueue.php:400
+#: includes/admin/class-uich-enqueue.php:446
 msgid "UiChemy"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:107
-msgid "Deactivation Reason"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:116
-msgid "Just Debugging."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:120
-msgid "Plugin Issue."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:124
-msgid "Slow Performance."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:128
-msgid "Switched to Alternative."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:132
-msgid "No Longer Needed."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:136
-msgid "Compatibility Issue."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:140
-msgid "Missing Feature."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:144
-msgid "Other Reasons."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:160
-msgid "Please share the reason"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:162
-msgid "If you require any help, please"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:163
-msgid "Create A Ticket."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:163
-msgid "We reply within 24 working hours."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:164
-msgid " we reply within 24 working hours.Looking for instant solutions? - "
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:164
-msgid "Read our Documentation"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:170
-msgid "I agree to be contacted via email for support with this plugin."
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:179
-msgid "Skip & Deactivate"
-msgstr ""
-
-#: includes/notices/class-uich-deactivate-feedback.php:182
-msgid "Submit & Deactivate"
 msgstr ""
 
 #: includes/notices/class-uich-plugin-page.php:86
@@ -203,6 +135,9 @@ msgstr ""
 
 #: includes/notices/class-uich-plugin-page.php:112
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:202
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:202
 msgid "What's New?"
 msgstr ""
 
@@ -210,270 +145,638 @@ msgstr ""
 msgid "Request Feature"
 msgstr ""
 
+#: assets/js/index.js:1
+msgid " We have detected errors in your CSS code. Click the button below to override the CSS."
+msgstr ""
+
+#: assets/js/index.js:1
+msgid "Override CSS"
+msgstr ""
+
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:390
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:42
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:81
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:390
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:42
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:81
 msgid "Select Page Builder"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:43
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:158
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:43
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:158
 msgid "Install Figma Plugin"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:48
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:48
 msgid "Required Theme"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:49
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:54
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:49
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:54
 msgid "Complete"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:53
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:53
 msgid "Required Plugins"
 msgstr ""
 
 #: dashboard/build/index.js:1
-msgid "Nexter Blocks"
-msgstr ""
-
-#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:232
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:275
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:348
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:232
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:275
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:348
 msgid "Required"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:624
+#: dashboard/src/dashboard/dashboard_main.jsx:648
+#: dashboard/src/dashboard/dashboard_main.jsx:672
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:234
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:624
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:648
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:672
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:234
+msgid "Beta"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:436
+#: dashboard/src/dashboard/dashboard_main.jsx:461
+#: dashboard/src/dashboard/dashboard_main.jsx:479
+#: dashboard/src/dashboard/dashboard_main.jsx:510
+#: dashboard/src/dashboard/dashboard_main.jsx:531
+#: dashboard/src/dashboard/dashboard_main.jsx:595
+#: dashboard/src/dashboard/dashboard_main.jsx:633
+#: dashboard/src/dashboard/dashboard_main.jsx:657
+#: dashboard/src/dashboard/dashboard_main.jsx:681
+#: dashboard/src/dashboard/dashboard_main.jsx:730
+#: dashboard/src/dashboard/dashboard_main.jsx:753
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:246
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:283
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:304
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:329
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:358
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:436
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:461
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:479
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:510
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:531
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:595
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:633
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:657
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:681
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:730
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:753
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:246
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:283
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:304
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:329
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:358
 msgid "Activated"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:438
+#: dashboard/src/dashboard/dashboard_main.jsx:463
+#: dashboard/src/dashboard/dashboard_main.jsx:481
+#: dashboard/src/dashboard/dashboard_main.jsx:492
+#: dashboard/src/dashboard/dashboard_main.jsx:512
+#: dashboard/src/dashboard/dashboard_main.jsx:533
+#: dashboard/src/dashboard/dashboard_main.jsx:597
+#: dashboard/src/dashboard/dashboard_main.jsx:612
+#: dashboard/src/dashboard/dashboard_main.jsx:634
+#: dashboard/src/dashboard/dashboard_main.jsx:659
+#: dashboard/src/dashboard/dashboard_main.jsx:683
+#: dashboard/src/dashboard/dashboard_main.jsx:732
+#: dashboard/src/dashboard/dashboard_main.jsx:755
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:250
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:285
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:306
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:331
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:360
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:438
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:463
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:481
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:492
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:512
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:533
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:597
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:612
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:634
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:659
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:683
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:732
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:755
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:250
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:285
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:306
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:331
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:360
 msgid "Activate"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:439
+#: dashboard/src/dashboard/dashboard_main.jsx:513
+#: dashboard/src/dashboard/dashboard_main.jsx:598
+#: dashboard/src/dashboard/dashboard_main.jsx:635
+#: dashboard/src/dashboard/dashboard_main.jsx:660
+#: dashboard/src/dashboard/dashboard_main.jsx:684
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:255
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:286
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:332
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:439
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:513
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:598
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:635
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:660
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:684
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:255
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:286
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:332
 msgid "Install & Activate"
 msgstr ""
 
 #: dashboard/build/index.js:1
-msgid "Spectra"
-msgstr ""
-
-#: dashboard/build/index.js:1
-msgid "Coming Soon"
-msgstr ""
-
-#: dashboard/build/index.js:1
-msgid "Kadence Blocks"
-msgstr ""
-
-#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:392
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:89
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:274
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:392
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:89
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:274
 msgid "Elementor"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:394
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:98
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:394
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:98
 msgid "Gutenberg"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:107
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:347
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:107
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:347
 msgid "Bricks Builder"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:112
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:112
 msgid "Continue"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:144
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:144
 msgid "Install UiChemy Figma Plugin"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:149
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:172
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:149
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:172
 msgid "Get UiChemy Key"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:156
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:156
 msgid "Install UiChemy Figma to"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:156
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:156
 msgid "Convertor"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:165
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:165
 msgid "Install & Run"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:165
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:165
 msgid "The Figma Plugin"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:170
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:170
 msgid "Connect your UiChemy"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:170
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:170
 msgid "Key & Click Connect"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:179
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:447
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:179
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:447
 msgid "Back"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:180
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:180
 msgid "Confirm & Proceed"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:523
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:295
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:523
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:295
 msgid "Elementor Pro"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:296
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:320
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:296
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:320
 msgid "Optional"
 msgstr ""
 
 #: dashboard/build/index.js:1
-msgid "Installation Required"
+#: dashboard/src/dashboard/dashboard_main.jsx:535
+#: dashboard/src/dashboard/dashboard_main.jsx:735
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:308
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:363
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:535
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:735
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:308
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:363
+msgid "Install"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:319
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:319
 msgid "The Plus Addons for Elementor"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:420
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:420
 msgid "Setup Up Done Successfully."
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:421
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:421
 msgid "Your Figma to WordPress Convertor is Ready to Import Design"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:425
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:425
 msgid "Contribute to improving our plugin by sharing non-sensitive details."
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:433
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:433
 msgid "I just installed UiChemy - Figma to WordPress Convertor Plugin. This connects my WordPress sites with Figma and easily import converted designs from Figma. Excited to use it."
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:439
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:439
 msgid "Post on"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/onboarding/onboarding.jsx:450
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/onboarding/onboarding.jsx:450
 msgid "Start Importing Design"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:124
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:124
 msgid "Get Started with UiChemy - Figma to"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:124
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:124
 msgid "WordPress Convertor"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:141
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:141
 msgid "Skip"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:142
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:142
 msgid "Get Started"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:215
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:215
 msgid "Version "
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:224
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:224
 msgid "Welcome,"
 msgstr ""
 
 #: dashboard/build/index.js:1
-msgid "Convert your Figma Designs to 100% Editable Elementor Templates in Seconds."
+#: dashboard/src/dashboard/dashboard_main.jsx:225
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:225
+msgid "Convert your Figma designs into 100% editable templates for Elementor, Gutenberg, and Bricks in seconds."
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:933
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:933
 msgid "Site URL"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:956
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:956
 msgid "Security Token"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:985
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:985
 msgid "Regenerate Token"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:993
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:993
 msgid "Import as User"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:396
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:396
 msgid "Bricks"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:403
+#: dashboard/src/dashboard/dashboard_main.jsx:546
+#: dashboard/src/dashboard/dashboard_main.jsx:694
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:403
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:546
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:694
 msgid "Install Required Plugins"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:409
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:409
 msgid "Figma to Elementor | UiChemy"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:415
+#: dashboard/src/dashboard/dashboard_main.jsx:558
+#: dashboard/src/dashboard/dashboard_main.jsx:706
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:415
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:558
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:706
 msgid "Install in Figma"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:424
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:424
 msgid "Elementor Page Builder"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:444
+#: dashboard/src/dashboard/dashboard_main.jsx:603
+#: dashboard/src/dashboard/dashboard_main.jsx:710
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:444
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:603
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:710
 msgid "Recommended Settings"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:450
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:450
 msgid "Flexbox Container"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:472
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:472
 msgid "Enable Unfiltered File Uploads"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:489
+#: dashboard/src/dashboard/dashboard_main.jsx:609
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:489
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:609
+msgid "Custom CSS Field"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:492
+#: dashboard/src/dashboard/dashboard_main.jsx:612
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:492
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:612
+msgid "Deactivate"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:496
+#: dashboard/src/dashboard/dashboard_main.jsx:616
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:496
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:616
 msgid "Optional Plugins"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:502
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:502
 msgid "The Plus Addons for Elementor (Free)"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:552
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:552
 msgid "Figma to Gutenberg | UiChemy"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:587
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:587
+msgid "Nexter Blocks"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:622
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:622
+msgid "Spectra"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:646
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:646
+msgid "Kadence Blocks"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:670
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:670
+msgid "GenerateBlocks"
+msgstr ""
+
+#: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:700
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:700
 msgid "Figma to Bricks | UiChemy"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:716
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:716
 msgid "Bricks Page Builder"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:746
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:746
 msgid "SVG Uploads"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:797
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:797
 msgid "How Does It Work?"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:804
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:804
 msgid "Watch Video"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:353
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:353
 msgid "Frequently Asked Questions"
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:354
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:354
 msgid "For any further help, reach us at Helpdesk or connect via Live Chat on website."
 msgstr ""
 
 #: dashboard/build/index.js:1
+#: dashboard/src/dashboard/dashboard_main.jsx:264
+#: dashboard_dev/build/index.js:1
+#: dashboard_dev/src/dashboard/dashboard_main.jsx:264
 msgid "Our Products"
 msgstr ""

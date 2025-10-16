@@ -65,6 +65,13 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
             add_action( 'wp_ajax_uich_activate_elementor_pro_plugin', array( $this, 'uich_activate_elementor_pro_plugin' ) );
 
             add_action('wp_ajax_uich_update_notice_count', array($this, 'uich_update_notice_count'));
+
+            // Gutenberg Custom CSS Field
+            $uicssOpt = get_option( 'uictmcss_enabled' );
+			if ( empty( $uicssOpt ) || $uicssOpt == false  ) {
+				add_action('wp_loaded', array( $this,'uich_block_add_attribues'));
+				add_action('wp_head', array( $this,'uich_block_css_add_to_head'));
+			}
 		}
 
 		public function editor_assets() {
@@ -73,7 +80,37 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 			if ( 'widgets.php' !== $pagenow && 'customize.php' !== $pagenow ) {
 				wp_enqueue_style( 'uichemy-cp-style', UICH_URL . 'assets/css/uich-cp.css', array(), UICH_VERSION, 'all' );
 				$scripts_dep = array_merge($scripts_dep, array('wp-editor', 'wp-edit-post'));
-				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/build/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+
+                // Editor's Image Uploads script
+				wp_enqueue_script('uich-editor-js', UICH_URL . 'assets/js/uich-copy-button.js', $scripts_dep, '1.0.0', false);
+                wp_localize_script(
+					'uich-editor-js',
+					'uichemy_ajax_object',
+					array(
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
+						'nonce'    => wp_create_nonce( 'uichemy-ajax-nonce' ),
+					)
+				);
+
+
+                // Gutenberg Custom CSS Field
+                $uicssOpt = get_option( 'uictmcss_enabled' );
+				if ( empty( $uicssOpt ) || $uicssOpt == false  ) {
+					wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+
+					wp_add_inline_script(
+						'wp-codemirror',
+						'window.CodeMirror = wp.CodeMirror;'
+					);
+
+					wp_enqueue_script(
+						'uich-nxt-js',
+						UICH_URL . 'assets/js/index.js',
+						array_merge($scripts_dep, array('lodash','code-editor', 'csslint')),
+						UICH_VERSION,
+						true
+					);
+				}
 			}
 		}
 
@@ -130,6 +167,15 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
             $bricks_uploads_svg     = apply_filters( 'uich_recommended_settings', 'bricks_svg_uploads' );
             $bricks_uploads_val_svg = ! empty( $bricks_uploads_svg['data'] ) ? $bricks_uploads_svg['data'] : '';
 
+            $kadence_install = apply_filters( 'uich_recommended_settings', 'kadence_install' );
+            $kad_success = ! empty( $kadence_install['success'] ) ? (bool) $kadence_install['success'] : false;
+
+            $generateblocks_install = apply_filters( 'uich_recommended_settings', 'generateblocks_install' );
+            $generateblocks_success = ! empty( $generateblocks_install['success'] ) ? (bool) $generateblocks_install['success'] : false;
+
+            $spectra_install = apply_filters( 'uich_recommended_settings', 'spectra_install' );
+            $spectra_success = ! empty( $spectra_install['success'] ) ? (bool) $spectra_install['success'] : false;
+
             $bricks_permissions =[];
             if(!empty($bricks_uploads_val_svg)){
                  foreach ( $bricks_uploads_val_svg as $role => $details ) {
@@ -149,7 +195,6 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 $find_plugin[] =$plu_name['Name'];
                 
             }
-           
 
             $current_theme = wp_get_theme();
             $active_theme_slug = get_stylesheet(); 
@@ -200,11 +245,16 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                         'userEmail' => get_option('admin_email'),
                         'siteUrl' => get_option('siteurl'),
                     ],
-                    'elementor' =>$elementor_install_success,
-                    'nexterBlock'=>$tpgb_install_success,
+                    'elementor' => $elementor_install_success,
+                    'nexterBlock'=> $tpgb_install_success,
+                    'kadence'=> $kad_success,
+                    'generateblocks'=>$generateblocks_success,
+                    'spectra'=>$spectra_success,
                     // 'gutenberg' => $gutenberg,
                     'plusAddons'=>$plusAddons,
                     'elementorPro'=>$elementorPro,
+                    'elementorCustomCss' => get_option('uich_elementor_custom_css'),
+                    'gutenbergCustomCss' => get_option('uictmcss_enabled'),
                     'flexboxCon'=>$flexbox_setting_val,
                     'eleFileLoad'=>$file_uploads_val,
                     'bricksFileLoad'=>$current_theme_name,
@@ -646,6 +696,122 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
             wp_send_json_success(['updated' => (bool)$updated]);
         }
+
+        /**
+         * Add attributes to Gutenberg blocks
+         *
+         * @since 4.1.3
+         */
+        public function uich_block_add_attribues(){
+			$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+			foreach ($registered_blocks as $block) {
+				$block->attributes['uichCss'] = array(
+					'type'    => 'string',
+					'default' => "",
+				);
+			}
+		}
+
+        /**
+         * Add CSS to Gutenberg blocks
+         *
+         * @since 4.1.3
+         */
+		public function uich_block_css_add_to_head() {
+			if ( function_exists( 'has_blocks' ) && has_blocks( get_the_ID() ) ) {
+				global $post;
+	
+				if ( ! is_object( $post ) ) {
+					return;
+				}
+	
+				$cnt = '';
+	
+				if ( get_queried_object() === null && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) {
+					global $_wp_current_template_content;
+	
+					$uichslugs = array();
+					$template_blocks = parse_blocks( $_wp_current_template_content );
+	
+					foreach ( $template_blocks as $template_block ) {
+						if ( 'core/template-part' === $template_block['blockName'] ) {
+							$uichslugs[] = $template_block['attrs']['slug'];
+						}
+					}
+	
+					$uitem_parts = get_block_templates( array( 'slugs__in' => $uichslugs ), 'wp_template_part' );
+	
+					foreach ( $uitem_parts as $template ) {
+						if ( ! empty( $template->content ) && ! empty( $template->slug ) && in_array( $template->slug, $uichslugs ) ) {
+							$cnt .= $template->content;
+						}
+					}
+	
+					$cnt .= $_wp_current_template_content;
+				} else {
+					$cnt = $post->post_content;
+				}
+	
+				$blocks = parse_blocks( $cnt );
+	
+				if ( ! is_array( $blocks ) || empty( $blocks ) ) {
+					return;
+				}
+	
+				$css = $this->uich_inner_blocks_css( $blocks, $post->ID );
+	
+				if ( empty( $css ) ) {
+					return;
+				}
+	
+				$style  = "\n" . '<style type="text/css" media="all">' . "\n";
+				$style .= $css;
+				$style .= "\n" . '</style>' . "\n";
+	
+				echo $style;
+			}
+		}
+
+        /**
+         * Add CSS to Gutenberg blocks
+         *
+         * @since 4.1.3
+         */
+		public function uich_inner_blocks_css( $inner_blocks, $id ) {
+			$style = '';
+	
+			foreach ( $inner_blocks as $block ) {
+	
+				if ( isset( $block['attrs'] ) ) {
+					if ( isset( $block['attrs']['uichCss'] ) ) {
+						$style .= $block['attrs']['uichCss'];
+					}
+				}
+	
+				if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
+					$reusable_block = get_post( $block['attrs']['ref'] );
+	
+					if ( ! $reusable_block || 'wp_block' !== $reusable_block->post_type ) {
+						return '';
+					}
+	
+					if ( 'publish' !== $reusable_block->post_status || ! empty( $reusable_block->post_password ) ) {
+						return '';
+					}
+	
+					$blocks = parse_blocks( $reusable_block->post_content );
+	
+					$style .= $this->uich_inner_blocks_css( $blocks, $reusable_block->ID );
+				}
+	
+				if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+					$style .= $this->uich_inner_blocks_css( $block['innerBlocks'], $id );
+				}
+			}
+	
+			return $style;
+		}
 
 	}
 

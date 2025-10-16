@@ -1,0 +1,26 @@
+{
+  "name": "uichemy-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^28.2.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@splidejs/react-splide": "^0.7.12",
+    "@wordpress/i18n": "^5.12.0",
+    "react": "^18.3.1",
+    "react-ace-builds": "^7.4.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "style-loader": "^4.0.0"
+  }
+}
