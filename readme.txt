@@ -4,7 +4,7 @@ Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to brick
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.2.0
+Stable tag: 4.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -142,6 +142,10 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 4.3.0 = 17 Oct 2025
+- Added support for multiple breakpoints for Boxed Width (Bricks).
+- More bug fixes & improvements.
+
 = 4.2.0 = 16 Oct 2025
 - Added support for Spectra, Gutenberg Core, Kadence & Generate Blocks.
 - Added support for disabling custom CSS for Elementor & Gutenberg.
