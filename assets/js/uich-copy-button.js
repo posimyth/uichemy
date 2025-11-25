@@ -143,7 +143,7 @@
                     const block = wp.blocks.parse(pastedData);
                     const blockStringify = JSON.stringify(block);
                     const isTPAG = block[0].name.startsWith("tpgb/");
-                    const checkMedia = /\.(jpg|png|jpeg|gif|svg)/gi.test(blockStringify);
+                    const checkMedia = /\.(jpg|png|jpeg|gif|svg|avif|webp)/gi.test(blockStringify);
                     
                     const clipboardBtn = document.querySelector("#uich-paste-clipboard");
                     if (clipboardBtn) {

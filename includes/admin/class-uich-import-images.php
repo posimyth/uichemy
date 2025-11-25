@@ -366,7 +366,7 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 						if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
 							$block_data['innerContent'] = self::string_replace_content( $block_data['innerContent'], $block_val['url'], $new_media['url'] );
 						}
-					}else if(isset( $block_val['url'] ) && !empty( $block_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $block_val['url'])) {
+					}else if(isset( $block_val['url'] ) && !empty( $block_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp|avif)$/', $block_val['url'])) {
 						$new_media = Tpgb_Import_Images::media_import( $block_val );
 						$block_data['attrs'][$block_key] = $new_media;
 						if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
@@ -389,7 +389,7 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 										if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
 											$block_data['innerContent'] = self::string_replace_content( $block_data['innerContent'], $val['url'], $new_media['url'] );
 										}
-									}else if( isset( $val['url'] ) && !empty( $val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $val['url']) ) {
+									}else if( isset( $val['url'] ) && !empty( $val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp|avif)$/', $val['url']) ) {
 										$new_media = Tpgb_Import_Images::media_import( $val );
 										$block_data['attrs'][$block_key][$key] = $new_media;
 										if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
@@ -409,7 +409,7 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 												if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
 													$block_data['innerContent'] = self::string_replace_content( $block_data['innerContent'], $sub_val['url'], $new_media['url'] );
 												}
-											}else if( isset( $sub_val['url'] ) && !empty( $sub_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $sub_val['url'])) {
+											}else if( isset( $sub_val['url'] ) && !empty( $sub_val['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp|avif)$/', $sub_val['url'])) {
 												$new_media = Tpgb_Import_Images::media_import( $sub_val );
 												$block_data['attrs'][$block_key][$key][$sub_key] = $new_media;
 												if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){
@@ -429,7 +429,7 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 														if(isset($block_data['innerContent']) && !empty($block_data['innerContent'])){
 															$block_data['innerContent'] = self::string_replace_content( $block_data['innerContent'], $sub_val1['url'], $new_media['url'] );
 														}
-													}else if( isset( $sub_val1['url'] ) && !empty( $sub_val1['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp)$/', $sub_val1['url'])) {
+													}else if( isset( $sub_val1['url'] ) && !empty( $sub_val1['url'] ) && preg_match('/\.(jpg|png|jpeg|gif|svg|webp|avif)$/', $sub_val1['url'])) {
 														$new_media = Tpgb_Import_Images::media_import( $sub_val1 );
 														$block_data['attrs'][$block_key][$key][$sub_key][$sub_key1] = $new_media;
 														if(isset($block_data['innerHTML']) && !empty($block_data['innerHTML'])){

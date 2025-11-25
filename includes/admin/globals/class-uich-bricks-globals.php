@@ -26,7 +26,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 	    const PADDING_CLASS_CATEGORY_ID = 'UICH_PADDING';
         const DEFAULT_CONTAINER_WIDTH = '1100px';
         const UICH_THEME_ID = 'uichemy_theme';
-        const UICH_PALETTE_NAME = 'Uichemy Palette';
+        const UICH_PALETTE_NAME = 'UiChemy Palette';
 
         // Helper method to safely retrieve and ensure an option is an array.
         private static function get_option_as_array($optionName){
