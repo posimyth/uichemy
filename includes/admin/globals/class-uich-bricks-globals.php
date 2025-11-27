@@ -25,6 +25,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 	    const TYPO_CLASS_CATEGORY_ID = 'UICH_TYPO';
 	    const PADDING_CLASS_CATEGORY_ID = 'UICH_PADDING';
         const DEFAULT_CONTAINER_WIDTH = '1100px';
+        const DEFAULT_CONTAINER_TABLET_WIDTH = '85%';
+        const DEFAULT_CONTAINER_MOBILE_WIDTH = '90%';
         const UICH_THEME_ID = 'uichemy_theme';
         const UICH_PALETTE_NAME = 'UiChemy Palette';
 
@@ -142,6 +144,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                     ],
                     'container' => [
                         'width' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH,
+                        'width:tablet_portrait' => Uich_Bricks_Globals::DEFAULT_CONTAINER_TABLET_WIDTH,
+                        'width:mobile_portrait' => Uich_Bricks_Globals::DEFAULT_CONTAINER_MOBILE_WIDTH,
                     ],
                 ],
             ];
@@ -149,7 +153,11 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             update_option('bricks_theme_styles', $themeStyles);
 
             return (object)[
-                'width' => ['desktop' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH],
+                'width' => [
+                    'desktop' => Uich_Bricks_Globals::DEFAULT_CONTAINER_WIDTH,
+                    'tablet_portrait' => Uich_Bricks_Globals::DEFAULT_CONTAINER_TABLET_WIDTH,
+                    'mobile_portrait' => Uich_Bricks_Globals::DEFAULT_CONTAINER_MOBILE_WIDTH,
+                ],
                 'themeID' => Uich_Bricks_Globals::UICH_THEME_ID,
             ];
         }

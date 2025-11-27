@@ -93,10 +93,64 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             Uich_Globals::elementor_refresh_css_and_clear_cache( $kit->get_id() );
         }
 
+        // Helper function to ensure default values are set in Elementor kit
+        private static function ensure_default_container_widths($all_settings) {
+
+            // Ensure it's an array
+            if (!is_array($all_settings)) {
+                $all_settings = [];
+            }
+
+            // Default container widths
+            $defaults = [
+                'desktop' => [
+                    'unit' => 'px',
+                    'size' => 1140,
+                    'sizes' => []
+                ],
+                'tablet' => [
+                    'unit' => '%',
+                    'size' => 85,
+                    'sizes' => []
+                ],
+                'mobile' => [
+                    'unit' => '%',
+                    'size' => 90,
+                    'sizes' => []
+                ]
+            ];
+
+            $needs_update = false;
+
+            // desktop
+            if (empty($all_settings['container_width'])) {
+                $all_settings['container_width'] = $defaults['desktop'];
+                $needs_update = true;
+            }
+
+            // tablet
+            if (empty($all_settings['container_width_tablet'])) {
+                $all_settings['container_width_tablet'] = $defaults['tablet'];
+                $needs_update = true;
+            }
+
+            // mobile
+            if (empty($all_settings['container_width_mobile'])) {
+                $all_settings['container_width_mobile'] = $defaults['mobile'];
+                $needs_update = true;
+            }
+
+            if ($needs_update) {
+                Uich_Globals::save_all_kit_settings($all_settings);
+            }
+
+            return $all_settings;
+        }
+
         public static function get_elementor_container_breakpoints_width(){
             if(!class_exists( '\Elementor\Plugin' )) return false;
 
-            $all_settings = Uich_Globals::get_all_kit_settings();
+            $all_settings = self::ensure_default_container_widths(Uich_Globals::get_all_kit_settings());
             $container_width_from_all_settings = array_key_exists('container_width', $all_settings) ? $all_settings['container_width'] : null;
             $container_width_tablet_from_all_settings = array_key_exists('container_width_tablet', $all_settings) ? $all_settings['container_width_tablet'] : null;
             $container_width_mobile_from_all_settings = array_key_exists('container_width_mobile', $all_settings) ? $all_settings['container_width_mobile'] : null;
@@ -115,11 +169,6 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $container_width_widescreen_kit  = $kit->get_settings_for_display('container_width_widescreen');
             $container_width_laptop_kit  = $kit->get_settings_for_display('container_width_laptop');
 
-            $default_container_width = [
-                'unit' => 'px',
-                'size' => 1140,
-                'sizes' => []
-            ];
 
             $container_width_normalize = function($value) {
                 if (empty($value) || !is_array($value)) {
@@ -137,7 +186,7 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $container_width_array = [];
 
             // desktop
-            $desktop = $container_width_from_all_settings ?? $container_width_kit ?? $default_container_width;
+            $desktop = $container_width_from_all_settings ?? $container_width_kit;
             $container_width_array['desktop'] = $desktop;
 
             // tablet
