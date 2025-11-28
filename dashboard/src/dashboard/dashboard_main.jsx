@@ -301,7 +301,7 @@ const Dashboard = () => {
             {
                 label: 'YouTube',
                 buttonText: 'Watch YouTube Tutorials',
-                link: 'https://www.youtube.com/watch?v=m2R0Qo0ax4Y&list=PLFRO-irWzXaJ00ay82qZZ2T4etPCPh7er',
+                link: 'https://youtu.be/8_6DymM-5KQ?si=YdyU6U-ASiWMzHkb',
             },
             {
                 label: 'Template Library',
@@ -793,7 +793,7 @@ const Dashboard = () => {
                 <div className="uich_section uich_second_box_height">
                     <div className="uich_section_header">
                         <h3>{__('How Does It Work?', 'uichemy')}</h3>
-                        <a href="https://www.youtube.com/watch?v=vm8Ak5Oy9AU?utm_source=wpbackend&utm_medium=dashboard&utm_campaign=uichemy" target="_blank" rel="noopener noreferrer" className="uich_video_link">
+                        <a href="https://youtu.be/8_6DymM-5KQ?si=YdyU6U-ASiWMzHkb" target="_blank" rel="noopener noreferrer" className="uich_video_link">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="13" fill="none" viewBox="0 0 18 13">
                                     <path fill="red" d="M8.993.168c.027 0 5.627 0 7.02.38a2.264 2.264 0 0 1 1.593 1.595c.595 2.393.458 6.174.012 8.66a2.264 2.264 0 0 1-1.593 1.592c-1.392.38-6.97.382-7.02.382 0 0-5.623 0-7.02-.381A2.265 2.265 0 0 1 .39 10.803C-.207 8.42-.044 4.637.379 2.154A2.265 2.265 0 0 1 1.973.561C3.37.18 8.993.168 8.993.168Zm-1.79 9.007 4.665-2.702L7.203 3.77v5.404Z" />
