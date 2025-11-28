@@ -144,6 +144,7 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 == Changelog ==
 = 4.4.1 = 27 Nov 2025
 - Updated the default Elementor & Bricks boxed Width.
+- More UI improvements.
 
 = 4.4.0 = 25 Nov 2025
 - Added support for importing WEBP & AVIF.
