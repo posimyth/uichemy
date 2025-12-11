@@ -9,6 +9,7 @@
  */
 
 namespace Uich\Uich_enqueue;
+use Uich\User\Uich_UserManager;
 
 /**
  * Exit if accessed directly.
@@ -230,11 +231,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
             //     }
             // }
 
-            $admins = get_users( array( 'role' => 'Administrator' ) );
-            $admin_username = [];
-            foreach ( $admins as $admin ) {
-                $admin_username[] = $admin->user_login;
-            }
+            $admin_username = Uich_UserManager::get_all_capable_users();
 
             if($user)
             {
@@ -265,6 +262,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                     'uich_onbording' => get_option( 'uich_onbording_end' ),
                     'version'=>UICH_VERSION,
                     'adminUsername' => $admin_username,
+                    'selectedAdminUsername' => Uich_UserManager::get_selected_user(),
                     'pluginVersion'=> $this->uich_notice_should_show(),
                     'siteToken' => apply_filters( 'uich_manage_token', 'get_token' ),
                 ];

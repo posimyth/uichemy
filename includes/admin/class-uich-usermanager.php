@@ -8,6 +8,8 @@
  * @package    Uichemy
  */
 
+namespace Uich\User;
+
 /** If this file is called directly, abort. */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -66,7 +68,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 
 			foreach ( $all_users as $user ) {
 				if ( $user->has_cap( 'import' ) ) {
-					$capable_users[] = $user;
+					$capable_users[] = $user->user_login;
 				}
 			}
 

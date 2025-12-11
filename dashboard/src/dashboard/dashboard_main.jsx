@@ -16,7 +16,7 @@ const Dashboard = () => {
     const [isInitialized, setIsInitialized] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [onboardingIsChecked, setOnboardingIsChecked] = useState(false);
-    const [selectedUser, setSelectedUser] = useState('');
+    const [selectedUser, setSelectedUser] = useState(uich_ajax_object.dashData.selectedAdminUsername);
     const [urlCopied, setUrlCopied] = useState(false);
     const [tokenCopied, setTokenCopied] = useState(false);
     const [originalToken, setOriginalToken] = useState(uich_ajax_object.dashData.siteToken);
