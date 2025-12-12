@@ -142,6 +142,10 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 4.4.2 = 12 Dec 2025
+- Fixed a minor bug with "Import as user" dropdown.
+- Updated WP compatibility.
+
 = 4.4.1 = 27 Nov 2025
 - Updated the default Elementor & Bricks boxed Width.
 - More UI improvements.
