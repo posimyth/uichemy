@@ -88,7 +88,7 @@ if ( ! class_exists( 'Uich_UserManager' ) ) {
 				return;
 			}
 
-			$selected_username = $capable_users[0]->user_login;
+			$selected_username = $capable_users[0];
 
 			return add_option( UICH_USER_OPTION, $selected_username );
 		}
