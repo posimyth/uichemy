@@ -310,7 +310,7 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 		 * Upload mimes Type
 		 */
 		public function add_svg_to_upload_mimes($mimes) {
-            $mimes['svg'] = 'image/svg+xml';
+			if(current_user_can('import') ) $mimes['svg'] = 'image/svg+xml';
             return $mimes;
 		}
 
@@ -1777,7 +1777,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 
 			$roles = wp_roles()->get_names();
 			foreach ( $roles as $role_key => $label ) {
-				wp_roles()->add_cap( $role_key, 'bricks_upload_svg' );
+				$role = get_role( $role_key );
+				if( $role && $role->has_cap( 'import' ) ) wp_roles()->add_cap( $role_key, 'bricks_upload_svg' );
 			}
 
 			return $this->uich_response( 'Successfully Enabled!', 'Unfiltered File Uploads activated Successfully.', true, '' );
