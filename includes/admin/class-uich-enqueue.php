@@ -67,6 +67,8 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
             add_action('wp_ajax_uich_update_notice_count', array($this, 'uich_update_notice_count'));
 
+			add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueue_elementor_atomic_script']);
+
             // Gutenberg Custom CSS Field
             $uicssOpt = get_option( 'uictmcss_enabled' );
 			if ( empty( $uicssOpt ) || $uicssOpt == false  ) {
@@ -443,6 +445,43 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
             }
         }
 
+        /**
+         * UiChemy copy button for atomic v4
+         */
+        public function enqueue_elementor_atomic_script() {
+            // Check if Elementor exists and is in edit mode
+            if (!class_exists('\Elementor\Plugin') || !\Elementor\Plugin::$instance->editor->is_edit_mode()) {
+                return;
+            }
+
+            // Check if atomic elements are enabled
+            $experiments_manager = \Elementor\Plugin::$instance->experiments;
+            if (!$experiments_manager->is_feature_active('e_atomic_elements')) {
+                return; // Don't load the script if atomic elements are not enabled
+            }
+
+            // Register and enqueue the script only if all conditions are met
+            wp_register_script(
+                'uich-elementor-button-js',
+                UICH_URL . 'assets/js/uich-elementor-button.js',
+                array('jquery'),
+                UICH_VERSION,
+                true,
+            );
+
+            wp_enqueue_script('uich-elementor-button-js');
+
+            wp_localize_script(
+                'uich-elementor-button-js',
+                'uich_ajax_object_data', 
+                array(
+                    'ajax_url' => admin_url('admin-ajax.php'),
+                    'nonce'    => wp_create_nonce('uichemy-ajax-nonce'),
+                )
+            );
+
+		}
+
 		/**
 		 * Add Menu Page WdKit.
 		 *
@@ -545,7 +584,6 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 					)
 				);
 			}
-
 		}
 
         /**

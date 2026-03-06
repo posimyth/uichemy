@@ -547,7 +547,6 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 
 			return $get_element_instance;
 		}
-
 	}
 
 }

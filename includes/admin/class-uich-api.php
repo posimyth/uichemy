@@ -18,6 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Uich_Globals' ) ) {
 	require_once UICH_PATH . 'includes/admin/globals/class-uich-globals.php';
 	require_once UICH_PATH . 'includes/admin/globals/class-uich-bricks-globals.php';
+	require_once UICH_PATH . 'includes/admin/class-uich-import-images.php';
+	require_once UICH_PATH . 'includes/admin/class-uich-atomic-imgs.php';
+	require_once UICH_PATH . 'includes/admin/globals/class-uich-atomic-globals.php';
 }
 
 if ( ! class_exists( 'Uich_Api' ) ) {
@@ -82,175 +85,38 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			add_action(
 				'rest_api_init',
 				function () {
-					register_rest_route(
-						'uichemy/v1',
-						'/import',
-						array(
-							'methods'             => 'POST',
-							'callback'            => array( $this, 'uich_handle_import' ),
-							'permission_callback' => '__return_true',
-						)
-					);
+					$routes = [
+						['/v1/import', 'uich_handle_import', 'POST'],
+						['/v2/elementor/import', 'uich_handle_elementor_import_v2', 'POST'],
+						['/v2/elementor/get_posts', 'uich_get_elementor_posts'],
+						['/v2/elementor/get_config', 'uich_get_elementor_config'],
+						['/v1/check', 'uich_handle_check', ['GET', 'POST']],
+						['/v2/gutenberg/import', 'uich_handle_gutenberg_import', 'POST'],
+						['/v2/gutenberg/get_posts', 'uich_get_gutenberg_posts'],
+						['/v2/gutenberg/get_config', 'uich_get_gutenberg_config'],
+						['/v2/bricks/import', 'uich_handle_bricks_import_v2', 'POST'],
+						['/v2/bricks/get_posts', 'uich_get_bricks_posts'],
+						['/v2/bricks/get_config', 'uich_get_bricks_config'],
+						['/v1/bricks/getnonce', 'uich_handle_bricks_get_nonce'],
+						['/v1/bricks/import', 'uich_handle_bricks_import', 'POST'],
+						['/v1/elementor/globals', 'uich_handle_elementor_globals_list'],
+						['/v1/elementor/globals/sync', 'uich_handle_elementor_globals_sync', 'POST'],
+						['/v1/bricks/globals', 'uich_handle_bricks_globals_list'],
+						['/v1/bricks/globals/sync', 'uich_handle_bricks_globals_sync', 'POST'],
+						['/v1/elementor/atomic_enable', 'uich_handle_elementor_atomic_enable'],
+						['/v1/elementor/classes_variables', 'uich_handle_elementor_classes_variables'],
+						['/v1/elementor/classes_variables/sync', 'uich_handle_elementor_classes_variables_sync', 'POST'],
+					];
 
-					register_rest_route(
-						'uichemy/v2',
-						'/elementor/import',
-						array(
-							'methods'             => 'POST',
-							'callback'            => array( $this, 'uich_handle_elementor_import_v2' ),
+					foreach ($routes as $route_config) {
+						[$route, $callback, $method] = array_pad($route_config, 3, null);
+						$method = $method ?? 'GET';
+						register_rest_route('uichemy', $route, array(
+							'methods'             => $method,
+							'callback'            => array( $this, $callback ),
 							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/elementor/get_posts',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_elementor_posts' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/elementor/get_config',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_elementor_config' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/gutenberg/import',
-						array(
-							'methods'             => 'POST',
-							'callback'            => array( $this, 'uich_handle_gutenberg_import' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/gutenberg/get_posts',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_gutenberg_posts' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/gutenberg/get_config',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_gutenberg_config' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/bricks/import',
-						array(
-							'methods'             => 'POST',
-							'callback'            => array( $this, 'uich_handle_bricks_import_v2' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/bricks/get_posts',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_bricks_posts' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v2',
-						'/bricks/get_config',
-						array(
-							'methods'             => 'GET',
-							'callback'            => array( $this, 'uich_get_bricks_config' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/check',
-						array(
-							'methods'             => array( 'GET', 'POST' ),
-							'callback'            => array( $this, 'uich_handle_check' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/bricks/getnonce',
-						array(
-							'methods'             => array( 'GET' ),
-							'callback'            => array( $this, 'uich_handle_bricks_get_nonce' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/bricks/import',
-						array(
-							'methods'             => array( 'POST' ),
-							'callback'            => array( $this, 'uich_handle_bricks_import' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/elementor/globals',
-						array(
-							'methods'             => array( 'GET' ),
-							'callback'            => array( $this, 'uich_handle_elementor_globals_list' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/elementor/globals/sync',
-						array(
-							'methods'             => array( 'POST' ),
-							'callback'            => array( $this, 'uich_handle_elementor_globals_sync' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/bricks/globals',
-						array(
-							'methods'             => array( 'GET' ),
-							'callback'            => array( $this, 'uich_handle_bricks_globals_list' ),
-							'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'uichemy/v1',
-						'/bricks/globals/sync',
-						array(
-							'methods'             => array( 'POST' ),
-							'callback'            => array( $this, 'uich_handle_bricks_globals_sync' ),
-							'permission_callback' => '__return_true',
-						)
-					);
+						));
+					};
 				}
 			);
 		}
@@ -303,6 +169,35 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			return array(
 				'success' => true,
 				'data' => $update_sync_data,
+			);
+		}
+
+		/**
+		 * Elementor Clasess
+ 		 */
+		public function uich_handle_elementor_classes_variables( WP_REST_Request $request) {
+
+			$this->uich_check_token( $request );
+
+			$uich_classes_variables = Uich_Atomic_Globals::get_global_classes_and_variable();
+
+			return array(
+				'success' => true,
+				'data' => $uich_classes_variables,
+			);
+		}
+
+		public function uich_handle_elementor_classes_variables_sync( WP_REST_Request $request){
+
+			$this->uich_check_token( $request );
+
+			$sync_data = json_decode( $request->get_body() );
+
+			$uich_sync_variables = Uich_Atomic_Globals::sych_uich_elementor_classes_and_variables_sync($sync_data);
+
+			return array(
+				'success' => true,
+				'data' => $uich_sync_variables,
 			);
 		}
 
@@ -445,6 +340,44 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			return $response;
 		}
 
+		public function uich_handle_elementor_atomic_enable( WP_REST_Request $request){
+
+			// Match Security Token.
+			$this->uich_check_token( $request );
+
+			if ( ! class_exists('\Elementor\Plugin') ) {
+				return array(
+					'success' => false,
+					'message' => 'Elementor is not active.'
+				);
+			}
+
+			$state = \Elementor\Core\Experiments\Manager::STATE_ACTIVE; // 'active'
+			$plugin_instance = \Elementor\Plugin::$instance;
+			$experiments     = $plugin_instance->experiments;
+
+			$features = [
+				'e_opt_in_v4',
+				'container',
+				\Elementor\Modules\NestedElements\Module::EXPERIMENT_NAME,
+				\Elementor\Modules\AtomicWidgets\Module::EXPERIMENT_NAME,
+				\Elementor\Modules\GlobalClasses\Module::NAME,
+				\Elementor\Modules\Variables\Module::EXPERIMENT_NAME,
+			];
+
+			foreach ( $features as $feature ) {
+				$option_key = $experiments->get_feature_option_key( $feature );
+				update_option( $option_key, $state );
+			}
+
+			$is_active = get_option( $experiments->get_feature_option_key( 'e_opt_in_v4' ) ) === $state;
+
+			return array(
+				'success' => true,
+				'isAtomicEnable' => $is_active,
+			);
+		}
+
 		public function uich_get_elementor_config( WP_REST_Request $request){
 			// Match Security Token.
 			$this->uich_check_token( $request );
@@ -464,6 +397,16 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 			$response['is_elementor_pro_installed'] = class_exists( 'ElementorPro\Plugin' );
 			$response['is_elementor_installed'] = class_exists( 'Elementor\Plugin' );
 			$response['isNexterInstalled'] = array_key_exists('nxt_builder', $all_post_types);
+
+			$response['isAtomicEnable'] = false;
+
+			// Only try to access experiments if Elementor is active
+			if ( $response['is_elementor_installed'] && isset( \Elementor\Plugin::$instance ) ) {
+				$experiments_manager = \Elementor\Plugin::$instance->experiments;
+				if (method_exists( $experiments_manager, 'is_feature_active' ) ) {
+					$response['isAtomicEnable'] = $experiments_manager->is_feature_active( 'e_atomic_elements' );
+				}
+			}
 
 			return $response;
 		}
@@ -819,6 +762,11 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				$post_settings = isset($json) && !empty($json) && isset($json['page_settings']) ? $json['page_settings'] : [];
 				$post_content = $this->ele_media_import($post_content);
 
+				// Loop through each top-level element (For Atomic Images Upload)
+				foreach ($post_content as &$element) {
+					Uich_Elementor_Import_Images::process_and_upload_images($element);
+				}
+
 				$new_document->save(
 					array(
 						'elements' => $post_content,
@@ -883,6 +831,11 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 					
 					$json_array = json_decode($json, true);
 					$update_content = !empty($json_array) && isset($json_array['content']) ? $json_array['content'] : [];
+
+					// Loop through each top-level element (For Atomic Images Upload)
+					foreach ($update_content as &$element) {
+						Uich_Elementor_Import_Images::process_and_upload_images($element);
+					}
 
 					if(!empty($importByReplacing) && $importByReplacing=='false'){
 						$merged_content = array_merge($exits_content, $update_content);

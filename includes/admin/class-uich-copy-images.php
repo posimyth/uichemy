@@ -76,134 +76,134 @@ class Uichemy_Gutenberg_Image_Import {
     }
 
     public static function array_recursively_data($data, $callback, $args = []) {
-    // If the data has a 'name' key, we are dealing with a block
-    if (isset($data['name'])) {
-        // Recursively process inner blocks if they exist
-        if (!empty($data['innerBlocks'])) {
-            $data['innerBlocks'] = self::array_recursively_data($data['innerBlocks'], $callback, $args);
+        // If the data has a 'name' key, we are dealing with a block
+        if (isset($data['name'])) {
+            // Recursively process inner blocks if they exist
+            if (!empty($data['innerBlocks'])) {
+                $data['innerBlocks'] = self::array_recursively_data($data['innerBlocks'], $callback, $args);
+            }
+
+            // Call the callback function to process the block data
+            return call_user_func($callback, $data, $args);
         }
 
-        // Call the callback function to process the block data
-        return call_user_func($callback, $data, $args);
-    }
+        // If data is neither an array nor an object, return the data as is
+        if (gettype($data) !== "array" && gettype($data) !== "object") {
+            return $data;
+        }
 
-    // If data is neither an array nor an object, return the data as is
-    if (gettype($data) !== "array" && gettype($data) !== "object") {
+        // Iterate through the array or object and process each item recursively
+        foreach ($data as $key => $value) {
+            $processed_data = self::array_recursively_data($value, $callback, $args);
+            if (null !== $processed_data) {
+                $data[$key] = $processed_data;
+            }
+        }
+
         return $data;
     }
 
-    // Iterate through the array or object and process each item recursively
-    foreach ($data as $key => $value) {
-        $processed_data = self::array_recursively_data($value, $callback, $args);
-        if (null !== $processed_data) {
-            $data[$key] = $processed_data;
-        }
-    }
+    public static function check_block_image_upload($block_data) {
 
-    return $data;
-}
+        if (isset($block_data['name']) && isset($block_data['attributes'])) {
 
-public static function check_block_image_upload($block_data) {
-
-    if (isset($block_data['name']) && isset($block_data['attributes'])) {
-
-        // Spectra Image Block
-        if ($block_data['name'] === 'uagb/image' || $block_data['name'] === 'core/image') {
-            if(isset($block_data['attributes']['url']) && isset($block_data['attributes']['id']) && !empty($block_data['attributes']['url'])){
-                $result = self::upload_media($block_data['attributes']['url']);
-                $block_data['attributes']['url'] = $block_data['attributes']['urlTablet'] = $block_data['attributes']['urlMobile'] = $result['url'];
-                $block_data['attributes']['id'] = $result['post_id'];
+            // Spectra Image Block
+            if ($block_data['name'] === 'uagb/image' || $block_data['name'] === 'core/image') {
+                if(isset($block_data['attributes']['url']) && isset($block_data['attributes']['id']) && !empty($block_data['attributes']['url'])){
+                    $result = self::upload_media($block_data['attributes']['url']);
+                    $block_data['attributes']['url'] = $block_data['attributes']['urlTablet'] = $block_data['attributes']['urlMobile'] = $result['url'];
+                    $block_data['attributes']['id'] = $result['post_id'];
+                }
             }
-        }
 
-        // Core Image Block
-        elseif ($block_data['name'] === 'core/image') {
-            if(isset($block_data['attributes']['url']) && isset($block_data['attributes']['id']) && !empty($block_data['attributes']['url'])){
-                $result = self::upload_media($block_data['attributes']['url']);
-                $block_data['attributes']['url'] = $result['url'];
-                $block_data['attributes']['id'] = $result['post_id'];
+            // Core Image Block
+            elseif ($block_data['name'] === 'core/image') {
+                if(isset($block_data['attributes']['url']) && isset($block_data['attributes']['id']) && !empty($block_data['attributes']['url'])){
+                    $result = self::upload_media($block_data['attributes']['url']);
+                    $block_data['attributes']['url'] = $result['url'];
+                    $block_data['attributes']['id'] = $result['post_id'];
+                }
             }
-        }
 
-        // Spectra Container Image Block
-		elseif ($block_data['name'] === 'uagb/container') {
-			if (isset($block_data['attributes']['backgroundImageDesktop']['url']) && isset($block_data['attributes']['backgroundImageDesktop']['id']) && !empty($block_data['attributes']['backgroundImageDesktop']['url'])) {
-				$result = self::upload_media($block_data['attributes']['backgroundImageDesktop']['url']);
-				$block_data['attributes']['backgroundImageDesktop']['url'] = $result['url'];
-				$block_data['attributes']['backgroundImageDesktop']['id'] = $result['post_id'];
-			}
-		}
-
-        // Core Container Image Block
-        elseif ($block_data['name'] === 'core/group') {
-            if (isset($block_data['attributes']['style']['background']['backgroundImage']['url']) && isset($block_data['attributes']['style']['background']['backgroundImage']['id']) && !empty($block_data['attributes']['style']['background']['backgroundImage']['url'])) {
-				$result = self::upload_media($block_data['attributes']['style']['background']['backgroundImage']['url']);
-				$block_data['attributes']['style']['background']['backgroundImage']['url'] = $result['url'];
-				$block_data['attributes']['style']['background']['backgroundImage']['id'] = $result['post_id'];
-			}
-        }
-
-        // Kedence Image Block
-        elseif($block_data['name'] === "kadence/image"){
-            if(isset($block_data['attributes']['url'])){
-                $new_url = self::upload_media($block_data['attributes']['url']);
-                $block_data['attributes']['url'] = $new_url['url'];
-                $block_data['attributes']['id'] = $new_url['post_id'];
-                $updated = self::update_img_src_with_uploaded_url($block_data['originalContent'], $block_data['name']);
-                $block_data['originalContent'] = $updated['data'];
+            // Spectra Container Image Block
+            elseif ($block_data['name'] === 'uagb/container') {
+                if (isset($block_data['attributes']['backgroundImageDesktop']['url']) && isset($block_data['attributes']['backgroundImageDesktop']['id']) && !empty($block_data['attributes']['backgroundImageDesktop']['url'])) {
+                    $result = self::upload_media($block_data['attributes']['backgroundImageDesktop']['url']);
+                    $block_data['attributes']['backgroundImageDesktop']['url'] = $result['url'];
+                    $block_data['attributes']['backgroundImageDesktop']['id'] = $result['post_id'];
+                }
             }
-        }
 
-        // Kedence Container Image Block
-        elseif($block_data['name'] === "kadence/column"){ 
-            if(isset($block_data['attributes']['backgroundImg']) && is_array($block_data['attributes']['backgroundImg'])) {
-                foreach($block_data['attributes']['backgroundImg'] as $index => $bg_img) {
-                    if (isset($bg_img['bgImg'])) {                        
-                        $new_media_url = self::upload_media($bg_img['bgImg']);
+            // Core Container Image Block
+            elseif ($block_data['name'] === 'core/group') {
+                if (isset($block_data['attributes']['style']['background']['backgroundImage']['url']) && isset($block_data['attributes']['style']['background']['backgroundImage']['id']) && !empty($block_data['attributes']['style']['background']['backgroundImage']['url'])) {
+                    $result = self::upload_media($block_data['attributes']['style']['background']['backgroundImage']['url']);
+                    $block_data['attributes']['style']['background']['backgroundImage']['url'] = $result['url'];
+                    $block_data['attributes']['style']['background']['backgroundImage']['id'] = $result['post_id'];
+                }
+            }
 
-                        // Update the bgImg URL
-                        $block_data['attributes']['backgroundImg'][$index]['bgImg'] = $new_media_url['url'];
+            // Kedence Image Block
+            elseif($block_data['name'] === "kadence/image"){
+                if(isset($block_data['attributes']['url'])){
+                    $new_url = self::upload_media($block_data['attributes']['url']);
+                    $block_data['attributes']['url'] = $new_url['url'];
+                    $block_data['attributes']['id'] = $new_url['post_id'];
+                    $updated = self::update_img_src_with_uploaded_url($block_data['originalContent'], $block_data['name']);
+                    $block_data['originalContent'] = $updated['data'];
+                }
+            }
 
-                        // Update the bgImgID
-                        $block_data['attributes']['backgroundImg'][$index]['bgImgID'] = $new_media_url['post_id'];
+            // Kedence Container Image Block
+            elseif($block_data['name'] === "kadence/column"){ 
+                if(isset($block_data['attributes']['backgroundImg']) && is_array($block_data['attributes']['backgroundImg'])) {
+                    foreach($block_data['attributes']['backgroundImg'] as $index => $bg_img) {
+                        if (isset($bg_img['bgImg'])) {                        
+                            $new_media_url = self::upload_media($bg_img['bgImg']);
+
+                            // Update the bgImg URL
+                            $block_data['attributes']['backgroundImg'][$index]['bgImg'] = $new_media_url['url'];
+
+                            // Update the bgImgID
+                            $block_data['attributes']['backgroundImg'][$index]['bgImgID'] = $new_media_url['post_id'];
+                        }
+                    }
+                }    
+            }
+
+            // GenerateBlocks Image Block
+            elseif($block_data['name'] === "generateblocks/media"){
+                if (isset($block_data['originalContent']) && strpos($block_data['originalContent'], 'img') !== false) {
+                    $new_updated = self::update_img_src_with_uploaded_url($block_data['originalContent'], $block_data['name']);
+                    $pattern = '/<img\s+[^>]*src=["\']([^"\']+)["\']/i';
+
+                    // Check if the pattern matches and extract the URL
+                    if (preg_match($pattern, $new_updated['data'], $matches)) {
+                        // Extracted URL from src attribute
+                        $original_url = $matches[1];
+                        $block_data['attributes']['htmlAttributes']['src'] = $original_url;
+                    }
+
+                    $block_data['originalContent'] = $new_updated['data'];
+                }
+            }
+
+            // GenerateBlocks Container Image Block
+            elseif($block_data['name'] === "generateblocks/element"){
+
+                if(isset($block_data['attributes']['styles']) && isset($block_data['attributes']['styles']['backgroundImage'])){
+                    $link = str_replace(['url(', ')'], '', $block_data['attributes']['styles']['backgroundImage']);
+                    $result = self::upload_media($link);
+
+                    if($result && is_array($result) && isset($result['url'])){
+                        $block_data['attributes']['styles']['backgroundImage'] = 'url(' . $result['url'] . ')';
                     }
                 }
-            }    
-        }
-
-        // GenerateBlocks Image Block
-        elseif($block_data['name'] === "generateblocks/media"){
-            if (isset($block_data['originalContent']) && strpos($block_data['originalContent'], 'img') !== false) {
-                $new_updated = self::update_img_src_with_uploaded_url($block_data['originalContent'], $block_data['name']);
-                $pattern = '/<img\s+[^>]*src=["\']([^"\']+)["\']/i';
-
-                // Check if the pattern matches and extract the URL
-                if (preg_match($pattern, $new_updated['data'], $matches)) {
-                    // Extracted URL from src attribute
-                    $original_url = $matches[1];
-                    $block_data['attributes']['htmlAttributes']['src'] = $original_url;
-                }
-
-                $block_data['originalContent'] = $new_updated['data'];
             }
         }
 
-        // GenerateBlocks Container Image Block
-        elseif($block_data['name'] === "generateblocks/element"){
-
-            if(isset($block_data['attributes']['styles']) && isset($block_data['attributes']['styles']['backgroundImage'])){
-                $link = str_replace(['url(', ')'], '', $block_data['attributes']['styles']['backgroundImage']);
-                $result = self::upload_media($link);
-
-                if($result && is_array($result) && isset($result['url'])){
-                    $block_data['attributes']['styles']['backgroundImage'] = 'url(' . $result['url'] . ')';
-                }
-            }
-        }
+        return $block_data;
     }
-
-    return $block_data;
-}
 
     public static function upload_media($url) {
         // Check if the image already exists in the media library

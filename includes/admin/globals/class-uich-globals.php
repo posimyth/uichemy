@@ -526,7 +526,6 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             $post_css->enqueue();
         }
 
-
         // End Points
         public static function get_globals() {
             return array(
@@ -581,6 +580,5 @@ if ( ! class_exists( 'Uich_Globals' ) ) {
             // Return the saved -> updated data
             return Uich_Globals::get_globals();
         }
-
     }
 }
