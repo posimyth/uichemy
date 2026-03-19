@@ -258,6 +258,9 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                     if(isset($class['settings']['_padding:tablet_portrait'])){
                         $value['_padding:tablet_portrait'] = $class['settings']['_padding:tablet_portrait'];
                     }
+                    if(isset($class['settings']['_padding:mobile_landscape'])){
+                        $value['_padding:mobile_landscape'] = $class['settings']['_padding:mobile_landscape'];
+                    }
                     if(isset($class['settings']['_padding:mobile_portrait'])){
                         $value['_padding:mobile_portrait'] = $class['settings']['_padding:mobile_portrait'];
                     }
@@ -313,7 +316,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
                 // Optional inset (boolean)
                 if (isset($shadow["inset"])) {
-                    $converted["inset"] = $shadow["inset"] == 1 ? true : false;
+                    $converted["inset"] = 1;
                 }
 
                 $shadow_classes[] = [
@@ -468,7 +471,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                     $gap_classes[] = [
                         'id'    => sanitize_text_field($class['id'] ?? ''),
                         'name'  => sanitize_text_field($class['name'] ?? ''),
-                        'value' => $value,
+                        'value' => array('desktop' => $value),
                     ];
                 }
             }
@@ -756,8 +759,8 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                         "color" => $incoming["color"] ?? [ "hex" => "#000000" ]
                     ];
 
-                    if (isset($incoming["inset"])) {
-                        $converted_shadow["inset"] = $incoming["inset"] ? 1 : 0;
+                    if(isset($incoming["inset"]) && $incoming["inset"] === 1) {
+                        $converted_shadow["inset"] = "true";
                     }
 
                     // UPDATE
@@ -795,6 +798,7 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
             Uich_Bricks_Globals::get_uich_border_classes();
             $uichemy_category_id = Uich_Bricks_Globals::BORDER_CLASS_CATEGORY_ID;
             $global_classes = Uich_Bricks_Globals::get_option_as_array('bricks_global_classes');
+            $color_palettes = Uich_Bricks_Globals::get_option_as_array('bricks_color_palette');
 
             $convertIntoArray = Uich_Bricks_Globals::object_to_array($border_updates);
 
@@ -823,6 +827,23 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
                 if(($action === 'SET' || $action === 'ADD') && isset($update['value']['value'])){
 
                     $incoming = $update['value']['value']; // FE border JSON
+
+                    // For applying global palette in border class
+                    foreach($color_palettes as $palette){
+                        if(isset($palette['colors'])){
+                            foreach($palette['colors'] as $color){
+                                if(isset($color['hex']) && isset($incoming['color']['hex'])
+                                    && $color['hex'] == $incoming['color']['hex']
+                                ){
+                                    $incoming['color'] = [
+                                        'id' => $color['id'],
+                                        'hex' => $color['hex'],
+                                        'name' => $color['name'],
+                                    ];
+                                }
+                            }
+                        }
+                    }
 
                     // Convert FE → Bricks string format
                     $converted_border = [
@@ -978,11 +999,27 @@ if ( ! class_exists( 'Uich_Bricks_Globals' ) ) {
 
                     $incoming = $update['value']['value'];
 
-                    // Convert FE → Bricks string format
-                    $converted_gap = [
-                        "_columnGap" => isset($incoming["columnGap"]) ? strval($incoming["columnGap"]) : "0",
-                        "_rowGap"    => isset($incoming["rowGap"])    ? strval($incoming["rowGap"])    : "0"
-                    ];
+                    $converted_gap = [];
+    
+                    // Define the gap properties to process
+                    $gap_properties = ['columnGap', 'rowGap'];
+
+                    // Get all available breakpoints from incoming data
+                    $breakpoints = array_keys($incoming);
+
+                    // Process each gap property for each breakpoint
+                    foreach ($gap_properties as $property) {
+                        foreach ($breakpoints as $breakpoint) {
+                            if (isset($incoming[$breakpoint][$property])) {
+                                // Create the key based on property and breakpoint
+                                $key = ($breakpoint === 'desktop') 
+                                    ? '_' . $property 
+                                    : '_' . $property . ':' . $breakpoint;
+
+                                $converted_gap[$key] = strval($incoming[$breakpoint][$property]);
+                            }
+                        }
+                    }
 
                     $found = false;
 

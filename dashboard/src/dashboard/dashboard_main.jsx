@@ -642,7 +642,7 @@ const Dashboard = () => {
                                         <p>{__('Beta', 'uichemy')}</p>
                                     </span>
                                 </div>
-                                {active.findPlugin.includes('Kadence Blocks – Gutenberg Blocks for Page Builder Features') ? 
+                                {active.findPlugin.includes('Kadence Blocks — Page Builder Toolkit for Gutenberg Editor') ? 
                                     active.kadence === true ?
                                         <div className='uich_activated_label'>
                                             <span className='uich_check_green_icon'>
@@ -674,8 +674,8 @@ const Dashboard = () => {
                                         </span>
                                         <span>{__('Activated', 'uichemy')}</span>
                                     </div> :
-                                    ( <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'ultimate-addons-for-gutenberg')}>{__('Activate', 'uichemy')}</button> ) : (
-                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'ultimate-addons-for-gutenberg')}>{__('Install & Activate', 'uichemy')}</button> )
+                                    ( <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled, 'generateblocks')}>{__('Activate', 'uichemy')}</button> ) : (
+                                        <button className='uich_secondary_button' onClick={(e) => nexterBlockInstall(e, setIsEnabled , 'generateblocks')}>{__('Install & Activate', 'uichemy')}</button> )
                                 }
                             </div>
                                 

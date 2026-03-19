@@ -4,7 +4,7 @@ Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to brick
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 4.7.0
+Stable tag: 4.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -142,6 +142,12 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 4.7.1 = 19 Mar 2026
+- Added support for color variables in borders, along with improved gap and shadow controls.
+- Improved dashboard usability for RTL (Right-to-Left) users.
+- Fixed issues with GenerateBlocks and Kadence installation from the dashboard.
+- Various bug fixes and performance improvements.
+
 = 4.7.0 = 6 Mar 2026
 - Added support for Elementor Atomic and their Global Classes & Variables.
 - More bug fixes & improvements.

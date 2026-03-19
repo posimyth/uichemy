@@ -455,6 +455,19 @@ $wp-color: #2271b1;
             cursor: pointer;
             color: var(--primary-color);
         }
+
+        // RTL override: flip input padding so text does not overlap with copy button
+        [dir="rtl"] & input {
+            padding-right: 50px;
+            padding-left: 16px;
+            text-align: right;
+        }
+
+        // RTL override: keep copy button on the right side in RTL for text-align right layout
+        [dir="rtl"] & .uich_copy_btn {
+            right: 10px;
+            left: auto;
+        }
     }
 }
 
@@ -867,6 +880,12 @@ $wp-color: #2271b1;
             box-shadow: none;
             outline: none;
         }
+    }
+
+    /* RTL override: flip external link icon to left side */
+    [dir="rtl"] & .uich_external_link {
+        right: auto;
+        left: 12px;
     }
 }
 
