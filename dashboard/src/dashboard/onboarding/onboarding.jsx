@@ -213,7 +213,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
             {
                 key: 'generateblocks',
                 title: 'GenerateBlocks',
-                icon: <img src={plugin_url + 'assets/images/generateblocks.png'} alt="nexter" />,
+                icon: <img src={plugin_url + 'assets/images/generate-blocks.png'} alt="nexter" />,
                 slug: 'generateblocks',
                 beta: true,
             },

@@ -4,7 +4,7 @@ Tags: figma to elementor, figma to wordpress, figma to gutenberg, figma to brick
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 4.7.1
+Stable tag: 4.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -17,14 +17,12 @@ Convert Figma Designs into Live WordPress Websites in seconds. You can edit your
 Well, that's it, that's the product. Install can bring your website to reality!
 
 --
-[ Visit Website](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [Video Tutorials]( https://www.youtube.com/watch?v=m2R0Qo0ax4Y&list=PLFRO-irWzXaJ00ay82qZZ2T4etPCPh7er) | [Documentations](https://uichemy.com/docs/) | [Roadmap](https://roadmap.uichemy.com/) | [Join Facebook Community](https://www.facebook.com/groups/uichemy/) | [Free Support](https://wordpress.org/support/plugin/uichemy/) | [Premium Support](https://store.posimyth.com/helpdesk/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [AI Chat (Instant Answers)](https://uichemy.com/chat/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [UiChemy Figma Templates](https://uichemy.com/templates-library/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [Conversion Case Study(GUIDED)](https://uichemy.com/case-study-templates/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links )
+[ Visit Website](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [Video Tutorials]( https://www.youtube.com/watch?v=m2R0Qo0ax4Y&list=PLFRO-irWzXaJ00ay82qZZ2T4etPCPh7er) | [Documentations](https://uichemy.com/docs/) | [Roadmap](https://roadmap.uichemy.com/) | [Join Facebook Community](https://www.facebook.com/groups/uichemy/) | [Free Support](https://wordpress.org/support/plugin/uichemy/) | [Premium Support](https://store.posimyth.com/helpdesk/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [AI Chat (Instant Answers)](https://uichemy.com/chat/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links) | [UiChemy Figma Templates](https://uichemy.com/templates-library/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)
 
 ## Figma Plugins
 * [Figma to Elementor Plugin](https://www.figma.com/community/plugin/1265873702834050352)
 * [Figma to Bricks Plugin](https://www.figma.com/community/plugin/1344313361212431142/)
 * [Figma to Gutenberg Plugin](https://www.figma.com/community/plugin/1379733208974981538/uichemy-convert-figma-to-gutenberg-block-editor-wordpress) 
-
-### [Read our Onboarding Guidelines to Get Best Output with UiChemy](https://www.figma.com/community/plugin/1265873702834050352/uichemy-convert-figma-to-wordpress-elementor-and-gutenberg)
 
 ### See UiChemy in Action <a href="https://youtu.be/vm8Ak5Oy9AU"> Watch Now</a>
 
@@ -50,7 +48,6 @@ Seems like too good to be true?
 - [Supports 30+ Widgets from The Plus Addons for Elementor](https://theplusaddons.com/elementor-widgets/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=links)
 - No Coding Knowledge required
 - Fast Loading Websites
-- Free forever, upgrade as per your need
 - Complete peace of mind
 - Saves time for Developers
 - Magic wand for Web designers
@@ -142,6 +139,10 @@ We've been active in the WordPress industry for over 8+ years, serving 120K+ use
 6. Publish Figma Design Directly to WordPress website
 
 == Changelog ==
+= 4.7.2 = 24 Mar 2026
+- Updated a missing image asset.
+- Updated readme.txt
+
 = 4.7.1 = 19 Mar 2026
 - Added support for color variables in borders, along with improved gap and shadow controls.
 - Improved dashboard usability for RTL (Right-to-Left) users.

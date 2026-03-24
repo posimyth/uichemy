@@ -659,7 +659,7 @@ const Dashboard = () => {
                             <div className={`uich_plugin_item ${active.generateblocks === true ? 'uich_activated' : ''}`}>
                                 <div className='uich_plugin_info'>
                                     <div className='uich_setting_icon'>
-                                        <img src={plugin_url + 'assets/images/generateblocks.png'} alt="nexter" />
+                                        <img src={plugin_url + 'assets/images/generate-blocks.png'} alt="nexter" />
                                     </div>
                                     <span className='uich_plugin_icon_text'>{__('GenerateBlocks', 'uichemy')}</span>
                                     <span className='uich_alert_red_icon'>
