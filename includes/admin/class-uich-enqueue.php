@@ -473,12 +473,23 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
             wp_localize_script(
                 'uich-elementor-button-js',
-                'uich_ajax_object_data', 
+                'uich_ajax_object_data',
                 array(
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'nonce'    => wp_create_nonce('uichemy-ajax-nonce'),
                 )
             );
+
+            // Enqueue UiChemy Custom CSS editor for atomic widgets
+            if ( empty( get_option( 'uich_elementor_custom_css' ) ) ) {
+                wp_enqueue_script(
+                    'uich-atomic-custom-css-js',
+                    UICH_URL . 'assets/js/uich-atomic-custom-css.js',
+                    array(),
+                    UICH_VERSION,
+                    true,
+                );
+            }
 
 		}
 

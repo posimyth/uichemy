@@ -76,10 +76,59 @@ if ( ! class_exists( 'Uich_Elementor_Import_Images' ) ) {
                                     }
                                 }
                             }
+
+                            // Handle custom_css — normalize to Elementor's {raw: base64} format
+                            if ( isset( $variant['custom_css'] ) ) {
+                                $variant['custom_css'] = self::normalize_custom_css( $variant['custom_css'] );
+                            }
                         }
                     }
                 }
             }
+        }
+
+        /**
+         * Normalize uich_custom_css to Elementor's expected format: { raw: base64_string }
+         *
+         * Accepts:
+         *   - Plain string:           "color: red;"
+         *   - Object with plain raw:  { raw: "color: red;" }
+         *   - Already encoded:        { raw: "Y29sb3I6IHJlZDs=" }  (passes through)
+         *
+         * @param mixed $uich_custom_css
+         * @return array|null
+         */
+        private static function normalize_custom_css( $uich_custom_css ) {
+            if ( empty( $uich_custom_css ) ) {
+                return null;
+            }
+
+            // Plain string — encode it
+            if ( is_string( $uich_custom_css ) ) {
+                $css = sanitize_textarea_field( trim( $uich_custom_css ) );
+                return empty( $css ) ? null : [ 'raw' => base64_encode( $css ) ];
+            }
+
+            // Object/array with raw key
+            if ( is_array( $uich_custom_css ) && isset( $uich_custom_css['raw'] ) && is_string( $uich_custom_css['raw'] ) ) {
+                $raw = trim( $uich_custom_css['raw'] );
+                if ( empty( $raw ) ) {
+                    return null;
+                }
+
+                // Check if already valid Base64 — decode and re-encode to verify
+                $decoded = base64_decode( $raw, true );
+                if ( $decoded !== false && base64_encode( $decoded ) === $raw ) {
+                    // Already Base64 encoded — pass through
+                    return $uich_custom_css;
+                }
+
+                // Plain CSS in raw field — encode it
+                $css = sanitize_textarea_field( $raw );
+                return empty( $css ) ? null : [ 'raw' => base64_encode( $css ) ];
+            }
+
+            return null;
         }
 
         // Download + attach helper

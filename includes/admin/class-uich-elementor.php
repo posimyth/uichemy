@@ -38,6 +38,7 @@ if ( ! class_exists( 'Uich_Elementor' ) ) {
 
 			if ( defined( 'ELEMENTOR_VERSION' ) && empty( get_option('uich_elementor_custom_css') ) ) {
 				add_action( 'elementor/init', array( $this, 'uich_initialize_controls' ) );
+				add_action( 'elementor/init', array( $this, 'uich_enable_atomic_custom_css' ) );
 			}
 		}
 
@@ -131,6 +132,28 @@ if ( ! class_exists( 'Uich_Elementor' ) ) {
 			$processed_css = $this->uich_generate_css( $element_settings, $css->get_element_unique_selector( $element ) );
 
 			$css->get_stylesheet()->add_raw_css( $processed_css );
+		}
+
+		/**
+		 * Enable custom CSS rendering for Elementor v4 atomic widgets.
+		 *
+		 * In Elementor free, custom CSS is stripped from atomic widget styles.
+		 * This filter restores it so UiChemy-imported designs render correctly
+		 * without requiring Elementor Pro.
+		 *
+		 * @since 4.7.4
+		 */
+		public function uich_enable_atomic_custom_css() {
+			// Restore Elementor's native custom_css (stripped in free version)
+			add_filter(
+				'elementor/atomic_widgets/editor_data/element_styles',
+				function ( $stripped_styles, $original_styles ) {
+					return $original_styles;
+				},
+				20,
+				2
+			);
+
 		}
 
 		/**
