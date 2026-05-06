@@ -50,14 +50,14 @@ class Uichemy_Gutenberg_Image_Import {
         check_ajax_referer('uichemy-ajax-nonce', 'nonce');
 
         if (!current_user_can('edit_posts')) {
-            wp_send_json_error(__('Not a Valid', 'tpgb'), 403);
+            wp_send_json_error(__('Not a Valid', 'uichemy'), 403);
         }
 
         $media_import = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
 
 
         if (empty($media_import)) {
-            wp_send_json_error(__('Empty Content.', 'tpgb'));
+            wp_send_json_error(__('Empty Content.', 'uichemy'));
         }
 
         $media_import = json_decode($media_import, true);
