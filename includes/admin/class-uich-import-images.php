@@ -533,8 +533,15 @@ if ( ! class_exists( 'Uich_Import_Images' ) ) {
 			}
 
 			foreach ( $element->get_controls() as $get_control ) {
-				$control_type = \Elementor\Plugin::instance()->controls_manager->get_control( $get_control['type'] );
 				$control_name = $get_control['name'];
+
+				// Only process controls that are actually set in the imported data,
+				if ( ! isset( $get_element_instance['settings'][ $control_name ] ) ) {
+					continue;
+				}
+
+				// Trigger the control's `on_import`
+				$control_type = \Elementor\Plugin::instance()->controls_manager->get_control( $get_control['type'] );
 
 				if ( ! $control_type ) {
 					return $get_element_instance;
