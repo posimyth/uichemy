@@ -354,7 +354,7 @@ if ( ! class_exists( 'Uich_MCP_Server' ) ) {
 		private static function handle_tools_call( $id, $params ) {
 			// Check if MCP is enabled before executing any tool.
 			// Done here (not in permission_callback) so MCP protocol handshake always works.
-			$enabled = get_option( self::ENABLED_OPTION, '0' );
+			$enabled = get_option( self::ENABLED_OPTION, '1' );
 			if ( $enabled !== '1' ) {
 				return self::json_rpc_success( $id, array(
 				'content' => array(

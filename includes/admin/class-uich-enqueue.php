@@ -270,7 +270,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                     'selectedAdminUsername' => Uich_UserManager::get_selected_user(),
                     'pluginVersion'=> $this->uich_notice_should_show(),
                     'siteToken' => apply_filters( 'uich_manage_token', 'get_token' ),
-                    'mcpEnabled' => (bool) get_option( 'uich_mcp_enabled', false ),
+                    'mcpEnabled' => get_option( 'uich_mcp_enabled', '1' ) === '1',
                     'mcpUrl'     => rest_url( 'uichemy/v1/mcp' ),
                 ];
             }
@@ -886,11 +886,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                 wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
             }
 
-            $current   = (bool) get_option( 'uich_mcp_enabled', false );
-            $new_value = ! $current;
+            $current   = get_option( 'uich_mcp_enabled', '1' );
+            $new_value = ( $current === '1' ) ? '0' : '1';
             update_option( 'uich_mcp_enabled', $new_value, false );
 
-            wp_send_json_success( array( 'mcpEnabled' => $new_value ) );
+            wp_send_json_success( array( 'mcpEnabled' => $new_value === '1' ) );
         }
 
 	}
