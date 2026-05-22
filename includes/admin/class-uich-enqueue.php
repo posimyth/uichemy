@@ -67,6 +67,8 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
             add_action('wp_ajax_uich_update_notice_count', array($this, 'uich_update_notice_count'));
 
+            add_action('wp_ajax_uich_mcp_toggle', array($this, 'uich_mcp_toggle'));
+
 			add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueue_elementor_atomic_script']);
 
             // Gutenberg Custom CSS Field
@@ -119,7 +121,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		}
 
         public function uich_dash_admin_scripts( $page ){
-            $slug = array( 'toplevel_page_uichemy-welcome' );
+            $slug = array( 'toplevel_page_uichemy-welcome', 'uichemy_page_uichemy-mcp' );
             if ( ! in_array( $page, $slug, true ) ) {
                 return;
             }
@@ -268,6 +270,8 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                     'selectedAdminUsername' => Uich_UserManager::get_selected_user(),
                     'pluginVersion'=> $this->uich_notice_should_show(),
                     'siteToken' => apply_filters( 'uich_manage_token', 'get_token' ),
+                    'mcpEnabled' => (bool) get_option( 'uich_mcp_enabled', false ),
+                    'mcpUrl'     => rest_url( 'uichemy/v1/mcp' ),
                 ];
             }
            
@@ -282,7 +286,9 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
                     'nonce'    => wp_create_nonce( 'uich-dash-ajax-nonce' ),
                     'uich_url' => UICH_URL.'dashboard/',
-                    'dashData' => $dashData,
+                    'blogName'  => get_bloginfo( 'name' ),
+                    'rest_url'  => rest_url(),
+                    'dashData'  => $dashData,
 
                 )
             );
@@ -505,6 +511,7 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 
 			if ( current_user_can( $capability ) ) {
 				add_menu_page( __( 'UiChemy', 'uichemy' ), __( 'UiChemy', 'uichemy' ), 'manage_options', 'uichemy-welcome', array( $this, 'uich_menu_page_template' ), UICH_URL . 'assets/svg/bw-logo.svg' );
+				add_submenu_page( 'uichemy-welcome', __( 'MCP Server', 'uichemy' ), __( 'MCP Server', 'uichemy' ), 'manage_options', 'uichemy-mcp', array( $this, 'uich_mcp_page_template' ) );
 			}
 		}
 
@@ -515,6 +522,11 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 		 */
 		public function uich_menu_page_template() {
             echo '<div id="uich-dash"></div>';
+		}
+
+		public function uich_mcp_page_template() {
+			echo '<div id="uich-dash"></div>';
+			echo '<script>if (!window.location.hash) { window.location.hash = "mcp-setup"; }</script>';
 		}
 
 		/**
@@ -861,6 +873,25 @@ if ( ! class_exists( 'Uich_Enqueue' ) ) {
 	
 			return $style;
 		}
+
+        /**
+         * Toggle MCP server on/off.
+         *
+         * @since 4.2.0
+         */
+        public function uich_mcp_toggle() {
+            check_ajax_referer( 'uich-dash-ajax-nonce', 'security' );
+
+            if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+                wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'uichemy' ) ) );
+            }
+
+            $current   = (bool) get_option( 'uich_mcp_enabled', false );
+            $new_value = ! $current;
+            update_option( 'uich_mcp_enabled', $new_value, false );
+
+            wp_send_json_success( array( 'mcpEnabled' => $new_value ) );
+        }
 
 	}
 

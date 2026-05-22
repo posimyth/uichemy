@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, HashRouter as Router, Routes, Link } from 'react-router-dom';
 import { nexterBlockInstall, plusAddonsInstall, elementorInstall, flexboxContainer, elementorFileUploads, bricksSvgUploads, appendFormData, uichdash_fetch_api, bricksActive, elementorProInstall , addcusOption } from '../apicall';
+import McpSection from './mcp_section.jsx';
 
 import Onboarding from './onboarding/onboarding.jsx';
 
@@ -1029,6 +1030,9 @@ const Dashboard = () => {
                                 <div className='uich_right_content'>
                                     {PageBuilderSelector()}
                                 </div>
+                            </div>
+                            <div id="mcp-setup" className='uich_main_content'>
+                                <McpSection />
                             </div>
                             <div className='uich_main_content'>
                                 <div className='uich_left_content'>
