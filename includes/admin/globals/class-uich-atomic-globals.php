@@ -39,19 +39,48 @@ if ( ! class_exists( 'Uich_Atomic_Globals' ) ) {
             return $obj;
         }
 
-        /** Get active kit's global classes as array */
+        /** Get active kit's global classes as array — reads from Elementor's CPT-based repository. */
         private static function get_global_classes_array(): array {
-            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit_for_frontend();
-            return json_decode($kit->get_meta('_elementor_global_classes'), true) 
-                ?? ['items' => [], 'order' => []];
+            if ( ! class_exists( '\Elementor\Modules\GlobalClasses\Global_Classes_Repository' ) ) {
+                return ['items' => [], 'order' => []];
+            }
+        
+            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit();
+            if ( ! $kit ) {
+                return ['items' => [], 'order' => []];
+            }
+        
+            $repository = \Elementor\Modules\GlobalClasses\Global_Classes_Repository::make( $kit );
+            $order      = $repository->get_order();
+            $items      = [];
+        
+            if ( ! empty( $order ) ) {
+                $repository->each_item( function ( array $class_data ) use ( &$items ) {
+                    $items[ $class_data['id'] ] = $class_data;
+                }, true );
+            }
+        
+            return ['items' => $items, 'order' => $order];
         }
 
-        /** Save global classes + fire Elementor hooks */
+        /**
+            * Save global classes via Elementor's CPT-based repository so the editor picks them up.
+            * Repository's put() fires elementor/global_classes/update internally — no need to re-fire.
+        */
         private static function save_global_classes_array(array $new, array $old): void {
-            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit_for_frontend();
-            do_action('elementor/global_classes/update', Uich_Atomic_Globals::CONTEXT_FRONTEND, $new, $old);
-            do_action('elementor/global_classes/update', Uich_Atomic_Globals::CONTEXT_PREVIEW,  $new, $old);
-            $kit->update_meta('_elementor_global_classes', json_encode($new));
+            if ( ! class_exists( '\Elementor\Modules\GlobalClasses\Global_Classes_Repository' ) ) {
+                return;
+            }
+        
+            $kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit();
+            if ( ! $kit ) {
+                return;
+            }
+        
+            $repository = \Elementor\Modules\GlobalClasses\Global_Classes_Repository::make( $kit );
+            $repository->put( $new['items'], $new['order'] );
+        
+            \Elementor\Plugin::$instance->files_manager->clear_cache();
         }
 
         /**
