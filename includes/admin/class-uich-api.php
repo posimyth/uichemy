@@ -408,6 +408,8 @@ if ( ! class_exists( 'Uich_Api' ) ) {
 				}
 			}
 
+			$response['elementor_version'] = defined('ELEMENTOR_VERSION') ? ELEMENTOR_VERSION : '';
+
 			return $response;
 		}
 
