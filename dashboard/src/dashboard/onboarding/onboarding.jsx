@@ -192,6 +192,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
             {
                 key: 'nexterBlock',
                 title: 'Nexter Blocks',
+                label: __('Nexter Blocks', 'uichemy'),
                 icon: ( <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" fill="none" viewBox="0 0 4 20"><path fill="#fff" d="m3.6 17.227-.01 2.222H.4v-3.088h2.308c.02 0 .035.008.052.01.099.011.196.036.288.072.03.01.06.023.088.036.007.005.015.008.022.012a.72.72 0 0 1 .349.331l.01.018a.603.603 0 0 1 .052.158c.02.075.03.151.031.229ZM3.59.82v12.998c0 .203-.092.378-.283.529-.197.152-.441.231-.69.223H.4V.4h2.662a.598.598 0 0 1 .37.12.36.36 0 0 1 .158.3Z" /></svg> ),
                 slug: 'the-plus-addons-for-block-editor',
                 required: true,
@@ -199,6 +200,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
             {
                 key: 'spectra',
                 title: 'Spectra',
+                label: __('Spectra', 'uichemy'),
                 icon: <img src={plugin_url + 'assets/images/spectra.png'} alt="nexter" />,
                 slug: 'ultimate-addons-for-gutenberg',
                 beta: true,
@@ -206,6 +208,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
             {
                 key: 'kadence',
                 title: 'Kadence Blocks – Gutenberg Blocks for Page Builder Features',
+                label: __('Kadence', 'uichemy'),
                 icon: <img src={plugin_url + 'assets/images/kadence.png'} alt="nexter" />,
                 slug: 'kadence-blocks',
                 beta: true,
@@ -213,6 +216,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
             {
                 key: 'generateblocks',
                 title: 'GenerateBlocks',
+                label: __('GenerateBlocks', 'uichemy'),
                 icon: <img src={plugin_url + 'assets/images/generate-blocks.png'} alt="nexter" />,
                 slug: 'generateblocks',
                 beta: true,
@@ -226,7 +230,7 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
                         <div className={`uich_setting_icon ${plugin.key}`}>
                             {plugin.icon}
                         </div>
-                        <span className='uich_plugin_icon_text'>{ ( plugin.key === 'kadence' ) ? __('Kadence', 'uichemy') : __(plugin.title, 'uichemy')}</span>
+                        <span className='uich_plugin_icon_text'>{plugin.label}</span>
             
                         {plugin.required ? (
                             <span className='uich_alert_button'>{__('Required', 'uichemy')}</span>
@@ -377,14 +381,14 @@ const Onboarding = ({ onComplete = () => { }, dataSave, isChecked, setIsChecked 
 
         return (
             <>
-                <h3>Required Plugins for Figma Export</h3>
+                <h3>{__('Required Plugins for Figma Export', 'uichemy')}</h3>
                 <div className='uich_select_page_builder'>
                     <div className='uich_section uich_plugin_box_width uich_select_page_gap'>
                         {installers[nextstep]?.()}
                     </div>
                     <div className="uich-footer-actions-button">
-                        <button className="uich-back-btn" onClick={() => { setOnBoardingStep(onBoardingStep - 1) }}>Back</button>
-                        <button className="uich-board-purple-common-btn" onClick={() => { setOnBoardingStep(onBoardingStep + 1) }}>Next</button>
+                        <button className="uich-back-btn" onClick={() => { setOnBoardingStep(onBoardingStep - 1) }}>{__('Back', 'uichemy')}</button>
+                        <button className="uich-board-purple-common-btn" onClick={() => { setOnBoardingStep(onBoardingStep + 1) }}>{__('Next', 'uichemy')}</button>
                     </div>
                 </div>
             </>

@@ -280,33 +280,33 @@ const Dashboard = () => {
     const AllResources = () => {
         const resources = [
             {
-                label: 'Documentation',
-                buttonText: 'Read Documentation',
+                label: __('Documentation', 'uichemy'),
+                buttonText: __('Read Documentation', 'uichemy'),
                 link: 'https://uichemy.com/docs/',
             },
             {
-                label: 'Educational Design Guidelines',
-                buttonText: 'Learn How to Optimize',
+                label: __('Educational Design Guidelines', 'uichemy'),
+                buttonText: __('Learn How to Optimize', 'uichemy'),
                 link: 'https://www.figma.com/community/file/1329383275066935195',
             },
             {
-                label: 'Community',
-                buttonText: 'Join Our Community',
+                label: __('Community', 'uichemy'),
+                buttonText: __('Join Our Community', 'uichemy'),
                 link: 'https://www.facebook.com/uichemy/',
             },
             {
-                label: 'Join Discord Channel',
-                buttonText: 'Join Now',
+                label: __('Join Discord Channel', 'uichemy'),
+                buttonText: __('Join Now', 'uichemy'),
                 link: ' https://go.posimyth.com/uichemy-discord',
             },
             {
-                label: 'YouTube',
-                buttonText: 'Watch YouTube Tutorials',
+                label: __('YouTube', 'uichemy'),
+                buttonText: __('Watch YouTube Tutorials', 'uichemy'),
                 link: 'https://youtu.be/8_6DymM-5KQ?si=YdyU6U-ASiWMzHkb',
             },
             {
-                label: 'Template Library',
-                buttonText: 'Visit Now',
+                label: __('Template Library', 'uichemy'),
+                buttonText: __('Visit Now', 'uichemy'),
                 link: 'https://uichemy.com/templates-library/'
             },
         ];
@@ -332,20 +332,20 @@ const Dashboard = () => {
     const FrequentlySection = () => {
         const faqData = [
             {
-                question: 'How does UiChemy work?',
-                answer: 'UiChemy works by integrating directly with Figma and WordPress. Once you have designed your website layout in Figma, you can export your design files using UiChemy\'s conversion feature.',
+                question: __('How does UiChemy work?', 'uichemy'),
+                answer: __('UiChemy works by integrating directly with Figma and WordPress. Once you have designed your website layout in Figma, you can export your design files using UiChemy\'s conversion feature.', 'uichemy'),
             },
             {
-                question: 'Is UiChemy a standalone software or a plugin?',
-                answer: 'UiChemy provides both a Figma plugin and a WordPress plugin that work together.',
+                question: __('Is UiChemy a standalone software or a plugin?', 'uichemy'),
+                answer: __('UiChemy provides both a Figma plugin and a WordPress plugin that work together.', 'uichemy'),
             },
             {
-                question: 'Does UiChemy require any coding knowledge?',
-                answer: 'No, UiChemy is designed to be used without any coding knowledge. It automatically converts your Figma designs to Elementor templates.',
+                question: __('Does UiChemy require any coding knowledge?', 'uichemy'),
+                answer: __('No, UiChemy is designed to be used without any coding knowledge. It automatically converts your Figma designs to Elementor templates.', 'uichemy'),
             },
             {
-                question: 'How can I get support or assistance with UiChemy?',
-                answer: 'You can reach our support team through the Helpdesk, join our community forums, or connect via Live Chat on our website for immediate assistance.',
+                question: __('How can I get support or assistance with UiChemy?', 'uichemy'),
+                answer: __('You can reach our support team through the Helpdesk, join our community forums, or connect via Live Chat on our website for immediate assistance.', 'uichemy'),
             },
         ];
 
@@ -765,19 +765,19 @@ const Dashboard = () => {
 
         const steps = [
             {
-                title: "Install UiChemy Figma Plugin",
-                description: "Convert Figma Designs to Elementor Websites and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.",
-                buttonText: "Next Step"
+                title: __('Install UiChemy Figma Plugin', 'uichemy'),
+                description: __('Convert Figma Designs to Elementor Websites and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.', 'uichemy'),
+                buttonText: __('Next Step', 'uichemy')
             },
             {
-                title: "Connect to Use Import using Security Token",
-                description: "Connect Figma Plugin to UiChemy Website and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.",
-                buttonText: "Next Step"
+                title: __('Connect to Use Import using Security Token', 'uichemy'),
+                description: __('Connect Figma Plugin to UiChemy Website and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.', 'uichemy'),
+                buttonText: __('Next Step', 'uichemy')
             },
             {
-                title: "Import in Elementor",
-                description: "Convert Figma Designs to Elementor Websites and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.",
-                buttonText: "Go to First Step"
+                title: __('Import in Elementor', 'uichemy'),
+                description: __('Convert Figma Designs to Elementor Websites and edit in WordPress. Our tool makes it easy to transfer all your design content from Figma to Elementor Website easily.', 'uichemy'),
+                buttonText: __('Go to First Step', 'uichemy')
             }
         ];
 

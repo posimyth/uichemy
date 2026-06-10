@@ -25,10 +25,10 @@ const getMcpData = () => {
 };
 
 const TOOLS = [
-    { name: 'check_config',          description: 'Checks MCP and Elementor readiness. Returns diagnostic details.' },
-    { name: 'get_globals',           description: 'Returns all global colors, typography, and container widths from the active Elementor kit.' },
-    { name: 'sync_globals',          description: 'Syncs color and typography changes directly to the active Elementor kit.' },
-    { name: 'import_elementor_page', description: 'Imports a converted Elementor JSON from a URL into WordPress as a new page or template.' },
+    { name: 'check_config',          description: __('Checks MCP and Elementor readiness. Returns diagnostic details.', 'uichemy') },
+    { name: 'get_globals',           description: __('Returns all global colors, typography, and container widths from the active Elementor kit.', 'uichemy') },
+    { name: 'sync_globals',          description: __('Syncs color and typography changes directly to the active Elementor kit.', 'uichemy') },
+    { name: 'import_elementor_page', description: __('Imports a converted Elementor JSON from a URL into WordPress as a new page or template.', 'uichemy') },
 ];
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
@@ -390,7 +390,7 @@ const ToolsTable = () => (
                     {TOOLS.map(t => (
                         <tr key={t.name}>
                             <td><code>{t.name}</code></td>
-                            <td>{__(t.description, 'uichemy')}</td>
+                            <td>{t.description}</td>
                         </tr>
                     ))}
                 </tbody>

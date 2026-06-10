@@ -4,7 +4,7 @@ Tags: figma to wordpress, figma to elementor, figma to gutenberg, figma to brick
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 4.10.0
+Stable tag: 4.10.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -221,6 +221,9 @@ Yes. UiChemy supports multi-site connections directly from the plugin dashboard.
 == Changelog ==
 
 ### View full changelog and upcoming features: [roadmap.uichemy.com](https://roadmap.uichemy.com/)
+
+= 4.10.1 = 11 June 2026
+- Fixed : Made all dashboard strings translatable and updated the POT file.
 
 = 4.10.0 = 2 June 2026
 - Fixed : Global styles now sync seamlessly with Elementor's updated Global Classes system.
